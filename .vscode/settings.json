@@ -38,6 +38,8 @@
         "functional": "c",
         "xutility": "c",
         "exception": "c",
-        "domain_stable.tbl": "c"
+        "future": "c",
+        "*.tbl": "c",
+        "random": "c"
     }
 }

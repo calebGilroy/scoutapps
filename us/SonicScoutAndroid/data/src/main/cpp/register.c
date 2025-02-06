@@ -1,5 +1,7 @@
 #include <jni.h>
+#include <stdint.h>
 #include <dksdk_ffi_c/logger/logger.h>
+#include <dksdk_ffi_c/mem.h>
 
 #define OCAML_LIFECYCLE_ENTIRE_PROCESS
 
@@ -8,8 +10,6 @@
 #include <caml/callback.h>
 #include <caml/memory.h>
 #include <caml/printexc.h>
-/*  Want caml_print_exception_backtrace() */
-#include <caml/backtrace.h>
 /*  Want caml_debug_info_available() */
 #include <caml/backtrace_prim.h>
 /*  Want caml_compact_heap() */
@@ -45,6 +45,26 @@
 #define os_char char
 #endif
 
+// There are other configuration values present in later schemas, but
+// we just use the defaults.
+typedef enum {
+    dk_caml_config_schema_version0 = 0
+  } dk_caml_config_schema_version;
+  struct dk_caml_config {
+    dk_caml_config_schema_version config_schema_version;
+  };
+
+  // From [dksdk-cmake]/cmake/dkcoder/library.bytecode.in.c
+  extern size_t dk_caml_startup_get_stack_size(const struct dk_caml_config *config);
+
+  // From [dksdk-cmake]/cmake/dkcoder/library.bytecode.in.c
+  extern value dk_caml_startup_exn(const struct dk_caml_config *config,
+                                   os_char **argv,
+                                   struct dksdk_ffi_c_stack* stack);
+
+// From [dksdk-cmake]/cmake/stubs/basic/startup_objects.c
+extern void dk_caml_print_exception_backtrace(void);
+
 // From [ocaml]/runtime/startup_aux.c
 #ifdef _WIN32
 extern void caml_win32_unregister_overflow_detection (void);
@@ -70,7 +90,7 @@ static void handle_ocaml_exception(value exn, const char *what, const char *what
 
     /* Display the backtrace if available. Sadly goes to [stderr]! */
     if (caml_debug_info_available())
-        caml_print_exception_backtrace();
+        dk_caml_print_exception_backtrace();
 }
 
 #define GET_CLAZZ_NAME() \
@@ -134,6 +154,8 @@ static void do_stop_ocaml() {
 
 static int ocaml_initialized;
 static int ocaml_terminated;
+static struct dksdk_ffi_c_stack init_ocaml_stack = {0};
+static void *init_ocaml_stack_on_heap = NULL;
 
 JNIEXPORT jboolean JNICALL
 Java_com_example_squirrelscout_data_OCamlServiceHandler_init_1ocaml(JNIEnv *env, jclass cls,
@@ -170,8 +192,25 @@ Java_com_example_squirrelscout_data_OCamlServiceHandler_init_1ocaml(JNIEnv *env,
     }
 #define RELEASE_INIT_OCAML3() do { caml_stat_free(argv0_os); RELEASE_INIT_OCAML2(); } while (0)
 
+//#if defined(_WIN32)
+//    _wputenv(L"CAML_DEBUG_SOCKET=localhost:8001");
+//#else
+//    setenv("CAML_DEBUG_SOCKET", "localhost:8001", /*overwrite*/0);
+//#endif
+
+    /* Setup configuration */
+    struct dk_caml_config config = {0};
+
+    /* Setup reserved stack space on the heap */
+    size_t stack_size = dk_caml_startup_get_stack_size(&config);
+    init_ocaml_stack_on_heap = malloc(
+        /* 8 for 64-bit alignment if needed */
+        stack_size + 8 + sizeof(struct dksdk_ffi_c_stack_alloc_header));
+    dksdk_ffi_c_stack_init(stack_size, init_ocaml_stack_on_heap, 0, &init_ocaml_stack);
+
+    /*  [init_ocaml_stack] is freed in [terminate_ocaml] */
     os_char *argv[2] = {argv0_os, NULL};
-    value res = caml_startup_exn(argv);
+    value res = dk_caml_startup_exn(&config, argv, &init_ocaml_stack);
 
     if (Is_exception_result(res)) {
         res = Extract_exception(res);
@@ -311,6 +350,11 @@ Java_com_example_squirrelscout_data_OCamlServiceHandler_terminate_1ocaml(JNIEnv 
     caml_win32_unregister_overflow_detection();
 #endif
 #endif
+
+    /* We have some data that may need to be freed from dk_caml_startup_code_exn() */
+    dksdk_ffi_c_stack_free_all(&init_ocaml_stack);
+    free(init_ocaml_stack_on_heap);
+    init_ocaml_stack_on_heap = NULL;
 
     LOG_INFO("[%s.terminate_ocaml] Finished", clazz_name_str);
     RELEASE_TERMINATE_OCAML1();
