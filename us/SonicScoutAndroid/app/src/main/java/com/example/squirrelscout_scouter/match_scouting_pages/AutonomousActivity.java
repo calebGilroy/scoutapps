@@ -32,7 +32,11 @@ public class AutonomousActivity extends ComponentActivity implements View.OnClic
     TextView speakerScore, speakerMiss, ampScore, ampMiss;
 
     //2025 auto
+    CheckBox autoPreplacedCoral;
     TextView autoCoralL4Score, autoCoralL4Miss, autoCoralL3Score, autoCoralL3Miss;
+    TextView autoCoralL2Score, autoCoralL2Miss, autoCoralL1Score, autoCoralL1Miss;
+
+    TextView autoProcessorScore, autoProcessorMiss, autoNetScore, autoNetMiss;
 
     //robot position
     Button leftPosition, centerPosition, rightPosition;
@@ -381,7 +385,7 @@ public class AutonomousActivity extends ComponentActivity implements View.OnClic
 
         //ScoutingSessionViewModel object which calls the .captureAutoData and then passes in the information
         //gathered form this page
-        return model.captureAutoData(
+        model.captureAutoData(
                 robotPosition,
                 wing1,
                 wing2,
@@ -397,10 +401,19 @@ public class AutonomousActivity extends ComponentActivity implements View.OnClic
                 Integer.parseInt(speakerMiss.getText().toString()),
                 leaveBool,
                 //2025 captureAutoData
+                autoPreplacedCoral.isChecked(),
                 Integer.parseInt(autoCoralL4Score.getText().toString()),
                 Integer.parseInt(autoCoralL4Miss.getText().toString()),
                 Integer.parseInt(autoCoralL3Score.getText().toString()),
-                Integer.parseInt(autoCoralL3Miss.getText().toString())
+                Integer.parseInt(autoCoralL3Miss.getText().toString()),
+                Integer.parseInt(autoCoralL2Score.getText().toString()),
+                Integer.parseInt(autoCoralL2Miss.getText().toString()),
+                Integer.parseInt(autoCoralL1Score.getText().toString()),
+                Integer.parseInt(autoCoralL1Miss.getText().toString()),
+                Integer.parseInt(autoProcessorScore.getText().toString()),
+                Integer.parseInt(autoProcessorMiss.getText().toString()),
+                Integer.parseInt(autoNetScore.getText().toString()),
+                Integer.parseInt(autoNetMiss.getText().toString())
 
 
         );
