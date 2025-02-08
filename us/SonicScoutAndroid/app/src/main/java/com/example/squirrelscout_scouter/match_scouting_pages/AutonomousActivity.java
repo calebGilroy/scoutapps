@@ -155,6 +155,12 @@ public class AutonomousActivity extends ComponentActivity implements View.OnClic
         secondCard = (View) findViewById(R.id.view4);
         title = (TextView) findViewById(R.id.textView2);
 
+        // 2025 new fields
+        autoPreplacedCoral = (CheckBox) findViewById(R.id.checkBox);;
+        autoCoralL4Score = autoCoralL4Miss = autoCoralL3Score = autoCoralL3Miss = (TextView) findViewById(R.id.SpeakerScoredCounter);
+        autoCoralL2Score = autoCoralL2Miss = autoCoralL1Score = autoCoralL1Miss = (TextView) findViewById(R.id.SpeakerScoredCounter);
+        autoProcessorScore = autoProcessorMiss = autoNetScore = autoNetMiss = (TextView) findViewById(R.id.SpeakerScoredCounter);
+
         //start animation (Was not used in 2024 season but was used in 2023 off season)
         //animationStart();
     }
