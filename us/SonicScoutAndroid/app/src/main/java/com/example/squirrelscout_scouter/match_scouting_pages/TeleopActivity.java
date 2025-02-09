@@ -8,7 +8,6 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Debug;
 import android.provider.MediaStore;
 import android.view.MotionEvent;
 import android.view.View;
@@ -18,10 +17,7 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -33,12 +29,9 @@ import androidx.lifecycle.ViewModelStoreOwner;
 
 import com.example.squirrelscout_scouter.MainApplication;
 import com.example.squirrelscout_scouter.R;
-import com.example.squirrelscout_scouter.ui.viewmodels.ModifiableRawMatchDataUiState;
 import com.example.squirrelscout_scouter.ui.viewmodels.ScoutingSessionViewModel;
 import com.example.squirrelscout_scouter.util.ScoutSingleton;
 import com.example.squirrelscout_scouter.util.SharedImageSingleton;
-
-import org.capnproto.Text;
 
 public class TeleopActivity extends ComponentActivity implements View.OnClickListener {
 
@@ -46,7 +39,12 @@ public class TeleopActivity extends ComponentActivity implements View.OnClickLis
     TextView speakerTitle;
     //AMP Scoring
     TextView ampTitle, ampMissLabel, ampScoreLabel, ampScoreCounter, ampMissCounter;
-    Button ampScoreIncrement, ampScoreDecrement, ampMissIncrement, ampMissDecrement;
+
+    TextView teleOpCoralL4Score;
+    Button teleOpCoralL4ScoreIncrement, teleOpCoralL4ScoreDecrement, ampMissIncrement, ampMissDecrement;
+
+    
+
     //Breakdown
     AutoCompleteTextView dropdown, dropdown2;
     //Endgame
@@ -86,7 +84,7 @@ public class TeleopActivity extends ComponentActivity implements View.OnClickLis
         model = new ViewModelProvider(scoutingSessionViewModelStoreOwner).get(ScoutingSessionViewModel.class);
 
         //...
-        ampScoreCounter = (TextView) findViewById(R.id.AmpScoredCounter);
+        teleOpCoralL4Score = (TextView) findViewById(R.id.teleOpCoralL4Score);
         ampMissCounter = (TextView) findViewById(R.id.AmpMissedCounter);
 
         //...
@@ -94,10 +92,10 @@ public class TeleopActivity extends ComponentActivity implements View.OnClickLis
         speakerTitle.setOnClickListener(this);
         ampTitle = (TextView) findViewById(R.id.AmpTitle);
         ampTitle.setOnClickListener(this);
-        ampScoreIncrement = (Button) findViewById(R.id.Amp_Score_Increment);
-        ampScoreIncrement.setOnClickListener(this);
-        ampScoreDecrement = (Button) findViewById(R.id.Amp_Score_Decrement);
-        ampScoreDecrement.setOnClickListener(this);
+        teleOpCoralL4ScoreIncrement = (Button) findViewById(R.id.teleOpCoralL4ScoreIncrement);
+        teleOpCoralL4ScoreIncrement.setOnClickListener(this);
+        teleOpCoralL4ScoreDecrement = (Button) findViewById(R.id.teleOpCoralL4ScoreDecrement);
+        teleOpCoralL4ScoreDecrement.setOnClickListener(this);
         ampMissIncrement = (Button) findViewById(R.id.Amp_Missed_Increment);
         ampMissIncrement.setOnClickListener(this);
         ampMissDecrement = (Button) findViewById(R.id.Amp_Missed_Decrement);
@@ -219,11 +217,11 @@ public class TeleopActivity extends ComponentActivity implements View.OnClickLis
     public void onClick(View view){
         int clickedId = view.getId();
 
-        if(clickedId == R.id.Amp_Score_Increment){
-            counterIncrementLogic(ampScoreCounter);
+        if(clickedId == R.id.teleOpCoralL4ScoreIncrement){
+            counterIncrementLogic(teleOpCoralL4Score);
         }
-        else if(clickedId == R.id.Amp_Score_Decrement){
-            counterDecrementLogic(ampScoreCounter);
+        else if(clickedId == R.id.teleOpCoralL4ScoreDecrement){
+            counterDecrementLogic(teleOpCoralL4Score);
         }
         else if(clickedId == R.id.Amp_Missed_Increment){
             counterIncrementLogic(ampMissCounter);
@@ -508,7 +506,7 @@ public class TeleopActivity extends ComponentActivity implements View.OnClickLis
         model.captureTeleData(
                 sharedImageSingleton.getSuccess(),
                 sharedImageSingleton.getMiss(),
-                Integer.parseInt(ampScoreCounter.getText().toString()),
+                0, //Integer.parseInt(ampScoreCounter.getText().toString()),
                 Integer.parseInt(ampMissCounter.getText().toString()),
                 getDistance(),
                 dropdown.getText().toString(),

@@ -19,21 +19,23 @@ import androidx.lifecycle.ViewModelStoreOwner;
 
 import com.example.squirrelscout_scouter.MainApplication;
 import com.example.squirrelscout_scouter.R;
-import com.example.squirrelscout_scouter.ui.viewmodels.ModifiableRawMatchDataUiState;
 import com.example.squirrelscout_scouter.ui.viewmodels.ScoutingSessionViewModel;
 import com.example.squirrelscout_scouter.util.ScoutSingleton;
-
-import java.io.StreamCorruptedException;
 
 public class AutonomousActivity extends ComponentActivity implements View.OnClickListener {
 
     //Increment/decrement buttons
-    Button speakerScoreIncrement, speakerScoreDecrement, speakerMissIncrement, speakerMissDecrement, ampScoreIncrement, ampScoreDecrement, ampMissInrecement, ampMissDecrement;
-    TextView speakerScore, speakerMiss, ampScore, ampMiss;
+    Button speakerScoreIncrement, speakerScoreDecrement, speakerMissIncrement, speakerMissDecrement;
+    
+    Button autoCoralL4ScoreIncrement, autoCoralL4ScoreDecrement, ampMissInrecement, ampMissDecrement;
+
+    
+
+    TextView speakerScore, speakerMiss, autoCoralL4Score, ampMiss;
 
     //2025 auto
     CheckBox autoPreplacedCoral;
-    TextView autoCoralL4Score, autoCoralL4Miss, autoCoralL3Score, autoCoralL3Miss;
+    TextView autoCoralL4Miss, autoCoralL3Score, autoCoralL3Miss;
     TextView autoCoralL2Score, autoCoralL2Miss, autoCoralL1Score, autoCoralL1Miss;
 
     TextView autoProcessorScore, autoProcessorMiss, autoNetScore, autoNetMiss;
@@ -89,10 +91,10 @@ public class AutonomousActivity extends ComponentActivity implements View.OnClic
         speakerMissIncrement.setOnClickListener(this);
         speakerMissDecrement = (Button) findViewById(R.id.Speaker_Missed_Decrement);
         speakerMissDecrement.setOnClickListener(this);
-        ampScoreIncrement = (Button) findViewById(R.id.Amp_Score_Increment);
-        ampScoreIncrement.setOnClickListener(this);
-        ampScoreDecrement = (Button) findViewById(R.id.Amp_Score_Decrement);
-        ampScoreDecrement.setOnClickListener(this);
+        autoCoralL4ScoreIncrement = (Button) findViewById(R.id.autoCoralL4ScoreIncrement);
+        autoCoralL4ScoreIncrement.setOnClickListener(this);
+        autoCoralL4ScoreDecrement = (Button) findViewById(R.id.autoCoralL4ScoreDecrement);
+        autoCoralL4ScoreDecrement.setOnClickListener(this);
         ampMissInrecement = (Button) findViewById(R.id.Amp_Missed_Increment);
         ampMissInrecement.setOnClickListener(this);
         ampMissDecrement = (Button) findViewById(R.id.Amp_Missed_Decrement);
@@ -101,8 +103,8 @@ public class AutonomousActivity extends ComponentActivity implements View.OnClic
         speakerScore.setOnClickListener(this);
         speakerMiss = (TextView) findViewById(R.id.SpeakerMissedCounter);
         speakerMiss.setOnClickListener(this);
-        ampScore = (TextView) findViewById(R.id.AmpScoredCounter);
-        ampScore.setOnClickListener(this);
+        autoCoralL4Score = (TextView) findViewById(R.id.autoCoralL4Score);
+        autoCoralL4Score.setOnClickListener(this);
         ampMiss = (TextView) findViewById(R.id.AmpMissedCounter);
         ampMiss.setOnClickListener(this);
 
@@ -179,11 +181,11 @@ public class AutonomousActivity extends ComponentActivity implements View.OnClic
     public void onClick(View view){
         int clickedId = view.getId();
 
-        if(clickedId == R.id.Amp_Score_Increment){
-            counterIncrementLogic(ampScore);
+        if(clickedId == R.id.autoCoralL4ScoreIncrement){
+            counterIncrementLogic(autoCoralL4Score);
         }
-        else if(clickedId == R.id.Amp_Score_Decrement){
-            counterDecrementLogic(ampScore);
+        else if(clickedId == R.id.autoCoralL4ScoreDecrement){
+            counterDecrementLogic(autoCoralL4Score);
         }
         else if(clickedId == R.id.Amp_Missed_Increment){
             counterIncrementLogic(ampMiss);
@@ -412,7 +414,7 @@ public class AutonomousActivity extends ComponentActivity implements View.OnClic
                 checkBox9.isChecked(),
                 checkBox10.isChecked(),
                 checkBox11.isChecked(),
-                Integer.parseInt(ampScore.getText().toString()),
+                0, //Integer.parseInt(ampScore.getText().toString()),
                 Integer.parseInt(ampMiss.getText().toString()),
                 Integer.parseInt(speakerScore.getText().toString()),
                 Integer.parseInt(speakerMiss.getText().toString()),
