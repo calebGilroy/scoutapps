@@ -157,8 +157,8 @@ public class AutonomousActivity extends ComponentActivity implements View.OnClic
         nextButton.setOnClickListener(this);
         //...
         info = (TextView) findViewById(R.id.textView3);
-        titleCard = (View) findViewById(R.id.view);
-        mainCard = (View) findViewById(R.id.view2);
+        titleCard = (View) findViewById(R.id.headerView);
+        mainCard = (View) findViewById(R.id.bodyView);
         firstCard = (View) findViewById(R.id.view3);
         secondCard = (View) findViewById(R.id.view4);
         title = (TextView) findViewById(R.id.textView2);

@@ -156,7 +156,7 @@ public class TeleopActivity extends ComponentActivity implements View.OnClickLis
 
         //Image Heatmap logics
         //image capture
-        imageView = findViewById(R.id.imageView);
+        imageView = findViewById(R.id.fieldImageView);
         imageView.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {

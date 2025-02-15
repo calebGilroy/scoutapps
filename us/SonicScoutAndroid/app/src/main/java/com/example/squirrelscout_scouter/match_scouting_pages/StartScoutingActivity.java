@@ -11,7 +11,6 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -76,9 +75,9 @@ public class StartScoutingActivity extends ComponentActivity implements  View.On
         //others
         chooseMatchI = (EditText) findViewById(R.id.Choose_Match_Input);
         robotNumberI = (EditText) findViewById(R.id.Robot_Number_Input);
-        firstCard = (View) findViewById(R.id.view2);
+        firstCard = (View) findViewById(R.id.bodyView);
         secondCard = (View) findViewById(R.id.view3);
-        topCard = (View) findViewById(R.id.view);
+        topCard = (View) findViewById(R.id.headerView);
         title = (TextView) findViewById(R.id.textView2);
         layout = (LinearLayout) findViewById(R.id.lay1);
         selectMatchTitle = (TextView) findViewById(R.id.Choose_Match_Label);

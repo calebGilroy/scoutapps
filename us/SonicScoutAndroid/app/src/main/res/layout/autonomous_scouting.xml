@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background">
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/_400sdp"
@@ -12,7 +13,7 @@
 
         <!-- Cards to make the design look nice -->
         <View
-            android:id="@+id/view"
+            android:id="@+id/headerView"
             android:layout_width="wrap_content"
             android:layout_height="@dimen/_39sdp"
             android:layout_marginStart="@dimen/_6sdp"
@@ -24,57 +25,65 @@
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
         <View
-            android:id="@+id/view2"
+            android:id="@+id/bodyView"
             android:layout_width="wrap_content"
             android:layout_height="@dimen/_560sdp"
             android:layout_marginTop="@dimen/_70sdp"
             android:background="@drawable/rounded_rectangle"
             android:backgroundTint="@color/secondary"
+            android:visibility="visible"
             app:layout_anchor="@+id/autoCoralL1Layout"
             app:layout_anchorGravity="bottom|center"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintTop_toTopOf="parent" />
+
         <View
             android:id="@+id/view3"
             android:layout_width="@dimen/_279sdp"
             android:layout_height="@dimen/_100sdp"
-            android:layout_marginTop="@dimen/_310sdp"
             android:layout_marginStart="@dimen/_14sdp"
+            android:layout_marginTop="@dimen/_310sdp"
             android:background="@drawable/round_rectangle_2"
             android:backgroundTint="@color/offwhite"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"/>
+            android:visibility="gone"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <View
-            android:id="@+id/view7"
+            android:id="@+id/bodyMiddleView"
             android:layout_width="@dimen/_280sdp"
             android:layout_height="@dimen/_150sdp"
-            android:layout_marginTop="@dimen/_150sdp"
             android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_150sdp"
             android:layout_marginEnd="@dimen/_10sdp"
             android:background="@drawable/rounded_rectangle_subtle"
             android:backgroundTint="@color/offwhite"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"/>
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <View
             android:id="@+id/view4"
             android:layout_width="@dimen/_279sdp"
             android:layout_height="@dimen/_100sdp"
-            android:layout_marginTop="@dimen/_425sdp"
             android:layout_marginStart="@dimen/_14sdp"
+            android:layout_marginTop="@dimen/_425sdp"
             android:background="@drawable/round_rectangle_2"
             android:backgroundTint="@color/offwhite"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"/>
+            android:visibility="gone"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <View
             android:id="@+id/view5"
             android:layout_width="wrap_content"
             android:layout_height="@dimen/_35sdp"
             android:layout_gravity="bottom"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
+            app:layout_constraintTop_toTopOf="parent" />
 
         <!-- Title -->
         <TextView
@@ -82,21 +91,22 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_19sdp"
-            android:textAlignment="center"
-            android:text="Match #00 &#10; 2930"
             android:layout_marginTop="@dimen/_14sdp"
+            android:text="Match #00 &#10; 2930"
+            android:textAlignment="center"
             android:textColor="@color/accent"
             android:textSize="@dimen/_10ssp"
             android:visibility="visible"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"/>
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <TextView
             android:id="@+id/textView2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_29sdp"
             android:layout_marginTop="@dimen/_12sdp"
             android:layout_marginEnd="@dimen/_29sdp"
-            android:layout_marginStart="@dimen/_29sdp"
             android:gravity="center"
             android:inputType="none"
             android:text="  Auto Period"
@@ -104,9 +114,9 @@
             android:textColor="@color/Text"
             android:textSize="@dimen/_20ssp"
             android:textStyle="bold"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
+            app:layout_constraintTop_toTopOf="parent" />
 
         <!-- Robot Starting Layout -->
         <TextView
@@ -125,6 +135,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
         <LinearLayout
             android:id="@+id/linearLayout8"
             android:layout_width="match_parent"
@@ -186,20 +197,21 @@
 
         <!-- Field Map -->
         <ImageView
-            android:id="@+id/imageView"
+            android:id="@+id/fieldImageView"
             android:layout_width="@dimen/_270sdp"
             android:layout_height="@dimen/_140sdp"
+            android:layout_marginTop="@dimen/_100sdp"
             android:scaleType="centerCrop"
             android:src="@drawable/new_field"
             android:translationX="@dimen/_15sdp"
-            android:translationY="@dimen/_155sdp"
-            android:layout_marginTop="@dimen/_100sdp"/>
+            android:translationY="@dimen/_155sdp" />
+
         <LinearLayout
             android:id="@+id/linearLayout10"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_300sdp"
-            android:layout_marginTop="@dimen/_217sdp"
             android:layout_marginStart="@dimen/_60sdp"
+            android:layout_marginTop="@dimen/_217sdp"
             android:orientation="vertical"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -210,29 +222,32 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:button="@null"
-                android:drawableRight="@drawable/checkbox"/>
+                android:drawableRight="@drawable/checkbox" />
+
             <CheckBox
                 android:id="@+id/checkBox2"
-                android:translationY="14dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:button="@null"
-                android:drawableRight="@drawable/checkbox"/>
+                android:drawableRight="@drawable/checkbox"
+                android:translationY="14dp" />
+
             <CheckBox
                 android:id="@+id/checkBox3"
-                android:translationY="28dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:button="@null"
-                android:drawableRight="@drawable/checkbox"/>
+                android:drawableRight="@drawable/checkbox"
+                android:translationY="28dp" />
 
         </LinearLayout>
+
         <LinearLayout
             android:id="@+id/linearLayout11"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_300sdp"
-            android:layout_marginTop="@dimen/_217sdp"
             android:layout_marginStart="@dimen/_225sdp"
+            android:layout_marginTop="@dimen/_217sdp"
             android:orientation="vertical"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -243,29 +258,32 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:button="@null"
-                android:drawableRight="@drawable/checkbox"/>
+                android:drawableRight="@drawable/checkbox" />
+
             <CheckBox
                 android:id="@+id/checkBox5"
-                android:translationY="14dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:button="@null"
-                android:drawableRight="@drawable/checkbox"/>
+                android:drawableRight="@drawable/checkbox"
+                android:translationY="14dp" />
+
             <CheckBox
                 android:id="@+id/checkBox6"
-                android:translationY="28dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:button="@null"
-                android:drawableRight="@drawable/checkbox"/>
+                android:drawableRight="@drawable/checkbox"
+                android:translationY="28dp" />
 
         </LinearLayout>
+
         <LinearLayout
             android:id="@+id/linearLayout12"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_300sdp"
-            android:layout_marginTop="@dimen/_166sdp"
             android:layout_marginStart="@dimen/_143sdp"
+            android:layout_marginTop="@dimen/_166sdp"
             android:orientation="vertical"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -276,35 +294,39 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:button="@null"
-                android:drawableRight="@drawable/checkbox"/>
+                android:drawableRight="@drawable/checkbox" />
+
             <CheckBox
                 android:id="@+id/checkBox8"
-                android:translationY="21dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:button="@null"
-                android:drawableRight="@drawable/checkbox"/>
+                android:drawableRight="@drawable/checkbox"
+                android:translationY="21dp" />
+
             <CheckBox
                 android:id="@+id/checkBox9"
-                android:translationY="43dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:button="@null"
-                android:drawableRight="@drawable/checkbox"/>
+                android:drawableRight="@drawable/checkbox"
+                android:translationY="43dp" />
+
             <CheckBox
                 android:id="@+id/checkBox10"
-                android:translationY="65dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:button="@null"
-                android:drawableRight="@drawable/checkbox"/>
+                android:drawableRight="@drawable/checkbox"
+                android:translationY="65dp" />
+
             <CheckBox
                 android:id="@+id/checkBox11"
-                android:translationY="85dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:button="@null"
-                android:drawableRight="@drawable/checkbox"/>
+                android:drawableRight="@drawable/checkbox"
+                android:translationY="85dp" />
 
         </LinearLayout>
 
@@ -315,7 +337,6 @@
             android:layout_height="match_parent"
             android:layout_gravity="center"
             android:layout_marginTop="@dimen/_345sdp"
-            android:translationX="-233dp"
             android:inputType="none"
             android:rotation="-90"
             android:text="SPEAKER"
@@ -324,167 +345,336 @@
             android:textColor="@color/accent"
             android:textSize="@dimen/_18ssp"
             android:textStyle="bold"
+            android:translationX="-233dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <LinearLayout
-            android:id="@+id/autoCoralL3Layout"
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/_29sdp"
-            android:layout_marginStart="@dimen/_40sdp"
-            android:layout_marginTop="@dimen/_325sdp"
-            android:layout_marginEnd="@dimen/_29sdp"
-            android:orientation="horizontal"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            android:id="@+id/autoCoralLevelsLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="0dp"
+            android:orientation="vertical"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <TextView
-                android:id="@+id/SpeakerScoredCounter"
-                android:layout_width="@dimen/_115sdp"
-                android:layout_height="match_parent"
-                android:layout_alignParentEnd="true"
-                android:layout_marginStart="@dimen/_6sdp"
-                android:background="@color/white"
-                android:gravity="center"
-                android:inputType="none"
-                android:text="SCORED"
-                android:textAllCaps="false"
-                android:textColor="@color/black"
-                android:textSize="@dimen/_15ssp"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/autoCoralL3Score"
-                android:layout_width="@dimen/_29sdp"
+            <LinearLayout
+                android:id="@+id/autoCoralL4Layout"
+                android:layout_width="wrap_content"
                 android:layout_height="@dimen/_29sdp"
-                android:layout_alignParentEnd="true"
-                android:background="@color/white"
-                android:gravity="center"
-                android:inputType="none"
-                android:text="0"
-                android:textAllCaps="true"
-                android:textColor="@color/black"
-                android:textSize="@dimen/_15ssp"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:layout_marginStart="@dimen/_40sdp"
+                android:layout_marginTop="0dp"
+                android:layout_marginEnd="@dimen/_29sdp"
+                android:orientation="horizontal">
 
-            <Button
-                android:id="@+id/autoCoralL3ScoreIncrement"
-                android:layout_width="@dimen/_29sdp"
-                android:layout_height="match_parent"
-                android:layout_marginStart="@dimen/_10sdp"
-                android:layout_marginEnd="@dimen/_2sdp"
-                android:background="@drawable/rounded_rectangle_subtle"
-                android:backgroundTint="@color/background"
-                android:text="+"
-                android:textColor="@color/accent"
-                android:textSize="@dimen/_15ssp"
-                app:backgroundTint="@null"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                <TextView
+                    android:id="@+id/AmpScoredLabel"
+                    android:layout_width="@dimen/_115sdp"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginStart="@dimen/_6sdp"
+                    android:background="@color/white"
+                    android:gravity="center"
+                    android:inputType="none"
+                    android:text="SCORED"
+                    android:textAllCaps="false"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_15ssp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-            <Button
-                android:id="@+id/autoCoralL3ScoreDecrement"
-                android:layout_width="@dimen/_29sdp"
-                android:layout_height="match_parent"
-                android:layout_gravity="center"
-                android:background="@drawable/rounded_rectangle_subtle"
-                android:backgroundTint="@color/background"
-                android:text="-"
-                android:textColor="@color/accent"
-                android:textSize="@dimen/_15ssp"
-                android:textStyle="bold"
-                app:backgroundTint="@null"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                <TextView
+                    android:id="@+id/autoCoralL4Score"
+                    android:layout_width="@dimen/_29sdp"
+                    android:layout_height="@dimen/_29sdp"
+                    android:layout_alignParentEnd="true"
+                    android:background="@color/white"
+                    android:gravity="center"
+                    android:inputType="none"
+                    android:text="0"
+                    android:textAllCaps="true"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_15ssp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-        </LinearLayout>
-        <LinearLayout
-            android:id="@+id/autoCoralL2Layout"
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/_29sdp"
-            android:layout_marginStart="@dimen/_40sdp"
-            android:layout_marginTop="@dimen/_365sdp"
-            android:layout_marginEnd="@dimen/_29sdp"
-            android:orientation="horizontal"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent">
+                <Button
+                    android:id="@+id/autoCoralL4ScoreIncrement"
+                    android:layout_width="@dimen/_29sdp"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginEnd="@dimen/_2sdp"
+                    android:background="@drawable/rounded_rectangle_subtle"
+                    android:backgroundTint="@color/background"
+                    android:text="+"
+                    android:textColor="@color/accent"
+                    android:textSize="@dimen/_15ssp"
+                    app:backgroundTint="@null"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
-                android:id="@+id/SpeakerMissedLabel"
-                android:layout_width="@dimen/_115sdp"
-                android:layout_height="match_parent"
-                android:layout_alignParentEnd="true"
-                android:layout_marginStart="@dimen/_6sdp"
-                android:background="@color/white"
-                android:gravity="center"
-                android:inputType="none"
-                android:text="MISSED"
-                android:textAllCaps="false"
-                android:textColor="@color/black"
-                android:textSize="@dimen/_15ssp"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                <Button
+                    android:id="@+id/autoCoralL4ScoreDecrement"
+                    android:layout_width="@dimen/_29sdp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:background="@drawable/rounded_rectangle_subtle"
+                    android:backgroundTint="@color/background"
+                    android:text="-"
+                    android:textColor="@color/accent"
+                    android:textSize="@dimen/_15ssp"
+                    android:textStyle="bold"
+                    app:backgroundTint="@null"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </LinearLayout>
 
-            <TextView
-                android:id="@+id/autoCoralL2Score"
-                android:layout_width="@dimen/_29sdp"
+            <LinearLayout
+                android:id="@+id/autoCoralL3Layout"
+                android:layout_width="wrap_content"
                 android:layout_height="@dimen/_29sdp"
-                android:layout_alignParentEnd="true"
-                android:background="@color/white"
-                android:gravity="center"
-                android:inputType="none"
-                android:text="0"
-                android:textAllCaps="true"
-                android:textColor="@color/black"
-                android:textSize="@dimen/_15ssp"
-                android:textStyle="bold"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"/>
+                android:layout_marginStart="@dimen/_40sdp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="@dimen/_29sdp"
+                android:orientation="horizontal"
+                android:visibility="visible">
 
-            <Button
-                android:id="@+id/autoCoralL2ScoreIncrement"
-                android:layout_width="@dimen/_29sdp"
-                android:layout_height="match_parent"
-                android:layout_marginStart="@dimen/_10sdp"
-                android:layout_marginEnd="@dimen/_2sdp"
-                android:background="@drawable/rounded_rectangle_subtle"
-                android:backgroundTint="@color/background"
-                android:text="+"
-                android:textColor="@color/accent"
-                android:textSize="@dimen/_15ssp"
-                app:backgroundTint="@null"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                <TextView
+                    android:id="@+id/SpeakerScoredCounter"
+                    android:layout_width="@dimen/_115sdp"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginStart="@dimen/_6sdp"
+                    android:background="@color/white"
+                    android:gravity="center"
+                    android:inputType="none"
+                    android:text="SCORED"
+                    android:textAllCaps="false"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_15ssp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-            <Button
-                android:id="@+id/autoCoralL2ScoreDecrement"
-                android:layout_width="@dimen/_29sdp"
-                android:layout_height="match_parent"
-                android:layout_gravity="center"
-                android:background="@drawable/rounded_rectangle_subtle"
-                android:backgroundTint="@color/background"
-                android:text="-"
-                android:textColor="@color/accent"
-                android:textSize="@dimen/_15ssp"
-                android:textStyle="bold"
-                app:backgroundTint="@null"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"/>
+                <TextView
+                    android:id="@+id/autoCoralL3Score"
+                    android:layout_width="@dimen/_29sdp"
+                    android:layout_height="@dimen/_29sdp"
+                    android:layout_alignParentEnd="true"
+                    android:background="@color/white"
+                    android:gravity="center"
+                    android:inputType="none"
+                    android:text="0"
+                    android:textAllCaps="true"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_15ssp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <Button
+                    android:id="@+id/autoCoralL3ScoreIncrement"
+                    android:layout_width="@dimen/_29sdp"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginEnd="@dimen/_2sdp"
+                    android:background="@drawable/rounded_rectangle_subtle"
+                    android:backgroundTint="@color/background"
+                    android:text="+"
+                    android:textColor="@color/accent"
+                    android:textSize="@dimen/_15ssp"
+                    app:backgroundTint="@null"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <Button
+                    android:id="@+id/autoCoralL3ScoreDecrement"
+                    android:layout_width="@dimen/_29sdp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:background="@drawable/rounded_rectangle_subtle"
+                    android:backgroundTint="@color/background"
+                    android:text="-"
+                    android:textColor="@color/accent"
+                    android:textSize="@dimen/_15ssp"
+                    android:textStyle="bold"
+                    app:backgroundTint="@null"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/autoCoralL2Layout"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/_29sdp"
+                android:layout_marginStart="@dimen/_40sdp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="@dimen/_29sdp"
+                android:orientation="horizontal"
+                android:visibility="visible">
+
+                <TextView
+                    android:id="@+id/SpeakerMissedLabel"
+                    android:layout_width="@dimen/_115sdp"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginStart="@dimen/_6sdp"
+                    android:background="@color/white"
+                    android:gravity="center"
+                    android:inputType="none"
+                    android:text="MISSED"
+                    android:textAllCaps="false"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_15ssp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/autoCoralL2Score"
+                    android:layout_width="@dimen/_29sdp"
+                    android:layout_height="@dimen/_29sdp"
+                    android:layout_alignParentEnd="true"
+                    android:background="@color/white"
+                    android:gravity="center"
+                    android:inputType="none"
+                    android:text="0"
+                    android:textAllCaps="true"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_15ssp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <Button
+                    android:id="@+id/autoCoralL2ScoreIncrement"
+                    android:layout_width="@dimen/_29sdp"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginEnd="@dimen/_2sdp"
+                    android:background="@drawable/rounded_rectangle_subtle"
+                    android:backgroundTint="@color/background"
+                    android:text="+"
+                    android:textColor="@color/accent"
+                    android:textSize="@dimen/_15ssp"
+                    app:backgroundTint="@null"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <Button
+                    android:id="@+id/autoCoralL2ScoreDecrement"
+                    android:layout_width="@dimen/_29sdp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:background="@drawable/rounded_rectangle_subtle"
+                    android:backgroundTint="@color/background"
+                    android:text="-"
+                    android:textColor="@color/accent"
+                    android:textSize="@dimen/_15ssp"
+                    android:textStyle="bold"
+                    app:backgroundTint="@null"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/autoCoralL1Layout"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/_29sdp"
+                android:layout_marginStart="@dimen/_40sdp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="@dimen/_29sdp"
+                android:orientation="horizontal"
+                android:visibility="visible">
+
+                <TextView
+                    android:id="@+id/AmpMissedLabel"
+                    android:layout_width="@dimen/_115sdp"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginStart="@dimen/_6sdp"
+                    android:background="@color/white"
+                    android:gravity="center"
+                    android:inputType="none"
+                    android:text="MISSED"
+                    android:textAllCaps="false"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_15ssp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/autoCoralL1Score"
+                    android:layout_width="@dimen/_29sdp"
+                    android:layout_height="@dimen/_29sdp"
+                    android:layout_alignParentEnd="true"
+                    android:background="@color/white"
+                    android:gravity="center"
+                    android:inputType="none"
+                    android:text="0"
+                    android:textAllCaps="true"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_15ssp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <Button
+                    android:id="@+id/autoCoralL1ScoreIncrement"
+                    android:layout_width="@dimen/_29sdp"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginEnd="@dimen/_2sdp"
+                    android:background="@drawable/rounded_rectangle_subtle"
+                    android:backgroundTint="@color/background"
+                    android:text="+"
+                    android:textColor="@color/accent"
+                    android:textSize="@dimen/_15ssp"
+                    app:backgroundTint="@null"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <Button
+                    android:id="@+id/autoCoralL1ScoreDecrement"
+                    android:layout_width="@dimen/_29sdp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:background="@drawable/rounded_rectangle_subtle"
+                    android:backgroundTint="@color/background"
+                    android:text="-"
+                    android:textColor="@color/accent"
+                    android:textSize="@dimen/_15ssp"
+                    android:textStyle="bold"
+                    app:backgroundTint="@null"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </LinearLayout>
+
+
+
+
+
         </LinearLayout>
 
         <!-- Speaker Scoring Layout -->
@@ -494,7 +684,6 @@
             android:layout_height="match_parent"
             android:layout_gravity="center"
             android:layout_marginTop="@dimen/_462sdp"
-            android:translationX="-233dp"
             android:inputType="none"
             android:rotation="-90"
             android:text="AMP"
@@ -503,166 +692,9 @@
             android:textColor="@color/accent"
             android:textSize="@dimen/_20ssp"
             android:textStyle="bold"
+            android:translationX="-233dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-        <LinearLayout
-            android:id="@+id/autoCoralL4Layout"
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/_29sdp"
-            android:layout_marginStart="@dimen/_40sdp"
-            android:layout_marginTop="@dimen/_440sdp"
-            android:layout_marginEnd="@dimen/_29sdp"
-            android:orientation="horizontal"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <TextView
-                android:id="@+id/AmpScoredLabel"
-                android:layout_width="@dimen/_115sdp"
-                android:layout_height="match_parent"
-                android:layout_alignParentEnd="true"
-                android:layout_marginStart="@dimen/_6sdp"
-                android:background="@color/white"
-                android:gravity="center"
-                android:inputType="none"
-                android:text="SCORED"
-                android:textAllCaps="false"
-                android:textColor="@color/black"
-                android:textSize="@dimen/_15ssp"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/autoCoralL4Score"
-                android:layout_width="@dimen/_29sdp"
-                android:layout_height="@dimen/_29sdp"
-                android:layout_alignParentEnd="true"
-                android:background="@color/white"
-                android:gravity="center"
-                android:inputType="none"
-                android:text="0"
-                android:textAllCaps="true"
-                android:textColor="@color/black"
-                android:textSize="@dimen/_15ssp"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <Button
-                android:id="@+id/autoCoralL4ScoreIncrement"
-                android:layout_width="@dimen/_29sdp"
-                android:layout_height="match_parent"
-                android:layout_marginStart="@dimen/_10sdp"
-                android:layout_marginEnd="@dimen/_2sdp"
-                android:background="@drawable/rounded_rectangle_subtle"
-                android:backgroundTint="@color/background"
-                android:text="+"
-                android:textColor="@color/accent"
-                android:textSize="@dimen/_15ssp"
-                app:backgroundTint="@null"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <Button
-                android:id="@+id/autoCoralL4ScoreDecrement"
-                android:layout_width="@dimen/_29sdp"
-                android:layout_height="match_parent"
-                android:layout_gravity="center"
-                android:background="@drawable/rounded_rectangle_subtle"
-                android:backgroundTint="@color/background"
-                android:text="-"
-                android:textColor="@color/accent"
-                android:textSize="@dimen/_15ssp"
-                android:textStyle="bold"
-                app:backgroundTint="@null"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-        </LinearLayout>
-        <LinearLayout
-            android:id="@+id/autoCoralL1Layout"
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/_29sdp"
-            android:layout_marginStart="@dimen/_40sdp"
-            android:layout_marginTop="@dimen/_480sdp"
-            android:layout_marginEnd="@dimen/_29sdp"
-            android:orientation="horizontal"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <TextView
-                android:id="@+id/AmpMissedLabel"
-                android:layout_width="@dimen/_115sdp"
-                android:layout_height="match_parent"
-                android:layout_alignParentEnd="true"
-                android:layout_marginStart="@dimen/_6sdp"
-                android:background="@color/white"
-                android:gravity="center"
-                android:inputType="none"
-                android:text="MISSED"
-                android:textAllCaps="false"
-                android:textColor="@color/black"
-                android:textSize="@dimen/_15ssp"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/autoCoralL1Score"
-                android:layout_width="@dimen/_29sdp"
-                android:layout_height="@dimen/_29sdp"
-                android:layout_alignParentEnd="true"
-                android:background="@color/white"
-                android:gravity="center"
-                android:inputType="none"
-                android:text="0"
-                android:textAllCaps="true"
-                android:textColor="@color/black"
-                android:textSize="@dimen/_15ssp"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <Button
-                android:id="@+id/autoCoralL1ScoreIncrement"
-                android:layout_width="@dimen/_29sdp"
-                android:layout_height="match_parent"
-                android:layout_marginStart="@dimen/_10sdp"
-                android:layout_marginEnd="@dimen/_2sdp"
-                android:background="@drawable/rounded_rectangle_subtle"
-                android:backgroundTint="@color/background"
-                android:text="+"
-                android:textColor="@color/accent"
-                android:textSize="@dimen/_15ssp"
-                app:backgroundTint="@null"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <Button
-                android:id="@+id/autoCoralL1ScoreDecrement"
-                android:layout_width="@dimen/_29sdp"
-                android:layout_height="match_parent"
-                android:layout_gravity="center"
-                android:background="@drawable/rounded_rectangle_subtle"
-                android:backgroundTint="@color/background"
-                android:text="-"
-                android:textColor="@color/accent"
-                android:textSize="@dimen/_15ssp"
-                android:textStyle="bold"
-                app:backgroundTint="@null"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-        </LinearLayout>
 
         <!-- Leave Layout -->
         <LinearLayout
@@ -730,18 +762,18 @@
             android:id="@+id/NEXT"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_29sdp"
-            android:layout_marginTop="@dimen/_590sdp"
             android:layout_marginStart="@dimen/_20sdp"
+            android:layout_marginTop="@dimen/_590sdp"
             android:layout_marginEnd="@dimen/_20sdp"
-            android:backgroundTint="@color/darkGrey"
             android:background="@drawable/rounded_rectangle_subtle"
-            app:backgroundTint="@null"
+            android:backgroundTint="@color/darkGrey"
             android:text="ENTER ALL DATA"
             android:textColor="@color/black"
             android:textSize="@dimen/_15ssp"
-            app:layout_constraintTop_toTopOf="parent"
+            app:backgroundTint="@null"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
+            app:layout_constraintTop_toTopOf="parent" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
