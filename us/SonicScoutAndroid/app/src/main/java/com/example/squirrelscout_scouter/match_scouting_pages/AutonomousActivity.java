@@ -31,6 +31,11 @@ public class AutonomousActivity extends ComponentActivity implements View.OnClic
 
     Button autoCoralL3ScoreIncrement, autoCoralL3ScoreDecrement;
 
+    Button autoCoralL2ScoreDecrement, autoCoralL2ScoreIncrement;
+
+    Button autoCoralL1ScoreIncrement, autoCoralL1ScoreDecrement;
+
+
     
 
     TextView speakerScore, speakerMiss, autoCoralL4Score, ampMiss;
@@ -88,26 +93,26 @@ public class AutonomousActivity extends ComponentActivity implements View.OnClic
 
         autoCoralL3ScoreDecrement = (Button) findViewById(R.id.autoCoralL3ScoreDecrement);
         autoCoralL3ScoreDecrement.setOnClickListener(this);
-        speakerMissIncrement = (Button) findViewById(R.id.Speaker_Missed_Increment);
-        speakerMissIncrement.setOnClickListener(this);
-        speakerMissDecrement = (Button) findViewById(R.id.Speaker_Missed_Decrement);
-        speakerMissDecrement.setOnClickListener(this);
+        autoCoralL2ScoreIncrement = (Button) findViewById(R.id.autoCoralL2ScoreIncrement);
+        autoCoralL2ScoreIncrement.setOnClickListener(this);
+        autoCoralL2ScoreDecrement = (Button) findViewById(R.id.autoCoralL2ScoreDecrement);
+        autoCoralL2ScoreDecrement.setOnClickListener(this);
         autoCoralL4ScoreIncrement = (Button) findViewById(R.id.autoCoralL4ScoreIncrement);
         autoCoralL4ScoreIncrement.setOnClickListener(this);
         autoCoralL4ScoreDecrement = (Button) findViewById(R.id.autoCoralL4ScoreDecrement);
         autoCoralL4ScoreDecrement.setOnClickListener(this);
         autoCoralL3ScoreIncrement = (Button) findViewById(R.id.autoCoralL3ScoreIncrement);
         autoCoralL3ScoreIncrement.setOnClickListener(this);
-        ampMissInrecement = (Button) findViewById(R.id.Amp_Missed_Increment);
-        ampMissInrecement.setOnClickListener(this);
-        ampMissDecrement = (Button) findViewById(R.id.Amp_Missed_Decrement);
-        ampMissDecrement.setOnClickListener(this);
+        autoCoralL1ScoreIncrement = (Button) findViewById(R.id.autoCoralL1ScoreIncrement);
+        autoCoralL1ScoreIncrement.setOnClickListener(this);
+        autoCoralL1ScoreDecrement = (Button) findViewById(R.id.autoCoralL1ScoreDecrement);
+        autoCoralL1ScoreDecrement.setOnClickListener(this);
         speakerScore = (TextView) findViewById(R.id.SpeakerScoredCounter);
         speakerScore.setOnClickListener(this);
-        speakerMiss = (TextView) findViewById(R.id.SpeakerMissedCounter);
-        speakerMiss.setOnClickListener(this);
-        ampMiss = (TextView) findViewById(R.id.AmpMissedCounter);
-        ampMiss.setOnClickListener(this);
+        //speakerMiss = (TextView) findViewById(R.id.SpeakerMissedCounter);
+        //speakerMiss.setOnClickListener(this);
+        //ampMiss = (TextView) findViewById(R.id.AmpMissedCounter);
+        //ampMiss.setOnClickListener(this);
 
         //robot Position
         leftPosition = (Button) findViewById(R.id.Start_Left);
@@ -161,15 +166,18 @@ public class AutonomousActivity extends ComponentActivity implements View.OnClic
         // 2025 new fields
         autoPreplacedCoral = (CheckBox) findViewById(R.id.checkBox);;
         autoCoralL3Miss = (TextView) findViewById(R.id.SpeakerScoredCounter);
-        autoCoralL2Score = autoCoralL2Miss = autoCoralL1Score = autoCoralL1Miss = (TextView) findViewById(R.id.SpeakerScoredCounter);
+        autoCoralL2Miss = autoCoralL1Miss = (TextView) findViewById(R.id.SpeakerScoredCounter);
         autoProcessorScore = autoProcessorMiss = autoNetScore = autoNetMiss = (TextView) findViewById(R.id.SpeakerScoredCounter);
 
         autoCoralL4Score = (TextView) findViewById(R.id.autoCoralL4Score);
         autoCoralL4Score.setOnClickListener(this);
-        autoCoralL4Miss = (TextView) findViewById(R.id.SpeakerMissedCounter);
+        //autoCoralL4Miss = (TextView) findViewById(R.id.SpeakerMissedCounter);
         autoCoralL3Score = (TextView) findViewById(R.id.autoCoralL3Score);
         autoCoralL3Score.setOnClickListener(this);
-
+        autoCoralL2Score = (TextView) findViewById(R.id.autoCoralL2Score);
+        autoCoralL2Score.setOnClickListener(this);
+        autoCoralL1Score = (TextView) findViewById(R.id.autoCoralL1Score);
+        autoCoralL1Score.setOnClickListener(this);
 
 
 
@@ -192,11 +200,11 @@ public class AutonomousActivity extends ComponentActivity implements View.OnClic
         else if(clickedId == R.id.autoCoralL4ScoreDecrement){
             counterDecrementLogic(autoCoralL4Score);
         }
-        else if(clickedId == R.id.Amp_Missed_Increment){
-            counterIncrementLogic(ampMiss);
+        else if(clickedId == R.id.autoCoralL1ScoreIncrement){
+            counterIncrementLogic(autoCoralL1Score);
         }
-        else if(clickedId == R.id.Amp_Missed_Decrement){
-            counterDecrementLogic(ampMiss);
+        else if(clickedId == R.id.autoCoralL1ScoreDecrement){
+            counterDecrementLogic(autoCoralL1Score);
         }
         else if(clickedId == R.id.autoCoralL3ScoreIncrement){
             counterIncrementLogic(autoCoralL3Score);
@@ -204,11 +212,11 @@ public class AutonomousActivity extends ComponentActivity implements View.OnClic
         else if(clickedId == R.id.autoCoralL3ScoreDecrement){
             counterDecrementLogic(autoCoralL3Score);
         }
-        else if(clickedId == R.id.Speaker_Missed_Increment){
-            counterIncrementLogic(speakerMiss);
+        else if(clickedId == R.id.autoCoralL2ScoreIncrement){
+            counterIncrementLogic(autoCoralL2Score);
         }
-        else if(clickedId == R.id.Speaker_Missed_Decrement){
-            counterDecrementLogic(speakerMiss);
+        else if(clickedId == R.id.autoCoralL2ScoreDecrement){
+            counterDecrementLogic(autoCoralL2Score);
         }
         else if(clickedId == R.id.Start_Left){
             robotLeftLogic();
@@ -420,19 +428,19 @@ public class AutonomousActivity extends ComponentActivity implements View.OnClic
                 checkBox10.isChecked(),
                 checkBox11.isChecked(),
                 0, //Integer.parseInt(ampScore.getText().toString()),
-                Integer.parseInt(ampMiss.getText().toString()),
+                0,//Integer.parseInt(ampMiss.getText().toString()),
                 0, //Integer.parseInt(speakerScore.getText().toString()),
-                Integer.parseInt(speakerMiss.getText().toString()),
+                0,//Integer.parseInt(speakerMiss.getText().toString()),
                 leaveBool,
                 //2025 captureAutoData
                 autoPreplacedCoral.isChecked(),
                 Integer.parseInt(autoCoralL4Score.getText().toString()),
-                Integer.parseInt(autoCoralL4Miss.getText().toString()),
+                0,//Integer.parseInt(autoCoralL4Miss.getText().toString()),
                 Integer.parseInt(autoCoralL3Score.getText().toString()),
                 0,//Integer.parseInt(autoCoralL3Miss.getText().toString()),
-                0,//Integer.parseInt(autoCoralL2Score.getText().toString()),
+                Integer.parseInt(autoCoralL2Score.getText().toString()),
                 0,//Integer.parseInt(autoCoralL2Miss.getText().toString()),
-                0,//Integer.parseInt(autoCoralL1Score.getText().toString()),
+                Integer.parseInt(autoCoralL1Score.getText().toString()),
                 0,//Integer.parseInt(autoCoralL1Miss.getText().toString()),
                 0,//Integer.parseInt(autoProcessorScore.getText().toString()),
                 0,//Integer.parseInt(autoProcessorMiss.getText().toString()),
