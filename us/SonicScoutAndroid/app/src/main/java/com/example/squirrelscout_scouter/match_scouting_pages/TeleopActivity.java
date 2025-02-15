@@ -100,9 +100,9 @@ public class TeleopActivity extends ComponentActivity implements View.OnClickLis
         ampMissIncrement.setOnClickListener(this);
         ampMissDecrement = (Button) findViewById(R.id.Amp_Missed_Decrement);
         ampMissDecrement.setOnClickListener(this);
-        ampMissLabel = (TextView) findViewById(R.id.AmpMissedLabel);
+        ampMissLabel = (TextView) findViewById(R.id.L1Label);
         ampMissLabel.setOnClickListener(this);
-        ampScoreLabel = (TextView) findViewById(R.id.AmpScoredLabel);
+        ampScoreLabel = (TextView) findViewById(R.id.L4Label);
         ampScoreLabel.setOnClickListener(this);
         trapYes = (Button) findViewById(R.id.TRAP_YES);
         trapYes.setOnClickListener(this);
