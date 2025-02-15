@@ -40,8 +40,13 @@ public class TeleopActivity extends ComponentActivity implements View.OnClickLis
     //AMP Scoring
     TextView ampTitle, ampMissLabel, ampScoreLabel, ampScoreCounter, ampMissCounter;
 
-    TextView teleOpCoralL4Score;
-    Button teleOpCoralL4ScoreIncrement, teleOpCoralL4ScoreDecrement, ampMissIncrement, ampMissDecrement;
+    TextView teleOpCoralL4Score, teleOpCoralL4Miss;
+
+    TextView teleOpCoralL4ScoreDecrement, teleOpCoralL4MissDecrement;
+
+    TextView teleOpCoralL4ScoreIncrement, teleOpCoralL4MissIncrement;
+
+    TextView ampMissIncrement, ampMissDecrement;
 
     
 
@@ -85,17 +90,24 @@ public class TeleopActivity extends ComponentActivity implements View.OnClickLis
 
         //...
         teleOpCoralL4Score = (TextView) findViewById(R.id.teleOpCoralL4Score);
-        ampMissCounter = (TextView) findViewById(R.id.AmpMissedCounter);
+        teleOpCoralL4Miss = (TextView) findViewById(R.id.teleOpCoralL4Miss);
+        //ampMissCounter = (TextView) findViewById(R.id.AmpMissedCounter);
 
         //...
-        speakerTitle = (TextView) findViewById(R.id.SpeakerTitle);
-        speakerTitle.setOnClickListener(this);
-        ampTitle = (TextView) findViewById(R.id.AmpTitle);
-        ampTitle.setOnClickListener(this);
+        //speakerTitle = (TextView) findViewById(R.id.SpeakerTitle);
+        //speakerTitle.setOnClickListener(this);
+        //ampTitle = (TextView) findViewById(R.id.AmpTitle);
+        //ampTitle.setOnClickListener(this);
         teleOpCoralL4ScoreIncrement = (Button) findViewById(R.id.teleOpCoralL4ScoreIncrement);
         teleOpCoralL4ScoreIncrement.setOnClickListener(this);
         teleOpCoralL4ScoreDecrement = (Button) findViewById(R.id.teleOpCoralL4ScoreDecrement);
         teleOpCoralL4ScoreDecrement.setOnClickListener(this);
+
+        teleOpCoralL4MissIncrement = (Button) findViewById(R.id.teleOpCoralL4MissIncrement);
+        teleOpCoralL4MissIncrement.setOnClickListener(this);
+        teleOpCoralL4MissDecrement = (Button) findViewById(R.id.teleOpCoralL4MissDecrement);
+        teleOpCoralL4MissDecrement.setOnClickListener(this);
+
         ampMissIncrement = (Button) findViewById(R.id.Amp_Missed_Increment);
         ampMissIncrement.setOnClickListener(this);
         ampMissDecrement = (Button) findViewById(R.id.Amp_Missed_Decrement);
@@ -118,7 +130,7 @@ public class TeleopActivity extends ComponentActivity implements View.OnClickLis
 
         //Breakdown dropdown
         dropdown = findViewById(R.id.dropdown);
-        String[] items = new String[]{"Tipped", "Mechanical Failure", "Incapacitated", "Note Stuck"};
+        String[] items = new String[]{"Tipped", "Mechanical Failure", "Incapacitated",};
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, R.layout.dropdown_text, items);
         dropdown.setAdapter(adapter);
         dropdown.setKeyListener(null);
@@ -223,6 +235,18 @@ public class TeleopActivity extends ComponentActivity implements View.OnClickLis
         else if(clickedId == R.id.teleOpCoralL4ScoreDecrement){
             counterDecrementLogic(teleOpCoralL4Score);
         }
+
+        else if(clickedId == R.id.teleOpCoralL4MissIncrement){
+            counterIncrementLogic(teleOpCoralL4Miss);
+        }
+
+        else if(clickedId == R.id.teleOpCoralL4MissDecrement){
+            counterDecrementLogic(teleOpCoralL4Miss);
+        }
+
+
+
+
         else if(clickedId == R.id.Amp_Missed_Increment){
             counterIncrementLogic(ampMissCounter);
         }
@@ -506,8 +530,10 @@ public class TeleopActivity extends ComponentActivity implements View.OnClickLis
         model.captureTeleData(
                 sharedImageSingleton.getSuccess(),
                 sharedImageSingleton.getMiss(),
-                0, //Integer.parseInt(ampScoreCounter.getText().toString()),
-                Integer.parseInt(ampMissCounter.getText().toString()),
+                //Integer.parseInt(ampScoreCounter.getText().toString()),
+                Integer.parseInt(teleOpCoralL4Score.getText().toString()),
+                Integer.parseInt(teleOpCoralL4Miss.getText().toString()),
+                //Integer.parseInt(ampMissCounter.getText().toString()),
                 getDistance(),
                 dropdown.getText().toString(),
                 dropdown2.getText().toString(),
