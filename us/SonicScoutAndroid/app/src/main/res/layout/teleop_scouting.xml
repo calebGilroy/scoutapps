@@ -33,7 +33,7 @@
             android:layout_marginTop="@dimen/_73sdp"
             android:background="@drawable/rounded_rectangle"
             android:backgroundTint="@color/secondary"
-            app:layout_anchor="@+id/linearLayout2"
+            app:layout_anchor="@+id/autoCoralL1Layout"
             app:layout_anchorGravity="bottom|center"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -275,7 +275,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <LinearLayout
-            android:id="@+id/linearLayout1"
+            android:id="@+id/autoCoralL4Layout"
             android:layout_width="wrap_content"
             android:layout_height="@dimen/_29sdp"
             android:layout_marginStart="@dimen/_40sdp"
@@ -377,7 +377,7 @@
 
         </LinearLayout>
         <LinearLayout
-            android:id="@+id/linearLayout2"
+            android:id="@+id/autoCoralL1Layout"
             android:layout_width="wrap_content"
             android:layout_height="@dimen/_29sdp"
             android:layout_marginStart="@dimen/_40sdp"
