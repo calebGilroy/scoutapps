@@ -438,7 +438,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/SpeakerMissedCounter"
+                android:id="@+id/autoCoralL2Score"
                 android:layout_width="@dimen/_29sdp"
                 android:layout_height="@dimen/_29sdp"
                 android:layout_alignParentEnd="true"
@@ -455,7 +455,7 @@
                 app:layout_constraintEnd_toEndOf="parent"/>
 
             <Button
-                android:id="@+id/Speaker_Missed_Increment"
+                android:id="@+id/autoCoralL2ScoreIncrement"
                 android:layout_width="@dimen/_29sdp"
                 android:layout_height="match_parent"
                 android:layout_marginStart="@dimen/_10sdp"
@@ -466,12 +466,12 @@
                 android:textColor="@color/accent"
                 android:textSize="@dimen/_15ssp"
                 app:backgroundTint="@null"
-                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"/>
+                app:layout_constraintTop_toTopOf="parent" />
 
             <Button
-                android:id="@+id/Speaker_Missed_Decrement"
+                android:id="@+id/autoCoralL2ScoreDecrement"
                 android:layout_width="@dimen/_29sdp"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
@@ -615,7 +615,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/AmpMissedCounter"
+                android:id="@+id/autoCoralL1Score"
                 android:layout_width="@dimen/_29sdp"
                 android:layout_height="@dimen/_29sdp"
                 android:layout_alignParentEnd="true"
@@ -632,7 +632,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <Button
-                android:id="@+id/Amp_Missed_Increment"
+                android:id="@+id/autoCoralL1ScoreIncrement"
                 android:layout_width="@dimen/_29sdp"
                 android:layout_height="match_parent"
                 android:layout_marginStart="@dimen/_10sdp"
@@ -648,7 +648,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <Button
-                android:id="@+id/Amp_Missed_Decrement"
+                android:id="@+id/autoCoralL1ScoreDecrement"
                 android:layout_width="@dimen/_29sdp"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
