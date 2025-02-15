@@ -44,8 +44,11 @@ public class AutonomousActivity extends ComponentActivity implements View.OnClic
     Button autoCoralL1MissIncrement, autoCoralL1MissDecrement;
 
     Button autoProcessorScoreIncrement, autoProcessorMissDecrement;
+    Button autoProcessorScoreDecrement, autoProcessorMissIncrement;
 
-    
+    Button autoNetScoreIncrement, autoNetScoreDecrement;
+
+    Button autoNetMissIncrement, autoNetMissDecrement;
 
 
 
@@ -144,8 +147,26 @@ public class AutonomousActivity extends ComponentActivity implements View.OnClic
 
         autoProcessorScoreIncrement = (Button) findViewById(R.id.autoProcessorScoreIncrement);
         autoProcessorScoreIncrement.setOnClickListener(this);
+        autoProcessorScoreDecrement = (Button) findViewById(R.id.autoProcessorScoreDecrement);
+        autoProcessorScoreDecrement.setOnClickListener(this);
+        autoProcessorMissIncrement = (Button) findViewById(R.id.autoProcessorMissIncrement);
+        autoProcessorMissIncrement.setOnClickListener(this);
         autoProcessorMissDecrement = (Button) findViewById(R.id.autoProcessorMissDecrement);
         autoProcessorMissDecrement.setOnClickListener(this);
+
+
+
+        autoNetScoreIncrement = (Button) findViewById(R.id.autoNetScoreIncrement);
+        autoNetScoreIncrement.setOnClickListener(this);
+        autoNetScoreDecrement = (Button) findViewById(R.id.autoNetScoreDecrement);
+        autoNetScoreDecrement.setOnClickListener(this);
+        autoNetMissIncrement = (Button) findViewById(R.id.autoNetMissIncrement);
+        autoNetMissIncrement.setOnClickListener(this);
+        autoNetMissDecrement = (Button) findViewById(R.id.autoNetMissDecrement);
+        autoNetMissDecrement.setOnClickListener(this);
+
+
+
 
 
         //ampMiss = (TextView) findViewById(R.id.AmpMissedCounter);
@@ -204,7 +225,7 @@ public class AutonomousActivity extends ComponentActivity implements View.OnClic
         autoPreplacedCoral = (CheckBox) findViewById(R.id.checkBox);;
         //autoCoralL3Miss = (TextView) findViewById(R.id.SpeakerScoredCounter);
         //autoCoralL2Miss = autoCoralL1Miss = (TextView) findViewById(R.id.SpeakerScoredCounter);
-        autoProcessorScore = autoProcessorMiss = autoNetScore = autoNetMiss = (TextView) findViewById(R.id.L3Label);
+        //autoProcessorScore = autoProcessorMiss = autoNetScore = autoNetMiss = (TextView) findViewById(R.id.L3Label);
 
         autoCoralL4Score = (TextView) findViewById(R.id.autoCoralL4Score);
         autoCoralL4Score.setOnClickListener(this);
@@ -221,6 +242,18 @@ public class AutonomousActivity extends ComponentActivity implements View.OnClic
         autoCoralL1Score.setOnClickListener(this);
         autoCoralL1Miss = (TextView) findViewById(R.id.autoCoralL1Miss);
         autoCoralL1Miss.setOnClickListener(this);
+
+        autoProcessorScore = (TextView) findViewById(R.id.autoProcessorScore);
+        autoProcessorScore.setOnClickListener(this);
+        autoProcessorMiss = (TextView) findViewById(R.id.autoProcessorMiss);
+        autoProcessorMiss.setOnClickListener(this);
+
+
+        autoNetScore = (TextView) findViewById(R.id.autoNetScore);
+        autoNetScore.setOnClickListener(this);
+        autoNetMiss = (TextView) findViewById(R.id.autoNetMiss);
+        autoNetMiss.setOnClickListener(this);
+
 
 
 
@@ -310,6 +343,25 @@ public class AutonomousActivity extends ComponentActivity implements View.OnClic
         else if(clickedId == R.id.autoProcessorMissDecrement) {
             counterDecrementLogic(autoProcessorMiss);
         }
+
+        else if(clickedId == R.id.autoNetScoreIncrement) {
+            counterIncrementLogic(autoNetScore);
+        }
+
+        else if(clickedId == R.id.autoNetScoreDecrement) {
+            counterDecrementLogic(autoNetScore);
+        }
+
+        else if(clickedId == R.id.autoNetMissIncrement) {
+            counterIncrementLogic(autoNetMiss);
+        }
+
+        else if(clickedId == R.id.autoNetMissDecrement) {
+            counterDecrementLogic(autoNetMiss);
+        }
+
+
+
 
 
 
@@ -541,10 +593,8 @@ public class AutonomousActivity extends ComponentActivity implements View.OnClic
                 Integer.parseInt(autoCoralL1Miss.getText().toString()),
                 Integer.parseInt(autoProcessorScore.getText().toString()),
                 Integer.parseInt(autoProcessorMiss.getText().toString()),
-                0,//Integer.parseInt(autoNetScore.getText().toString()),
-                0//Integer.parseInt(autoNetMiss.getText().toString())
-
-
+                Integer.parseInt(autoNetScore.getText().toString()),
+                Integer.parseInt(autoNetMiss.getText().toString())
         );
 
     }
