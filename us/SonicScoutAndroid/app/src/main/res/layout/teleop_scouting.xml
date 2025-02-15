@@ -312,7 +312,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/autoCoralL3Score"
+                    android:id="@+id/teleOpCoralL3Score"
                     android:layout_width="@dimen/_29sdp"
                     android:layout_height="@dimen/_29sdp"
                     android:layout_alignParentEnd="true"
@@ -330,7 +330,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <Button
-                    android:id="@+id/autoCoralL3ScoreIncrement"
+                    android:id="@+id/teleOpCoralL3ScoreIncrement"
                     android:layout_width="@dimen/_29sdp"
                     android:layout_height="match_parent"
                     android:layout_marginStart="@dimen/_10sdp"
@@ -346,7 +346,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <Button
-                    android:id="@+id/autoCoralL3ScoreDecrement"
+                    android:id="@+id/teleOpCoralL3ScoreDecrement"
                     android:layout_width="@dimen/_29sdp"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
@@ -362,7 +362,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/autoCoralL3Miss"
+                    android:id="@+id/teleOpCoralL3Miss"
                     android:layout_width="@dimen/_29sdp"
                     android:layout_height="@dimen/_29sdp"
                     android:layout_alignParentEnd="true"
@@ -380,7 +380,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <Button
-                    android:id="@+id/autoCoralL3MissIncrement"
+                    android:id="@+id/teleOpCoralL3MissIncrement"
                     android:layout_width="@dimen/_29sdp"
                     android:layout_height="match_parent"
                     android:layout_marginStart="@dimen/_10sdp"
@@ -396,7 +396,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <Button
-                    android:id="@+id/autoCoralL3MissDecrement"
+                    android:id="@+id/teleOpCoralL3MissDecrement"
                     android:layout_width="@dimen/_29sdp"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
@@ -413,7 +413,7 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/autoCoralL2Layout"
+                android:id="@+id/teleOpCoralL2Layout"
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/_29sdp"
                 android:layout_marginStart="10dp"
@@ -423,7 +423,7 @@
                 android:visibility="visible">
 
                 <TextView
-                    android:id="@+id/L2Label"
+                    android:id="@+id/teleOpL2Label"
                     android:layout_width="80dp"
                     android:layout_height="match_parent"
                     android:layout_alignParentEnd="true"
@@ -441,7 +441,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/autoCoralL2Score"
+                    android:id="@+id/teleOpCoralL2Score"
                     android:layout_width="@dimen/_29sdp"
                     android:layout_height="@dimen/_29sdp"
                     android:layout_alignParentEnd="true"
@@ -459,7 +459,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <Button
-                    android:id="@+id/autoCoralL2ScoreIncrement"
+                    android:id="@+id/teleOpCoralL2ScoreIncrement"
                     android:layout_width="@dimen/_29sdp"
                     android:layout_height="match_parent"
                     android:layout_marginStart="@dimen/_10sdp"
@@ -475,7 +475,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <Button
-                    android:id="@+id/autoCoralL2ScoreDecrement"
+                    android:id="@+id/teleOpCoralL2ScoreDecrement"
                     android:layout_width="@dimen/_29sdp"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
@@ -491,7 +491,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/autoCoralL2Miss"
+                    android:id="@+id/teleOpCoralL2Miss"
                     android:layout_width="@dimen/_29sdp"
                     android:layout_height="@dimen/_29sdp"
                     android:layout_alignParentEnd="true"
@@ -509,7 +509,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <Button
-                    android:id="@+id/autoCoralL2MissIncrement"
+                    android:id="@+id/teleOpCoralL2MissIncrement"
                     android:layout_width="@dimen/_29sdp"
                     android:layout_height="match_parent"
                     android:layout_marginStart="@dimen/_10sdp"
@@ -525,7 +525,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <Button
-                    android:id="@+id/autoCoralL2MissDecrement"
+                    android:id="@+id/teleOpCoralL2MissDecrement"
                     android:layout_width="@dimen/_29sdp"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
@@ -542,7 +542,7 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/autoCoralL1Layout"
+                android:id="@+id/teleOpCoralL1Layout"
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/_29sdp"
                 android:layout_marginStart="10dp"
@@ -552,7 +552,7 @@
                 android:visibility="visible">
 
                 <TextView
-                    android:id="@+id/L1Label"
+                    android:id="@+id/teleOpL1Label"
                     android:layout_width="80dp"
                     android:layout_height="match_parent"
                     android:layout_alignParentEnd="true"
@@ -570,7 +570,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/autoCoralL1Score"
+                    android:id="@+id/teleOpCoralL1Score"
                     android:layout_width="@dimen/_29sdp"
                     android:layout_height="@dimen/_29sdp"
                     android:layout_alignParentEnd="true"
@@ -588,7 +588,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <Button
-                    android:id="@+id/autoCoralL1ScoreIncrement"
+                    android:id="@+id/teleOpCoralL1ScoreIncrement"
                     android:layout_width="@dimen/_29sdp"
                     android:layout_height="match_parent"
                     android:layout_marginStart="@dimen/_10sdp"
@@ -604,7 +604,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <Button
-                    android:id="@+id/autoCoralL1ScoreDecrement"
+                    android:id="@+id/teleOpCoralL1ScoreDecrement"
                     android:layout_width="@dimen/_29sdp"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
@@ -620,7 +620,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/autoCoralL1Miss"
+                    android:id="@+id/teleOpCoralL1Miss"
                     android:layout_width="@dimen/_29sdp"
                     android:layout_height="@dimen/_29sdp"
                     android:layout_alignParentEnd="true"
@@ -638,7 +638,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <Button
-                    android:id="@+id/autoCoralL1MissIncrement"
+                    android:id="@+id/teleOpCoralL1MissIncrement"
                     android:layout_width="@dimen/_29sdp"
                     android:layout_height="match_parent"
                     android:layout_marginStart="@dimen/_10sdp"
@@ -654,7 +654,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <Button
-                    android:id="@+id/autoCoralL1MissDecrement"
+                    android:id="@+id/teleOpCoralL1MissDecrement"
                     android:layout_width="@dimen/_29sdp"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
@@ -671,14 +671,14 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/autoProcessorLayout"
+                android:id="@+id/teleOpProcessorLayout"
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/_29sdp"
                 android:orientation="horizontal"
                 android:visibility="visible">
 
                 <TextView
-                    android:id="@+id/autoProcessorLabel"
+                    android:id="@+id/teleOpProcessorLabel"
                     android:layout_width="80dp"
                     android:layout_height="match_parent"
                     android:layout_alignParentEnd="true"
@@ -696,7 +696,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/autoProcessorScore"
+                    android:id="@+id/teleOpProcessorScore"
                     android:layout_width="@dimen/_29sdp"
                     android:layout_height="@dimen/_29sdp"
                     android:layout_alignParentEnd="true"
@@ -714,7 +714,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <Button
-                    android:id="@+id/autoProcessorScoreIncrement"
+                    android:id="@+id/teleOpProcessorScoreIncrement"
                     android:layout_width="@dimen/_29sdp"
                     android:layout_height="match_parent"
                     android:layout_marginStart="@dimen/_10sdp"
@@ -730,7 +730,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <Button
-                    android:id="@+id/autoProcessorScoreDecrement"
+                    android:id="@+id/teleOpProcessorScoreDecrement"
                     android:layout_width="@dimen/_29sdp"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
@@ -746,7 +746,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/autoProcessorMiss"
+                    android:id="@+id/teleOpProcessorMiss"
                     android:layout_width="@dimen/_29sdp"
                     android:layout_height="@dimen/_29sdp"
                     android:layout_alignParentEnd="true"
@@ -764,7 +764,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <Button
-                    android:id="@+id/autoProcessorMissIncrement"
+                    android:id="@+id/teleOpProcessorMissIncrement"
                     android:layout_width="@dimen/_29sdp"
                     android:layout_height="match_parent"
                     android:layout_marginStart="@dimen/_10sdp"
@@ -780,7 +780,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <Button
-                    android:id="@+id/autoProcessorMissDecrement"
+                    android:id="@+id/teleOpProcessorMissDecrement"
                     android:layout_width="@dimen/_29sdp"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
@@ -797,14 +797,14 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/autoNetLayout"
+                android:id="@+id/teleOpNetLayout"
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/_29sdp"
                 android:orientation="horizontal"
                 android:visibility="visible">
 
                 <TextView
-                    android:id="@+id/autoNetLabel"
+                    android:id="@+id/teleOpNetLabel"
                     android:layout_width="80dp"
                     android:layout_height="match_parent"
                     android:layout_alignParentEnd="true"
@@ -822,7 +822,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/autoNetScore"
+                    android:id="@+id/teleOpNetScore"
                     android:layout_width="@dimen/_29sdp"
                     android:layout_height="@dimen/_29sdp"
                     android:layout_alignParentEnd="true"
@@ -840,7 +840,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <Button
-                    android:id="@+id/autoNetScoreIncrement"
+                    android:id="@+id/teleOpNetScoreIncrement"
                     android:layout_width="@dimen/_29sdp"
                     android:layout_height="match_parent"
                     android:layout_marginStart="@dimen/_10sdp"
@@ -856,7 +856,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <Button
-                    android:id="@+id/autoNetScoreDecrement"
+                    android:id="@+id/teleOpNetScoreDecrement"
                     android:layout_width="@dimen/_29sdp"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
@@ -872,7 +872,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/autoNetMiss"
+                    android:id="@+id/teleOpNetMiss"
                     android:layout_width="@dimen/_29sdp"
                     android:layout_height="@dimen/_29sdp"
                     android:layout_alignParentEnd="true"
@@ -890,7 +890,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <Button
-                    android:id="@+id/autoNetMissIncrement"
+                    android:id="@+id/teleOpNetMissIncrement"
                     android:layout_width="@dimen/_29sdp"
                     android:layout_height="match_parent"
                     android:layout_marginStart="@dimen/_10sdp"
@@ -906,7 +906,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <Button
-                    android:id="@+id/autoNetMissDecrement"
+                    android:id="@+id/teleOpNetMissDecrement"
                     android:layout_width="@dimen/_29sdp"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
@@ -1063,6 +1063,7 @@
             android:layout_marginTop="@dimen/_335sdp"
             android:layout_marginEnd="@dimen/_29sdp"
             android:orientation="horizontal"
+            android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -1081,10 +1082,10 @@
                 android:textColor="@color/black"
                 android:textSize="@dimen/_15ssp"
                 android:textStyle="bold"
+                android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
-
 
 
             <TextView
@@ -1101,10 +1102,10 @@
                 android:textColor="@color/black"
                 android:textSize="@dimen/_15ssp"
                 android:textStyle="bold"
+                android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
-
 
 
             <TextView
@@ -1157,6 +1158,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
         </LinearLayout>
+
         <LinearLayout
             android:id="@+id/autoCoralL1Layout"
             android:layout_width="wrap_content"
@@ -1165,9 +1167,10 @@
             android:layout_marginTop="@dimen/_375sdp"
             android:layout_marginEnd="@dimen/_29sdp"
             android:orientation="horizontal"
-            app:layout_constraintTop_toTopOf="parent"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent">
+            app:layout_constraintTop_toTopOf="parent">
 
             <TextView
                 android:id="@+id/L1Label"
@@ -1183,6 +1186,7 @@
                 android:textColor="@color/black"
                 android:textSize="@dimen/_15ssp"
                 android:textStyle="bold"
+                android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -1200,9 +1204,9 @@
                 android:textColor="@color/black"
                 android:textSize="@dimen/_15ssp"
                 android:textStyle="bold"
-                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"/>
+                app:layout_constraintTop_toTopOf="parent" />
 
             <Button
                 android:id="@+id/Amp_Missed_Increment"
@@ -1216,9 +1220,9 @@
                 android:textColor="@color/accent"
                 android:textSize="@dimen/_15ssp"
                 app:backgroundTint="@null"
-                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"/>
+                app:layout_constraintTop_toTopOf="parent" />
 
             <Button
                 android:id="@+id/Amp_Missed_Decrement"
@@ -1232,9 +1236,9 @@
                 android:textSize="@dimen/_15ssp"
                 android:textStyle="bold"
                 app:backgroundTint="@null"
-                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"/>
+                app:layout_constraintTop_toTopOf="parent" />
         </LinearLayout>
 
         <!-- Robot Breakdown Layout -->
@@ -1246,6 +1250,7 @@
             android:layout_marginTop="@dimen/_430sdp"
             android:layout_marginEnd="@dimen/_29sdp"
             android:orientation="horizontal"
+            android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -1284,6 +1289,7 @@
             android:layout_marginTop="@dimen/_470sdp"
             android:layout_marginEnd="@dimen/_29sdp"
             android:orientation="horizontal"
+            android:visibility="visible"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">

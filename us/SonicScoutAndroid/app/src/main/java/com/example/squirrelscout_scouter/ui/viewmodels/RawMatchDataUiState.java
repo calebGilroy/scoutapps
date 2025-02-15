@@ -62,4 +62,20 @@ public interface RawMatchDataUiState {
     String endgameClimb();
     boolean endgameTrap();
     String pickUpAbility();
+
+    int teleOpCoralL4Score();
+    int teleOpCoralL4Miss();
+    int teleOpCoralL3Score();
+    int teleOpCoralL3Miss();
+
+    int teleOpCoralL2Score();
+    int teleOpCoralL2Miss();
+    int teleOpCoralL1Score();
+    int teleOpCoralL1Miss();
+    int teleOpProcessorScore();
+    int teleOpProcessorMiss();
+    int teleOpNetScore();
+    int teleOpNetMiss();
+
+
 }

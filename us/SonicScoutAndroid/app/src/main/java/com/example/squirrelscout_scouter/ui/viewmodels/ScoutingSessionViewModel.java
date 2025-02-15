@@ -139,6 +139,22 @@ public class ScoutingSessionViewModel extends ViewModel {
             if (!clone.autoCoralL3MissIsSet()) clone.setAutoCoralL3Miss(-1);
             if (!clone.autoCoralL2MissIsSet()) clone.setAutoCoralL2Miss(-1);
             if (!clone.autoCoralL1MissIsSet()) clone.setAutoCoralL1Miss(-1);
+
+            //tele2025
+            if (!clone.teleOpCoralL4ScoreIsSet()) clone.setTeleOpCoralL4Score(-1);
+            if (!clone.teleOpCoralL3ScoreIsSet()) clone.setTeleOpCoralL3Score(-1);
+            if (!clone.teleOpCoralL2ScoreIsSet()) clone.setTeleOpCoralL2Score(-1);
+            if (!clone.teleOpCoralL1ScoreIsSet()) clone.setTeleOpCoralL1Score(-1);
+            if (!clone.teleOpProcessorScoreIsSet()) clone.setTeleOpProcessorScore(-1);
+            if (!clone.teleOpProcessorMissIsSet()) clone.setTeleOpProcessorMiss(-1);
+            if (!clone.teleOpNetScoreIsSet()) clone.setTeleOpNetScore(-1);
+            if (!clone.teleOpNetMissIsSet()) clone.setTeleOpNetMiss(-1);
+            if (!clone.teleOpCoralL4MissIsSet()) clone.setTeleOpCoralL4Miss(-1);
+            if (!clone.teleOpCoralL3MissIsSet()) clone.setTeleOpCoralL3Miss(-1);
+            if (!clone.teleOpCoralL2MissIsSet()) clone.setTeleOpCoralL2Miss(-1);
+            if (!clone.teleOpCoralL1MissIsSet()) clone.setTeleOpCoralL1Miss(-1);
+
+
         }
         return clone.toImmutable();
     }
@@ -238,7 +254,7 @@ public class ScoutingSessionViewModel extends ViewModel {
         updateAndSetSession(session);
     }
 
-    public void captureTeleData(int speakerScore, int speakerMiss, int ampScore, int ampMiss, String distance, String breakdown, String climb, boolean trap, String pickup){
+    public void captureTeleData(int speakerScore, int speakerMiss, int ampScore, int ampMiss, String distance, String breakdown, String climb, boolean trap, String pickup, int teleOpCoralL4Score, int teleOpCoralL4Miss, int teleOpCoralL3Score, int teleOpCoralL3Miss, int teleOpCoralL2Score, int teleOpCoralL2Miss, int teleOpCoralL1Score, int teleOpCoralL1Miss, int teleOpProcessorScore, int teleOpProcessorMiss, int teleOpNetScore, int teleOpNetMiss) {
         ImmutableRawMatchDataSessionUiState session = rawMatchDataSessionUiState.getValue();
         assert  session != null;
 
@@ -254,6 +270,21 @@ public class ScoutingSessionViewModel extends ViewModel {
         rawMatchData.setEndgameClimb(climb);
         rawMatchData.setEndgameTrap(trap);
         rawMatchData.setPickUpAbility(pickup);
+        //2025 tele
+        rawMatchData.setTeleOpCoralL4Score(teleOpCoralL4Score);
+        rawMatchData.setTeleOpCoralL4Miss(teleOpCoralL4Miss);
+        rawMatchData.setTeleOpCoralL3Score(teleOpCoralL3Score);
+        rawMatchData.setTeleOpCoralL3Miss(teleOpCoralL3Miss);
+        rawMatchData.setTeleOpCoralL2Score(teleOpCoralL2Score);
+        rawMatchData.setTeleOpCoralL2Miss(teleOpCoralL2Miss);
+        rawMatchData.setTeleOpCoralL1Score(teleOpCoralL1Score);
+        rawMatchData.setTeleOpCoralL1Miss(teleOpCoralL1Miss);
+        rawMatchData.setTeleOpProcessorScore(teleOpProcessorScore);
+        rawMatchData.setTeleOpProcessorMiss(teleOpProcessorMiss);
+        rawMatchData.setTeleOpNetScore(teleOpNetScore);
+        rawMatchData.setTeleOpNetMiss(teleOpNetMiss);
+
+
 
         updateAndSetSession(session);
     }

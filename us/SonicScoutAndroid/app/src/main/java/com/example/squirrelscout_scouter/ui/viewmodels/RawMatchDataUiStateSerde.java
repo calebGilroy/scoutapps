@@ -147,7 +147,20 @@ class RawMatchDataUiStateSerde {
         rawMatchData.setAutoCoralL1Miss((short) v.autoCoralL1Miss());
 
         //2025 Tele-OP
-        //rawMatchData.setTeleOpCoralL4Score((short) v.teleOpCoralL4Score());
+        rawMatchData.setTeleOpCoralL4Score((short) v.teleOpCoralL4Score());
+        rawMatchData.setTeleOpCoralL4Miss((short) v.teleOpCoralL4Miss());
+        rawMatchData.setTeleOpCoralL3Score((short) v.teleOpCoralL3Score());
+        rawMatchData.setTeleOpCoralL3Miss((short) v.teleOpCoralL3Miss());
+        rawMatchData.setTeleOpCoralL2Score((short) v.teleOpCoralL2Score());
+        rawMatchData.setTeleOpCoralL2Miss((short) v.teleOpCoralL2Miss());
+        rawMatchData.setTeleOpCoralL1Score((short) v.teleOpCoralL1Score());
+        rawMatchData.setTeleOpCoralL1Miss((short) v.teleOpCoralL1Miss());
+        rawMatchData.setTeleOpProcessorScore((short) v.teleOpProcessorScore());
+        rawMatchData.setTeleOpProcessorMiss((short) v.teleOpProcessorMiss());
+        rawMatchData.setTeleOpNetScore((short) v.teleOpNetScore());
+        rawMatchData.setTeleOpNetMiss((short) v.teleOpNetMiss());
+        rawMatchData.setTeleBreakdown(stringToTBreakdown(v.teleBreakdown()));
+        rawMatchData.setEndgameClimb(stringToEClimb(v.endgameClimb()));
 
         
 

@@ -48,7 +48,38 @@ public class TeleopActivity extends ComponentActivity implements View.OnClickLis
 
     TextView ampMissIncrement, ampMissDecrement;
 
-    
+    TextView teleOpCoralL3Score, teleOpCoralL3Miss;
+
+    TextView teleOpCoralL3ScoreDecrement, teleOpCoralL3MissDecrement;
+
+    TextView teleOpCoralL3ScoreIncrement, teleOpCoralL3MissIncrement;
+
+    TextView teleOpCoralL2Score, teleOpCoralL2Miss;
+
+    TextView teleOpCoralL2ScoreDecrement, teleOpCoralL2MissDecrement;
+
+    TextView teleOpCoralL2ScoreIncrement, teleOpCoralL2MissIncrement;
+
+    TextView teleOpCoralL1Score, teleOpCoralL1Miss;
+
+    TextView teleOpCoralL1ScoreDecrement, teleOpCoralL1MissDecrement;
+
+    TextView teleOpCoralL1ScoreIncrement, teleOpCoralL1MissIncrement;
+
+    TextView teleOpProcessorScore, teleOpProcessorMiss;
+
+    TextView teleOpProcessorScoreDecrement, teleOpProcessorMissDecrement;
+
+    TextView teleOpProcessorScoreIncrement, teleOpProcessorMissIncrement;
+
+    TextView teleOpNetScore, teleOpNetMiss;
+
+    TextView teleOpNetScoreIncrement, teleOpNetMissIncrement;
+    TextView teleOpNetScoreDecrement, teleOpNetMissDecrement;
+
+
+
+
 
     //Breakdown
     AutoCompleteTextView dropdown, dropdown2;
@@ -91,6 +122,18 @@ public class TeleopActivity extends ComponentActivity implements View.OnClickLis
         //...
         teleOpCoralL4Score = (TextView) findViewById(R.id.teleOpCoralL4Score);
         teleOpCoralL4Miss = (TextView) findViewById(R.id.teleOpCoralL4Miss);
+        teleOpCoralL3Score = (TextView) findViewById(R.id.teleOpCoralL3Score);
+        teleOpCoralL3Miss = (TextView) findViewById(R.id.teleOpCoralL3Miss);
+        teleOpCoralL2Score = (TextView) findViewById(R.id.teleOpCoralL2Score);
+        teleOpCoralL2Miss = (TextView) findViewById(R.id.teleOpCoralL2Miss);
+        teleOpCoralL1Score = (TextView) findViewById(R.id.teleOpCoralL1Score);
+        teleOpCoralL1Miss = (TextView) findViewById(R.id.teleOpCoralL1Miss);
+        teleOpProcessorScore = (TextView) findViewById(R.id.teleOpProcessorScore);
+        teleOpProcessorMiss = (TextView) findViewById(R.id.teleOpProcessorMiss);
+
+        teleOpNetScore = (TextView) findViewById(R.id.teleOpNetScore);
+        teleOpNetMiss = (TextView) findViewById(R.id.teleOpNetMiss);
+
         //ampMissCounter = (TextView) findViewById(R.id.AmpMissedCounter);
 
         //...
@@ -107,6 +150,65 @@ public class TeleopActivity extends ComponentActivity implements View.OnClickLis
         teleOpCoralL4MissIncrement.setOnClickListener(this);
         teleOpCoralL4MissDecrement = (Button) findViewById(R.id.teleOpCoralL4MissDecrement);
         teleOpCoralL4MissDecrement.setOnClickListener(this);
+
+        teleOpCoralL3ScoreIncrement = (Button) findViewById(R.id.teleOpCoralL3ScoreIncrement);
+        teleOpCoralL3ScoreIncrement.setOnClickListener(this);
+        teleOpCoralL3ScoreDecrement = (Button) findViewById(R.id.teleOpCoralL3ScoreDecrement);
+        teleOpCoralL3ScoreDecrement.setOnClickListener(this);
+
+        teleOpCoralL3MissIncrement = (Button) findViewById(R.id.teleOpCoralL3MissIncrement);
+        teleOpCoralL3MissIncrement.setOnClickListener(this);
+        teleOpCoralL3MissDecrement = (Button) findViewById(R.id.teleOpCoralL3MissDecrement);
+        teleOpCoralL3MissDecrement.setOnClickListener(this);
+
+
+        teleOpCoralL2MissIncrement = (Button) findViewById(R.id.teleOpCoralL2MissIncrement);
+        teleOpCoralL2MissIncrement.setOnClickListener(this);
+        teleOpCoralL2MissDecrement = (Button) findViewById(R.id.teleOpCoralL2MissDecrement);
+        teleOpCoralL2MissDecrement.setOnClickListener(this);
+
+        teleOpCoralL2ScoreIncrement = (Button) findViewById(R.id.teleOpCoralL2ScoreIncrement);
+        teleOpCoralL2ScoreIncrement.setOnClickListener(this);
+        teleOpCoralL2ScoreDecrement = (Button) findViewById(R.id.teleOpCoralL2ScoreDecrement);
+        teleOpCoralL2ScoreDecrement.setOnClickListener(this);
+
+
+
+        teleOpCoralL1MissIncrement = (Button) findViewById(R.id.teleOpCoralL1MissIncrement);
+        teleOpCoralL1MissIncrement.setOnClickListener(this);
+        teleOpCoralL1MissDecrement = (Button) findViewById(R.id.teleOpCoralL1MissDecrement);
+        teleOpCoralL1MissDecrement.setOnClickListener(this);
+
+        teleOpCoralL1ScoreIncrement = (Button) findViewById(R.id.teleOpCoralL1ScoreIncrement);
+        teleOpCoralL1ScoreIncrement.setOnClickListener(this);
+        teleOpCoralL1ScoreDecrement = (Button) findViewById(R.id.teleOpCoralL1ScoreDecrement);
+        teleOpCoralL1ScoreDecrement.setOnClickListener(this);
+
+
+
+        teleOpProcessorMissIncrement = (Button) findViewById(R.id.teleOpProcessorMissIncrement);
+        teleOpProcessorMissIncrement.setOnClickListener(this);
+        teleOpProcessorMissDecrement = (Button) findViewById(R.id.teleOpProcessorMissDecrement);
+        teleOpProcessorMissDecrement.setOnClickListener(this);
+
+        teleOpProcessorScoreIncrement = (Button) findViewById(R.id.teleOpProcessorScoreIncrement);
+        teleOpProcessorScoreIncrement.setOnClickListener(this);
+        teleOpProcessorScoreDecrement = (Button) findViewById(R.id.teleOpProcessorScoreDecrement);
+        teleOpProcessorScoreDecrement.setOnClickListener(this);
+
+
+
+        teleOpNetMissIncrement = (Button) findViewById(R.id.teleOpNetMissIncrement);
+        teleOpNetMissIncrement.setOnClickListener(this);
+        teleOpNetMissDecrement = (Button) findViewById(R.id.teleOpNetMissDecrement);
+        teleOpNetMissDecrement.setOnClickListener(this);
+
+        teleOpNetScoreIncrement = (Button) findViewById(R.id.teleOpNetScoreIncrement);
+        teleOpNetScoreIncrement.setOnClickListener(this);
+        teleOpNetScoreDecrement = (Button) findViewById(R.id.teleOpNetScoreDecrement);
+        teleOpNetScoreDecrement.setOnClickListener(this);
+
+
 
         ampMissIncrement = (Button) findViewById(R.id.Amp_Missed_Increment);
         ampMissIncrement.setOnClickListener(this);
@@ -243,6 +345,90 @@ public class TeleopActivity extends ComponentActivity implements View.OnClickLis
         else if(clickedId == R.id.teleOpCoralL4MissDecrement){
             counterDecrementLogic(teleOpCoralL4Miss);
         }
+
+        else if(clickedId == R.id.teleOpCoralL3ScoreIncrement){
+            counterIncrementLogic(teleOpCoralL3Score);
+        }
+
+        else if(clickedId == R.id.teleOpCoralL3ScoreDecrement){
+            counterDecrementLogic(teleOpCoralL3Score);
+        }
+
+        else if(clickedId == R.id.teleOpCoralL3MissIncrement){
+            counterIncrementLogic(teleOpCoralL3Miss);
+        }
+
+        else if(clickedId == R.id.teleOpCoralL3MissDecrement){
+            counterDecrementLogic(teleOpCoralL3Miss);
+        }
+
+
+        else if(clickedId == R.id.teleOpCoralL2ScoreIncrement){
+            counterIncrementLogic(teleOpCoralL2Score);
+        }
+
+        else if(clickedId == R.id.teleOpCoralL2ScoreDecrement){
+            counterDecrementLogic(teleOpCoralL2Score);
+        }
+
+        else if(clickedId == R.id.teleOpCoralL2MissIncrement){
+            counterIncrementLogic(teleOpCoralL2Miss);
+        }
+
+        else if(clickedId == R.id.teleOpCoralL2MissDecrement){
+            counterDecrementLogic(teleOpCoralL2Miss);
+        }
+
+
+        else if(clickedId == R.id.teleOpCoralL1ScoreIncrement){
+            counterIncrementLogic(teleOpCoralL1Score);
+        }
+
+        else if(clickedId == R.id.teleOpCoralL1ScoreDecrement){
+            counterDecrementLogic(teleOpCoralL1Score);
+        }
+
+        else if(clickedId == R.id.teleOpCoralL1MissIncrement){
+            counterIncrementLogic(teleOpCoralL1Miss);
+        }
+
+        else if(clickedId == R.id.teleOpCoralL1MissDecrement){
+            counterDecrementLogic(teleOpCoralL1Miss);
+        }
+
+
+        else if(clickedId == R.id.teleOpProcessorScoreIncrement){
+            counterIncrementLogic(teleOpProcessorScore);
+        }
+
+        else if(clickedId == R.id.teleOpProcessorScoreDecrement){
+            counterDecrementLogic(teleOpProcessorScore);
+        }
+
+        else if(clickedId == R.id.teleOpProcessorMissIncrement){
+            counterIncrementLogic(teleOpProcessorMiss);
+        }
+
+        else if(clickedId == R.id.teleOpProcessorMissDecrement){
+            counterDecrementLogic(teleOpProcessorMiss);
+        }
+
+        else if(clickedId == R.id.teleOpNetScoreIncrement){
+            counterIncrementLogic(teleOpNetScore);
+        }
+
+        else if(clickedId == R.id.teleOpNetScoreDecrement){
+            counterDecrementLogic(teleOpNetScore);
+        }
+
+        else if(clickedId == R.id.teleOpNetMissIncrement){
+            counterIncrementLogic(teleOpNetMiss);
+        }
+
+        else if(clickedId == R.id.teleOpNetMissDecrement){
+            counterDecrementLogic(teleOpNetMiss);
+        }
+
 
 
 
@@ -530,15 +716,27 @@ public class TeleopActivity extends ComponentActivity implements View.OnClickLis
         model.captureTeleData(
                 sharedImageSingleton.getSuccess(),
                 sharedImageSingleton.getMiss(),
-                //Integer.parseInt(ampScoreCounter.getText().toString()),
-                Integer.parseInt(teleOpCoralL4Score.getText().toString()),
-                Integer.parseInt(teleOpCoralL4Miss.getText().toString()),
-                //Integer.parseInt(ampMissCounter.getText().toString()),
+                0,//Integer.parseInt(ampScoreCounter.getText().toString()),
+                0,//Integer.parseInt(ampMissCounter.getText().toString()),
                 getDistance(),
                 dropdown.getText().toString(),
                 dropdown2.getText().toString(),
                 trapBool,
-                scoutSingleton.getFirstPickup()
+                scoutSingleton.getFirstPickup(),
+                Integer.parseInt(teleOpCoralL4Score.getText().toString()),
+                Integer.parseInt(teleOpCoralL4Miss.getText().toString()),
+                Integer.parseInt(teleOpCoralL3Score.getText().toString()),
+                Integer.parseInt(teleOpCoralL3Miss.getText().toString()),
+                Integer.parseInt(teleOpCoralL2Score.getText().toString()),
+                Integer.parseInt(teleOpCoralL2Miss.getText().toString()),
+                Integer.parseInt(teleOpCoralL1Score.getText().toString()),
+                Integer.parseInt(teleOpCoralL1Miss.getText().toString()),
+                Integer.parseInt(teleOpProcessorScore.getText().toString()),
+                Integer.parseInt(teleOpProcessorMiss.getText().toString()),
+                Integer.parseInt(teleOpNetScore.getText().toString()),
+                Integer.parseInt(teleOpNetMiss.getText().toString())
+
+
         );
     }
 
