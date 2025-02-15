@@ -35,6 +35,8 @@ public class AutonomousActivity extends ComponentActivity implements View.OnClic
 
     Button autoCoralL1ScoreIncrement, autoCoralL1ScoreDecrement;
 
+    Button autoCoralL4MissIncrement, autoCoralL4MissDecrement;
+
 
     
 
@@ -107,10 +109,14 @@ public class AutonomousActivity extends ComponentActivity implements View.OnClic
         autoCoralL1ScoreIncrement.setOnClickListener(this);
         autoCoralL1ScoreDecrement = (Button) findViewById(R.id.autoCoralL1ScoreDecrement);
         autoCoralL1ScoreDecrement.setOnClickListener(this);
-        speakerScore = (TextView) findViewById(R.id.SpeakerScoredCounter);
-        speakerScore.setOnClickListener(this);
-        //speakerMiss = (TextView) findViewById(R.id.SpeakerMissedCounter);
-        //speakerMiss.setOnClickListener(this);
+
+        autoCoralL4MissIncrement = (Button) findViewById(R.id.autoCoralL4MissIncrement);
+        autoCoralL4MissIncrement.setOnClickListener(this);
+        autoCoralL4MissDecrement = (Button) findViewById(R.id.autoCoralL4MissDecrement);
+        autoCoralL4MissDecrement.setOnClickListener(this);
+
+
+
         //ampMiss = (TextView) findViewById(R.id.AmpMissedCounter);
         //ampMiss.setOnClickListener(this);
 
@@ -171,7 +177,7 @@ public class AutonomousActivity extends ComponentActivity implements View.OnClic
 
         autoCoralL4Score = (TextView) findViewById(R.id.autoCoralL4Score);
         autoCoralL4Score.setOnClickListener(this);
-        //autoCoralL4Miss = (TextView) findViewById(R.id.SpeakerMissedCounter);
+        autoCoralL4Miss = (TextView) findViewById(R.id.autoCoralL4Miss);
         autoCoralL3Score = (TextView) findViewById(R.id.autoCoralL3Score);
         autoCoralL3Score.setOnClickListener(this);
         autoCoralL2Score = (TextView) findViewById(R.id.autoCoralL2Score);
@@ -218,6 +224,16 @@ public class AutonomousActivity extends ComponentActivity implements View.OnClic
         else if(clickedId == R.id.autoCoralL2ScoreDecrement){
             counterDecrementLogic(autoCoralL2Score);
         }
+
+        else if(clickedId == R.id.autoCoralL4MissIncrement) {
+            counterIncrementLogic(autoCoralL4Miss);
+        }
+
+        else if(clickedId == R.id.autoCoralL4MissDecrement) {
+            counterDecrementLogic(autoCoralL4Miss);
+        }
+
+
         else if(clickedId == R.id.Start_Left){
             robotLeftLogic();
         }
@@ -435,7 +451,7 @@ public class AutonomousActivity extends ComponentActivity implements View.OnClic
                 //2025 captureAutoData
                 autoPreplacedCoral.isChecked(),
                 Integer.parseInt(autoCoralL4Score.getText().toString()),
-                0,//Integer.parseInt(autoCoralL4Miss.getText().toString()),
+                Integer.parseInt(autoCoralL4Miss.getText().toString()),
                 Integer.parseInt(autoCoralL3Score.getText().toString()),
                 0,//Integer.parseInt(autoCoralL3Miss.getText().toString()),
                 Integer.parseInt(autoCoralL2Score.getText().toString()),
