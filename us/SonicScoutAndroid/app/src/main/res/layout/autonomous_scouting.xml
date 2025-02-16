@@ -285,6 +285,7 @@
             android:layout_marginStart="@dimen/_143sdp"
             android:layout_marginTop="@dimen/_166sdp"
             android:orientation="vertical"
+            android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -294,7 +295,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:button="@null"
-                android:drawableRight="@drawable/checkbox" />
+                android:drawableRight="@drawable/checkbox"
+                android:visibility="gone" />
 
             <CheckBox
                 android:id="@+id/checkBox8"
@@ -302,7 +304,8 @@
                 android:layout_height="wrap_content"
                 android:button="@null"
                 android:drawableRight="@drawable/checkbox"
-                android:translationY="21dp" />
+                android:translationY="21dp"
+                android:visibility="gone" />
 
             <CheckBox
                 android:id="@+id/checkBox9"
@@ -879,6 +882,8 @@
                 android:id="@+id/autoProcessorLayout"
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/_29sdp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="20dp"
                 android:orientation="horizontal"
                 android:visibility="visible">
 
@@ -1005,6 +1010,8 @@
                 android:id="@+id/autoNetLayout"
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/_29sdp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="20dp"
                 android:orientation="horizontal"
                 android:visibility="visible">
 
