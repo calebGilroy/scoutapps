@@ -154,10 +154,12 @@
             android:id="@+id/teleOpCoralLevelsLayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="80dp"
             android:orientation="vertical"
             android:visibility="visible"
             app:layout_constraintBottom_toTopOf="@+id/linearLayout6"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/bodyView"
             app:layout_constraintVertical_bias="0.819"
             tools:layout_editor_absoluteX="46dp"><![CDATA[>
 
@@ -1345,7 +1347,7 @@
             android:layout_marginTop="1050dp"
             android:layout_marginEnd="@dimen/_29sdp"
             android:orientation="horizontal"
-            android:visibility="visible"
+            android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -1423,6 +1425,42 @@
             android:gravity="center"
             android:text=""
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/teleOpScoredTitle"
+            android:layout_width="@dimen/_106sdp"
+            android:layout_height="match_parent"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="148dp"
+            android:gravity="center"
+            android:inputType="none"
+            android:text="SCORED :"
+            android:textAllCaps="false"
+            android:textColor="@color/accent"
+            android:textSize="@dimen/_20ssp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.38"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/teleOpMissTitle"
+            android:layout_width="@dimen/_106sdp"
+            android:layout_height="match_parent"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="148dp"
+            android:gravity="center"
+            android:inputType="none"
+            android:text="MISS :"
+            android:textAllCaps="false"
+            android:textColor="@color/accent"
+            android:textSize="@dimen/_20ssp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.912"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 

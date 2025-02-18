@@ -477,7 +477,7 @@ public class TeleopActivity extends ComponentActivity implements View.OnClickLis
 
     //next page logic
     private void nextPageCheck(){
-        if(!(dropdown2.getText().toString().isEmpty()) && (trapYes.getTextColors() != ContextCompat.getColorStateList(this, R.color.green))){
+        if(!(dropdown2.getText().toString().isEmpty())){
             nextButton.setTextColor(ContextCompat.getColor(this, R.color.black));
             nextButton.setBackgroundTintList(ContextCompat.getColorStateList(this, R.color.accent));
             nextButton.setText("NEXT PAGE");
@@ -492,7 +492,7 @@ public class TeleopActivity extends ComponentActivity implements View.OnClickLis
             Intent intent = new Intent(TeleopActivity.this, QRCodeActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             // Start the target activity with the Intent
-            addMarker(0,0,imageView,4);
+            addMarker(1,1,imageView,4);
             saveImageToGallery(getMarkedImage(imageView), "Trial");
             saveScoutInfo();
             startActivity(intent);
@@ -556,7 +556,7 @@ public class TeleopActivity extends ComponentActivity implements View.OnClickLis
         Bitmap originalBitmap = getMarkedImage(imageView);
         markerBitmap = Bitmap.createBitmap(originalBitmap.getWidth(), originalBitmap.getHeight(), Bitmap.Config.ARGB_8888);
         Canvas canvas = new Canvas(markerBitmap);
-        canvas.drawBitmap(originalBitmap, 0, 0, null);
+        canvas.drawBitmap(originalBitmap, 1, 1, null);
 
         Paint paint = new Paint();
         paint.setColor(Color.RED);
@@ -589,7 +589,10 @@ public class TeleopActivity extends ComponentActivity implements View.OnClickLis
 
     private Bitmap getMarkedImage(ImageView imageView) {
         // Create a bitmap from the ImageView
-        Bitmap originalBitmap = Bitmap.createBitmap(imageView.getWidth(), imageView.getHeight(), Bitmap.Config.ARGB_8888);
+        Bitmap originalBitmap = Bitmap.createBitmap(
+                1,1,
+                //imageView.getWidth(), imageView.getHeight(),
+                Bitmap.Config.ARGB_8888);
         Canvas canvas = new Canvas(originalBitmap);
         imageView.draw(canvas);
 
@@ -714,8 +717,8 @@ public class TeleopActivity extends ComponentActivity implements View.OnClickLis
         ScoutSingleton scoutSingleton = ScoutSingleton.getInstance();
 
         model.captureTeleData(
-                sharedImageSingleton.getSuccess(),
-                sharedImageSingleton.getMiss(),
+                0,//sharedImageSingleton.getSuccess(),
+                0,//sharedImageSingleton.getMiss(),
                 0,//Integer.parseInt(ampScoreCounter.getText().toString()),
                 0,//Integer.parseInt(ampMissCounter.getText().toString()),
                 getDistance(),

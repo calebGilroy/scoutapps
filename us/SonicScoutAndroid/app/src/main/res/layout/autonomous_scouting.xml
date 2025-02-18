@@ -58,9 +58,9 @@
             android:layout_height="@dimen/_150sdp"
             android:layout_marginStart="@dimen/_10sdp"
             android:layout_marginTop="@dimen/_150sdp"
-            android:layout_marginEnd="@dimen/_10sdp"
             android:background="@drawable/rounded_rectangle_subtle"
             android:backgroundTint="@color/offwhite"
+            android:visibility="gone"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -142,7 +142,7 @@
             android:layout_height="@dimen/_29sdp"
             android:layout_marginStart="@dimen/_20sdp"
             android:layout_marginTop="@dimen/_110sdp"
-            android:layout_marginEnd="@dimen/_29sdp"
+            android:layout_marginEnd="60dp"
             android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -200,11 +200,13 @@
             android:id="@+id/fieldImageView"
             android:layout_width="@dimen/_270sdp"
             android:layout_height="@dimen/_140sdp"
-            android:layout_marginTop="@dimen/_100sdp"
             android:scaleType="centerCrop"
             android:src="@drawable/new_field"
             android:translationX="@dimen/_15sdp"
-            android:translationY="@dimen/_155sdp" />
+            android:translationY="@dimen/_155sdp"
+            android:visibility="gone"
+            tools:layout_editor_absoluteX="19dp"
+            tools:layout_editor_absoluteY="201dp" />
 
         <LinearLayout
             android:id="@+id/linearLayout10"
@@ -213,6 +215,7 @@
             android:layout_marginStart="@dimen/_60sdp"
             android:layout_marginTop="@dimen/_217sdp"
             android:orientation="vertical"
+            android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -249,6 +252,7 @@
             android:layout_marginStart="@dimen/_225sdp"
             android:layout_marginTop="@dimen/_217sdp"
             android:orientation="vertical"
+            android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -351,6 +355,8 @@
             android:translationX="-233dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+
 
         <LinearLayout
             android:id="@+id/autoCoralLevelsLayout"
@@ -1160,6 +1166,7 @@
             android:textSize="@dimen/_20ssp"
             android:textStyle="bold"
             android:translationX="-233dp"
+            android:visibility="visible"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -1245,6 +1252,45 @@
             android:textSize="@dimen/_15ssp"
             app:backgroundTint="@null"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/autoScoreTitle"
+            android:layout_width="@dimen/_106sdp"
+            android:layout_height="match_parent"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="200dp"
+            android:gravity="center"
+            android:inputType="none"
+            android:text="SCORE :"
+            android:textAllCaps="false"
+            android:textColor="@color/accent"
+            android:textSize="@dimen/_20ssp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/autoCoralLevelsLayout"
+            app:layout_constraintEnd_toEndOf="parent"
+
+            app:layout_constraintHorizontal_bias="0.326"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/autoMissTitle"
+            android:layout_width="@dimen/_106sdp"
+            android:layout_height="match_parent"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="204dp"
+            android:gravity="center"
+            android:inputType="none"
+            android:text="MISS :"
+            android:textAllCaps="false"
+            android:textColor="@color/accent"
+            android:textSize="@dimen/_20ssp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/autoCoralLevelsLayout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.867"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
