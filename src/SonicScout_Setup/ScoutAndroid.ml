@@ -98,7 +98,7 @@ let generate_setup_properties ~projectdir ~cwd ~slots () =
   in
   OS.File.write_lines setup_properties content |> Utils.rmsg
 
-let run ?opts ~slots () =
+let run ?(opts : Utils.opts option) ~slots () =
   let open Bos in
   Utils.start_step "Building SonicScoutAndroid";
   let cwd = OS.Dir.current () |> Utils.rmsg in
@@ -129,7 +129,10 @@ let run ?opts ~slots () =
   (* Gradle *)
   if Sys.win32 then
     Logs.info (fun l -> l "NOTE: Extracting Gradle can take several minutes");
-  dk [ "dksdk.gradle.download"; "ALL"; "NO_SYSTEM_PATH" ];
+  let d_ARGS =
+    match opts with Some { build_type = `Debug; _ } -> [ "ALL" ] | _ -> []
+  in
+  dk ([ "dksdk.gradle.download"; "NO_SYSTEM_PATH" ] @ d_ARGS);
   let slots =
     Slots.add_gradle_home slots
       Fpath.(cwd / ".ci" / "local" / "share" / "gradle")
