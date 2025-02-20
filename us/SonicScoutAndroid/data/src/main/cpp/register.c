@@ -33,6 +33,8 @@
 #include <caml/startup_aux.h>
 /*  Want caml_sys_init() */
 #include <caml/sys.h>
+/*  Want caml_acquire_runtime_system() and caml_release_runtime_system() */
+#include <caml/threads.h>
 
 #undef CAML_NAME_SPACE
 #undef CAML_INTERNALS
@@ -106,7 +108,7 @@ static void do_stop_ocaml() {
        variables are:
        - `caml_signal_handlers` must start as zero
        - `Caml_state->backtrace_last_exn = Val_unit` (from domain.c)
-       
+
        So first set all the global root values to 0 and manually set
        other roots to an initial value that works. We can only
        do that for `caml_global_roots` because of
@@ -124,7 +126,7 @@ static void do_stop_ocaml() {
     caml_skiplist_init(&caml_global_roots_old);
 
     /* Get rid of the local stack.
-    
+
        The stack is just a linked list that ends with a NULL pointer. */
     caml_globals[0] = 0;
 }
@@ -142,20 +144,21 @@ Java_com_example_squirrelscout_data_OCamlServiceHandler_init_1ocaml(JNIEnv *env,
 
     /* Get the class name (Ex. ComDataService) for logging */
     GET_CLAZZ_NAME();
+#define RELEASE_INIT_OCAML0() do { (*env)->ReleaseStringUTFChars(env, clazz_name, clazz_name_str); } while (0)
 
     LOG_INFO("[%s.init_ocaml] Starting", clazz_name_str);
 
+    /* Acquire OCaml runtime lock */
+    caml_acquire_runtime_system();
+#define RELEASE_INIT_OCAML1() do { caml_release_runtime_system(); RELEASE_INIT_OCAML0(); } while (0)
+
     /* Convert process_argv0 into argv */
-
-#define RELEASE_INIT_OCAML1() (*env)->ReleaseStringUTFChars(env, clazz_name, clazz_name_str)
-
     const char *argv0 = (*env)->GetStringUTFChars(env, process_argv0, NULL);
     if (argv0 == NULL) {
         LOG_FATAL("[%s.init_ocaml] Did not receive the argv0 of the process", clazz_name_str);
         RELEASE_INIT_OCAML1();
         return JNI_FALSE;
     }
-
 #define RELEASE_INIT_OCAML2() do { (*env)->ReleaseStringUTFChars(env, process_argv0, argv0); RELEASE_INIT_OCAML1(); } while (0)
 
     os_char *argv0_os = caml_stat_strdup_to_os(argv0);
@@ -165,7 +168,6 @@ Java_com_example_squirrelscout_data_OCamlServiceHandler_init_1ocaml(JNIEnv *env,
         RELEASE_INIT_OCAML2();
         return JNI_FALSE;
     }
-
 #define RELEASE_INIT_OCAML3() do { caml_stat_free(argv0_os); RELEASE_INIT_OCAML2(); } while (0)
 
     os_char *argv[2] = {argv0_os, NULL};
@@ -196,9 +198,13 @@ Java_com_example_squirrelscout_data_OCamlServiceHandler_start_1ocaml(JNIEnv *env
 
     /* Get the class name (Ex. ComDataService) for logging */
     GET_CLAZZ_NAME();
-#define RELEASE_START_OCAML1() (*env)->ReleaseStringUTFChars(env, clazz_name, clazz_name_str)
+#define RELEASE_START_OCAML0() (*env)->ReleaseStringUTFChars(env, clazz_name, clazz_name_str)
 
     LOG_INFO("[%s.start_ocaml] Starting", clazz_name_str);
+
+    /* Acquire OCaml runtime lock */
+    caml_acquire_runtime_system();
+#define RELEASE_START_OCAML1() do { caml_release_runtime_system(); RELEASE_START_OCAML0(); } while (0)
 
 #ifdef OCAML_LIFECYCLE_ENTIRE_PROCESS
 #define RELEASE_START_OCAML2() 0
@@ -249,11 +255,17 @@ JNIEXPORT void JNICALL
 Java_com_example_squirrelscout_data_OCamlServiceHandler_stop_1ocaml(JNIEnv *env, jclass cls) {
     /* Get the class name (Ex. ComDataService) for logging */
     GET_CLAZZ_NAME();
-#define RELEASE_STOP_OCAML1() (*env)->ReleaseStringUTFChars(env, clazz_name, clazz_name_str)
+#define RELEASE_STOP_OCAML0() (*env)->ReleaseStringUTFChars(env, clazz_name, clazz_name_str)
 
     LOG_INFO("[%s.stop_ocaml] Starting", clazz_name_str);
 
-#ifndef OCAML_LIFECYCLE_ENTIRE_PROCESS
+#ifdef OCAML_LIFECYCLE_ENTIRE_PROCESS
+#define RELEASE_STOP_OCAML1() 0
+#else
+    /* Acquire OCaml runtime lock */
+    caml_acquire_runtime_system();
+#define RELEASE_STOP_OCAML1() do { caml_release_runtime_system(); RELEASE_STOP_OCAML0(); } while (0)
+
     do_stop_ocaml();
 #endif
 
@@ -271,11 +283,17 @@ Java_com_example_squirrelscout_data_OCamlServiceHandler_terminate_1ocaml(JNIEnv 
 
     /* Get the class name (Ex. ComDataService) for logging */
     GET_CLAZZ_NAME();
-#define RELEASE_TERMINATE_OCAML1() (*env)->ReleaseStringUTFChars(env, clazz_name, clazz_name_str)
+#define RELEASE_TERMINATE_OCAML0() (*env)->ReleaseStringUTFChars(env, clazz_name, clazz_name_str)
 
     LOG_INFO("[%s.terminate_ocaml] Starting", clazz_name_str);
 
-#ifndef OCAML_LIFECYCLE_ENTIRE_PROCESS
+#ifdef OCAML_LIFECYCLE_ENTIRE_PROCESS
+#define RELEASE_TERMINATE_OCAML1() 0
+#else
+    /* Acquire OCaml runtime lock */
+    caml_acquire_runtime_system();
+#define RELEASE_TERMINATE_OCAML1() do { caml_release_runtime_system(); RELEASE_TERMINATE_OCAML0(); } while (0)
+
     /* Do all the caml_shutdown() bits of stop_ocaml that have not been done yet.
 
        Except:
@@ -314,6 +332,7 @@ Java_com_example_squirrelscout_data_OCamlServiceHandler_atexit_1ocaml(JNIEnv *en
     LOG_INFO("[%s.at_exit_ocaml] Starting", clazz_name_str);
 
 #ifdef OCAML_LIFECYCLE_ENTIRE_PROCESS
+    /* Undocumented but shouldn't need OCaml runtime lock to do a shutdown. */
     caml_shutdown();
 #endif
 
