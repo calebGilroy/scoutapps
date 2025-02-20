@@ -183,8 +183,8 @@ Java_com_example_squirrelscout_data_OCamlServiceHandler_init_1ocaml(JNIEnv *env,
     do_stop_ocaml();
 #endif
 
-    RELEASE_INIT_OCAML3();
     LOG_INFO("[%s.init_ocaml] Finished", clazz_name_str);
+    RELEASE_INIT_OCAML3();
     return JNI_TRUE;
 }
 
