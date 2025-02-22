@@ -44,30 +44,35 @@ module Table : Table_type = struct
     | Scouter_Name
     (* [Game specific] auto*)
     | Starting_Position
-    | Wing_Note1
-    | Wing_Note2
-    | Wing_Note3
-    | Center_Note1
-    | Center_Note2
-    | Center_Note3
-    | Center_Note4
-    | Center_Note5
-    | Auto_Amp_Score
-    | Auto_Amp_Miss
-    | Auto_Speaker_Score
-    | Auto_Speaker_Miss
-    | Auto_Leave
-    | Preplaced_Coral
+    | Auto_coral_l1_score
+    | Auto_coral_l1_miss
+    | Auto_coral_l2_score
+    | Auto_coral_l2_miss
+    | Auto_coral_l3_score
+    | Auto_coral_l3_miss
+    | Auto_coral_l4_score
+    | Auto_coral_l4_miss
+    | Auto_processor_score
+    | Auto_processor_miss
+    | Auto_net_score
+    | Auto_net_miss
+    | Preplaced_coral
 
     (* [Game specific] tele data points *)
-    | Tele_Speaker_Score
-    | Tele_Speaker_Miss
-    | Tele_Amp_Score
-    | Tele_Amp_Miss
-    | Distance
-    | Tele_Breakdown
-    | Endgame_Climb
-    | Endgame_Trap
+    | Tele_op_coral_l1_score
+    | Tele_op_coral_l1_miss
+    | Tele_op_coral_l2_score
+    | Tele_op_coral_l2_miss
+    | Tele_op_coral_l3_score
+    | Tele_op_coral_l3_miss
+    | Tele_op_coral_l4_score
+    | Tele_op_coral_l4_miss
+    | Tele_op_processor_score
+    | Tele_op_processor_miss
+    | Tele_op_net_score
+    | Tele_op_net_miss
+    | Tele_op_breakdown
+    | Endgame_climb
 
   (* This is how the column will be seen in the SQL database or the
     .csv file upon exportation*)
@@ -79,30 +84,35 @@ module Table : Table_type = struct
     | Scouter_Name -> "scouter_name"
     (*  *)
     | Starting_Position -> "starting_position"
-    | Wing_Note1 -> "wing_note1"
-    | Wing_Note2 -> "wing_note2"
-    | Wing_Note3 -> "wing_note3"
-    | Center_Note1 -> "center_note1"
-    | Center_Note2 -> "center_note2"
-    | Center_Note3 -> "center_note3"
-    | Center_Note4 -> "center_note4"
-    | Center_Note5 -> "center_note5"
-    | Auto_Amp_Score -> "auto_amp_score"
-    | Auto_Amp_Miss -> "auto_amp_miss"
-    | Auto_Speaker_Score -> "auto_speaker_score"
-    | Auto_Speaker_Miss -> "auto_speaker_miss"
-    | Auto_Leave -> "auto_leave"
-    | Preplaced_Coral -> "preplaced_coral"
+    | Auto_coral_l1_score -> "auto_coral_l1_score"
+    | Auto_coral_l1_miss -> "auto_coral_l1_miss"
+    | Auto_coral_l2_score -> "auto_coral_l2_score"
+    | Auto_coral_l2_miss -> "auto_coral_l2_miss"
+    | Auto_coral_l3_score -> "auto_coral_l3_score"
+    | Auto_coral_l3_miss -> "auto_coral_l3_miss"
+    | Auto_coral_l4_score -> "auto_coral_l4_score"
+    | Auto_coral_l4_miss -> "auto_coral_l4_miss"
+    | Auto_processor_score -> "auto_processor_score"
+    | Auto_processor_miss -> "auto_processor_miss"
+    | Auto_net_score -> "auto_net_score"
+    | Auto_net_miss -> "auto_net_miss"
+    | Preplaced_coral -> "preplaced_coral"
 
     (*  *)
-    | Tele_Speaker_Score -> "tele_speaker_score"
-    | Tele_Speaker_Miss -> "tele_speaker_miss"
-    | Tele_Amp_Score -> "tele_amp_score"
-    | Tele_Amp_Miss -> "tele_amp_miss"
-    | Distance -> "distance"
-    | Tele_Breakdown -> "tele_breakdown"
-    | Endgame_Climb -> "endgame_climb"
-    | Endgame_Trap -> "endgame_trap"
+    | Tele_op_coral_l1_score -> "tele_op_coral_l1_score"
+    | Tele_op_coral_l1_miss -> "tele_op_coral_l1_miss"
+    | Tele_op_coral_l2_score -> "tele_op_coral_l2_score"
+    | Tele_op_coral_l2_miss -> "tele_op_coral_l2_miss"
+    | Tele_op_coral_l3_score -> "tele_op_coral_l3_score"
+    | Tele_op_coral_l3_miss -> "tele_op_coral_l3_miss"
+    | Tele_op_coral_l4_score -> "tele_op_coral_l4_score"
+    | Tele_op_coral_l4_miss -> "tele_op_coral_l4_miss"
+    | Tele_op_processor_score -> "tele_op_processor_score"
+    | Tele_op_processor_miss -> "tele_op_processor_miss"
+    | Tele_op_net_score -> "tele_op_net_score"
+    | Tele_op_net_miss -> "tele_op_net_miss"
+    | Tele_op_breakdown -> "tele_op_breakdown"
+    | Endgame_climb -> "endgame_climb"
 
   (* This defines what kind of data type each column will store. There are only two options: TEXT or INT*)
   (* # of colum_datatype should be matching # of columns defined in above functions*)
@@ -113,30 +123,35 @@ module Table : Table_type = struct
     | Scouter_Name -> "TEXT"
     (*  *)
     | Starting_Position -> "TEXT"
-    | Wing_Note1 -> "TEXT"
-    | Wing_Note2 -> "TEXT"
-    | Wing_Note3 -> "TEXT"
-    | Center_Note1 -> "TEXT"
-    | Center_Note2 -> "TEXT"
-    | Center_Note3 -> "TEXT"
-    | Center_Note4 -> "TEXT"
-    | Center_Note5 -> "TEXT"
-    | Auto_Amp_Score -> "INT"
-    | Auto_Amp_Miss -> "INT"
-    | Auto_Speaker_Score -> "INT"
-    | Auto_Speaker_Miss -> "INT"
-    | Auto_Leave -> "TEXT"
-    | Preplaced_Coral -> "TEXT"
+    | Auto_coral_l1_score -> "INT"
+    | Auto_coral_l1_miss -> "INT"
+    | Auto_coral_l2_score -> "INT"
+    | Auto_coral_l2_miss -> "INT"
+    | Auto_coral_l3_score -> "INT"
+    | Auto_coral_l3_miss -> "INT"
+    | Auto_coral_l4_score -> "INT"
+    | Auto_coral_l4_miss -> "INT"
+    | Auto_processor_score -> "INT"
+    | Auto_processor_miss -> "INT"
+    | Auto_net_score -> "INT"
+    | Auto_net_miss -> "INT"
+    | Preplaced_coral -> "TEXT"
 
     (*  *)
-    | Tele_Speaker_Score -> "INT"
-    | Tele_Speaker_Miss -> "INT"
-    | Tele_Amp_Score -> "INT"
-    | Tele_Amp_Miss -> "INT"
-    | Distance -> "Text"
-    | Tele_Breakdown -> "TEXT"
-    | Endgame_Climb -> "TEXT"
-    | Endgame_Trap -> "TEXT"
+    | Tele_op_coral_l1_score -> "INT"
+    | Tele_op_coral_l1_miss -> "INT"
+    | Tele_op_coral_l2_score -> "INT"
+    | Tele_op_coral_l2_miss -> "INT"
+    | Tele_op_coral_l3_score -> "INT"
+    | Tele_op_coral_l3_miss -> "INT"
+    | Tele_op_coral_l4_score -> "INT"
+    | Tele_op_coral_l4_miss -> "INT"
+    | Tele_op_processor_score -> "INT"
+    | Tele_op_processor_miss -> "INT"
+    | Tele_op_net_score -> "INT"
+    | Tele_op_net_miss -> "INT"
+    | Tele_op_breakdown -> "TEXT"
+    | Endgame_climb -> "TEXT"
 
   (*This defines how the order of the columns seen in databse will be written and captured from QR code*)
   let colums_in_order =
@@ -148,30 +163,35 @@ module Table : Table_type = struct
       (*Alliance;*)
       (* Auto *)
       Starting_Position;
-      Wing_Note1;
-      Wing_Note2;
-      Wing_Note3;
-      Center_Note1;
-      Center_Note2;
-      Center_Note3;
-      Center_Note4;
-      Center_Note5;
-      Auto_Amp_Score;
-      Auto_Amp_Miss;
-      Auto_Speaker_Score;
-      Auto_Speaker_Miss;
-      Auto_Leave;
-      Preplaced_Coral;
+      Auto_coral_l1_score;
+      Auto_coral_l1_miss;
+      Auto_coral_l2_score;
+      Auto_coral_l2_miss;
+      Auto_coral_l3_score;
+      Auto_coral_l3_miss;
+      Auto_coral_l4_score;
+      Auto_coral_l4_miss;
+      Auto_processor_score;
+      Auto_processor_miss;
+      Auto_net_score;
+      Auto_net_miss;
+      Preplaced_coral;
 
       (* Teleop *)
-      Tele_Speaker_Score;
-      Tele_Speaker_Miss;
-      Tele_Amp_Score;
-      Tele_Amp_Miss;
-      Distance;
-      Tele_Breakdown;
-      Endgame_Climb;
-      Endgame_Trap;
+      Tele_op_coral_l1_score;
+      Tele_op_coral_l1_miss;
+      Tele_op_coral_l2_score;
+      Tele_op_coral_l2_miss;
+      Tele_op_coral_l3_score;
+      Tele_op_coral_l3_miss;
+      Tele_op_coral_l4_score;
+      Tele_op_coral_l4_miss;
+      Tele_op_processor_score;
+      Tele_op_processor_miss;
+      Tele_op_net_score;
+      Tele_op_net_miss;
+      Tele_op_breakdown;
+      Endgame_climb;
     ]
 
   (*Set's primary keys for identification of data. Do not change under normal circumstanes.*)
@@ -218,28 +238,29 @@ module Table : Table_type = struct
 
     (*All these following functions give function on how the Enum data created in schema.capnp will be read and written*)
     let position_to_string : ProjectSchema.Reader.SPosition.t -> string = function
-      | AmpSide -> "AMPSIDE"
+      | AmpSide -> "Left"
       | Center -> "CENTER"
-      | SourceSide -> "SOURCESIDE"
+      | SourceSide -> "Right"
       | Undefined _ -> "UNDEFINED"
     in
 
-    let breakdown_to_string : ProjectSchema.Reader.TBreakdown.t -> string = function
+    let breakdown_to_string : ProjectSchema.Reader.TBreakdown2025.t -> string = function
       | None -> "NONE"
       | Tipped -> "TIPPED"
       | MechanicalFailure -> "MECHANICAL_FAILURE"
       | Incapacitated -> "INCAPACITATED"
-      | NoteStuck -> "NOTE_STUCK"
       | Undefined _ -> "NONE"
+      | GamePieceStuck -> "GAMEPIECESTUCK"
     in
 
     let teleopClimb_to_string : ProjectSchema.Reader.EClimb.t -> string = function
-      | Success -> "SUCCESS"
+      | Harmony -> "Deep_Cage"
       | Failed -> "FAILED"
       | DidNotAttempt -> "DID_NOT_ATTEMPT"
-      | Harmony -> "HARMONY"
+      (* | ShallowCage -> "Shallow_Cage" *)
       | Parked -> "PARKED"
       | Undefined _ -> "UNDEFINED"
+      | Success -> "SUCCESS"
     in
 
     (* let alliance_to_string : ProjectSchema.Reader.RobotPosition.t -> string = function
@@ -281,41 +302,53 @@ module Table : Table_type = struct
       let values =
         Printf.sprintf
         (*Number of %s should match number of columns*)
-        "%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, \n\
-        \         %s, %s, %s, %s, %s, %s, %s, %s, %s, %s"
+        "
+        %s, %s, %s, %s,
+        %s, %s, %s, %s,
+        %s, %s, %s, %s,
+        %s, %s, %s, %s,
+        %s, %s, %s, %s,
+        %s, %s, %s, %s,
+        %s, %s, %s, %s,
+        %s, %s, %s, %s
+        "
+        (* "%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, \n\
+        \         %s, %s, %s, %s, %s, %s, %s, %s, %s, %s" *)
         (match_data |> team_number_get |> string_of_int)
         (match_data |> team_name_get |> string_to_cmd_line_form)
         (match_data |> match_number_get |> string_of_int)
         (match_data |> scouter_name_get |> string_to_cmd_line_form)
         (*  *)
-        (match_data |> starting_position_get |> position_to_string
-       |> string_to_cmd_line_form)
-        (match_data |> wing_note1_get |> bool_to_string_as_num)
-        (match_data |> wing_note2_get |> bool_to_string_as_num)
-        (match_data |> wing_note3_get |> bool_to_string_as_num)
-        (match_data |> center_note1_get |> bool_to_string_as_num)
-        (match_data |> center_note2_get |> bool_to_string_as_num)
-        (match_data |> center_note3_get |> bool_to_string_as_num)
-        (match_data |> center_note4_get |> bool_to_string_as_num)
-        (match_data |> center_note5_get |> bool_to_string_as_num)
-        (match_data |> auto_amp_score_get |> string_of_int)
-        (match_data |> auto_amp_miss_get |> string_of_int)
-        (match_data |> auto_speaker_score_get |> string_of_int)
-        (match_data |> auto_speaker_miss_get |> string_of_int)
-        (match_data |> auto_leave_get |> bool_to_string_as_num)
+        (match_data |> starting_position_get |> position_to_string|> string_to_cmd_line_form)
+        (match_data |> auto_coral_l1_score_get |> string_of_int)
+        (match_data |> auto_coral_l1_miss_get |> string_of_int)
+        (match_data |> auto_coral_l2_score_get |> string_of_int)
+        (match_data |> auto_coral_l2_miss_get |> string_of_int)
+        (match_data |> auto_coral_l3_score_get |> string_of_int)
+        (match_data |> auto_coral_l3_miss_get |> string_of_int)
+        (match_data |> auto_coral_l4_score_get |> string_of_int)
+        (match_data |> auto_coral_l4_miss_get |> string_of_int)
+        (match_data |> auto_processor_score_get |> string_of_int)
+        (match_data |> auto_processor_miss_get |> string_of_int)
+        (match_data |> auto_net_score_get |> string_of_int)
+        (match_data |> auto_net_miss_get |> string_of_int)
         (match_data |> preplaced_coral_get |> bool_to_string_as_num)
 
         (*  *)
-        (match_data |> tele_speaker_score_get |> string_of_int)
-        (match_data |> tele_speaker_miss_get |> string_of_int)
-        (match_data |> tele_amp_score_get |> string_of_int)
-        (match_data |> tele_amp_miss_get |> string_of_int)
-        (match_data |> distance_get |> string_to_cmd_line_form)
-        (match_data |> tele_breakdown_get |> breakdown_to_string
-       |> string_to_cmd_line_form)
-        (match_data |> endgame_climb_get |> teleopClimb_to_string
-       |> string_to_cmd_line_form)
-        (match_data |> endgame_trap_get |> bool_to_string_as_num)
+        (match_data |> tele_op_coral_l1_score_get |> string_of_int)
+        (match_data |> tele_op_coral_l1_miss_get |> string_of_int)
+        (match_data |> tele_op_coral_l2_score_get |> string_of_int)
+        (match_data |> tele_op_coral_l2_miss_get |> string_of_int)
+        (match_data |> tele_op_coral_l3_score_get |> string_of_int)
+        (match_data |> tele_op_coral_l3_miss_get |> string_of_int)
+        (match_data |> tele_op_coral_l4_score_get |> string_of_int)
+        (match_data |> tele_op_coral_l4_miss_get |> string_of_int)
+        (match_data |> tele_op_processor_score_get |> string_of_int)
+        (match_data |> tele_op_processor_miss_get |> string_of_int)
+        (match_data |> tele_op_net_score_get |> string_of_int)
+        (match_data |> tele_op_net_miss_get |> string_of_int)
+        (match_data |> tele_op_breakdown_get |> breakdown_to_string|> string_to_cmd_line_form)
+        (match_data |> endgame_climb_get |> teleopClimb_to_string|> string_to_cmd_line_form)
       in
 
       let sql = "INSERT INTO " ^ table_name ^ " VALUES(" ^ values ^ ")" in
