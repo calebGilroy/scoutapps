@@ -11,14 +11,17 @@ let _compile_backend ~slots { opts; global_dkml; _ } =
   Sqlite3.run ();
   ScoutBackend.run ?global_dkml ~opts ~slots ()
 
-let _compile_base ?skip_android ({ dksdk_data_home; opts; global_dkml } as common) =
+let _nocompile_base ({ dksdk_data_home; global_dkml; _ }) =
   let global_dkml = if global_dkml then Some () else None in
-
   InitialSteps.run ~dksdk_data_home ();
   let slots = Slots.create () in
   let slots = CMakeNinja.run ~opts ~slots () in
   let slots = Dependencies.run ~opts ~slots () in
   let slots = DkML.run ?global_dkml ~slots () in
+  slots
+
+let _compile_base ?skip_android ({ opts; _ } as common) =
+  let slots = _nocompile_base common in
   let slots = _compile_backend ~slots common in
   let slots =
     match skip_android with
@@ -50,17 +53,17 @@ let launch_android common =
     Utils.done_steps "Developing"
   with Utils.StopProvisioning -> ()
 
-let launch_scanner common =
+let launch_scanner common quick =
   try
-    let slots = _compile_base ~skip_android:() common in
+    let slots = if quick then _nocompile_base common else _compile_base ~skip_android:() common in
     let slots = Scanner.run ~slots () in
     ignore slots;
     Utils.done_steps "Developing"
   with Utils.StopProvisioning -> ()
 
-let launch_database common =
+let launch_database common quick =
   try
-    let slots = _compile_base ~skip_android:() common in
+    let slots = if quick then _nocompile_base common else _compile_base ~skip_android:() common in
     let slots = Database.run ~slots () in
     ignore slots;
     Utils.done_steps "Developing"
@@ -82,6 +85,10 @@ module Cli = struct
       $ Tr1Logs_Term.TerminalCliOptions.term ~short_opts:() ()
       $ dksdk_data_home_t $ opts_t $ global_dkml_t)
 
+  let quick_t =
+    let doc = "Launch without compiling" in
+    Arg.(value & flag & info ~doc ["quick"] )
+
   let compile_cmd =
     let open SSCli in
     let doc =
@@ -99,7 +106,7 @@ module Cli = struct
     in
     let man = [ `S Manpage.s_description; `Blocks help_secs ] in
     Cmd.v (Cmd.info ~doc ~man "compile-backend") Term.(const compile_backend $ common_t)
-  
+
   let android_cmd =
     let open SSCli in
     let doc =
@@ -120,7 +127,7 @@ module Cli = struct
        if it hasn't been already."
     in
     let man = [ `S Manpage.s_description; `Blocks help_secs ] in
-    Cmd.v (Cmd.info ~doc ~man "scanner") Term.(const launch_scanner $ common_t)
+    Cmd.v (Cmd.info ~doc ~man "scanner") Term.(const launch_scanner $ common_t $ quick_t)
 
   let database_cmd =
     let open SSCli in
@@ -133,7 +140,7 @@ module Cli = struct
     let man = [ `S Manpage.s_description; `Blocks help_secs ] in
     Cmd.v
       (Cmd.info ~doc ~man "database")
-      Term.(const launch_database $ common_t)
+      Term.(const launch_database $ common_t $ quick_t)
 
   let groups_cmd =
     let doc = "Develop the Sonic Scout software." in
