@@ -35,44 +35,50 @@ class RawMatchDataUiStateSerde {
                 return Schema.SPosition._NOT_IN_SCHEMA;
         }
     }
-    public Schema.TBreakdown stringToTBreakdown(String breakdown){
-        switch(breakdown){
+    public Schema.TBreakdown2025 stringToTBreakdown2025(String breakdownDropdown){
+        switch(breakdownDropdown){
             case "None":
-                return Schema.TBreakdown.NONE;
+                return Schema.TBreakdown2025.NONE;
 
             case "Tipped":
-                return Schema.TBreakdown.TIPPED;
+                return Schema.TBreakdown2025.TIPPED;
 
             case "Mechanical Failure":
-                return Schema.TBreakdown.MECHANICAL_FAILURE;
+                return Schema.TBreakdown2025.MECHANICAL_FAILURE;
 
             case "Incapacitated":
-                return Schema.TBreakdown.INCAPACITATED;
+                return Schema.TBreakdown2025.INCAPACITATED;
+
+            case "Game Piece Stuck":
+                return Schema.TBreakdown2025.GAME_PIECE_STUCK;
 
             default:
-                return Schema.TBreakdown._NOT_IN_SCHEMA;
+                return Schema.TBreakdown2025._NOT_IN_SCHEMA;
         }
     }
 
-    public Schema.EClimb stringToEClimb(String climb){
-        switch(climb){
-            case "Success":
-                return Schema.EClimb.SUCCESS;
+    public Schema.EClimb2025 stringToEClimb2025(String climbDropdown){
+        switch(climbDropdown){
+            case "SUCCESS":
+                return Schema.EClimb2025.SUCCESS;
 
             case "Failed":
-                return Schema.EClimb.FAILED;
+                return Schema.EClimb2025.FAILED;
 
             case "Did Not Attempt":
-                return Schema.EClimb.DID_NOT_ATTEMPT;
+                return Schema.EClimb2025.DID_NOT_ATTEMPT;
 
-            case "Harmony":
-                return Schema.EClimb.HARMONY;
+            case "DEEP Cage":
+                return Schema.EClimb2025.DEEP_CAGE;
+
+            case "Shallow Cage":
+                return Schema.EClimb2025.SHALLOW_CAGE;
 
             case "Park":
-                return Schema.EClimb.PARKED;
+                return Schema.EClimb2025.PARKED;
 
             default:
-                return Schema.EClimb._NOT_IN_SCHEMA;
+                return Schema.EClimb2025._NOT_IN_SCHEMA;
         }
     }
 
@@ -159,8 +165,8 @@ class RawMatchDataUiStateSerde {
         rawMatchData.setTeleOpProcessorMiss((short) v.teleOpProcessorMiss());
         rawMatchData.setTeleOpNetScore((short) v.teleOpNetScore());
         rawMatchData.setTeleOpNetMiss((short) v.teleOpNetMiss());
-        rawMatchData.setTeleBreakdown(stringToTBreakdown(v.teleBreakdown()));
-        rawMatchData.setEndgameClimb(stringToEClimb(v.endgameClimb()));
+        rawMatchData.setTeleOpBreakdown(stringToTBreakdown2025(v.breakdownDropdown()));
+        rawMatchData.setTeleOpClimb(stringToEClimb2025(v.climbDropdown()));
 
         
 
@@ -171,8 +177,6 @@ class RawMatchDataUiStateSerde {
         rawMatchData.setTeleAmpScore((short) v.teleAmpScore());
         rawMatchData.setTeleAmpMiss((short) v.teleAmpMiss());
         rawMatchData.setDistance(v.teleRange());
-        rawMatchData.setTeleBreakdown(stringToTBreakdown(v.teleBreakdown()));
-        rawMatchData.setEndgameClimb(stringToEClimb(v.endgameClimb()));
         rawMatchData.setEndgameTrap(v.endgameTrap());
 //        rawMatchData.setTelePickup(v.pickUpAbility());
 

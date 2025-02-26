@@ -58,8 +58,10 @@ public interface RawMatchDataUiState {
     int teleAmpScore();
     int teleAmpMiss();
     String teleRange();
-    String teleBreakdown();
-    String endgameClimb();
+    //String teleBreakdown();
+    String breakdownDropdown();
+    //String endgameClimb();
+    String climbDropdown();
     boolean endgameTrap();
     String pickUpAbility();
 

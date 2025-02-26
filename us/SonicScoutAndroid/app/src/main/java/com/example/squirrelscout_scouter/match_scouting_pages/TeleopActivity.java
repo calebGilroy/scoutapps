@@ -83,6 +83,8 @@ public class TeleopActivity extends ComponentActivity implements View.OnClickLis
 
     //Breakdown
     AutoCompleteTextView dropdown, dropdown2;
+    AutoCompleteTextView breakdownDropdown, climbDropdown;
+
     //Endgame
     Button trapYes, trapNo;
     boolean trapBool;
@@ -231,18 +233,18 @@ public class TeleopActivity extends ComponentActivity implements View.OnClickLis
         nextButton.setOnClickListener(this);
 
         //Breakdown dropdown
-        dropdown = findViewById(R.id.dropdown);
+        breakdownDropdown = findViewById(R.id.breakdownDropdown);
         String[] items = new String[]{"Tipped", "Mechanical Failure", "Incapacitated",};
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, R.layout.dropdown_text, items);
-        dropdown.setAdapter(adapter);
-        dropdown.setKeyListener(null);
-        dropdown.setOnClickListener(new View.OnClickListener() {
+        breakdownDropdown.setAdapter(adapter);
+        breakdownDropdown.setKeyListener(null);
+        breakdownDropdown.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                dropdown.showDropDown();
+                breakdownDropdown.showDropDown();
             }
         });
-        dropdown.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        breakdownDropdown.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 nextPageCheck();
@@ -250,18 +252,18 @@ public class TeleopActivity extends ComponentActivity implements View.OnClickLis
         });
 
         //Climb dropdown
-        dropdown2 = findViewById(R.id.dropdown2);
+        climbDropdown = findViewById(R.id.climbDropdown);
         String[] items2 = new String[]{"Did Not Attempt", "Parked", "Failed", "Deep Cage", "Shallow Cage"};
         ArrayAdapter<String> adapter2 = new ArrayAdapter<>(this, R.layout.dropdown_text, items2);
-        dropdown2.setAdapter(adapter2);
-        dropdown2.setKeyListener(null);
-        dropdown2.setOnClickListener(new View.OnClickListener() {
+        climbDropdown.setAdapter(adapter2);
+        climbDropdown.setKeyListener(null);
+        climbDropdown.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                dropdown2.showDropDown();
+                climbDropdown.showDropDown();
             }
         });
-        dropdown2.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        climbDropdown.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 nextPageCheck();
@@ -477,11 +479,11 @@ public class TeleopActivity extends ComponentActivity implements View.OnClickLis
 
     //next page logic
     private void nextPageCheck(){
-        if(!(dropdown2.getText().toString().isEmpty())){
+        if(!(climbDropdown.getText().toString().isEmpty())){
             nextButton.setTextColor(ContextCompat.getColor(this, R.color.black));
             nextButton.setBackgroundTintList(ContextCompat.getColorStateList(this, R.color.accent));
             nextButton.setText("NEXT PAGE");
-            Toast.makeText(TeleopActivity.this, dropdown.getText().toString(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(TeleopActivity.this, breakdownDropdown.getText().toString(), Toast.LENGTH_SHORT).show();
         }
     }
     private void nextPageLogic(){
@@ -722,8 +724,8 @@ public class TeleopActivity extends ComponentActivity implements View.OnClickLis
                 0,//Integer.parseInt(ampScoreCounter.getText().toString()),
                 0,//Integer.parseInt(ampMissCounter.getText().toString()),
                 getDistance(),
-                dropdown.getText().toString(),
-                dropdown2.getText().toString(),
+                breakdownDropdown.getText().toString(),
+                climbDropdown.getText().toString(),
                 trapBool,
                 scoutSingleton.getFirstPickup(),
                 Integer.parseInt(teleOpCoralL4Score.getText().toString()),

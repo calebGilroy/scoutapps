@@ -253,11 +253,11 @@ module Table : Table_type = struct
       | GamePieceStuck -> "GAMEPIECESTUCK"
     in
 
-    let teleopClimb_to_string : ProjectSchema.Reader.EClimb.t -> string = function
-      | Harmony -> "Deep_Cage"
+    let teleopClimb_to_string : ProjectSchema.Reader.EClimb2025.t -> string = function
+      | DeepCage -> "Deep_Cage"
       | Failed -> "FAILED"
       | DidNotAttempt -> "DID_NOT_ATTEMPT"
-      (* | ShallowCage -> "Shallow_Cage" *)
+      | ShallowCage -> "Shallow_Cage" 
       | Parked -> "PARKED"
       | Undefined _ -> "UNDEFINED"
       | Success -> "SUCCESS"
@@ -348,7 +348,7 @@ module Table : Table_type = struct
         (match_data |> tele_op_net_score_get |> string_of_int)
         (match_data |> tele_op_net_miss_get |> string_of_int)
         (match_data |> tele_op_breakdown_get |> breakdown_to_string|> string_to_cmd_line_form)
-        (match_data |> endgame_climb_get |> teleopClimb_to_string|> string_to_cmd_line_form)
+        (match_data |> tele_op_climb_get |> teleopClimb_to_string|> string_to_cmd_line_form)
       in
 
       let sql = "INSERT INTO " ^ table_name ^ " VALUES(" ^ values ^ ")" in

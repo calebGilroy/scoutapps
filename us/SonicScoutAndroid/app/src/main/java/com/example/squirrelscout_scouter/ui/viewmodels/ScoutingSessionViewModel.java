@@ -124,8 +124,8 @@ public class ScoutingSessionViewModel extends ViewModel {
             if (!clone.teleAmpScoreIsSet()) clone.setTeleAmpScore(-1);
             if (!clone.teleAmpMissIsSet()) clone.setTeleAmpMiss(-1);
             if (!clone.teleRangeIsSet()) clone.setTeleRange("UI needs Tele Range");
-            if (!clone.teleBreakdownIsSet()) clone.setTeleBreakdown("UI needs breakdown");
-            if (!clone.endgameClimbIsSet()) clone.setEndgameClimb("UI needs endgame climb");
+            if (!clone.breakdownDropdownIsSet()) clone.setBreakdownDropdown("UI needs breakdown");
+            if (!clone.climbDropdownIsSet()) clone.setClimbDropdown("UI needs endgame climb");
             if (!clone.endgameTrapIsSet()) clone.setEndgameTrap(false);
             if (!clone.autoCoralL4ScoreIsSet()) clone.setAutoCoralL4Score(-1);
             if (!clone.autoCoralL3ScoreIsSet()) clone.setAutoCoralL3Score(-1);
@@ -254,7 +254,7 @@ public class ScoutingSessionViewModel extends ViewModel {
         updateAndSetSession(session);
     }
 
-    public void captureTeleData(int speakerScore, int speakerMiss, int ampScore, int ampMiss, String distance, String breakdown, String climb, boolean trap, String pickup, int teleOpCoralL4Score, int teleOpCoralL4Miss, int teleOpCoralL3Score, int teleOpCoralL3Miss, int teleOpCoralL2Score, int teleOpCoralL2Miss, int teleOpCoralL1Score, int teleOpCoralL1Miss, int teleOpProcessorScore, int teleOpProcessorMiss, int teleOpNetScore, int teleOpNetMiss) {
+    public void captureTeleData(int speakerScore, int speakerMiss, int ampScore, int ampMiss, String distance, String breakdownDropdown, String climbDropdown, boolean trap, String pickup, int teleOpCoralL4Score, int teleOpCoralL4Miss, int teleOpCoralL3Score, int teleOpCoralL3Miss, int teleOpCoralL2Score, int teleOpCoralL2Miss, int teleOpCoralL1Score, int teleOpCoralL1Miss, int teleOpProcessorScore, int teleOpProcessorMiss, int teleOpNetScore, int teleOpNetMiss) {
         ImmutableRawMatchDataSessionUiState session = rawMatchDataSessionUiState.getValue();
         assert  session != null;
 
@@ -266,8 +266,8 @@ public class ScoutingSessionViewModel extends ViewModel {
         rawMatchData.setTeleAmpScore(ampScore);
         rawMatchData.setTeleAmpMiss(ampMiss);
         rawMatchData.setTeleRange(distance);
-        rawMatchData.setTeleBreakdown(breakdown);
-        rawMatchData.setEndgameClimb(climb);
+        rawMatchData.setBreakdownDropdown(breakdownDropdown);
+        rawMatchData.setClimbDropdown(climbDropdown);
         rawMatchData.setEndgameTrap(trap);
         rawMatchData.setPickUpAbility(pickup);
         //2025 tele

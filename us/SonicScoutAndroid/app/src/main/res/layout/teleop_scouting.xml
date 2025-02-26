@@ -1284,7 +1284,7 @@
                 android:textStyle="bold" />
 
             <AutoCompleteTextView
-                android:id="@+id/dropdown"
+                android:id="@+id/breakdownDropdown"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_29sdp"
                 android:layout_marginStart="5dp"
@@ -1323,7 +1323,7 @@
                 android:textStyle="bold" />
 
             <AutoCompleteTextView
-                android:id="@+id/dropdown2"
+                android:id="@+id/climbDropdown"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_29sdp"
                 android:layout_marginStart="15dp"
