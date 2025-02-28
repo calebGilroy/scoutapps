@@ -57,6 +57,7 @@ module Table : Table_type = struct
     | Auto_net_score
     | Auto_net_miss
     | Preplaced_coral
+    | Auto_leave
 
     (* [Game specific] tele data points *)
     | Tele_op_coral_l1_score
@@ -97,6 +98,7 @@ module Table : Table_type = struct
     | Auto_net_score -> "auto_net_score"
     | Auto_net_miss -> "auto_net_miss"
     | Preplaced_coral -> "preplaced_coral"
+    | Auto_leave -> "auto_leave"
 
     (*  *)
     | Tele_op_coral_l1_score -> "tele_op_coral_l1_score"
@@ -136,6 +138,7 @@ module Table : Table_type = struct
     | Auto_net_score -> "INT"
     | Auto_net_miss -> "INT"
     | Preplaced_coral -> "TEXT"
+    | Auto_leave -> "TEXT"
 
     (*  *)
     | Tele_op_coral_l1_score -> "INT"
@@ -176,6 +179,7 @@ module Table : Table_type = struct
       Auto_net_score;
       Auto_net_miss;
       Preplaced_coral;
+      Auto_leave;
 
       (* Teleop *)
       Tele_op_coral_l1_score;
@@ -310,10 +314,9 @@ module Table : Table_type = struct
         %s, %s, %s, %s,
         %s, %s, %s, %s,
         %s, %s, %s, %s,
-        %s, %s, %s, %s
+        %s, %s, %s, %s,
+        %s
         "
-        (* "%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, \n\
-        \         %s, %s, %s, %s, %s, %s, %s, %s, %s, %s" *)
         (match_data |> team_number_get |> string_of_int)
         (match_data |> team_name_get |> string_to_cmd_line_form)
         (match_data |> match_number_get |> string_of_int)
@@ -333,6 +336,7 @@ module Table : Table_type = struct
         (match_data |> auto_net_score_get |> string_of_int)
         (match_data |> auto_net_miss_get |> string_of_int)
         (match_data |> preplaced_coral_get |> bool_to_string_as_num)
+        (match_data |> auto_leave_get |> bool_to_string_as_num)
 
         (*  *)
         (match_data |> tele_op_coral_l1_score_get |> string_of_int)
