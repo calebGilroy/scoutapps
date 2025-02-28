@@ -68,13 +68,13 @@ class RawMatchDataUiStateSerde {
             case "Did Not Attempt":
                 return Schema.EClimb2025.DID_NOT_ATTEMPT;
 
-            case "DEEP Cage":
+            case "Deep Cage":
                 return Schema.EClimb2025.DEEP_CAGE;
 
             case "Shallow Cage":
                 return Schema.EClimb2025.SHALLOW_CAGE;
 
-            case "Park":
+            case "Parked":
                 return Schema.EClimb2025.PARKED;
 
             default:

@@ -25,6 +25,7 @@ After ".quit" a csv file will be created. Right click the file and open with fil
 .mode line
 .output blahblah.csv
 SELECT * FROM raw_match_data;
+SELECT match_number, team_number,endgame_climb, tele_op_coral_l4_score FROM raw_match_data;
 
 .quit
 ```

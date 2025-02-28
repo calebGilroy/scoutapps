@@ -133,7 +133,12 @@ enum EClimb2025{
   didNotAttempt @2;
   deepCage @3; 
   parked @4;
-  shallowCage @5; 
+  shallowCage @5;
+  #failed @0;
+  #didNotAttempt @1;
+  #deepCage @2; 
+  #parked @3;
+  #shallowCage @4;  
 }
 
 enum RobotPosition {
