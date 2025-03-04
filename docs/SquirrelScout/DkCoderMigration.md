@@ -62,8 +62,10 @@ Quick Steps:
 
 ```powershell
 # SCANNER, CLI
-del -force -recurse build_dev\DkSDKFiles\host ; del -force -recurse build_dev/_deps/bytecode_to_c_host_tools-build
+del -recurse -force us\SonicScoutBackend\build_dev\DkSDKFiles\host\bytecode-to-c ; del -recurse -force us\SonicScoutBackend\build_dev\_deps\bytecode_to_c_host_tools-build\ ; del -recurse -force us\SonicScoutBackend\build_dev\src\SonicScout_MainCLI ; echo "" >> us\SonicScoutBackend\build_dev\CMakeCache.txt
+
+ninja -C us\SonicScoutBackend\build_dev src\SonicScout_MainCLI\sonic-scout-cli.exe 
 
 # COM (Android Studio)
-$aid="y5xc2i16"; del -force -recurse Y:\source\scoutapps\us\SonicScoutAndroid\data\.cxx\Debug\$aid\arm64-v8a\DkSDKFiles\host ; del -force -recurse Y:\source\scoutapps\us\SonicScoutAndroid\data\.cxx\Debug\$aid\arm64-v8a\_deps\bytecode_to_c_host_tools-build\ ; del -force Y:\source\scoutapps\us\SonicScoutAndroid\data\.cxx\Debug\$aid\arm64-v8a\data\src\main\cpp\SonicScout_ObjsLib-prim.c ;del -force Y:\source\scoutapps\us\SonicScoutAndroid\data\.cxx\Debug\$aid\arm64-v8a\data\src\main\cpp\SonicScout_ObjsLib-sect.c ; del -force Y:\source\scoutapps\us\SonicScoutAndroid\data\.cxx\Debug\$aid\arm64-v8a\data\src\main\cpp\SonicScout_ObjsLib-lib.c ; del -force -recurse Y:\source\scoutapps\us\SonicScoutBackend\build_dev\_deps\bytecode_to_c_host_tools-build\
+$aid="y5xc2i16"; del -force -recurse us\SonicScoutAndroid\data\.cxx\Debug\$aid\arm64-v8a\DkSDKFiles\host ; del -force -recurse us\SonicScoutAndroid\data\.cxx\Debug\$aid\arm64-v8a\_deps\bytecode_to_c_host_tools-build\ ; del -force us\SonicScoutAndroid\data\.cxx\Debug\$aid\arm64-v8a\data\src\main\cpp\SonicScout_ObjsLib-prim.c ;del -force us\SonicScoutAndroid\data\.cxx\Debug\$aid\arm64-v8a\data\src\main\cpp\SonicScout_ObjsLib-sect.c ; del -force us\SonicScoutAndroid\data\.cxx\Debug\$aid\arm64-v8a\data\src\main\cpp\SonicScout_ObjsLib-lib.c ; del -force -recurse us\SonicScoutBackend\build_dev\_deps\bytecode_to_c_host_tools-build\; del -recurse -force us\SonicScoutBackend\build_dev\src\SonicScout_ObjsLib
 ```
