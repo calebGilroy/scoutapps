@@ -152,8 +152,12 @@ static void do_stop_ocaml() {
 }
 #endif
 
-static int ocaml_initialized;
-static int ocaml_terminated;
+enum ocaml_state {
+    OCAML_UNINITIALIZED = 0,
+    OCAML_INITIALIZED,
+    OCAML_EXITED
+};
+static enum ocaml_state state = OCAML_UNINITIALIZED;
 static struct dksdk_ffi_c_stack init_ocaml_stack = {0};
 static void *init_ocaml_stack_on_heap = NULL;
 
@@ -161,8 +165,8 @@ JNIEXPORT jboolean JNICALL
 Java_com_example_squirrelscout_data_OCamlServiceHandler_init_1ocaml(JNIEnv *env, jclass cls,
                                                                     jstring process_argv0) {
     /* Only initialize OCaml with caml_startup once. Confer D01 in COM-DATA-DESIGN.md */
-    if (ocaml_initialized) return JNI_FALSE;
-    ocaml_initialized = 1;
+    if (state == OCAML_INITIALIZED || state == OCAML_EXITED) return JNI_FALSE;
+    state = OCAML_INITIALIZED;
 
     /* Get the class name (Ex. ComDataService) for logging */
     GET_CLAZZ_NAME();
@@ -299,7 +303,7 @@ Java_com_example_squirrelscout_data_OCamlServiceHandler_stop_1ocaml(JNIEnv *env,
     LOG_INFO("[%s.stop_ocaml] Starting", clazz_name_str);
 
 #ifdef OCAML_LIFECYCLE_ENTIRE_PROCESS
-#define RELEASE_STOP_OCAML1() 0
+#define RELEASE_STOP_OCAML1() RELEASE_STOP_OCAML0()
 #else
     /* Acquire OCaml runtime lock */
     caml_acquire_runtime_system();
@@ -314,21 +318,20 @@ Java_com_example_squirrelscout_data_OCamlServiceHandler_stop_1ocaml(JNIEnv *env,
 
 JNIEXPORT void JNICALL
 Java_com_example_squirrelscout_data_OCamlServiceHandler_terminate_1ocaml(JNIEnv *env, jclass cls) {
-    /* If never initialized OCaml, nothing to do. */
-    if (!ocaml_initialized) return;
-    /* Only terminate OCaml with caml_shutdown once. */
-    if (ocaml_terminated) return;
-    ocaml_terminated = 1;
+    /* If never initialized OCaml, nothing to do.
+     * When OCAML_LIFECYCLE_ENTIRE_PROCESS then terminate does nothing. */
+    if (state == OCAML_UNINITIALIZED || state == OCAML_EXITED) return;
 
     /* Get the class name (Ex. ComDataService) for logging */
     GET_CLAZZ_NAME();
 #define RELEASE_TERMINATE_OCAML0() (*env)->ReleaseStringUTFChars(env, clazz_name, clazz_name_str)
 
+#ifdef OCAML_LIFECYCLE_ENTIRE_PROCESS
+#define RELEASE_TERMINATE_OCAML1() RELEASE_TERMINATE_OCAML0()
+#else
+    state = OCAML_UNINITIALIZED;
     LOG_INFO("[%s.terminate_ocaml] Starting", clazz_name_str);
 
-#ifdef OCAML_LIFECYCLE_ENTIRE_PROCESS
-#define RELEASE_TERMINATE_OCAML1() 0
-#else
     /* Acquire OCaml runtime lock */
     caml_acquire_runtime_system();
 #define RELEASE_TERMINATE_OCAML1() do { caml_release_runtime_system(); RELEASE_TERMINATE_OCAML0(); } while (0)
@@ -349,14 +352,10 @@ Java_com_example_squirrelscout_data_OCamlServiceHandler_terminate_1ocaml(JNIEnv 
 #ifdef _WIN32
     caml_win32_unregister_overflow_detection();
 #endif
-#endif
-
-    /* We have some data that may need to be freed from dk_caml_startup_code_exn() */
-    dksdk_ffi_c_stack_free_all(&init_ocaml_stack);
-    free(init_ocaml_stack_on_heap);
-    init_ocaml_stack_on_heap = NULL;
 
     LOG_INFO("[%s.terminate_ocaml] Finished", clazz_name_str);
+#endif
+
     RELEASE_TERMINATE_OCAML1();
 }
 
@@ -364,10 +363,10 @@ JNIEXPORT void JNICALL
 Java_com_example_squirrelscout_data_OCamlServiceHandler_atexit_1ocaml(JNIEnv *env,
                                                                            jclass cls) {
     (void)env;
-    (void)cls;
 
     /* If never initialized OCaml, nothing to do. */
-    if (!ocaml_initialized) return;
+    if (state == OCAML_UNINITIALIZED || state == OCAML_EXITED) return;
+    state = OCAML_EXITED;
 
     /* Get the class name (Ex. ComDataService) for logging */
     GET_CLAZZ_NAME();
@@ -378,6 +377,13 @@ Java_com_example_squirrelscout_data_OCamlServiceHandler_atexit_1ocaml(JNIEnv *en
 #ifdef OCAML_LIFECYCLE_ENTIRE_PROCESS
     /* Undocumented but shouldn't need OCaml runtime lock to do a shutdown. */
     caml_shutdown();
+
+    /* We have some data that may need to be freed from dk_caml_startup_code_exn() */
+    if(init_ocaml_stack_on_heap) {
+        dksdk_ffi_c_stack_free_all(&init_ocaml_stack);
+        free(init_ocaml_stack_on_heap);
+        init_ocaml_stack_on_heap = NULL;
+    }
 #endif
 
     LOG_INFO("[%s.at_exit_ocaml] Finished", clazz_name_str);
