@@ -78,6 +78,10 @@ let generate_setup_properties ~projectdir ~cwd ~slots () =
         (Utils.mixed_path Fpath.(cwd / "fetch" / "dksdk-access"));
       Printf.sprintf "FETCHCONTENT_SOURCE_DIR_DKSDK-CMAKE = %s"
         (Utils.mixed_path Fpath.(cwd / "fetch" / "dksdk-cmake"));
+      Printf.sprintf "FETCHCONTENT_SOURCE_DIR_DKSDK-FFI-C = %s"
+        (Utils.mixed_path Fpath.(cwd / "fetch" / "dksdk-ffi-c"));
+      Printf.sprintf "FETCHCONTENT_SOURCE_DIR_DKSDK-FFI-JAVA = %s"
+        (Utils.mixed_path Fpath.(cwd / "fetch" / "dksdk-ffi-java"));
       Printf.sprintf "SonicScoutBackend_SOURCE_DIR = %s"
         (Utils.mixed_path Fpath.(cwd / "us" / "SonicScoutBackend"));
       Printf.sprintf "CMAKE_MAKE_PROGRAM = %s"
