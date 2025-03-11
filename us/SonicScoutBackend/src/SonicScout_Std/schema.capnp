@@ -116,6 +116,9 @@ enum TBreakdown2025{
   mechanicalFailure @2;
   incapacitated @3;
   gamePieceStuck @4;
+  coralStuck @5;
+  stuckOnAlgae @6;
+
 }
 
 enum EClimb{

@@ -52,6 +52,12 @@ class RawMatchDataUiStateSerde {
             case "Game Piece Stuck":
                 return Schema.TBreakdown2025.GAME_PIECE_STUCK;
 
+            case "Coral Stuck":
+                return Schema.TBreakdown2025.CORAL_STUCK;
+                 
+            case "Stuck on Algae":
+                return Schema.TBreakdown2025.STUCK_ON_ALGAE;                     
+
             default:
                 return Schema.TBreakdown2025._NOT_IN_SCHEMA;
         }
