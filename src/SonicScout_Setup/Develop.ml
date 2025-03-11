@@ -11,7 +11,7 @@ let _compile_backend ~slots { opts; global_dkml; _ } =
   Sqlite3.run ();
   ScoutBackend.run ?global_dkml ~opts ~slots ()
 
-let _nocompile_base ({ dksdk_data_home; global_dkml; _ }) =
+let _nocompile_base ({ opts; dksdk_data_home; global_dkml; _ }) =
   let global_dkml = if global_dkml then Some () else None in
   InitialSteps.run ~dksdk_data_home ();
   let slots = Slots.create () in
