@@ -47,7 +47,7 @@ if(SONIC_SCOUT_FEATURE_SCANNER)
     add_library(ManagerApp_backend STATIC squirrel_scout_manager.c)
     add_library(SquirrelScout::ManagerApp_backend ALIAS ManagerApp_backend)
     target_link_libraries(ManagerApp_backend
-        PRIVATE DkSDK::OCaml::Compile
+        PRIVATE DkSDK::OCaml::Compile DkSDK::FFI::C-Static
         PUBLIC Threads::Threads
         # The manager app will be a binary that statically links
         # to OCaml (dynamic linking is not required because we

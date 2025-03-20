@@ -5,13 +5,13 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "(Windows) Launch ManagerAppQtCamReader",
+            "name": "(Windows) Launch SonicScoutQRScanner",
             "type": "cppvsdbg",
             "request": "launch",
-            "program": "${workspaceFolder}/us/SonicScoutBackend/build_dev/src/ManagerApp/ManagerAppQtCamReader.exe",
+            "program": "${workspaceFolder}/us/SonicScoutBackend/build_dev/src/SonicScout_ManagerApp/SonicScoutQRScanner.exe",
             "args": [],
             "stopAtEntry": true,
-            "cwd": "${workspaceRoot}/us/SonicScoutBackend/build_dev/_CPack_Packages/win64/ZIP/SonicScoutBackend-1.0.0-win64/bin",
+            "cwd": "${workspaceRoot}/us/SonicScoutBackend/5.15.2/msvc2019_64/bin",
             "environment": [],
             "console": "externalTerminal"
         },
