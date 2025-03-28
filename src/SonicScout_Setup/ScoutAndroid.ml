@@ -68,7 +68,7 @@ let clean areas =
     configuration in SonicScout_Setup into Gradle. *)
 let generate_setup_properties ~projectdir ~cwd ~slots () =
   let open Bos in
-  let ninja_dir = Slots.ninja_dir slots in
+  let ninja_dir = Slots.ninja_dir_exn slots in
   (* keep the directories forward-slashed so readable *)
   let setup_properties = Fpath.(projectdir / "setup.properties") in
   let content =
@@ -179,7 +179,7 @@ let run ?(opts : Utils.opts option) ~slots () =
       RunGradle.generate_local_properties ~projectdir ~slots ();
 
       let cmake =
-        let c = Slots.cmake_home slots in
+        let c = Slots.cmake_home_exn slots in
         Fpath.(c / "bin" / "cmake")
       in
       RunGradle.run ~env:dk_env ~debug_env:() ~projectdir ~slots

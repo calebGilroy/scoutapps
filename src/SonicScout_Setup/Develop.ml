@@ -11,7 +11,7 @@ let _compile_backend ~slots { opts; global_dkml; _ } =
   Sqlite3.run ();
   ScoutBackend.run ?global_dkml ~opts ~slots ()
 
-let _nocompile_base ({ opts; dksdk_data_home; global_dkml; _ }) =
+let _nocompile_base { opts; dksdk_data_home; global_dkml; _ } =
   let global_dkml = if global_dkml then Some () else None in
   InitialSteps.run ~dksdk_data_home ();
   let slots = Slots.create () in
@@ -55,7 +55,10 @@ let launch_android common =
 
 let launch_scanner common quick =
   try
-    let slots = if quick then _nocompile_base common else _compile_base ~skip_android:() common in
+    let slots =
+      if quick then _nocompile_base common
+      else _compile_base ~skip_android:() common
+    in
     let slots = Scanner.run ~slots () in
     ignore slots;
     Utils.done_steps "Developing"
@@ -63,8 +66,19 @@ let launch_scanner common quick =
 
 let launch_database common quick =
   try
-    let slots = if quick then _nocompile_base common else _compile_base ~skip_android:() common in
+    let slots =
+      if quick then _nocompile_base common
+      else _compile_base ~skip_android:() common
+    in
     let slots = Database.run ~slots () in
+    ignore slots;
+    Utils.done_steps "Developing"
+  with Utils.StopProvisioning -> ()
+
+let launch_source_update common =
+  try
+    let slots = _compile_base ~skip_android:() common in
+    let slots = ProjectSource.run ~slots () in
     ignore slots;
     Utils.done_steps "Developing"
   with Utils.StopProvisioning -> ()
@@ -87,7 +101,7 @@ module Cli = struct
 
   let quick_t =
     let doc = "Launch without compiling" in
-    Arg.(value & flag & info ~doc ["quick"] )
+    Arg.(value & flag & info ~doc [ "quick" ])
 
   let compile_cmd =
     let open SSCli in
@@ -101,11 +115,14 @@ module Cli = struct
   let compile_backend_cmd =
     let open SSCli in
     let doc =
-      "Compile all Sonic Scout backend code. Your machine needs to have been setup with \
-        prerequisites; you can do that with the './dk SonicScout_Setup.Develop compile' command."
+      "Compile all Sonic Scout backend code. Your machine needs to have been \
+       setup with prerequisites; you can do that with the './dk \
+       SonicScout_Setup.Develop compile' command."
     in
     let man = [ `S Manpage.s_description; `Blocks help_secs ] in
-    Cmd.v (Cmd.info ~doc ~man "compile-backend") Term.(const compile_backend $ common_t)
+    Cmd.v
+      (Cmd.info ~doc ~man "compile-backend")
+      Term.(const compile_backend $ common_t)
 
   let android_cmd =
     let open SSCli in
@@ -127,7 +144,9 @@ module Cli = struct
        if it hasn't been already."
     in
     let man = [ `S Manpage.s_description; `Blocks help_secs ] in
-    Cmd.v (Cmd.info ~doc ~man "scanner") Term.(const launch_scanner $ common_t $ quick_t)
+    Cmd.v
+      (Cmd.info ~doc ~man "scanner")
+      Term.(const launch_scanner $ common_t $ quick_t)
 
   let database_cmd =
     let open SSCli in
@@ -142,6 +161,17 @@ module Cli = struct
       (Cmd.info ~doc ~man "database")
       Term.(const launch_database $ common_t $ quick_t)
 
+  let source_update_cmd =
+    let open SSCli in
+    let doc =
+      "Regenerate the Java and OCaml schema with the latest updates to \
+       capnp.schema."
+    in
+    let man = [ `S Manpage.s_description; `Blocks help_secs ] in
+    Cmd.v
+      (Cmd.info ~doc ~man "source-update")
+      Term.(const launch_source_update $ common_t)
+
   let groups_cmd =
     let doc = "Develop the Sonic Scout software." in
     let man = [ `S Manpage.s_description; `Blocks SSCli.help_secs ] in
@@ -149,8 +179,15 @@ module Cli = struct
       Term.(ret (const (fun _ -> `Help (`Pager, None)) $ common_t))
     in
     Cmd.group ~default
-      (Cmd.info ~doc ~man ("./dk " ^ __MODULE_ID__))
-      [ compile_cmd; compile_backend_cmd; android_cmd; scanner_cmd; database_cmd ]
+      (Cmd.info ~doc ~man __MODULE_ID__)
+      [
+        compile_cmd;
+        compile_backend_cmd;
+        android_cmd;
+        scanner_cmd;
+        database_cmd;
+        source_update_cmd;
+      ]
 end
 
 let __init () =

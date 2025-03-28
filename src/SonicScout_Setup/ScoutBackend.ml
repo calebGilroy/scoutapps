@@ -168,6 +168,11 @@ let cmake_properties ~cwd ~(opts : Utils.opts) slots : string list =
       | `Release -> "Release")
     :: cprops
   in
+  (* Avoid:
+        C:\VS\VC\Tools\MSVC\14.38.33130\bin\Hostx64\x64\cl.exe  /nologo /TP -DKJ_USE_FIBERS -IC:\scoutapps2\us\SonicScoutBackend\build_dev\_deps\capnproto-src\c++\src /wo4503 -std:c++14 /showIncludes /Foc++\src\kj\CMakeFiles\kj-async.dir\async.c++.obj /Fdc++\src\kj\CMakeFiles\kj-async.dir\kj-async.pdb /FS -c C:\scoutapps2\us\SonicScoutBackend\build_dev\_deps\capnproto-src\c++\src\kj\async.c++
+        C:\scoutapps2\us\SonicScoutBackend\build_dev\_deps\capnproto-src\c++\src\kj\async.h(39): fatal error C1189: #error:  "Fibers cannot be enabled when exceptions are disabled."
+  *)
+  let cprops = "-DWITH_FIBERS=OFF" :: cprops in
   let cprops = "-DSONIC_SCOUT_FEATURE_CLI=ON" :: cprops in
   let open Utils in
   let cprops =

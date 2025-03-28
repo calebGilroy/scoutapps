@@ -75,12 +75,12 @@ let android_sdk_dir { android_sdk_dir; _ } = android_sdk_dir
 let jdk { jdk; _ } = jdk
 let gradle_home { gradle_home; _ } = gradle_home
 
-let ninja_dir { ninja_dir; _ } =
+let ninja_dir_exn { ninja_dir; _ } =
   match ninja_dir with
   | None -> failwith "Missing ninja_dir slot"
   | Some ninja_dir -> ninja_dir
 
-let cmake_home { cmake_home; _ } =
+let cmake_home_exn { cmake_home; _ } =
   match (cmake_home, Sys.getenv_opt "DKCODER_CMAKE_EXE") with
   | Some cmake_home, _ -> cmake_home
   | None, Some cmake_exe -> Fpath.(v cmake_exe |> parent |> parent)

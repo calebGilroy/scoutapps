@@ -1,16 +1,4 @@
-(* TODO: Make this a DkCoder "us" script.
-
-   REPLACES: Legacy ./dk that runs CMake scripts.
-
-   FIXES BUGS:
-   1. `./dk` would inject OCaml environment and mess up direct CMake invocations.
-   2. Using Ninja with Visual Studio requires that you launch the Visual
-      Studio Command Prompt (or vsdevcmd/vcvars). That is burdensome for the user.
-      Confer: https://discourse.cmake.org/t/best-practice-for-ninja-build-visual-studio/4653/6
-
-   PREREQS (must be replaced before dksdk.gradle.run is replaced):
-   1. `./dk` and `./dk.cmd` and `__dk.cmake`
-*)
+(* TODO: Make this a DkCoder "us" script. *)
 
 open Bos
 
@@ -26,12 +14,12 @@ let run ?debug_env ?env ?global_dkml ~projectdir ~name ~slots args =
   (* Don't leak DkCoder OCaml environment to Android Gradle Plugin. *)
   let env = RunGradle.remove_ocaml_dkcoder_env env in
 
-  let cmake_home = Slots.cmake_home_exn slots in
-  let cmake_exe = Fpath.(cmake_home / "bin" / "cmake") in
+  let ninja_dir = Slots.ninja_dir_exn slots in
+  let ninja_exe = Fpath.(ninja_dir / "ninja") in
 
   let cmd =
-    RunWithCompiler.get_command_for_program_and_args ?global_dkml ~tools_dir ~name
-      cmake_exe args
+    RunWithCompiler.get_command_for_program_and_args ?global_dkml ~tools_dir
+      ~name ninja_exe args
   in
 
   (* Run *)

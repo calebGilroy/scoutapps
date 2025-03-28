@@ -4,9 +4,9 @@ DkSDKProject_AddPackage(
         SUMMARY_PARAGRAPHS
         [[SquirrelScout_ObjsLib registers the COM class and instance objects.]]
 )
-option(SONIC_SCOUT_FEATURE_COM "Enable the COM library that runs the Sonic Scout backend inside Android/iOS")
+option(SONIC_SCOUT_FEATURE_COM "Enable the COM library that runs the Sonic Scout backend inside Android/iOS" ON)
 
-if(SONIC_SCOUT_FEATURE_COM)
+if(SONIC_SCOUT_FEATURE_COM AND SONIC_SCOUT_NATIVE_COM)
         # This is the STATIC library that will link to Android/iOS applications.
         add_library(SquirrelScout_ObjsLib STATIC SquirrelScout_ObjsLib.ml Init.ml)
         add_library(SquirrelScout::ObjsLib ALIAS SquirrelScout_ObjsLib)
@@ -15,5 +15,5 @@ if(SONIC_SCOUT_FEATURE_COM)
 else()
         add_custom_target(SquirrelScout_ObjsLib)
         add_custom_command(TARGET SquirrelScout_ObjsLib POST_BUILD
-                COMMAND ${CMAKE_COMMAND} -E echo "The COM library is disabled. To enable, set the SONIC_SCOUT_FEATURE_COM CMake variable to ON.")
+                COMMAND ${CMAKE_COMMAND} -E echo "The COM library is disabled. To enable, set the SONIC_SCOUT_FEATURE_COM and SONIC_SCOUT_NATIVE_COM CMake variables to ON.")
 endif()

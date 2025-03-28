@@ -460,6 +460,8 @@ public final class Schema {
           case 2 : return com.example.squirrelscout.data.capnp.Schema.TBreakdown2025.MECHANICAL_FAILURE;
           case 3 : return com.example.squirrelscout.data.capnp.Schema.TBreakdown2025.INCAPACITATED;
           case 4 : return com.example.squirrelscout.data.capnp.Schema.TBreakdown2025.GAME_PIECE_STUCK;
+          case 5 : return com.example.squirrelscout.data.capnp.Schema.TBreakdown2025.CORAL_STUCK;
+          case 6 : return com.example.squirrelscout.data.capnp.Schema.TBreakdown2025.STUCK_ON_ALGAE;
           default: return com.example.squirrelscout.data.capnp.Schema.TBreakdown2025._NOT_IN_SCHEMA;
         }
       }
@@ -779,6 +781,8 @@ public final class Schema {
           case 2 : return com.example.squirrelscout.data.capnp.Schema.TBreakdown2025.MECHANICAL_FAILURE;
           case 3 : return com.example.squirrelscout.data.capnp.Schema.TBreakdown2025.INCAPACITATED;
           case 4 : return com.example.squirrelscout.data.capnp.Schema.TBreakdown2025.GAME_PIECE_STUCK;
+          case 5 : return com.example.squirrelscout.data.capnp.Schema.TBreakdown2025.CORAL_STUCK;
+          case 6 : return com.example.squirrelscout.data.capnp.Schema.TBreakdown2025.STUCK_ON_ALGAE;
           default: return com.example.squirrelscout.data.capnp.Schema.TBreakdown2025._NOT_IN_SCHEMA;
         }
       }
@@ -849,6 +853,8 @@ public final class Schema {
     MECHANICAL_FAILURE,
     INCAPACITATED,
     GAME_PIECE_STUCK,
+    CORAL_STUCK,
+    STUCK_ON_ALGAE,
     _NOT_IN_SCHEMA,
   }
 
@@ -2123,7 +2129,7 @@ public static final org.capnproto.SegmentReader b_dcb2f503d26b5541 =
    "\u0015\u0000\u0000\u0000\u00e2\u0000\u0000\u0000" +
    "\u0021\u0000\u0000\u0000\u0007\u0000\u0000\u0000" +
    "\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000" +
-   "\u001d\u0000\u0000\u0000\u007f\u0000\u0000\u0000" +
+   "\u001d\u0000\u0000\u0000\u00af\u0000\u0000\u0000" +
    "\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000" +
    "\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000" +
    "\u0073\u0063\u0068\u0065\u006d\u0061\u002e\u0063" +
@@ -2131,21 +2137,27 @@ public static final org.capnproto.SegmentReader b_dcb2f503d26b5541 =
    "\u0065\u0061\u006b\u0064\u006f\u0077\u006e\u0032" +
    "\u0030\u0032\u0035\u0000\u0000\u0000\u0000\u0000" +
    "\u0000\u0000\u0000\u0000\u0001\u0000\u0001\u0000" +
-   "\u0014\u0000\u0000\u0000\u0001\u0000\u0002\u0000" +
+   "\u001c\u0000\u0000\u0000\u0001\u0000\u0002\u0000" +
    "\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000" +
-   "\u0035\u0000\u0000\u0000\u002a\u0000\u0000\u0000" +
+   "\u004d\u0000\u0000\u0000\u002a\u0000\u0000\u0000" +
    "\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000" +
    "\u0001\u0000\u0000\u0000\u0000\u0000\u0000\u0000" +
-   "\u002d\u0000\u0000\u0000\u003a\u0000\u0000\u0000" +
+   "\u0045\u0000\u0000\u0000\u003a\u0000\u0000\u0000" +
    "\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000" +
    "\u0002\u0000\u0000\u0000\u0000\u0000\u0000\u0000" +
-   "\u0025\u0000\u0000\u0000\u0092\u0000\u0000\u0000" +
+   "\u003d\u0000\u0000\u0000\u0092\u0000\u0000\u0000" +
    "\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000" +
    "\u0003\u0000\u0000\u0000\u0000\u0000\u0000\u0000" +
-   "\u0025\u0000\u0000\u0000\u0072\u0000\u0000\u0000" +
+   "\u003d\u0000\u0000\u0000\u0072\u0000\u0000\u0000" +
    "\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000" +
    "\u0004\u0000\u0000\u0000\u0000\u0000\u0000\u0000" +
-   "\u0021\u0000\u0000\u0000\u007a\u0000\u0000\u0000" +
+   "\u0039\u0000\u0000\u0000\u007a\u0000\u0000\u0000" +
+   "\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000" +
+   "\u0005\u0000\u0000\u0000\u0000\u0000\u0000\u0000" +
+   "\u0035\u0000\u0000\u0000\u005a\u0000\u0000\u0000" +
+   "\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000" +
+   "\u0006\u0000\u0000\u0000\u0000\u0000\u0000\u0000" +
+   "\u0031\u0000\u0000\u0000\u006a\u0000\u0000\u0000" +
    "\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000" +
    "\u006e\u006f\u006e\u0065\u0000\u0000\u0000\u0000" +
    "\u0074\u0069\u0070\u0070\u0065\u0064\u0000\u0000" +
@@ -2155,7 +2167,11 @@ public static final org.capnproto.SegmentReader b_dcb2f503d26b5541 =
    "\u0069\u006e\u0063\u0061\u0070\u0061\u0063\u0069" +
    "\u0074\u0061\u0074\u0065\u0064\u0000\u0000\u0000" +
    "\u0067\u0061\u006d\u0065\u0050\u0069\u0065\u0063" +
-   "\u0065\u0053\u0074\u0075\u0063\u006b\u0000\u0000" + "");
+   "\u0065\u0053\u0074\u0075\u0063\u006b\u0000\u0000" +
+   "\u0063\u006f\u0072\u0061\u006c\u0053\u0074\u0075" +
+   "\u0063\u006b\u0000\u0000\u0000\u0000\u0000\u0000" +
+   "\u0073\u0074\u0075\u0063\u006b\u004f\u006e\u0041" +
+   "\u006c\u0067\u0061\u0065\u0000\u0000\u0000\u0000" + "");
 public static final org.capnproto.SegmentReader b_bbd08609ca483180 =
    org.capnproto.GeneratedClassSupport.decodeRawBytes(
    "\u0000\u0000\u0000\u0000\u0005\u0000\u0006\u0000" +

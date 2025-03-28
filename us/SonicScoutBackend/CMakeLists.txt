@@ -50,6 +50,8 @@ DkSDKProject_AddProject(
         DUNE_VERSION 3.8
 )
 
+option(SONIC_SCOUT_NATIVE_COM "Enable native compilation and tests for the COM library that runs the Sonic Scout backend inside Android/iOS")
+
 # Externally provided content
 add_subdirectory(dependencies)
 

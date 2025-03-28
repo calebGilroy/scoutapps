@@ -93,7 +93,7 @@ let add_java_env ~slots env =
       env)
 
 let add_ninja_env ~slots env =
-  let ninja_dir = Fpath.to_string (Slots.ninja_dir slots) in
+  let ninja_dir = Fpath.to_string (Slots.ninja_dir_exn slots) in
   OSEnvMap.(
     update "PATH"
       (function
@@ -163,7 +163,7 @@ let generate_local_properties ~slots ~projectdir () =
         (android_local_properties_escape (Utils.mixed_path cmake_dir));
     ]
   in
-  let cmake_3_25_3_home = Slots.cmake_home slots in
+  let cmake_3_25_3_home = Slots.cmake_home_exn slots in
   OS.File.write_lines local_properties (content ~cmake_dir:cmake_3_25_3_home)
   |> rmsg
 

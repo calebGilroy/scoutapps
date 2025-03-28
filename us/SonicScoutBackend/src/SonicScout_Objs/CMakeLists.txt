@@ -5,7 +5,7 @@ DkSDKProject_AddPackage(
         [[SquirrelScout_Objs expose a register function to register the COM class and instance objects.]]
 )
 
-if(SONIC_SCOUT_FEATURE_COM)
+if(SONIC_SCOUT_FEATURE_COM AND SONIC_SCOUT_NATIVE_COM)
         add_library(SquirrelScout_Objs OBJECT
                 ObjsEntry.ml
                 # Since this is a library id, will be ignored by DkCoder
