@@ -45,6 +45,8 @@ module type S = sig
       | MechanicalFailure
       | Incapacitated
       | GamePieceStuck
+      | CoralStuck
+      | StuckOnAlgae
       | Undefined of int
   end
   module TBreakdown_16560530708388719165 : sig
@@ -175,6 +177,8 @@ module type S = sig
         | MechanicalFailure
         | Incapacitated
         | GamePieceStuck
+        | CoralStuck
+        | StuckOnAlgae
         | Undefined of int
     end
     module EClimb : sig
@@ -397,6 +401,8 @@ module type S = sig
         | MechanicalFailure
         | Incapacitated
         | GamePieceStuck
+        | CoralStuck
+        | StuckOnAlgae
         | Undefined of int
     end
     module EClimb : sig
@@ -584,6 +590,8 @@ module MakeRPC(MessageWrapper : Capnp.RPC.S) = struct
       | MechanicalFailure
       | Incapacitated
       | GamePieceStuck
+      | CoralStuck
+      | StuckOnAlgae
       | Undefined of int
     let decode u16 = match u16 with
       | 0 -> None
@@ -591,6 +599,8 @@ module MakeRPC(MessageWrapper : Capnp.RPC.S) = struct
       | 2 -> MechanicalFailure
       | 3 -> Incapacitated
       | 4 -> GamePieceStuck
+      | 5 -> CoralStuck
+      | 6 -> StuckOnAlgae
       | v -> Undefined v
     let encode_safe enum = match enum with
       | None -> 0
@@ -598,6 +608,8 @@ module MakeRPC(MessageWrapper : Capnp.RPC.S) = struct
       | MechanicalFailure -> 2
       | Incapacitated -> 3
       | GamePieceStuck -> 4
+      | CoralStuck -> 5
+      | StuckOnAlgae -> 6
       | Undefined x -> invalid_msg "Cannot encode undefined enum value."
     let encode_unsafe enum = match enum with
       | None -> 0
@@ -605,6 +617,8 @@ module MakeRPC(MessageWrapper : Capnp.RPC.S) = struct
       | MechanicalFailure -> 2
       | Incapacitated -> 3
       | GamePieceStuck -> 4
+      | CoralStuck -> 5
+      | StuckOnAlgae -> 6
       | Undefined x -> x
   end
   module TBreakdown_16560530708388719165 = struct
@@ -864,6 +878,8 @@ module MakeRPC(MessageWrapper : Capnp.RPC.S) = struct
         | MechanicalFailure
         | Incapacitated
         | GamePieceStuck
+        | CoralStuck
+        | StuckOnAlgae
         | Undefined of int
     end
     module EClimb = struct
@@ -1230,6 +1246,8 @@ module MakeRPC(MessageWrapper : Capnp.RPC.S) = struct
         | MechanicalFailure
         | Incapacitated
         | GamePieceStuck
+        | CoralStuck
+        | StuckOnAlgae
         | Undefined of int
     end
     module EClimb = struct

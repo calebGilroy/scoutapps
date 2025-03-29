@@ -255,6 +255,8 @@ module Table : Table_type = struct
       | Incapacitated -> "INCAPACITATED"
       | Undefined _ -> "NONE"
       | GamePieceStuck -> "GAMEPIECESTUCK"
+      | StuckOnAlgae -> "StuckOnAlgae"
+      | CoralStuck -> "CoralStuck"
     in
 
     let teleopClimb_to_string : ProjectSchema.Reader.EClimb2025.t -> string = function

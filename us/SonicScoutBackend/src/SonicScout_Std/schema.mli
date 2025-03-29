@@ -45,6 +45,8 @@ module type S = sig
       | MechanicalFailure
       | Incapacitated
       | GamePieceStuck
+      | CoralStuck
+      | StuckOnAlgae
       | Undefined of int
   end
   module TBreakdown_16560530708388719165 : sig
@@ -175,6 +177,8 @@ module type S = sig
         | MechanicalFailure
         | Incapacitated
         | GamePieceStuck
+        | CoralStuck
+        | StuckOnAlgae
         | Undefined of int
     end
     module EClimb : sig
@@ -397,6 +401,8 @@ module type S = sig
         | MechanicalFailure
         | Incapacitated
         | GamePieceStuck
+        | CoralStuck
+        | StuckOnAlgae
         | Undefined of int
     end
     module EClimb : sig
