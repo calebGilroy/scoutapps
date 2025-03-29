@@ -51,16 +51,20 @@ public class StartScoutingActivity extends ComponentActivity implements  View.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.start_scouting);
 
+
         // view model scoped to the entire scouting session that starts at StartScoutingActivity
         ViewModelStoreOwner scoutingSessionViewModelStoreOwner = ((MainApplication) getApplication()).getScoutingSessionViewModelStoreOwner();
         model = new ViewModelProvider(scoutingSessionViewModelStoreOwner).get(ScoutingSessionViewModel.class);
 
         // new session
         Intent intent = getIntent();
+        int scoutMatchNumber = intent.getIntExtra(ScoutingSessionViewModel.INTENT_MATCH_SHORT_MATCH_NUMBER, (int) 1);
         model.startNewSessionIfNecessary(
                 intent.getLongExtra(ScoutingSessionViewModel.INTENT_INITIAL_LONG_SESSION_NUMBER, 0L),
                 intent.getStringExtra(ScoutingSessionViewModel.INTENT_INITIAL_STRING_SCOUT_NAME),
-                intent.getShortExtra(ScoutingSessionViewModel.INTENT_INITIAL_SHORT_TEAM_NUMBER, (short) 0));
+                intent.getShortExtra(ScoutingSessionViewModel.INTENT_INITIAL_SHORT_TEAM_NUMBER, (short) 0),
+                (short) scoutMatchNumber);
+
 
         //buttons
         incrementMatch = (Button) findViewById(R.id.MATCH_INCREMENT);
@@ -84,6 +88,7 @@ public class StartScoutingActivity extends ComponentActivity implements  View.On
         selectPositionTitle = (TextView) findViewById(R.id.Robot_Position_Label);
         teamTitle = (TextView) findViewById(R.id.Robot_Selected);
 
+        chooseMatchI.setText(scoutMatchNumber+ "");
         //dropdown
         dropdown = findViewById(R.id.dropdown);
         String[] items = new String[]{"Red 1", "Red 2", "Red 3", "Blue 1", "Blue 2", "Blue 3"};

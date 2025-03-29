@@ -22,9 +22,11 @@ public class ScoutingSessionViewModel extends ViewModel {
     /**
      * Some unique identifier so we know when a new session has been started
      */
+    /* These "INITIAL" are meant to be the scout information from the "Homepage" */
     public static final String INTENT_INITIAL_LONG_SESSION_NUMBER = "Initial:SessionNumber";
     public static final String INTENT_INITIAL_STRING_SCOUT_NAME = "Initial:ScoutName";
     public static final String INTENT_INITIAL_SHORT_TEAM_NUMBER = "Initial:TeamNumber";
+    public static final String INTENT_MATCH_SHORT_MATCH_NUMBER = "Match:MatchNumber";
 
     /**
      * Be careful with Mutable on top of a Modifiable! Any modifications need to
@@ -164,12 +166,13 @@ public class ScoutingSessionViewModel extends ViewModel {
         return session == null ? "no session" : session.toString();
     }
 
-    public void startNewSessionIfNecessary(long sessionNumber, String scoutName, short teamNumber) {
+    public void startNewSessionIfNecessary(long sessionNumber, String scoutName, short scoutTeamNumber, short matchNumber) {
         ImmutableRawMatchDataSessionUiState oldState = rawMatchDataSessionUiState.getValue();
         if (oldState == null || oldState.sessionNumber() != sessionNumber) {
-            // new session! everything should be cleared except the scout name and team number
+            // new session! everything should be cleared except the scout name and match number
             ModifiableRawMatchDataUiState state = ModifiableRawMatchDataUiState.create();
             state.setScoutName(scoutName);
+            state.setMatchScouting(matchNumber);
 
             rawMatchDataSessionUiState.setValue(
                     ImmutableRawMatchDataSessionUiState.builder()

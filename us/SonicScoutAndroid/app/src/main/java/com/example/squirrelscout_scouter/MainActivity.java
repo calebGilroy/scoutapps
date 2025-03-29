@@ -138,7 +138,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 Intent intent = new Intent(MainActivity.this, StartScoutingActivity.class);
                 intent.putExtra(ScoutingSessionViewModel.INTENT_INITIAL_LONG_SESSION_NUMBER, s);
                 intent.putExtra(ScoutingSessionViewModel.INTENT_INITIAL_STRING_SCOUT_NAME, ScoutName);
+                /* This is the _scout_ team number, not the match team number. */
                 intent.putExtra(ScoutingSessionViewModel.INTENT_INITIAL_SHORT_TEAM_NUMBER, validatedTeamNum);
+                //intent.putExtra(ScoutingSessionViewModel.INTENT_MATCH_SHORT_MATCH_NUMBER, 1);
                 startActivity(intent);
                 Log.d("d", "scouter name: " + ScoutName);
                 Toast.makeText(MainActivity.this, ScoutName, Toast.LENGTH_SHORT).show();
