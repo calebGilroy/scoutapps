@@ -6,6 +6,7 @@
 #include <caml/osdeps.h>
 #include <caml/threads.h>
 #include <dksdk_ffi_c/mem.h>
+#include <dksdk_ffi_c/logger/logger.h>
 #include <squirrel_scout_manager/squirrel_scout_manager.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -70,6 +71,10 @@ void squirrel_scout_manager_init(int argc0, SQUIRREL_SCOUT_MANAGER_portable_char
     caml_argv[1 + i - argv0_start_ocaml_inc] = argv0[i];
   }
   caml_argv[1 + i - argv0_start_ocaml_inc] = NULL;
+
+  /* Setup logging */
+  dksdk_ffi_c_logger_setLevel(LogLevel_INFO);
+  dksdk_ffi_c_logger_initConsoleLogger(stderr);
 
   /* Setup configuration */
   struct dk_caml_config config = {0};
