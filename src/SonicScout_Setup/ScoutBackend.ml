@@ -221,6 +221,16 @@ let run ?(opts = Utils.default_opts) ?global_dkml ~slots () =
           (OS.File.read (Fpath.v "CMakeUserPresets-SUGGESTED.json") |> rmsg)
         |> rmsg;
 
+      (* DkCoder has no way to detect changes to .ml source files. *)
+      DkFs_C99.Path.rm ~recurse:() ~force:() ~kill:()
+        Fpath.
+          [
+            projectdir / "build_dev" / "DkFiles" / "c";
+            projectdir / "build_dev" / "src" / "SonicScout_MainCLI";
+            projectdir / "build_dev" / "src" / "SonicScout_ManagerApp";
+          ]
+      |> rmsg;
+
       RunCMake.run ?global_dkml ~projectdir ~name:"backend-preset" ~slots
         ([ "--preset"; preset ] @ cmake_properties ~cwd ~opts slots);
       RunCMake.run ?global_dkml ~projectdir ~name:"backend-build" ~slots
