@@ -173,7 +173,7 @@ let cmake_properties ~cwd ~(opts : Utils.opts) slots : string list =
         C:\scoutapps2\us\SonicScoutBackend\build_dev\_deps\capnproto-src\c++\src\kj\async.h(39): fatal error C1189: #error:  "Fibers cannot be enabled when exceptions are disabled."
   *)
   let cprops = "-DWITH_FIBERS=OFF" :: cprops in
-  let cprops = "-DSONIC_SCOUT_FEATURE_CLI=ON" :: cprops in
+  let cprops = "-DSONIC_SCOUT_FEATURE_CLI=OFF" :: cprops in
   let open Utils in
   let cprops =
     (* Override what is forced in CMakePresets.json *)
@@ -238,7 +238,6 @@ let run ?(opts = Utils.default_opts) ?global_dkml ~slots () =
           "--build";
           Fpath.to_string build_reldir;
           "--target";
-          "sonic-scout-cli";
           "DkSDK_DevTools";
           "DkSDKTest_UnitTests_ALL";
           "ManagerApp_ALL";
