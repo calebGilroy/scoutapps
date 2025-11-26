@@ -1,0 +1,545 @@
+<UserControl
+    x:Class="ScoutApp.Views.MainView"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:cvt="using:ScoutApp.Converter"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vm="using:ScoutApp.ViewModels"
+    d:DesignHeight="600"
+    d:DesignWidth="800"
+    x:DataType="vm:MainViewModel"
+    mc:Ignorable="d">
+    <!--  We are using Compiled bindings. This is not mandatory but makes life easier. Read more about it here:  -->
+    <!--  https://docs.avaloniaui.net/docs/basics/data/data-binding/compiled-bindings  -->
+
+    <!--  Use Alt-Shift-F to format. Do this continually!  -->
+
+    <Design.DataContext>
+        <vm:MainViewModel />
+    </Design.DataContext>
+
+    <UserControl.Resources>
+        <cvt:EnumToBooleanConverter x:Key="EnumToBooleanConverter" />
+    </UserControl.Resources>
+
+    <ScrollViewer VerticalScrollBarVisibility="Visible">
+
+        <Grid
+            Width="542"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Background="Gainsboro"
+            ColumnDefinitions="Auto,*"
+            RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto">
+
+            <!--  BEGIN string  -->
+            <TextBlock
+                Grid.Row="0"
+                Grid.Column="0"
+                FontWeight="Bold">
+                Scout Name:
+            </TextBlock>
+            <TextBox
+                Grid.Row="0"
+                Grid.Column="1"
+                Text="{Binding ScoutName}" />
+            <!--  END string  -->
+
+            <!--  BEGIN int  -->
+            <TextBlock
+                Grid.Row="1"
+                Grid.Column="0"
+                FontWeight="Bold">
+                Match Number:
+            </TextBlock>
+            <NumericUpDown
+                Grid.Row="1"
+                Grid.Column="1"
+                FormatString="0"
+                Minimum="0"
+                Value="{Binding MatchNumber}" />
+            <!--  END int  -->
+
+            <!--  BEGIN int  -->
+            <TextBlock
+                Grid.Row="2"
+                Grid.Column="0"
+                FontWeight="Bold">
+                Team Number:
+            </TextBlock>
+            <NumericUpDown
+                Grid.Row="2"
+                Grid.Column="1"
+                FormatString="0"
+                Minimum="0"
+                Value="{Binding TeamNumber32}" />
+            <!--  END int  -->
+
+            <!--  BEGIN enum  -->
+            <TextBlock
+                Grid.Row="3"
+                Grid.Column="0"
+                FontWeight="Bold">
+                Starting Position:
+            </TextBlock>
+            <StackPanel
+                Grid.Row="3"
+                Grid.Column="1"
+                Orientation="Horizontal">
+                <RadioButton
+                    Content="Left"
+                    GroupName="AutoStartingPosition"
+                    IsChecked="{Binding SPosition2025, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static vm:AutoStartingPosition.Left}}" />
+                <RadioButton
+                    Content="Middle"
+                    GroupName="AutoStartingPosition"
+                    IsChecked="{Binding SPosition2025, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static vm:AutoStartingPosition.Middle}}" />
+                <RadioButton
+                    Content="Right"
+                    GroupName="StartingPosition"
+                    IsChecked="{Binding SPosition2025, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static vm:AutoStartingPosition.Right}}" />
+            </StackPanel>
+            <!--  END enum  -->
+
+            <StackPanel
+                Grid.Row="7"
+                Grid.Column="0"
+                Grid.ColumnSpan="2">
+                <TextBlock FontWeight="Bold">
+                    Everything All At Once
+                </TextBlock>
+                <TextBox IsReadOnly="True" Text="{Binding EverythingAllAtOnce, Mode=OneWay}" />
+            </StackPanel>
+
+            <Image
+                Grid.Row="8"
+                Grid.Column="0"
+                Grid.ColumnSpan="2"
+                MaxWidth="300"
+                Source="{Binding QRCode1}" />
+
+            <StackPanel
+                Grid.Row="4"
+                Grid.Column="0"
+                Grid.ColumnSpan="2"
+                Orientation="Vertical">
+
+                <!--  All the new fields go below  -->
+                <Grid
+                    Width="542"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    Background="Gainsboro"
+                    ColumnDefinitions="Auto,Auto"
+                    RowDefinitions="Auto">
+
+                    <!--  LEFT COLUMN  -->
+                    <StackPanel
+                        Grid.Row="0"
+                        Grid.Column="0"
+                        Orientation="Vertical">
+
+                        <!--  BEGIN bool  -->
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Width="175" FontWeight="Bold">
+                                Preplaced Coral:
+                            </TextBlock>
+                            <CheckBox IsChecked="{Binding PreplacedCoral}" />
+                        </StackPanel>
+                        <!--  END bool  -->
+
+
+                        <!--  BEGIN int  -->
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Width="175" FontWeight="Bold">
+                                Auto L4 Score:
+                            </TextBlock>
+                            <NumericUpDown
+                                FormatString="0"
+                                Minimum="0"
+                                Value="{Binding AutoCoralL4Score}" />
+                        </StackPanel>
+                        <!--  END int  -->
+
+                        <!--  BEGIN int  -->
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Width="175" FontWeight="Bold">
+                                Auto L3 Score:
+                            </TextBlock>
+                            <NumericUpDown
+                                FormatString="0"
+                                Minimum="0"
+                                Value="{Binding AutoCoralL3Score}" />
+                        </StackPanel>
+                        <!--  END int  -->
+
+                        <!--  BEGIN int  -->
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Width="175" FontWeight="Bold">
+                                Auto L2 Score:
+                            </TextBlock>
+                            <NumericUpDown
+                                FormatString="0"
+                                Minimum="0"
+                                Value="{Binding AutoCoralL2Score}" />
+                        </StackPanel>
+                        <!--  END int  -->
+
+                        <!--  BEGIN int  -->
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Width="175" FontWeight="Bold">
+                                Auto L1 Score:
+                            </TextBlock>
+                            <NumericUpDown
+                                FormatString="0"
+                                Minimum="0"
+                                Value="{Binding AutoCoralL1Score}" />
+                        </StackPanel>
+                        <!--  END int  -->
+
+
+                        <!--  BEGIN int  -->
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Width="175" FontWeight="Bold">
+                                Auto L4 Miss:
+                            </TextBlock>
+                            <NumericUpDown
+                                FormatString="0"
+                                Minimum="0"
+                                Value="{Binding AutoCoralL4Miss}" />
+                        </StackPanel>
+                        <!--  END int  -->
+
+                        <!--  BEGIN int  -->
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Width="175" FontWeight="Bold">
+                                Auto L3 Miss:
+                            </TextBlock>
+                            <NumericUpDown
+                                FormatString="0"
+                                Minimum="0"
+                                Value="{Binding AutoCoralL3Miss}" />
+                        </StackPanel>
+                        <!--  END int  -->
+
+                        <!--  BEGIN int  -->
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Width="175" FontWeight="Bold">
+                                Auto L2 Miss:
+                            </TextBlock>
+                            <NumericUpDown
+                                FormatString="0"
+                                Minimum="0"
+                                Value="{Binding AutoCoralL2Miss}" />
+                        </StackPanel>
+                        <!--  END int  -->
+
+                        <!--  BEGIN int  -->
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Width="175" FontWeight="Bold">
+                                Auto L1 Miss:
+                            </TextBlock>
+                            <NumericUpDown
+                                FormatString="0"
+                                Minimum="0"
+                                Value="{Binding AutoCoralL1Miss}" />
+                        </StackPanel>
+                        <!--  END int  -->
+
+
+                        <!--  BEGIN int  -->
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Width="175" FontWeight="Bold">
+                                Auto Processor Score:
+                            </TextBlock>
+                            <NumericUpDown
+                                FormatString="0"
+                                Minimum="0"
+                                Value="{Binding AutoProcessorScore}" />
+                        </StackPanel>
+                        <!--  END int  -->
+
+                        <!--  BEGIN int  -->
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Width="175" FontWeight="Bold">
+                                Auto Processor Miss:
+                            </TextBlock>
+                            <NumericUpDown
+                                FormatString="0"
+                                Minimum="0"
+                                Value="{Binding AutoProcessorMiss}" />
+                        </StackPanel>
+                        <!--  END int  -->
+
+
+                        <!--  BEGIN int  -->
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Width="175" FontWeight="Bold">
+                                Auto Net Score:
+                            </TextBlock>
+                            <NumericUpDown
+                                FormatString="0"
+                                Minimum="0"
+                                Value="{Binding AutoNetScore}" />
+                        </StackPanel>
+                        <!--  END int  -->
+
+                        <!--  BEGIN int  -->
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Width="175" FontWeight="Bold">
+                                Auto Net Miss:
+                            </TextBlock>
+                            <NumericUpDown
+                                FormatString="0"
+                                Minimum="0"
+                                Value="{Binding AutoNetMiss}" />
+                        </StackPanel>
+                        <!--  END int  -->
+
+
+                        <!--  BEGIN enum  -->
+                        <TextBlock Width="175" FontWeight="Bold">
+                            Breakdown:
+                        </TextBlock>
+                        <StackPanel>
+                            <RadioButton
+                                Content="None"
+                                GroupName="TBreakdown2025"
+                                IsChecked="{Binding TeleOpBreakdown, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static vm:TBreakdown2025.None}}" />
+                            <RadioButton
+                                Content="Tipped"
+                                GroupName="TBreakdown2025"
+                                IsChecked="{Binding TeleOpBreakdown, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static vm:TBreakdown2025.Tipped}}" />
+                            <RadioButton
+                                Content="Mechanical Failure"
+                                GroupName="TBreakdown2025"
+                                IsChecked="{Binding TeleOpBreakdown, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static vm:TBreakdown2025.MechanicalFailure}}" />
+                            <RadioButton
+                                Content="Incapacitated"
+                                GroupName="TBreakdown2025"
+                                IsChecked="{Binding TeleOpBreakdown, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static vm:TBreakdown2025.Incapacitated}}" />
+                            <RadioButton
+                                Content="Coral Stuck"
+                                GroupName="TBreakdown2025"
+                                IsChecked="{Binding TeleOpBreakdown, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static vm:TBreakdown2025.CoralStuck}}" />
+                            <RadioButton
+                                Content="Stuck on Algae"
+                                GroupName="TBreakdown2025"
+                                IsChecked="{Binding TeleOpBreakdown, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static vm:TBreakdown2025.StuckOnAlgae}}" />
+                        </StackPanel>
+                        <!--  END enum  -->
+
+                    </StackPanel>
+
+
+
+
+
+                    <!--  RIGHT COLUMN  -->
+                    <StackPanel
+                        Grid.Row="0"
+                        Grid.Column="1"
+                        Orientation="Vertical">
+
+                        <!--  BEGIN bool  -->
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Width="175" FontWeight="Bold">
+                                Ground Intake:
+                            </TextBlock>
+                            <CheckBox IsChecked="{Binding GroundPickup}" />
+                        </StackPanel>
+                        <!--  END bool  -->
+
+
+                        <!--  BEGIN int  -->
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Width="175" FontWeight="Bold">
+                                TeleOp L4 Score:
+                            </TextBlock>
+                            <NumericUpDown
+                                FormatString="0"
+                                Minimum="0"
+                                Value="{Binding TeleOpCoralL4Score}" />
+                        </StackPanel>
+                        <!--  END int  -->
+
+                        <!--  BEGIN int  -->
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Width="175" FontWeight="Bold">
+                                TeleOp L3 Score:
+                            </TextBlock>
+                            <NumericUpDown
+                                FormatString="0"
+                                Minimum="0"
+                                Value="{Binding TeleOpCoralL3Score}" />
+                        </StackPanel>
+                        <!--  END int  -->
+
+                        <!--  BEGIN int  -->
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Width="175" FontWeight="Bold">
+                                TeleOp L2 Score:
+                            </TextBlock>
+                            <NumericUpDown
+                                FormatString="0"
+                                Minimum="0"
+                                Value="{Binding TeleOpCoralL2Score}" />
+                        </StackPanel>
+                        <!--  END int  -->
+
+                        <!--  BEGIN int  -->
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Width="175" FontWeight="Bold">
+                                TeleOp L1 Score:
+                            </TextBlock>
+                            <NumericUpDown
+                                FormatString="0"
+                                Minimum="0"
+                                Value="{Binding TeleOpCoralL1Score}" />
+                        </StackPanel>
+                        <!--  END int  -->
+
+
+                        <!--  BEGIN int  -->
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Width="175" FontWeight="Bold">
+                                TeleOp L4 Miss:
+                            </TextBlock>
+                            <NumericUpDown
+                                FormatString="0"
+                                Minimum="0"
+                                Value="{Binding TeleOpCoralL4Miss}" />
+                        </StackPanel>
+                        <!--  END int  -->
+
+                        <!--  BEGIN int  -->
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Width="175" FontWeight="Bold">
+                                TeleOp L3 Miss:
+                            </TextBlock>
+                            <NumericUpDown
+                                FormatString="0"
+                                Minimum="0"
+                                Value="{Binding TeleOpCoralL3Miss}" />
+                        </StackPanel>
+                        <!--  END int  -->
+
+                        <!--  BEGIN int  -->
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Width="175" FontWeight="Bold">
+                                TeleOp L2 Miss:
+                            </TextBlock>
+                            <NumericUpDown
+                                FormatString="0"
+                                Minimum="0"
+                                Value="{Binding TeleOpCoralL2Miss}" />
+                        </StackPanel>
+                        <!--  END int  -->
+
+                        <!--  BEGIN int  -->
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Width="175" FontWeight="Bold">
+                                TeleOp L1 Miss:
+                            </TextBlock>
+                            <NumericUpDown
+                                FormatString="0"
+                                Minimum="0"
+                                Value="{Binding TeleOpCoralL1Miss}" />
+                        </StackPanel>
+                        <!--  END int  -->
+
+
+                        <!--  BEGIN int  -->
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Width="175" FontWeight="Bold">
+                                TeleOp Processor Score:
+                            </TextBlock>
+                            <NumericUpDown
+                                FormatString="0"
+                                Minimum="0"
+                                Value="{Binding TeleOpProcessorScore}" />
+                        </StackPanel>
+                        <!--  END int  -->
+
+                        <!--  BEGIN int  -->
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Width="175" FontWeight="Bold">
+                                TeleOp Processor Miss:
+                            </TextBlock>
+                            <NumericUpDown
+                                FormatString="0"
+                                Minimum="0"
+                                Value="{Binding TeleOpProcessorMiss}" />
+                        </StackPanel>
+                        <!--  END int  -->
+
+
+                        <!--  BEGIN int  -->
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Width="175" FontWeight="Bold">
+                                TeleOp Net Score:
+                            </TextBlock>
+                            <NumericUpDown
+                                FormatString="0"
+                                Minimum="0"
+                                Value="{Binding TeleOpNetScore}" />
+                        </StackPanel>
+                        <!--  END int  -->
+
+                        <!--  BEGIN int  -->
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Width="175" FontWeight="Bold">
+                                TeleOp Net Miss:
+                            </TextBlock>
+                            <NumericUpDown
+                                FormatString="0"
+                                Minimum="0"
+                                Value="{Binding TeleOpNetMiss}" />
+                        </StackPanel>
+                        <!--  END int  -->
+
+
+                        <!--  BEGIN enum  -->
+                        <TextBlock Width="175" FontWeight="Bold">
+                            Climb:
+                        </TextBlock>
+                        <StackPanel>
+                            <RadioButton
+                                Content="Success"
+                                GroupName="EClimb2025"
+                                IsChecked="{Binding TeleOpBreakdown, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static vm:EClimb2025.Success}}" />
+                            <RadioButton
+                                Content="Failed"
+                                GroupName="EClimb2025"
+                                IsChecked="{Binding TeleOpBreakdown, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static vm:EClimb2025.Failed}}" />
+                            <RadioButton
+                                Content="Did Not Attempt"
+                                GroupName="EClimb2025"
+                                IsChecked="{Binding TeleOpBreakdown, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static vm:EClimb2025.DidNotAttempt}}" />
+                            <RadioButton
+                                Content="Deep Cage"
+                                GroupName="EClimb2025"
+                                IsChecked="{Binding TeleOpBreakdown, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static vm:EClimb2025.DeepCage}}" />
+                            <RadioButton
+                                Content="Shallow Cage"
+                                GroupName="EClimb2025"
+                                IsChecked="{Binding TeleOpBreakdown, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static vm:EClimb2025.ShallowCage}}" />
+                            <RadioButton
+                                Content="Parked"
+                                GroupName="EClimb2025"
+                                IsChecked="{Binding TeleOpBreakdown, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static vm:EClimb2025.Parked}}" />
+                        </StackPanel>
+                        <!--  END enum  -->
+
+                    </StackPanel>
+
+                </Grid>
+
+            </StackPanel>
+
+        </Grid>
+
+    </ScrollViewer>
+
+</UserControl>
