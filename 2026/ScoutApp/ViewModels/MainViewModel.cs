@@ -44,7 +44,7 @@ namespace ScoutApp.ViewModels
     public partial class MainViewModel : ObservableObject
     {
          [ObservableProperty]
-        private bool showText = true;
+        private bool showText = false;
 
         [RelayCommand]
         private void ToggleText()
@@ -58,237 +58,231 @@ namespace ScoutApp.ViewModels
 
         // BEGIN string
         [ObservableProperty]
-        [NotifyPropertyChangedFor(nameof(EverythingAllAtOnce))]
+        [NotifyPropertyChangedFor(nameof(Summary))]
         [NotifyPropertyChangedFor(nameof(QRCode1))]
         private string? _ScoutName;
         // END string
 
         // BEGIN bool
         [ObservableProperty]
-        [NotifyPropertyChangedFor(nameof(EverythingAllAtOnce))]
+        [NotifyPropertyChangedFor(nameof(Summary))]
         [NotifyPropertyChangedFor(nameof(QRCode1))]
-        private bool _PreplacedCoral = false;
+        private bool _AutoLeave = true;
         // END bool
 
         // BEGIN int
         [ObservableProperty]
-        [NotifyPropertyChangedFor(nameof(EverythingAllAtOnce))]
+        [NotifyPropertyChangedFor(nameof(Summary))]
         [NotifyPropertyChangedFor(nameof(QRCode1))]
         private int _TeamNumber32 = 0;
         // END int
 
         // BEGIN int
         [ObservableProperty]
-        [NotifyPropertyChangedFor(nameof(EverythingAllAtOnce))]
+        [NotifyPropertyChangedFor(nameof(Summary))]
         [NotifyPropertyChangedFor(nameof(QRCode1))]
         private int _MatchNumber = 0;
         // END int
 
         // BEGIN int
         [ObservableProperty]
-        [NotifyPropertyChangedFor(nameof(EverythingAllAtOnce))]
+        [NotifyPropertyChangedFor(nameof(Summary))]
         [NotifyPropertyChangedFor(nameof(QRCode1))]
         private int _AutoCoralL4Score = 0;
         // END int
 
         // BEGIN int
         [ObservableProperty]
-        [NotifyPropertyChangedFor(nameof(EverythingAllAtOnce))]
+        [NotifyPropertyChangedFor(nameof(Summary))]
         [NotifyPropertyChangedFor(nameof(QRCode1))]
         private int _AutoCoralL3Score = 0;
         // END int
 
         // BEGIN int
         [ObservableProperty]
-        [NotifyPropertyChangedFor(nameof(EverythingAllAtOnce))]
+        [NotifyPropertyChangedFor(nameof(Summary))]
         [NotifyPropertyChangedFor(nameof(QRCode1))]
         private int _AutoCoralL2Score = 0;
         // END int
 
         // BEGIN int
         [ObservableProperty]
-        [NotifyPropertyChangedFor(nameof(EverythingAllAtOnce))]
+        [NotifyPropertyChangedFor(nameof(Summary))]
         [NotifyPropertyChangedFor(nameof(QRCode1))]
         private int _AutoCoralL1Score = 0;
         // END int
 
         // BEGIN int
         [ObservableProperty]
-        [NotifyPropertyChangedFor(nameof(EverythingAllAtOnce))]
+        [NotifyPropertyChangedFor(nameof(Summary))]
         [NotifyPropertyChangedFor(nameof(QRCode1))]
         private int _AutoCoralL4Miss = 0;
         // END int
 
         // BEGIN int
         [ObservableProperty]
-        [NotifyPropertyChangedFor(nameof(EverythingAllAtOnce))]
+        [NotifyPropertyChangedFor(nameof(Summary))]
         [NotifyPropertyChangedFor(nameof(QRCode1))]
         private int _AutoCoralL3Miss = 0;
         // END int
 
         // BEGIN int
         [ObservableProperty]
-        [NotifyPropertyChangedFor(nameof(EverythingAllAtOnce))]
+        [NotifyPropertyChangedFor(nameof(Summary))]
         [NotifyPropertyChangedFor(nameof(QRCode1))]
         private int _AutoCoralL2Miss = 0;
         // END int
 
         // BEGIN int
         [ObservableProperty]
-        [NotifyPropertyChangedFor(nameof(EverythingAllAtOnce))]
+        [NotifyPropertyChangedFor(nameof(Summary))]
         [NotifyPropertyChangedFor(nameof(QRCode1))]
         private int _AutoCoralL1Miss = 0;
         // END int
 
-
-
-
         // BEGIN bool
         [ObservableProperty]
-        [NotifyPropertyChangedFor(nameof(EverythingAllAtOnce))]
+        [NotifyPropertyChangedFor(nameof(Summary))]
         [NotifyPropertyChangedFor(nameof(QRCode1))]
         private bool _GroundPickup = false;
         // END bool
 
         // BEGIN int
         [ObservableProperty]
-        [NotifyPropertyChangedFor(nameof(EverythingAllAtOnce))]
+        [NotifyPropertyChangedFor(nameof(Summary))]
         [NotifyPropertyChangedFor(nameof(QRCode1))]
         private int _TeleOpCoralL4Score = 0;
         // END int
 
         // BEGIN int
         [ObservableProperty]
-        [NotifyPropertyChangedFor(nameof(EverythingAllAtOnce))]
+        [NotifyPropertyChangedFor(nameof(Summary))]
         [NotifyPropertyChangedFor(nameof(QRCode1))]
         private int _TeleOpCoralL3Score = 0;
         // END int
 
         // BEGIN int
         [ObservableProperty]
-        [NotifyPropertyChangedFor(nameof(EverythingAllAtOnce))]
+        [NotifyPropertyChangedFor(nameof(Summary))]
         [NotifyPropertyChangedFor(nameof(QRCode1))]
         private int _TeleOpCoralL2Score = 0;
         // END int
 
         // BEGIN int
         [ObservableProperty]
-        [NotifyPropertyChangedFor(nameof(EverythingAllAtOnce))]
+        [NotifyPropertyChangedFor(nameof(Summary))]
         [NotifyPropertyChangedFor(nameof(QRCode1))]
         private int _TeleOpCoralL1Score = 0;
         // END int
 
         // BEGIN int
         [ObservableProperty]
-        [NotifyPropertyChangedFor(nameof(EverythingAllAtOnce))]
+        [NotifyPropertyChangedFor(nameof(Summary))]
         [NotifyPropertyChangedFor(nameof(QRCode1))]
         private int _TeleOpCoralL4Miss = 0;
         // END int
 
         // BEGIN int
         [ObservableProperty]
-        [NotifyPropertyChangedFor(nameof(EverythingAllAtOnce))]
+        [NotifyPropertyChangedFor(nameof(Summary))]
         [NotifyPropertyChangedFor(nameof(QRCode1))]
         private int _TeleOpCoralL3Miss = 0;
         // END int
 
         // BEGIN int
         [ObservableProperty]
-        [NotifyPropertyChangedFor(nameof(EverythingAllAtOnce))]
+        [NotifyPropertyChangedFor(nameof(Summary))]
         [NotifyPropertyChangedFor(nameof(QRCode1))]
         private int _TeleOpCoralL2Miss = 0;
         // END int
 
         // BEGIN int
         [ObservableProperty]
-        [NotifyPropertyChangedFor(nameof(EverythingAllAtOnce))]
+        [NotifyPropertyChangedFor(nameof(Summary))]
         [NotifyPropertyChangedFor(nameof(QRCode1))]
         private int _TeleOpCoralL1Miss = 0;
         // END int
 
         // BEGIN int
         [ObservableProperty]
-        [NotifyPropertyChangedFor(nameof(EverythingAllAtOnce))]
+        [NotifyPropertyChangedFor(nameof(Summary))]
         [NotifyPropertyChangedFor(nameof(QRCode1))]
         private int _AutoProcessorScore = 0;
         // END int
 
         // BEGIN int
         [ObservableProperty]
-        [NotifyPropertyChangedFor(nameof(EverythingAllAtOnce))]
+        [NotifyPropertyChangedFor(nameof(Summary))]
         [NotifyPropertyChangedFor(nameof(QRCode1))]
         private int _AutoProcessorMiss = 0;
         // END int
 
         // BEGIN int
         [ObservableProperty]
-        [NotifyPropertyChangedFor(nameof(EverythingAllAtOnce))]
+        [NotifyPropertyChangedFor(nameof(Summary))]
         [NotifyPropertyChangedFor(nameof(QRCode1))]
         private int _AutoNetScore = 0;
         // END int
 
         // BEGIN int
         [ObservableProperty]
-        [NotifyPropertyChangedFor(nameof(EverythingAllAtOnce))]
+        [NotifyPropertyChangedFor(nameof(Summary))]
         [NotifyPropertyChangedFor(nameof(QRCode1))]
         private int _AutoNetMiss = 0;
         // END int
 
         // BEGIN int
         [ObservableProperty]
-        [NotifyPropertyChangedFor(nameof(EverythingAllAtOnce))]
+        [NotifyPropertyChangedFor(nameof(Summary))]
         [NotifyPropertyChangedFor(nameof(QRCode1))]
         private int _TeleOpProcessorScore = 0;
         // END int
 
         // BEGIN int
         [ObservableProperty]
-        [NotifyPropertyChangedFor(nameof(EverythingAllAtOnce))]
+        [NotifyPropertyChangedFor(nameof(Summary))]
         [NotifyPropertyChangedFor(nameof(QRCode1))]
         private int _TeleOpProcessorMiss = 0;
         // END int
 
         // BEGIN int
         [ObservableProperty]
-        [NotifyPropertyChangedFor(nameof(EverythingAllAtOnce))]
+        [NotifyPropertyChangedFor(nameof(Summary))]
         [NotifyPropertyChangedFor(nameof(QRCode1))]
         private int _TeleOpNetScore = 0;
         // END int
 
         // BEGIN int
         [ObservableProperty]
-        [NotifyPropertyChangedFor(nameof(EverythingAllAtOnce))]
+        [NotifyPropertyChangedFor(nameof(Summary))]
         [NotifyPropertyChangedFor(nameof(QRCode1))]
         private int _TeleOpNetMiss = 0;
         // END int
 
-
-
-
         // BEGIN enum (part 2)
         [ObservableProperty]
-        [NotifyPropertyChangedFor(nameof(EverythingAllAtOnce))]
+        [NotifyPropertyChangedFor(nameof(Summary))]
         [NotifyPropertyChangedFor(nameof(QRCode1))]
         private AutoStartingPosition _SPosition2025;
         // END enum (part 2)
 
         // BEGIN enum (part 2)
         [ObservableProperty]
-        [NotifyPropertyChangedFor(nameof(EverythingAllAtOnce))]
+        [NotifyPropertyChangedFor(nameof(Summary))]
         [NotifyPropertyChangedFor(nameof(QRCode1))]
         private TBreakdown2025 _TeleOpBreakdown;
         // END enum (part 2)
 
         // BEGIN enum (part 2)
         [ObservableProperty]
-        [NotifyPropertyChangedFor(nameof(EverythingAllAtOnce))]
+        [NotifyPropertyChangedFor(nameof(Summary))]
         [NotifyPropertyChangedFor(nameof(QRCode1))]
         private EClimb2025 _TeleOpClimb;
         // END enum (part 2)
 
-        // EverythingAllAtOnce will change based on all the fields that
-        // have [NotifyPropertyChangedFor(nameof(EverythingAllAtOnce))].
-        public string EverythingAllAtOnce
+        // Summary will change based on all the fields that
+        // have [NotifyPropertyChangedFor(nameof(Summary))].
+        public string Summary
         {
             get
             {
@@ -298,7 +292,7 @@ ScoutName:{{ScoutName}}
 AutoStartingPosition:{{SPosition2025}}
 TeamNumber:{{TeamNumber32}}
 MatchNumber:{{MatchNumber}}
-PreplacedCoral:{{PreplacedCoral}}
+AutoLeave:{{AutoLeave}}
 AutoL4-Score:{{AutoCoralL4Score}}
 AutoL3-Score:{{AutoCoralL3Score}}
 AutoL2-Score:{{AutoCoralL2Score}}
@@ -307,7 +301,7 @@ AutoL4-Miss:{{AutoCoralL4Miss}}
 AutoL3-Miss:{{AutoCoralL3Miss}}
 AutoL2-Miss:{{AutoCoralL2Miss}}
 AutoL1-Miss:{{AutoCoralL1Miss}}
-GroundPickup"{{GroundPickup}}
+GroundPickup:{{GroundPickup}}
 TeleOpL4-Score:{{TeleOpCoralL4Score}}
 TeleOpL3-Score:{{TeleOpCoralL3Score}}
 TeleOpL2-Score:{{TeleOpCoralL2Score}}
@@ -339,38 +333,38 @@ Climb:{{TeleOpClimb}}
             {
                 string textForQRCode =
                     $$"""
-3-{{ScoutName}}
-40-{{SPosition2025}}
-53-{{TeamNumber32}}
-2-{{MatchNumber}}
-54-{{PreplacedCoral}}
-28-{{AutoCoralL4Score}}
-29-{{AutoCoralL3Score}}
-30-{{AutoCoralL2Score}}
-31-{{AutoCoralL1Score}}
-36-{{AutoCoralL4Miss}}
-37-{{AutoCoralL3Miss}}
-38-{{AutoCoralL2Miss}}
-39-{{AutoCoralL1Miss}}
-50-{{GroundPickup}}
-41-{{TeleOpCoralL4Score}}
-42-{{TeleOpCoralL3Score}}
-43-{{TeleOpCoralL2Score}}
-44-{{TeleOpCoralL1Score}}
-54-{{TeleOpCoralL4Miss}}
-55-{{TeleOpCoralL3Miss}}
-56-{{TeleOpCoralL2Miss}}
-57-{{TeleOpCoralL1Miss}}
-32-{{AutoProcessorScore}}
-33-{{AutoProcessorMiss}}
-34-{{AutoNetScore}}
-35-{{AutoNetMiss}}
-45-{{TeleOpProcessorScore}}
-46-{{TeleOpProcessorMiss}}
-47-{{TeleOpNetScore}}
-48-{{TeleOpNetMiss}}
-51-{{TeleOpBreakdown}}
-52-{{TeleOpClimb}}
+Name-{{ScoutName}}
+SPos-{{SPosition2025}}
+Team-{{TeamNumber32}}
+Match-{{MatchNumber}}
+ALeave-{{AutoLeave}}
+AL4-{{AutoCoralL4Score}}
+AL3-{{AutoCoralL3Score}}
+AL2-{{AutoCoralL2Score}}
+AL1-{{AutoCoralL1Score}}
+AM4-{{AutoCoralL4Miss}}
+AM3-{{AutoCoralL3Miss}}
+AM2-{{AutoCoralL2Miss}}
+AM1-{{AutoCoralL1Miss}}
+GPickup-{{GroundPickup}}
+TL4-{{TeleOpCoralL4Score}}
+TL3-{{TeleOpCoralL3Score}}
+TL2-{{TeleOpCoralL2Score}}
+TL1-{{TeleOpCoralL1Score}}
+TM4-{{TeleOpCoralL4Miss}}
+TM3-{{TeleOpCoralL3Miss}}
+TM2-{{TeleOpCoralL2Miss}}
+TM1-{{TeleOpCoralL1Miss}}
+APS-{{AutoProcessorScore}}
+APM-{{AutoProcessorMiss}}
+ANS-{{AutoNetScore}}
+ANM-{{AutoNetMiss}}
+TPS-{{TeleOpProcessorScore}}
+TPM-{{TeleOpProcessorMiss}}
+TNS-{{TeleOpNetScore}}
+TNM-{{TeleOpNetMiss}}
+TBK-{{TeleOpBreakdown}}
+CLB-{{TeleOpClimb}}
 """;
                 using (QRCodeGenerator qrGenerator = new QRCodeGenerator())
                 using (QRCodeData qrCodeData = qrGenerator.CreateQrCode(textForQRCode, QRCodeGenerator.ECCLevel.Q))
