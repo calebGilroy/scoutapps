@@ -4,12 +4,12 @@ type opts = {
   next : bool;
   fetch_siblings : bool;
   build_type : [ `Debug | `Release ];
-      (** On Windows the [`Debug] build type is not redistributable
-          (can't be moved to other machines).
-          It will only work if ["ucrtbased.dll"] and other debug DLLs
-          can be located, and that usually only if Visual Studio is installed
-          on the user's PC. We can't copy the "d" DLLs either because
-          Microsoft restricts redistribution of the debug DLLS. *)
+      (** On Windows the [`Debug] build type is not redistributable (can't be
+          moved to other machines). It will only work if ["ucrtbased.dll"] and
+          other debug DLLs can be located, and that usually only if Visual
+          Studio is installed on the user's PC. We can't copy the "d" DLLs
+          either because Microsoft restricts redistribution of the debug DLLS.
+      *)
   skip_fetch : bool;
 }
 
@@ -27,13 +27,18 @@ let default_opts : opts =
 
 let build_type { build_type; _ } = build_type
 
+let not_skip_fetch' opts =
+  match opts with Some { skip_fetch; _ } -> not skip_fetch | _ -> true
+
+let not_skip_fetch { skip_fetch; _ } = not skip_fetch
+
 (** {1 File Paths} *)
 
 let mixed_path p =
   Stringext.replace_all ~pattern:"\\" ~with_:"/" (Fpath.to_string p)
 
-(** [sibling_dir_mixed] is the directory of the project [project]
-    that is directly next (a "sibling") to the current directory [cwd].
+(** [sibling_dir_mixed] is the directory of the project [project] that is
+    directly next (a "sibling") to the current directory [cwd].
 
     The return value is a mixed path directory, where all backslashes are
     replaced with forward slashes. On Unix the path does not change. But on
@@ -80,7 +85,7 @@ let start_step, done_steps =
   in
   (start, done_)
 
-(** {1 Error Handling}  *)
+(** {1 Error Handling} *)
 
 exception StopProvisioning
 
@@ -88,12 +93,11 @@ let rmsg = function Ok v -> v | Error (`Msg msg) -> failwith msg
 
 (** {1 Running with slots} *)
 
-(** [slot_env ?env ~slots ()] prepends the [paths] in [slots]
-    to the PATH of the returned environment, with [env] being the
-    initial environment.
-    
-    If there is no initial environment then the current environment
-    is used instead. *)
+(** [slot_env ?env ~slots ()] prepends the [paths] in [slots] to the PATH of the
+    returned environment, with [env] being the initial environment.
+
+    If there is no initial environment then the current environment is used
+    instead. *)
 let slot_env ?env ~slots () =
   let open Bos in
   (* Prepend [paths] to PATH *)
@@ -304,12 +308,13 @@ let dk ?env ~slots args =
   let script = if Sys.win32 then Cmd.v ".\\dk.cmd" else Cmd.v "./dk" in
   OS.Cmd.run ~env Cmd.(script %% of_list args) |> rmsg
 
-let dk_ninja_link_or_copy ~dk =
-  match DkCoder_Std.Context.(abi (get_exn ())) with
-  | `Windows_x86_64 | `Windows_x86 ->
-      (* Avoid error 'failed to create symbolic link' for dksdk.ninja.link on Win32 *)
-      dk [ "dksdk.ninja.copy"; "QUIET" ]
-  | _ -> dk [ "dksdk.ninja.link"; "QUIET" ]
+let dk_ninja_link_or_copy ?opts ~dk () =
+  if not_skip_fetch' opts then
+    match DkCoder_Std.Context.(abi (get_exn ())) with
+    | `Windows_x86_64 | `Windows_x86 ->
+        (* Avoid error 'failed to create symbolic link' for dksdk.ninja.link on Win32 *)
+        dk [ "dksdk.ninja.copy"; "QUIET" ]
+    | _ -> dk [ "dksdk.ninja.link"; "QUIET" ]
 
 let dk_env ?(opts = default_opts) () =
   let env = Bos.OS.Env.current () |> rmsg in

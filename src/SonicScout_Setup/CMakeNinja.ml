@@ -15,11 +15,11 @@ let run ?opts ~slots () =
   let cwd = OS.Dir.current () |> Utils.rmsg in
 
   (* CMake *)
-  dk [ "dksdk.cmake.link"; "QUIET" ];
+  if Utils.not_skip_fetch' opts then dk [ "dksdk.cmake.link"; "QUIET" ];
   let slots = Slots.set_cmake_home slots Fpath.(cwd / ".ci" / "cmake") in
 
   (* Ninja *)
-  Utils.dk_ninja_link_or_copy ~dk;
+  if Utils.not_skip_fetch' opts then Utils.dk_ninja_link_or_copy ?opts ~dk ();
   let slots = Slots.set_ninja_dir slots Fpath.(cwd / ".ci" / "ninja" / "bin") in
 
   slots

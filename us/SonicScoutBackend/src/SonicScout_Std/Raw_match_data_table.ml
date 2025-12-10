@@ -30,6 +30,39 @@ module type Table_type = sig
   include Fetchable_Data
 end
 
+type field_type =
+  | Integer
+  | Bool
+  | String
+  [@@warning "-unused-type-declaration"]
+
+type field = {
+  field_name: string;
+  field_type: field_type;
+  field_is_primary : bool;
+}
+let fi field_name = { field_name; field_is_primary=false; field_type = Integer }
+let fb field_name = { field_name; field_is_primary=false; field_type = Bool }
+let fs field_name = { field_name; field_is_primary=false; field_type = String }
+let as_primary field = { field with field_is_primary=true }
+
+let fields = [
+  as_primary (fi "Name");
+  fs "SPos";
+  fi "Team";
+  fs "ALeave";
+  fi "AL4";
+]
+
+let getfield name =
+  List.find_opt
+    (fun { field_name; _} -> String.equal field_name name)
+    fields
+
+let primaryfields = List.filter_map
+  (fun {field_is_primary; field_name; field_type=_} ->
+    if field_is_primary then Some field_name else None) fields
+
 (*Code which can be edited for each specific season*)
 module Table : Table_type = struct
   let table_name = "raw_match_data"
@@ -202,8 +235,27 @@ module Table : Table_type = struct
   let primary_keys = [ Team_number; Match_Number; Scouter_Name ]
 
   let create_table db =
-    Db_utils.create_table db ~table_name ~colums:colums_in_order ~primary_keys
-      ~to_name:colum_name ~to_datatype:colum_datatype
+    let columns = Buffer.create 1024 in
+    List.iteri
+      (fun idx { field_name; field_type=_; field_is_primary=_ } ->
+            if (idx > 0) then (
+              Buffer.add_string columns " ,";
+            );
+            Printf.bprintf columns "%s" field_name)
+      fields;
+    let createtable = Printf.sprintf "CREATE TABLE IF NOT EXISTS %s (%s, PRIMARY KEY (%s))"
+      table_name
+      (Buffer.contents columns)
+      (String.concat "," primaryfields)
+    in
+    match Sqlite3.exec db createtable with
+    | Sqlite3.Rc.OK ->
+        print_endline "create table successful";
+        Db_utils.Successful
+    | r ->
+        Db_utils.formatted_error_message db r
+          "failed to exec raw_match_data create sql";
+        Db_utils.Failed
 
   let drop_table _db = Db_utils.Failed
 
@@ -223,7 +275,102 @@ module Table : Table_type = struct
 
     match result with _ :: [] -> true | _ -> false
 
-  let insert_record db capnp_string =
+  (** The QR code format is carriage-return, line-feed separated
+      name value parameters.
+
+      An example code is the following, broken onto many lines
+      for readability:
+
+      {v
+        Name-\r\nSPos-Left\r\nTeam-0\r\n
+        Match-0\r\nALeave-True\r\nAL4-0\r\n
+        AL3-0\r\nAL2-0\r\nAL1-0\r\nAM4-0\r\n
+        AM3-0\r\nAM2-0\r\nAM1-0\r\n
+        GPickup-False\r\nTL4-0\r\nTL3-0\r\n
+        TL2-0\r\nTL1-0\r\nTM4-0\r\nTM3-0\r\n
+        TM2-0\r\nTM1-0\r\nAPS-0\r\nAPM-0\r\n
+        ANS-0\r\nANM-0\r\nTPS-0\r\nTPM-0\r\n
+        TNS-0\r\nTNM-0\r\nTBK-None\r\nCLB-Success
+      v}
+
+      For example, the name ["GPickup"] has the value ["False"].
+    *)
+  let insert_record db qr_string =
+    (* NAME1-VALUE1\r\nNAME2-VALUE2\r\n...
+       ==>
+       NAME1-VALUE1\r
+       NAME2-VALUE2\r
+       ... *)
+    let namevalues = String.split_on_char '\n' qr_string in
+    (* NAME1-VALUE1\r
+       NAME2-VALUE2\r
+       ==>
+       NAME1-VALUE1
+       NAME2-VALUE2
+       ... *)
+    let namevalues = List.map String.trim namevalues in
+    (* NAME1-VALUE1
+       NAME2-VALUE2
+       ==>
+       (NAME1,VALUE1)
+       (NAME2,VALUE2)
+       ... *)
+    let namevalues = List.filter_map (fun s ->
+      let splitted = String.split_on_char '-' s in
+      match splitted with
+      | [name; value] ->
+        (* Printf.eprintf "(name, value) = (%s, %s)\n%!" name value; *)
+        Some (name, value)
+      | _ -> None
+      ) namevalues in
+
+    (* This uses string manipulation to make a SQL command ...
+       it follows what the original authors did in 2023.
+       If you were making an application for a customer, this would
+       be a security vulnerability because a malicious person
+       could make a QR code that ran arbitrary commands on your
+       computer. Not good! It is an attack called
+       "SQL injection attack". *)
+    let column_names = Buffer.create 1024 in
+    let field_values = Buffer.create 1024 in
+    List.iteri
+      (fun idx (name, value) ->
+        match getfield name with
+        | None ->
+            Printf.eprintf "WARNING! The QR code contained `%s` but the QR scanning code in %s.ml did not add a field for it.\n" name __MODULE__
+        | Some { field_name; field_type=_; field_is_primary=_ } ->
+            if (idx > 0) then (
+              Buffer.add_string column_names " ,";
+              Buffer.add_string field_values " ,";
+            );
+            Buffer.add_string column_names field_name;
+            Buffer.add_string field_values ("\"" ^ value ^ "\""))
+      namevalues;
+
+    let sql = Printf.sprintf "INSERT INTO %s(%s) VALUES(%s)"
+          table_name
+          (Buffer.contents column_names)
+          (Buffer.contents field_values)
+    in
+    Logs.info (fun l -> l "raw_match_table sql: %s" sql);
+
+    match Sqlite3.exec db sql with
+    | Sqlite3.Rc.OK ->
+        print_endline "exec successful";
+        Db_utils.Successful
+    | r ->
+        Db_utils.formatted_error_message db r
+          "failed to exec raw_match_data insert sql";
+        Db_utils.Failed
+
+
+  (** This is for inserting a record using the Capnp cross-platform
+      format which was used for communicating in binary inside
+      Android between Java (most Android code is Java) and C/OCaml
+      (the QR scanner is mostly C).
+
+      We used this from 2023-2025 but not anymore. *)
+  let insert_record_capnp db capnp_string =
     let module ProjectSchema = Schema.Make (DkSDKFFI_OCaml0.ComMessageC) in
     let match_data =
       (* Get a stream of the bytes to deserialize *)
@@ -237,7 +384,7 @@ module Table : Table_type = struct
       match DkSDKFFI_OCaml0.ComCodecs.FramedStreamC.get_next_frame stream
       with
       | Result.Ok message -> ProjectSchema.Reader.RawMatchData.of_message message
-      | Result.Error _ -> failwith "could not decode capnp data"
+      | Result.Error _ -> failwith (Printf.sprintf "could not decode capnp data. instead got: %s" capnp_string)
     in
 
     (*All these following functions give function on how the Enum data created in schema.capnp will be read and written*)
@@ -263,7 +410,7 @@ module Table : Table_type = struct
       | DeepCage -> "Deep_Cage"
       | Failed -> "FAILED"
       | DidNotAttempt -> "DID_NOT_ATTEMPT"
-      | ShallowCage -> "Shallow_Cage" 
+      | ShallowCage -> "Shallow_Cage"
       | Parked -> "PARKED"
       | Undefined _ -> "UNDEFINED"
       | Success -> "SUCCESS"
@@ -369,6 +516,7 @@ module Table : Table_type = struct
           Db_utils.formatted_error_message db r
             "failed to exec raw_match_data insert sql";
           Db_utils.Failed
+      [@@warning "-unused-value-declaration"]
 
   module Fetch = struct
     let latest_match_number db =

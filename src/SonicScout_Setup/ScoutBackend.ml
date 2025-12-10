@@ -129,7 +129,7 @@ let package ~notarize () =
         @@ DkNet_Std.Http.download_url ~max_time_ms:300_000
              ~checksum:
                (`SHA_256
-                 "9086fa9c83e5a3da2599220d4e426d1dfeefac417f2abf19862a91620c38faee")
+                  "9086fa9c83e5a3da2599220d4e426d1dfeefac417f2abf19862a91620c38faee")
              ~destination:cmake_zip
              (Uri.of_string
                 "https://github.com/Kitware/CMake/releases/download/v3.30.0-rc4/cmake-3.30.0-rc4-windows-x86_64.zip");
@@ -213,8 +213,10 @@ let run ?(opts = Utils.default_opts) ?global_dkml ~slots () =
   in
   OS.Dir.with_current projectdir
     (fun () ->
-      dk ~slots [ "dksdk.cmake.link"; "QUIET" ];
-      Utils.dk_ninja_link_or_copy ~dk:(dk ~slots);
+      if Utils.not_skip_fetch opts then
+        dk ~slots [ "dksdk.cmake.link"; "QUIET" ];
+      if Utils.not_skip_fetch opts then
+        Utils.dk_ninja_link_or_copy ~opts ~dk:(dk ~slots) ();
       let user_presets = Fpath.v "CMakeUserPresets.json" in
       if not (OS.File.exists user_presets |> rmsg) then
         OS.File.write user_presets

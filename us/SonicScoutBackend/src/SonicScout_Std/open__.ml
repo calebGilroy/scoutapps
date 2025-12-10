@@ -6,6 +6,7 @@ module Qrc = Tr1Qrc_Std.Qrc
 module Bytes = Tr1Stdlib_V414Base.Bytes
 module Queue = Tr1Stdlib_V414Base.Queue
 module String = Tr1Stdlib_V414Base.String
+module Buffer = Tr1Stdlib_V414Base.Buffer
 module List = Tr1Stdlib_V414Base.List
 module Int64 = Tr1Stdlib_V414Base.Int64
 module Printf = Tr1Stdlib_V414CRuntime.Printf
