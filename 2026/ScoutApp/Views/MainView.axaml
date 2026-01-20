@@ -8,11 +8,7 @@
     xmlns:vm="using:ScoutApp.ViewModels"
     d:DesignHeight="600"
     d:DesignWidth="800"
-    x:DataType="vm:MainViewModel"
-    mc:Ignorable="d">
-    <!--  We are using Compiled bindings. This is not mandatory but makes life easier. Read more about it here:  -->
-    <!--  https://docs.avaloniaui.net/docs/basics/data/data-binding/compiled-bindings  -->
-
+    x:DataType="vm:MainViewModel">
     <!--  Use Alt-Shift-F to format. Do this continually!  -->
 
     <Design.DataContext>
@@ -21,22 +17,21 @@
 
     <UserControl.Resources>
         <cvt:EnumToBooleanConverter x:Key="EnumToBooleanConverter" />
-        <Color x:Key="black_color">#000000</Color>
-        <Color x:Key="black2_color">#000100</Color>
-        <Color x:Key="white_color">#FFFFFF</Color>
 
-        <Color x:Key="text_color">#f0f9fe</Color>
-        <Color x:Key="background_color">#021c2c</Color>
-        <Color x:Key="accent_color">#f36716</Color>
+        <Color x:Key="black_color">#000000</Color>
+        <Color x:Key="text_color">#FFFFFF</Color>
+        <Color x:Key="background_color">#4D4D4D</Color>
+        <Color x:Key="accent_color">#F36716</Color>
         <Color x:Key="lightgrey_color">#C2C4C3</Color>
         <Color x:Key="offwhite_color">#D1CAC3</Color>
-        <Color x:Key="darkgrey_color">#676767</Color>
+        <Color x:Key="darkgrey_color">#636363</Color>
         <Color x:Key="orange_color">#FF5722</Color>
         <Color x:Key="thirdbutton_color">#DED6CE</Color>
-        <Color x:Key="secondary_color">#03263a</Color>
+        <Color x:Key="secondary_color">#0089D6</Color>
         <Color x:Key="error_color">#F2110C</Color>
         <Color x:Key="green_color">#1FA659</Color>
 
+        <SolidColorBrush x:Key="black" Color="{StaticResource black_color}" />
         <SolidColorBrush x:Key="text" Color="{StaticResource text_color}" />
         <SolidColorBrush x:Key="background" Color="{StaticResource background_color}" />
         <SolidColorBrush x:Key="accent" Color="{StaticResource accent_color}" />
@@ -50,7 +45,52 @@
         <SolidColorBrush x:Key="green" Color="{StaticResource green_color}" />
     </UserControl.Resources>
 
+    <UserControl.Styles>
+        <Style Selector="ToggleButton">
+            <Setter Property="Background" Value="{StaticResource darkgrey}" />
+            <Setter Property="Foreground" Value="{StaticResource accent}" />
+            <Setter Property="Template">
+                <ControlTemplate>
+                    <Border
+                        Padding="6"
+                        Background="{TemplateBinding Background}"
+                        CornerRadius="4">
+                        <ContentPresenter
+                            HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                            VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                            Content="{TemplateBinding Content}" />
+                    </Border>
+                </ControlTemplate>
+            </Setter>
+        </Style>
+        <Style Selector="ToggleButton:checked">
+            <Setter Property="Background" Value="{StaticResource secondary}" />
+            <Setter Property="Foreground" Value="{StaticResource text}" />
+        </Style>
+        <Style Selector="ToggleButton:pointerover">
+            <Setter Property="Background" Value="{StaticResource darkgrey}" />
+            <Setter Property="Foreground" Value="{StaticResource accent}" />
+        </Style>
+        <Style Selector="ToggleButton:focused">
+            <Setter Property="Background" Value="{StaticResource darkgrey}" />
+            <Setter Property="Foreground" Value="{StaticResource accent}" />
+        </Style>
+        <Style Selector="ToggleButton:pressed">
+            <Setter Property="Background" Value="{StaticResource darkgrey}" />
+            <Setter Property="Foreground" Value="{StaticResource accent}" />
+        </Style>
+        <Style Selector="ToggleButton:checked:pointerover">
+            <Setter Property="Background" Value="{StaticResource secondary}" />
+            <Setter Property="Foreground" Value="{StaticResource text}" />
+        </Style>
+        <Style Selector="ToggleButton:checked:focused">
+            <Setter Property="Background" Value="{StaticResource secondary}" />
+            <Setter Property="Foreground" Value="{StaticResource text}" />
+        </Style>
+    </UserControl.Styles>
+
     <ScrollViewer VerticalScrollBarVisibility="Visible">
+
         <Grid
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
@@ -58,131 +98,111 @@
             ColumnDefinitions="Auto,Auto,Auto,Auto,Auto"
             RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto">
 
-            <Button
+            <ToggleButton
                 Grid.Row="0"
                 Grid.Column="0"
                 Margin="10,10,10,0"
-                Background="{StaticResource lightgrey}"
                 Command="{Binding HeadingButtonCommand}"
                 CommandParameter="PreMatch"
                 Content="PRE-MATCH"
                 FontWeight="Bold"
-                Foreground="{StaticResource accent}" />
-            <Button
+                IsChecked="{Binding SelectedHeadingButton, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static vm:HeadingButtons.PreMatch}}" />
+            <ToggleButton
                 Grid.Row="0"
                 Grid.Column="1"
                 Margin="10,10,10,0"
-                Background="{StaticResource lightgrey}"
                 Command="{Binding HeadingButtonCommand}"
                 CommandParameter="Auto"
                 Content="AUTO"
                 FontWeight="Bold"
-                Foreground="{StaticResource accent}" />
-            <Button
+                IsChecked="{Binding SelectedHeadingButton, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static vm:HeadingButtons.Auto}}" />
+            <ToggleButton
                 Grid.Row="0"
                 Grid.Column="2"
                 Margin="10,10,10,0"
-                Background="{StaticResource lightgrey}"
                 Command="{Binding HeadingButtonCommand}"
                 CommandParameter="TeleOp"
                 Content="TELEOP"
                 FontWeight="Bold"
-                Foreground="{StaticResource accent}" />
-            <Button
+                IsChecked="{Binding SelectedHeadingButton, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static vm:HeadingButtons.TeleOp}}" />
+            <ToggleButton
                 Grid.Row="0"
                 Grid.Column="3"
                 Margin="10,10,10,0"
-                Background="{StaticResource lightgrey}"
                 Command="{Binding HeadingButtonCommand}"
                 CommandParameter="Endgame"
                 Content="ENDGAME"
                 FontWeight="Bold"
-                Foreground="{StaticResource accent}" />
-            <Button
+                IsChecked="{Binding SelectedHeadingButton, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static vm:HeadingButtons.Endgame}}" />
+            <ToggleButton
                 Grid.Row="0"
                 Grid.Column="4"
                 Margin="10,10,10,0"
-                Background="{StaticResource lightgrey}"
                 Command="{Binding HeadingButtonCommand}"
                 CommandParameter="PostMatch"
                 Content="POST-MATCH"
                 FontWeight="Bold"
-                Foreground="{StaticResource accent}" />
+                IsChecked="{Binding SelectedHeadingButton, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static vm:HeadingButtons.PostMatch}}" />
 
             <!--  Pre-Match  -->
             <StackPanel
                 Grid.Row="1"
-                Grid.ColumnSpan="4"
-                HorizontalAlignment="Right"
+                Grid.ColumnSpan="5"
+                Margin="0,20,0,0"
+                HorizontalAlignment="Center"
                 IsVisible="{Binding SelectedHeadingButton, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static vm:HeadingButtons.PreMatch}}"
-                Orientation="Horizontal">
+                Orientation="Vertical">
 
-                <StackPanel Orientation="Vertical">
+                <TextBlock HorizontalAlignment="Center" FontWeight="Bold">
+                    Scout Name:
+                </TextBlock>
+                <TextBox
+                    Margin="0,10,0,40"
+                    HorizontalAlignment="Center"
+                    Text="{Binding ScoutName}" />
 
-                    <TextBlock
-                        Height="32"
-                        Margin="10,10"
-                        FontWeight="Bold">
-                        Scout Name:
-                    </TextBlock>
+                <TextBlock HorizontalAlignment="Center" FontWeight="Bold">
+                    Match Number:
+                </TextBlock>
+                <NumericUpDown
+                    Margin="0,10,0,40"
+                    HorizontalAlignment="Center"
+                    FormatString="0"
+                    Minimum="0"
+                    Value="{Binding MatchNumber}" />
 
-                    <TextBlock
-                        Height="32"
-                        Margin="10,10"
-                        FontWeight="Bold">
-                        Match Number:
-                    </TextBlock>
+                <TextBlock HorizontalAlignment="Center" FontWeight="Bold">
+                    Team Number:
+                </TextBlock>
+                <NumericUpDown
+                    Margin="0,10,0,40"
+                    HorizontalAlignment="Center"
+                    FormatString="0"
+                    Minimum="0"
+                    Value="{Binding TeamNumber32}" />
 
-                    <TextBlock
-                        Height="32"
-                        Margin="10,10"
-                        FontWeight="Bold">
-                        Team Number:
-                    </TextBlock>
-
-                    <TextBlock
-                        Height="32"
-                        Margin="10,10"
-                        FontWeight="Bold">
-                        Starting Position:
-                    </TextBlock>
-
-                </StackPanel>
-
-                <StackPanel Orientation="Vertical">
-
-                    <TextBox Margin="10,10" Text="{Binding ScoutName}" />
-
-                    <NumericUpDown
-                        Margin="10,10"
-                        FormatString="0"
-                        Minimum="0"
-                        Value="{Binding MatchNumber}" />
-
-                    <NumericUpDown
-                        Margin="10,10"
-                        FormatString="0"
-                        Minimum="0"
-                        Value="{Binding TeamNumber32}" />
-
-                    <StackPanel
-                        Margin="10,10"
-                        HorizontalAlignment="Stretch"
-                        Orientation="Horizontal">
-                        <RadioButton
-                            Content="Left"
-                            GroupName="AutoStartingPosition"
-                            IsChecked="{Binding SPosition2025, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static vm:AutoStartingPosition.Left}}" />
-                        <RadioButton
-                            Content="Middle"
-                            GroupName="AutoStartingPosition"
-                            IsChecked="{Binding SPosition2025, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static vm:AutoStartingPosition.Middle}}" />
-                        <RadioButton
-                            Content="Right"
-                            GroupName="AutoStartingPosition"
-                            IsChecked="{Binding SPosition2025, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static vm:AutoStartingPosition.Right}}" />
-                    </StackPanel>
-
+                <TextBlock HorizontalAlignment="Center" FontWeight="Bold">
+                    Starting Position:
+                </TextBlock>
+                <StackPanel
+                    Margin="0,10,0,40"
+                    HorizontalAlignment="Center"
+                    Orientation="Horizontal">
+                    <RadioButton
+                        Width="80"
+                        Content="Left"
+                        GroupName="AutoStartingPosition"
+                        IsChecked="{Binding SPosition2025, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static vm:AutoStartingPosition.Left}}" />
+                    <RadioButton
+                        Width="80"
+                        Content="Middle"
+                        GroupName="AutoStartingPosition"
+                        IsChecked="{Binding SPosition2025, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static vm:AutoStartingPosition.Middle}}" />
+                    <RadioButton
+                        Width="80"
+                        Content="Right"
+                        GroupName="AutoStartingPosition"
+                        IsChecked="{Binding SPosition2025, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static vm:AutoStartingPosition.Right}}" />
                 </StackPanel>
 
             </StackPanel>
@@ -190,27 +210,35 @@
             <!--  Post-Match  -->
             <StackPanel
                 Grid.Row="2"
-                Grid.ColumnSpan="4"
-                HorizontalAlignment="Right"
+                Grid.ColumnSpan="5"
+                Margin="0,20,0,40"
+                HorizontalAlignment="Center"
                 IsVisible="{Binding SelectedHeadingButton, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static vm:HeadingButtons.PostMatch}}"
                 Orientation="Vertical">
                 <Button
                     HorizontalAlignment="Center"
                     HorizontalContentAlignment="Center"
+                    Background="{StaticResource darkgrey}"
                     Command="{Binding ToggleTextCommand}"
                     Content="Summary"
                     FontWeight="Bold"
-                    Foreground="{StaticResource}" />
-                <TextBlock IsVisible="{Binding ShowText}" Text="{Binding Summary, Mode=OneWay}" />
-                <Image MaxWidth="300" Source="{Binding QRCode1}" />
+                    Foreground="{StaticResource accent}" />
+                <TextBlock
+                    Margin="0,10,0,0"
+                    IsVisible="{Binding ShowText}"
+                    Text="{Binding Summary, Mode=OneWay}" />
+                <Image
+                Margin="0,40,0,0"
+                    MaxWidth="300"
+                    Source="{Binding QRCode1}" />
             </StackPanel>
 
             <!--  Endgame  -->
             <StackPanel
                 Grid.Row="3"
                 Grid.Column="0"
-                Grid.ColumnSpan="4"
-                HorizontalAlignment="Right"
+                Grid.ColumnSpan="5"
+                HorizontalAlignment="Center"
                 IsVisible="{Binding SelectedHeadingButton, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static vm:HeadingButtons.Endgame}}"
                 Orientation="Horizontal">
 
@@ -283,8 +311,8 @@
             <!--  Auto  -->
             <StackPanel
                 Grid.Row="4"
-                Grid.ColumnSpan="4"
-                HorizontalAlignment="Right"
+                Grid.ColumnSpan="5"
+                HorizontalAlignment="Center"
                 IsVisible="{Binding SelectedHeadingButton, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static vm:HeadingButtons.Auto}}"
                 Orientation="Horizontal">
 
@@ -406,8 +434,8 @@
             <!--  TeleOp  -->
             <StackPanel
                 Grid.Row="5"
-                Grid.ColumnSpan="4"
-                HorizontalAlignment="Right"
+                Grid.ColumnSpan="5"
+                HorizontalAlignment="Center"
                 IsVisible="{Binding SelectedHeadingButton, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static vm:HeadingButtons.TeleOp}}"
                 Orientation="Horizontal">
 
