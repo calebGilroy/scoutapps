@@ -8,7 +8,7 @@ using ScoutApp.ViewModels;
 
 public static class JsonToCSConverter
     {
-        private const string DefaultScheduleAssetPath = "avares://ScoutApp/Assets/2023wasno.json";
+        private const string DefaultScheduleAssetPath = "avares://ScoutApp/Assets/2025wasno.json";
 
         private static Dictionary<int, int[]> TeamsByMatch = [];
 
@@ -20,25 +20,28 @@ public static class JsonToCSConverter
 
         private sealed class ScheduleRecord
         {
+            [JsonPropertyName("comp_level")]
+            public string? CompLevel { get; set; }
+
             [JsonPropertyName("match_number")]
             public int MatchNumber { get; set; }
 
-            [JsonPropertyName("red_1")]
+            [JsonPropertyName("red1")]
             public int Red1 { get; set; }
 
-            [JsonPropertyName("red_2")]
-            public int Red2 { get; set; }
-
-            [JsonPropertyName("red_3")]
-            public int Red3 { get; set; }
-
-            [JsonPropertyName("blue_1")]
+            [JsonPropertyName("blue1")]
             public int Blue1 { get; set; }
 
-            [JsonPropertyName("blue_2")]
+            [JsonPropertyName("red2")]
+            public int Red2 { get; set; }
+
+            [JsonPropertyName("blue2")]
             public int Blue2 { get; set; }
 
-            [JsonPropertyName("blue_3")]
+            [JsonPropertyName("red3")]
+            public int Red3 { get; set; }
+
+            [JsonPropertyName("blue3")]
             public int Blue3 { get; set; }
         }
 
@@ -51,6 +54,8 @@ public static class JsonToCSConverter
             var next = new Dictionary<int, int[]>(capacity: parsed.Records.Count);
             foreach (ScheduleRecord record in parsed.Records)
             {
+                if (record.CompLevel != "qm")
+                    continue;
                 next[record.MatchNumber] = [record.Red1, record.Red2, record.Red3, record.Blue1, record.Blue2, record.Blue3];
             }
 
