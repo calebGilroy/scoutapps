@@ -4,6 +4,7 @@ using Avalonia.Media.Imaging;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using QRCoder;
+using Avalonia.Platform;
 
 namespace ScoutApp.ViewModels
 {
@@ -366,8 +367,10 @@ CLB-{{Climb}}
 
                 if (SelectedAlliancePosition == null || SPosition2026 == null || Climb == null)
                 {
-                    byte[] fallback = Convert.FromBase64String("iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR4nGNgYAAAAAMAAWgmWQ0AAAAASUVORK5CYII=");
-                    return new Bitmap(new MemoryStream(fallback));
+
+                    var uri = new Uri("avares://ScoutApp/Assets/cartman.png");
+                    using var stream = AssetLoader.Open(uri);
+                    return new Bitmap(stream);
                 }
 
                 using QRCodeGenerator qrGenerator = new();

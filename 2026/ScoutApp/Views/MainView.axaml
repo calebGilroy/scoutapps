@@ -211,9 +211,11 @@
                     IsVisible="{Binding ShowSummary}"
                     Text="{Binding Summary, Mode=OneWay}" />
                 <Image
-                    MaxWidth="300"
+                    Width="300"
+                    Height="300"
                     Margin="0,20,0,0"
-                    Source="{Binding QRCode1}" />
+                    Source="{Binding QRCode1}"
+                    Stretch="Fill" />
             </StackPanel>
 
             <!--  Auto  -->
