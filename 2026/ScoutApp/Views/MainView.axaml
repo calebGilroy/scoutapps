@@ -96,7 +96,7 @@
             VerticalAlignment="Top"
             Background="{StaticResource background}"
             ColumnDefinitions="Auto,Auto,Auto,Auto"
-            RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto">
+            RowDefinitions="Auto,Auto,Auto,Auto,Auto">
 
             <ToggleButton
                 Grid.Row="0"
@@ -235,7 +235,7 @@
                 HorizontalAlignment="Center"
                 ColumnDefinitions="Auto,Auto"
                 IsVisible="{Binding SelectedHeadingButton, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static vm:HeadingButtons.Auto}}"
-                RowDefinitions="Auto,Auto,Auto">
+                RowDefinitions="Auto,Auto,Auto,Auto,Auto">
 
                 <TextBlock
                     Grid.Row="0"
@@ -285,42 +285,14 @@
                             Height="32"
                             Margin="0,32,0,0"
                             FontWeight="Bold">
-                            L4
+                            FUEL into HUB
                         </TextBlock>
 
                         <TextBlock
                             Height="32"
                             Margin="0,32,0,0"
                             FontWeight="Bold">
-                            L3
-                        </TextBlock>
-
-                        <TextBlock
-                            Height="32"
-                            Margin="0,32,0,0"
-                            FontWeight="Bold">
-                            L2
-                        </TextBlock>
-
-                        <TextBlock
-                            Height="32"
-                            Margin="0,32,0,0"
-                            FontWeight="Bold">
-                            L1
-                        </TextBlock>
-
-                        <TextBlock
-                            Height="32"
-                            Margin="0,32,0,0"
-                            FontWeight="Bold">
-                            Processor
-                        </TextBlock>
-
-                        <TextBlock
-                            Height="32"
-                            Margin="0,32,0,0"
-                            FontWeight="Bold">
-                            Net
+                            Auto Tower Climb
                         </TextBlock>
 
                     </StackPanel>
@@ -328,90 +300,100 @@
                     <StackPanel Margin="0,0,25,0" Orientation="Vertical">
 
                         <TextBlock Height="16" FontWeight="Bold">
-                            SCORE
+                            SCORED
                         </TextBlock>
 
                         <NumericUpDown
                             Margin="0,16"
                             FormatString="0"
                             Minimum="0"
-                            Value="{Binding AutoCoralL4Score}" />
+                            Value="{Binding AutoFuelScored}" />
 
-                        <NumericUpDown
+                        <ComboBox
+                            Width="150"
                             Margin="0,16"
-                            FormatString="0"
-                            Minimum="0"
-                            Value="{Binding AutoCoralL3Score}" />
-
-                        <NumericUpDown
-                            Margin="0,16"
-                            FormatString="0"
-                            Minimum="0"
-                            Value="{Binding AutoCoralL2Score}" />
-
-                        <NumericUpDown
-                            Margin="0,16"
-                            FormatString="0"
-                            Minimum="0"
-                            Value="{Binding AutoCoralL1Score}" />
-
-                        <NumericUpDown
-                            Margin="0,16"
-                            FormatString="0"
-                            Minimum="0"
-                            Value="{Binding AutoProcessorScore}" />
-
-                        <NumericUpDown
-                            Margin="0,16"
-                            FormatString="0"
-                            Minimum="0"
-                            Value="{Binding AutoNetScore}" />
+                            SelectedItem="{Binding AutoTowerClimb, Mode=TwoWay}">
+                            <ComboBox.Items>
+                                <x:Static Member="vm:TowerClimb2026.Level1" />
+                                <x:Static Member="vm:TowerClimb2026.Failed" />
+                                <x:Static Member="vm:TowerClimb2026.DidNotAttempt" />
+                            </ComboBox.Items>
+                        </ComboBox>
 
                     </StackPanel>
 
                     <StackPanel Orientation="Vertical">
 
                         <TextBlock Height="16" FontWeight="Bold">
-                            MISS
+                            MISSED
                         </TextBlock>
 
                         <NumericUpDown
                             Margin="0,16"
                             FormatString="0"
                             Minimum="0"
-                            Value="{Binding AutoCoralL4Miss}" />
-
-                        <NumericUpDown
-                            Margin="0,16"
-                            FormatString="0"
-                            Minimum="0"
-                            Value="{Binding AutoCoralL3Miss}" />
-
-                        <NumericUpDown
-                            Margin="0,16"
-                            FormatString="0"
-                            Minimum="0"
-                            Value="{Binding AutoCoralL2Miss}" />
-
-                        <NumericUpDown
-                            Margin="0,16"
-                            FormatString="0"
-                            Minimum="0"
-                            Value="{Binding AutoCoralL1Miss}" />
-
-                        <NumericUpDown
-                            Margin="0,16"
-                            FormatString="0"
-                            Minimum="0"
-                            Value="{Binding AutoProcessorMiss}" />
-
-                        <NumericUpDown
-                            Margin="0,16"
-                            FormatString="0"
-                            Minimum="0"
-                            Value="{Binding AutoNetMiss}" />
+                            Value="{Binding AutoFuelMissed}" />
 
                     </StackPanel>
+
+                </StackPanel>
+
+                <!--  Auto Obstacles  -->
+                <StackPanel
+                    Grid.Row="3"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="2"
+                    Margin="0,20,0,0"
+                    HorizontalAlignment="Center"
+                    Orientation="Horizontal">
+
+                    <TextBlock
+                        Height="32"
+                        Margin="0,0,20,0"
+                        FontWeight="Bold">
+                        Obstacles Used:
+                    </TextBlock>
+
+                    <CheckBox
+                        Margin="0,0,20,0"
+                        Content="Bump"
+                        IsChecked="{Binding AutoUsedBump}" />
+
+                    <CheckBox
+                        Content="Trench"
+                        IsChecked="{Binding AutoUsedTrench}" />
+
+                </StackPanel>
+
+                <!--  Auto Intake  -->
+                <StackPanel
+                    Grid.Row="4"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="2"
+                    Margin="0,20,0,0"
+                    HorizontalAlignment="Center"
+                    Orientation="Horizontal">
+
+                    <TextBlock
+                        Height="32"
+                        Margin="0,0,20,0"
+                        FontWeight="Bold">
+                        Intake From:
+                    </TextBlock>
+
+                    <CheckBox
+                        Margin="0,0,20,0"
+                        Content="Depot"
+                        IsChecked="{Binding AutoIntakeDepot}" />
+
+                    <CheckBox
+                        Margin="0,0,20,0"
+                        Content="Outpost"
+                        IsChecked="{Binding AutoIntakeOutpost}" />
+
+                    <CheckBox
+                        Content="Neutral Zone"
+                        IsChecked="{Binding AutoIntakeNeutralZone}" />
 
                 </StackPanel>
 
@@ -426,55 +408,9 @@
                 HorizontalAlignment="Center"
                 ColumnDefinitions="Auto,Auto"
                 IsVisible="{Binding SelectedHeadingButton, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static vm:HeadingButtons.TeleOp}}"
-                RowDefinitions="Auto,Auto,Auto">
+                RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto">
 
-                <TextBlock
-                    Grid.Row="1"
-                    Grid.Column="0"
-                    Height="32"
-                    Margin="0,32,0,0"
-                    HorizontalAlignment="Center"
-                    FontWeight="Bold">
-                    Climb:
-                </TextBlock>
-                <ComboBox
-                    Grid.Row="2"
-                    Grid.Column="0"
-                    Width="150"
-                    SelectedItem="{Binding Climb, Mode=TwoWay}">
-                    <ComboBox.Items>
-                        <x:Static Member="vm:Climb2026.L1" />
-                        <x:Static Member="vm:Climb2026.L2" />
-                        <x:Static Member="vm:Climb2026.L3" />
-                        <x:Static Member="vm:Climb2026.Failed" />
-                        <x:Static Member="vm:Climb2026.DidNotAttempt" />
-                    </ComboBox.Items>
-                </ComboBox>
-
-                <TextBlock
-                    Grid.Row="1"
-                    Grid.Column="1"
-                    Height="32"
-                    Margin="0,32,0,0"
-                    HorizontalAlignment="Center"
-                    FontWeight="Bold">
-                    Breakdown:
-                </TextBlock>
-                <ComboBox
-                    Grid.Row="2"
-                    Grid.Column="1"
-                    Width="150"
-                    SelectedItem="{Binding Breakdown, Mode=TwoWay}">
-                    <ComboBox.Items>
-                        <x:Static Member="vm:Breakdown2026.None" />
-                        <x:Static Member="vm:Breakdown2026.Tipped" />
-                        <x:Static Member="vm:Breakdown2026.MechanicalFailure" />
-                        <x:Static Member="vm:Breakdown2026.Incapacitated" />
-                        <x:Static Member="vm:Breakdown2026.FuelStuck" />
-                        <x:Static Member="vm:Breakdown2026.Beached" />
-                    </ComboBox.Items>
-                </ComboBox>
-
+                <!--  FUEL Scoring  -->
                 <StackPanel
                     Grid.Row="0"
                     Grid.ColumnSpan="2"
@@ -482,140 +418,181 @@
                     Orientation="Horizontal">
 
                     <StackPanel Margin="0,0,25,0" Orientation="Vertical">
-
                         <TextBlock
                             Height="32"
                             Margin="0,32,0,0"
                             FontWeight="Bold">
-                            L4
+                            FUEL into HUB
                         </TextBlock>
-
-                        <TextBlock
-                            Height="32"
-                            Margin="0,32,0,0"
-                            FontWeight="Bold">
-                            L3
-                        </TextBlock>
-
-                        <TextBlock
-                            Height="32"
-                            Margin="0,32,0,0"
-                            FontWeight="Bold">
-                            L2
-                        </TextBlock>
-
-                        <TextBlock
-                            Height="32"
-                            Margin="0,32,0,0"
-                            FontWeight="Bold">
-                            L1
-                        </TextBlock>
-
-                        <TextBlock
-                            Height="32"
-                            Margin="0,32,0,0"
-                            FontWeight="Bold">
-                            Processor
-                        </TextBlock>
-
-                        <TextBlock
-                            Height="32"
-                            Margin="0,32,0,0"
-                            FontWeight="Bold">
-                            Net
-                        </TextBlock>
-
                     </StackPanel>
 
                     <StackPanel Margin="0,0,25,0" Orientation="Vertical">
-
                         <TextBlock Height="16" FontWeight="Bold">
-                            SCORE
+                            SCORED
                         </TextBlock>
-
                         <NumericUpDown
                             Margin="0,16"
                             FormatString="0"
                             Minimum="0"
-                            Value="{Binding TeleOpCoralL4Score}" />
-
-                        <NumericUpDown
-                            Margin="0,16"
-                            FormatString="0"
-                            Minimum="0"
-                            Value="{Binding TeleOpCoralL3Score}" />
-
-                        <NumericUpDown
-                            Margin="0,16"
-                            FormatString="0"
-                            Minimum="0"
-                            Value="{Binding TeleOpCoralL2Score}" />
-
-                        <NumericUpDown
-                            Margin="0,16"
-                            FormatString="0"
-                            Minimum="0"
-                            Value="{Binding TeleOpCoralL1Score}" />
-
-                        <NumericUpDown
-                            Margin="0,16"
-                            FormatString="0"
-                            Minimum="0"
-                            Value="{Binding TeleOpProcessorScore}" />
-
-                        <NumericUpDown
-                            Margin="0,16"
-                            FormatString="0"
-                            Minimum="0"
-                            Value="{Binding TeleOpNetScore}" />
-
+                            Value="{Binding TeleOpFuelScored}" />
                     </StackPanel>
 
                     <StackPanel Orientation="Vertical">
-
                         <TextBlock Height="16" FontWeight="Bold">
-                            MISS
+                            MISSED
                         </TextBlock>
-
                         <NumericUpDown
                             Margin="0,16"
                             FormatString="0"
                             Minimum="0"
-                            Value="{Binding TeleOpCoralL4Miss}" />
-
-                        <NumericUpDown
-                            Margin="0,16"
-                            FormatString="0"
-                            Minimum="0"
-                            Value="{Binding TeleOpCoralL3Miss}" />
-
-                        <NumericUpDown
-                            Margin="0,16"
-                            FormatString="0"
-                            Minimum="0"
-                            Value="{Binding TeleOpCoralL2Miss}" />
-
-                        <NumericUpDown
-                            Margin="0,16"
-                            FormatString="0"
-                            Minimum="0"
-                            Value="{Binding TeleOpCoralL1Miss}" />
-
-                        <NumericUpDown
-                            Margin="0,16"
-                            FormatString="0"
-                            Minimum="0"
-                            Value="{Binding TeleOpProcessorMiss}" />
-
-                        <NumericUpDown
-                            Margin="0,16"
-                            FormatString="0"
-                            Minimum="0"
-                            Value="{Binding TeleOpNetMiss}" />
-
+                            Value="{Binding TeleOpFuelMissed}" />
                     </StackPanel>
 
                 </StackPanel>
+
+                <!--  TeleOp Obstacles  -->
+                <StackPanel
+                    Grid.Row="1"
+                    Grid.ColumnSpan="2"
+                    Margin="0,20,0,0"
+                    HorizontalAlignment="Center"
+                    Orientation="Horizontal">
+
+                    <TextBlock
+                        Height="32"
+                        Margin="0,0,20,0"
+                        FontWeight="Bold">
+                        Obstacles Used:
+                    </TextBlock>
+
+                    <CheckBox
+                        Margin="0,0,20,0"
+                        Content="Bump"
+                        IsChecked="{Binding TeleOpUsedBump}" />
+
+                    <CheckBox
+                        Content="Trench"
+                        IsChecked="{Binding TeleOpUsedTrench}" />
+
+                </StackPanel>
+
+                <!--  TeleOp Intake  -->
+                <StackPanel
+                    Grid.Row="2"
+                    Grid.ColumnSpan="2"
+                    Margin="0,20,0,0"
+                    HorizontalAlignment="Center"
+                    Orientation="Horizontal">
+
+                    <TextBlock
+                        Height="32"
+                        Margin="0,0,20,0"
+                        FontWeight="Bold">
+                        Intake From:
+                    </TextBlock>
+
+                    <CheckBox
+                        Margin="0,0,20,0"
+                        Content="Depot"
+                        IsChecked="{Binding TeleOpIntakeDepot}" />
+
+                    <CheckBox
+                        Margin="0,0,20,0"
+                        Content="Outpost"
+                        IsChecked="{Binding TeleOpIntakeOutpost}" />
+
+                    <CheckBox
+                        Content="Neutral Zone"
+                        IsChecked="{Binding TeleOpIntakeNeutralZone}" />
+
+                </StackPanel>
+
+                <!--  Tower Climb  -->
+                <TextBlock
+                    Grid.Row="3"
+                    Grid.Column="0"
+                    Height="32"
+                    Margin="0,20,20,0"
+                    FontWeight="Bold">
+                    Tower Climb:
+                </TextBlock>
+                <ComboBox
+                    Grid.Row="3"
+                    Grid.Column="1"
+                    Width="180"
+                    Margin="0,20,0,0"
+                    SelectedItem="{Binding TowerClimb, Mode=TwoWay}">
+                    <ComboBox.Items>
+                        <x:Static Member="vm:TowerClimb2026.Level1" />
+                        <x:Static Member="vm:TowerClimb2026.Level2" />
+                        <x:Static Member="vm:TowerClimb2026.Level3" />
+                        <x:Static Member="vm:TowerClimb2026.Failed" />
+                        <x:Static Member="vm:TowerClimb2026.DidNotAttempt" />
+                    </ComboBox.Items>
+                </ComboBox>
+
+                <!--  Breakdown  -->
+                <TextBlock
+                    Grid.Row="4"
+                    Grid.Column="0"
+                    Height="32"
+                    Margin="0,20,20,0"
+                    FontWeight="Bold">
+                    Breakdown:
+                </TextBlock>
+                <ComboBox
+                    Grid.Row="4"
+                    Grid.Column="1"
+                    Width="180"
+                    Margin="0,20,0,0"
+                    SelectedItem="{Binding Breakdown, Mode=TwoWay}">
+                    <ComboBox.Items>
+                        <x:Static Member="vm:Breakdown2026.None" />
+                        <x:Static Member="vm:Breakdown2026.Tipped" />
+                        <x:Static Member="vm:Breakdown2026.MechanicalFailure" />
+                        <x:Static Member="vm:Breakdown2026.Incapacitated" />
+                        <x:Static Member="vm:Breakdown2026.Disabled" />
+                        <x:Static Member="vm:Breakdown2026.Beached" />
+                    </ComboBox.Items>
+                </ComboBox>
+
+                <!--  Defense Rating  -->
+                <TextBlock
+                    Grid.Row="5"
+                    Grid.Column="0"
+                    Height="32"
+                    Margin="0,20,20,0"
+                    FontWeight="Bold">
+                    Defense Rating (0-5):
+                </TextBlock>
+                <NumericUpDown
+                    Grid.Row="5"
+                    Grid.Column="1"
+                    Width="180"
+                    Margin="0,20,0,0"
+                    FormatString="0"
+                    Maximum="5"
+                    Minimum="0"
+                    Value="{Binding DefenseRating}" />
+
+                <!--  Notes  -->
+                <TextBlock
+                    Grid.Row="6"
+                    Grid.Column="0"
+                    Height="32"
+                    Margin="0,20,20,0"
+                    FontWeight="Bold">
+                    Notes:
+                </TextBlock>
+                <TextBox
+                    Grid.Row="6"
+                    Grid.Column="1"
+                    Width="250"
+                    Height="100"
+                    Margin="0,20,0,0"
+                    AcceptsReturn="True"
+                    Text="{Binding Notes}"
+                    TextWrapping="Wrap" />
 
             </Grid>
 

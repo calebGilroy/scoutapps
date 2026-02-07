@@ -14,20 +14,22 @@ namespace ScoutApp.ViewModels
         Center,
         Right
     }
+
     public enum Breakdown2026
     {
         None,
         Tipped,
         MechanicalFailure,
         Incapacitated,
-        FuelStuck,
+        Disabled,
         Beached
     }
-    public enum Climb2026
+
+    public enum TowerClimb2026
     {
-        L1,
-        L2,
-        L3,
+        Level1,
+        Level2,
+        Level3,
         Failed,
         DidNotAttempt
     }
@@ -59,32 +61,32 @@ namespace ScoutApp.ViewModels
             MatchNumber += 1;
             SPosition2026 = null;
             AutoMove = false;
-            AutoCoralL4Score = 0;
-            AutoCoralL3Score = 0;
-            AutoCoralL2Score = 0;
-            AutoCoralL1Score = 0;
-            AutoCoralL4Miss = 0;
-            AutoCoralL3Miss = 0;
-            AutoCoralL2Miss = 0;
-            AutoCoralL1Miss = 0;
-            TeleOpCoralL4Score = 0;
-            TeleOpCoralL3Score = 0;
-            TeleOpCoralL2Score = 0;
-            TeleOpCoralL1Score = 0;
-            TeleOpCoralL4Miss = 0;
-            TeleOpCoralL3Miss = 0;
-            TeleOpCoralL2Miss = 0;
-            TeleOpCoralL1Miss = 0;
-            AutoProcessorScore = 0;
-            AutoProcessorMiss = 0;
-            AutoNetScore = 0;
-            AutoNetMiss = 0;
-            TeleOpProcessorScore = 0;
-            TeleOpProcessorMiss = 0;
-            TeleOpNetScore = 0;
-            TeleOpNetMiss = 0;
+            // Auto FUEL
+            AutoFuelScored = 0;
+            AutoFuelMissed = 0;
+            AutoTowerClimb = null;
+            // Auto Obstacles
+            AutoUsedBump = false;
+            AutoUsedTrench = false;
+            // Auto Intake
+            AutoIntakeDepot = false;
+            AutoIntakeOutpost = false;
+            AutoIntakeNeutralZone = false;
+            // TeleOp FUEL
+            TeleOpFuelScored = 0;
+            TeleOpFuelMissed = 0;
+            // TeleOp Obstacles
+            TeleOpUsedBump = false;
+            TeleOpUsedTrench = false;
+            // TeleOp Intake
+            TeleOpIntakeDepot = false;
+            TeleOpIntakeOutpost = false;
+            TeleOpIntakeNeutralZone = false;
+            // Endgame
+            TowerClimb = null;
             Breakdown = Breakdown2026.None;
-            Climb = null;
+            DefenseRating = 0;
+            Notes = string.Empty;
             ShowSummary = false;
             SelectedHeadingButton = HeadingButtons.PreMatch;
         }
@@ -173,132 +175,99 @@ namespace ScoutApp.ViewModels
         [ObservableProperty]
         [NotifyPropertyChangedFor(nameof(Summary))]
         [NotifyPropertyChangedFor(nameof(QRCode1))]
+        private AutoStartingPosition? _SPosition2026;
+
+        [ObservableProperty]
+        [NotifyPropertyChangedFor(nameof(Summary))]
+        [NotifyPropertyChangedFor(nameof(QRCode1))]
         private bool _AutoMove = false;
 
+        // ===== AUTO FUEL =====
         [ObservableProperty]
         [NotifyPropertyChangedFor(nameof(Summary))]
         [NotifyPropertyChangedFor(nameof(QRCode1))]
-        private int _AutoCoralL4Score = 0;
+        private int _AutoFuelScored = 0;
 
         [ObservableProperty]
         [NotifyPropertyChangedFor(nameof(Summary))]
         [NotifyPropertyChangedFor(nameof(QRCode1))]
-        private int _AutoCoralL3Score = 0;
+        private int _AutoFuelMissed = 0;
 
         [ObservableProperty]
         [NotifyPropertyChangedFor(nameof(Summary))]
         [NotifyPropertyChangedFor(nameof(QRCode1))]
-        private int _AutoCoralL2Score = 0;
+        private TowerClimb2026? _AutoTowerClimb;
+
+        // ===== AUTO OBSTACLES =====
+        [ObservableProperty]
+        [NotifyPropertyChangedFor(nameof(Summary))]
+        [NotifyPropertyChangedFor(nameof(QRCode1))]
+        private bool _AutoUsedBump = false;
 
         [ObservableProperty]
         [NotifyPropertyChangedFor(nameof(Summary))]
         [NotifyPropertyChangedFor(nameof(QRCode1))]
-        private int _AutoCoralL1Score = 0;
+        private bool _AutoUsedTrench = false;
+
+        // ===== AUTO INTAKE =====
+        [ObservableProperty]
+        [NotifyPropertyChangedFor(nameof(Summary))]
+        [NotifyPropertyChangedFor(nameof(QRCode1))]
+        private bool _AutoIntakeDepot = false;
 
         [ObservableProperty]
         [NotifyPropertyChangedFor(nameof(Summary))]
         [NotifyPropertyChangedFor(nameof(QRCode1))]
-        private int _AutoCoralL4Miss = 0;
+        private bool _AutoIntakeOutpost = false;
 
         [ObservableProperty]
         [NotifyPropertyChangedFor(nameof(Summary))]
         [NotifyPropertyChangedFor(nameof(QRCode1))]
-        private int _AutoCoralL3Miss = 0;
+        private bool _AutoIntakeNeutralZone = false;
+
+        // ===== TELEOP FUEL =====
+        [ObservableProperty]
+        [NotifyPropertyChangedFor(nameof(Summary))]
+        [NotifyPropertyChangedFor(nameof(QRCode1))]
+        private int _TeleOpFuelScored = 0;
 
         [ObservableProperty]
         [NotifyPropertyChangedFor(nameof(Summary))]
         [NotifyPropertyChangedFor(nameof(QRCode1))]
-        private int _AutoCoralL2Miss = 0;
+        private int _TeleOpFuelMissed = 0;
+
+        // ===== TELEOP OBSTACLES =====
+        [ObservableProperty]
+        [NotifyPropertyChangedFor(nameof(Summary))]
+        [NotifyPropertyChangedFor(nameof(QRCode1))]
+        private bool _TeleOpUsedBump = false;
 
         [ObservableProperty]
         [NotifyPropertyChangedFor(nameof(Summary))]
         [NotifyPropertyChangedFor(nameof(QRCode1))]
-        private int _AutoCoralL1Miss = 0;
+        private bool _TeleOpUsedTrench = false;
+
+        // ===== TELEOP INTAKE =====
+        [ObservableProperty]
+        [NotifyPropertyChangedFor(nameof(Summary))]
+        [NotifyPropertyChangedFor(nameof(QRCode1))]
+        private bool _TeleOpIntakeDepot = false;
 
         [ObservableProperty]
         [NotifyPropertyChangedFor(nameof(Summary))]
         [NotifyPropertyChangedFor(nameof(QRCode1))]
-        private int _TeleOpCoralL4Score = 0;
+        private bool _TeleOpIntakeOutpost = false;
 
         [ObservableProperty]
         [NotifyPropertyChangedFor(nameof(Summary))]
         [NotifyPropertyChangedFor(nameof(QRCode1))]
-        private int _TeleOpCoralL3Score = 0;
+        private bool _TeleOpIntakeNeutralZone = false;
 
+        // ===== ENDGAME =====
         [ObservableProperty]
         [NotifyPropertyChangedFor(nameof(Summary))]
         [NotifyPropertyChangedFor(nameof(QRCode1))]
-        private int _TeleOpCoralL2Score = 0;
-
-        [ObservableProperty]
-        [NotifyPropertyChangedFor(nameof(Summary))]
-        [NotifyPropertyChangedFor(nameof(QRCode1))]
-        private int _TeleOpCoralL1Score = 0;
-
-        [ObservableProperty]
-        [NotifyPropertyChangedFor(nameof(Summary))]
-        [NotifyPropertyChangedFor(nameof(QRCode1))]
-        private int _TeleOpCoralL4Miss = 0;
-
-        [ObservableProperty]
-        [NotifyPropertyChangedFor(nameof(Summary))]
-        [NotifyPropertyChangedFor(nameof(QRCode1))]
-        private int _TeleOpCoralL3Miss = 0;
-
-        [ObservableProperty]
-        [NotifyPropertyChangedFor(nameof(Summary))]
-        [NotifyPropertyChangedFor(nameof(QRCode1))]
-        private int _TeleOpCoralL2Miss = 0;
-
-        [ObservableProperty]
-        [NotifyPropertyChangedFor(nameof(Summary))]
-        [NotifyPropertyChangedFor(nameof(QRCode1))]
-        private int _TeleOpCoralL1Miss = 0;
-
-        [ObservableProperty]
-        [NotifyPropertyChangedFor(nameof(Summary))]
-        [NotifyPropertyChangedFor(nameof(QRCode1))]
-        private int _AutoProcessorScore = 0;
-
-        [ObservableProperty]
-        [NotifyPropertyChangedFor(nameof(Summary))]
-        [NotifyPropertyChangedFor(nameof(QRCode1))]
-        private int _AutoProcessorMiss = 0;
-
-        [ObservableProperty]
-        [NotifyPropertyChangedFor(nameof(Summary))]
-        [NotifyPropertyChangedFor(nameof(QRCode1))]
-        private int _AutoNetScore = 0;
-
-        [ObservableProperty]
-        [NotifyPropertyChangedFor(nameof(Summary))]
-        [NotifyPropertyChangedFor(nameof(QRCode1))]
-        private int _AutoNetMiss = 0;
-
-        [ObservableProperty]
-        [NotifyPropertyChangedFor(nameof(Summary))]
-        [NotifyPropertyChangedFor(nameof(QRCode1))]
-        private int _TeleOpProcessorScore = 0;
-
-        [ObservableProperty]
-        [NotifyPropertyChangedFor(nameof(Summary))]
-        [NotifyPropertyChangedFor(nameof(QRCode1))]
-        private int _TeleOpProcessorMiss = 0;
-
-        [ObservableProperty]
-        [NotifyPropertyChangedFor(nameof(Summary))]
-        [NotifyPropertyChangedFor(nameof(QRCode1))]
-        private int _TeleOpNetScore = 0;
-
-        [ObservableProperty]
-        [NotifyPropertyChangedFor(nameof(Summary))]
-        [NotifyPropertyChangedFor(nameof(QRCode1))]
-        private int _TeleOpNetMiss = 0;
-
-        [ObservableProperty]
-        [NotifyPropertyChangedFor(nameof(Summary))]
-        [NotifyPropertyChangedFor(nameof(QRCode1))]
-        private AutoStartingPosition? _SPosition2026;
+        private TowerClimb2026? _TowerClimb;
 
         [ObservableProperty]
         [NotifyPropertyChangedFor(nameof(Summary))]
@@ -308,48 +277,44 @@ namespace ScoutApp.ViewModels
         [ObservableProperty]
         [NotifyPropertyChangedFor(nameof(Summary))]
         [NotifyPropertyChangedFor(nameof(QRCode1))]
-        private Climb2026? _Climb;
+        private int _DefenseRating = 0;
+
+        [ObservableProperty]
+        [NotifyPropertyChangedFor(nameof(Summary))]
+        [NotifyPropertyChangedFor(nameof(QRCode1))]
+        private string _Notes = string.Empty;
 
         public string Summary
         {
             get
             {
-                {
-                    return $$"""
+                return $$"""
 Scout Name: {{ScoutName}}
 Team Number: {{TeamNumber}}
 Match Number: {{MatchNumber}}
 Alliance Position: {{SelectedAlliancePosition}}
 Auto Starting Position: {{SPosition2026}}
 Auto Move: {{AutoMove}}
-Auto L4 Score: {{AutoCoralL4Score}}
-Auto L3 Score: {{AutoCoralL3Score}}
-Auto L2 Score: {{AutoCoralL2Score}}
-Auto L1 Score: {{AutoCoralL1Score}}
-Auto L4 Miss: {{AutoCoralL4Miss}}
-Auto L3 Miss: {{AutoCoralL3Miss}}
-Auto L2 Miss: {{AutoCoralL2Miss}}
-Auto L1 Miss: {{AutoCoralL1Miss}}
-TeleOp L4 Score: {{TeleOpCoralL4Score}}
-TeleOp L3 Score: {{TeleOpCoralL3Score}}
-TeleOp L2 Score: {{TeleOpCoralL2Score}}
-TeleOp L1 Score: {{TeleOpCoralL1Score}}
-TeleOp L4 Miss: {{TeleOpCoralL4Miss}}
-TeleOp L3 Miss: {{TeleOpCoralL3Miss}}
-TeleOp L2 Miss: {{TeleOpCoralL2Miss}}
-TeleOp L1 Miss: {{TeleOpCoralL1Miss}}
-Auto Processor Score: {{AutoProcessorScore}}
-Auto Processor Miss: {{AutoProcessorMiss}}
-Auto Net Score: {{AutoNetScore}}
-Auto Net Miss: {{AutoNetMiss}}
-TeleOp Processor Score: {{TeleOpProcessorScore}}
-TeleOp Processor Miss: {{TeleOpProcessorMiss}}
-TeleOp Net Score: {{TeleOpNetScore}}
-TeleOp Net Miss: {{TeleOpNetMiss}}
+Auto FUEL Scored: {{AutoFuelScored}}
+Auto FUEL Missed: {{AutoFuelMissed}}
+Auto Tower Climb: {{AutoTowerClimb}}
+Auto Used Bump: {{AutoUsedBump}}
+Auto Used Trench: {{AutoUsedTrench}}
+Auto Intake Depot: {{AutoIntakeDepot}}
+Auto Intake Outpost: {{AutoIntakeOutpost}}
+Auto Intake Neutral Zone: {{AutoIntakeNeutralZone}}
+TeleOp FUEL Scored: {{TeleOpFuelScored}}
+TeleOp FUEL Missed: {{TeleOpFuelMissed}}
+TeleOp Used Bump: {{TeleOpUsedBump}}
+TeleOp Used Trench: {{TeleOpUsedTrench}}
+TeleOp Intake Depot: {{TeleOpIntakeDepot}}
+TeleOp Intake Outpost: {{TeleOpIntakeOutpost}}
+TeleOp Intake Neutral Zone: {{TeleOpIntakeNeutralZone}}
+Endgame Tower Climb: {{TowerClimb}}
 Breakdown: {{Breakdown}}
-Climb: {{Climb}}
+Defense Rating: {{DefenseRating}}
+Notes: {{Notes}}
 """;
-                }
             }
         }
 
@@ -365,37 +330,29 @@ Match-{{MatchNumber}}
 APos-{{SelectedAlliancePosition}}
 SPos-{{SPosition2026}}
 AMove-{{AutoMove}}
-AL4-{{AutoCoralL4Score}}
-AL3-{{AutoCoralL3Score}}
-AL2-{{AutoCoralL2Score}}
-AL1-{{AutoCoralL1Score}}
-AM4-{{AutoCoralL4Miss}}
-AM3-{{AutoCoralL3Miss}}
-AM2-{{AutoCoralL2Miss}}
-AM1-{{AutoCoralL1Miss}}
-TL4-{{TeleOpCoralL4Score}}
-TL3-{{TeleOpCoralL3Score}}
-TL2-{{TeleOpCoralL2Score}}
-TL1-{{TeleOpCoralL1Score}}
-TM4-{{TeleOpCoralL4Miss}}
-TM3-{{TeleOpCoralL3Miss}}
-TM2-{{TeleOpCoralL2Miss}}
-TM1-{{TeleOpCoralL1Miss}}
-APS-{{AutoProcessorScore}}
-APM-{{AutoProcessorMiss}}
-ANS-{{AutoNetScore}}
-ANM-{{AutoNetMiss}}
-TPS-{{TeleOpProcessorScore}}
-TPM-{{TeleOpProcessorMiss}}
-TNS-{{TeleOpNetScore}}
-TNM-{{TeleOpNetMiss}}
+AFS-{{AutoFuelScored}}
+AFM-{{AutoFuelMissed}}
+ATC-{{AutoTowerClimb}}
+ABump-{{AutoUsedBump}}
+ATrench-{{AutoUsedTrench}}
+AIDep-{{AutoIntakeDepot}}
+AIOut-{{AutoIntakeOutpost}}
+AINZ-{{AutoIntakeNeutralZone}}
+TFS-{{TeleOpFuelScored}}
+TFM-{{TeleOpFuelMissed}}
+TBump-{{TeleOpUsedBump}}
+TTrench-{{TeleOpUsedTrench}}
+TIDep-{{TeleOpIntakeDepot}}
+TIOut-{{TeleOpIntakeOutpost}}
+TINZ-{{TeleOpIntakeNeutralZone}}
+TC-{{TowerClimb}}
 BD-{{Breakdown}}
-CLB-{{Climb}}
+DEF-{{DefenseRating}}
+NOTE-{{Notes}}
 """;
 
-                if (SelectedAlliancePosition == null || SPosition2026 == null || Climb == null)
+                if (SelectedAlliancePosition == null || SPosition2026 == null || TowerClimb == null)
                 {
-
                     var uri = new Uri("avares://ScoutApp/Assets/cartman.png");
                     using var stream = AssetLoader.Open(uri);
                     return new Bitmap(stream);
