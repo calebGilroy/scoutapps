@@ -9,7 +9,6 @@
     d:DesignHeight="600"
     d:DesignWidth="800"
     x:DataType="vm:MainViewModel">
-    <!--  Use Alt-Shift-F to format. Do this continually!  -->
 
     <Design.DataContext>
         <vm:MainViewModel />
@@ -98,40 +97,63 @@
             ColumnDefinitions="Auto,Auto,Auto,Auto"
             RowDefinitions="Auto,Auto,Auto,Auto,Auto">
 
+            <TextBlock
+                Grid.Row="0"
+                Grid.Column="0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                FontWeight="Bold"
+                Foreground="{StaticResource accent}"
+                IsVisible="{Binding TextVisible}"
+                Text="{Binding MatchNumber, StringFormat='Match {0}'}" />
+            <TextBlock
+                Grid.Row="0"
+                Grid.Column="3"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Top"
+                FontWeight="Bold"
+                Foreground="{StaticResource accent}"
+                IsVisible="{Binding TextVisible}"
+                Text="{Binding TeamNumber, StringFormat='Team {0}'}" />
+
             <ToggleButton
                 Grid.Row="0"
                 Grid.Column="0"
-                Margin="20,10,20,0"
+                Margin="40,20,20,0"
                 Command="{Binding HeadingButtonCommand}"
                 CommandParameter="PreMatch"
-                Content="PRE-MATCH"
+                Content="PRE MATCH"
+                FontSize="16"
                 FontWeight="Bold"
                 IsChecked="{Binding SelectedHeadingButton, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static vm:HeadingButtons.PreMatch}}" />
             <ToggleButton
                 Grid.Row="0"
                 Grid.Column="1"
-                Margin="20,10,20,0"
+                Margin="20,20,20,0"
                 Command="{Binding HeadingButtonCommand}"
                 CommandParameter="Auto"
                 Content="AUTO"
+                FontSize="16"
                 FontWeight="Bold"
                 IsChecked="{Binding SelectedHeadingButton, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static vm:HeadingButtons.Auto}}" />
             <ToggleButton
                 Grid.Row="0"
                 Grid.Column="2"
-                Margin="20,10,20,0"
+                Margin="20,20,20,0"
                 Command="{Binding HeadingButtonCommand}"
                 CommandParameter="TeleOp"
                 Content="TELEOP"
+                FontSize="16"
                 FontWeight="Bold"
                 IsChecked="{Binding SelectedHeadingButton, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static vm:HeadingButtons.TeleOp}}" />
             <ToggleButton
                 Grid.Row="0"
                 Grid.Column="3"
-                Margin="20,10,20,0"
+                Margin="20,20,40,00"
                 Command="{Binding HeadingButtonCommand}"
                 CommandParameter="PostMatch"
-                Content="POST-MATCH"
+                Content="POST MATCH"
+                FontSize="16"
                 FontWeight="Bold"
                 IsChecked="{Binding SelectedHeadingButton, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static vm:HeadingButtons.PostMatch}}" />
 
@@ -194,7 +216,7 @@
             <StackPanel
                 Grid.Row="2"
                 Grid.ColumnSpan="4"
-                Margin="0,20,0,20"
+                Margin="0,20"
                 HorizontalAlignment="Center"
                 IsVisible="{Binding SelectedHeadingButton, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static vm:HeadingButtons.PostMatch}}"
                 Orientation="Vertical">
@@ -231,7 +253,7 @@
                 Grid.Row="3"
                 Grid.Column="0"
                 Grid.ColumnSpan="4"
-                Margin="0,20,0,20"
+                Margin="0,20"
                 HorizontalAlignment="Center"
                 ColumnDefinitions="Auto,Auto"
                 IsVisible="{Binding SelectedHeadingButton, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static vm:HeadingButtons.Auto}}"
@@ -359,9 +381,7 @@
                         Content="Bump"
                         IsChecked="{Binding AutoUsedBump}" />
 
-                    <CheckBox
-                        Content="Trench"
-                        IsChecked="{Binding AutoUsedTrench}" />
+                    <CheckBox Content="Trench" IsChecked="{Binding AutoUsedTrench}" />
 
                 </StackPanel>
 
@@ -391,9 +411,7 @@
                         Content="Outpost"
                         IsChecked="{Binding AutoIntakeOutpost}" />
 
-                    <CheckBox
-                        Content="Neutral Zone"
-                        IsChecked="{Binding AutoIntakeNeutralZone}" />
+                    <CheckBox Content="Neutral Zone" IsChecked="{Binding AutoIntakeNeutralZone}" />
 
                 </StackPanel>
 
@@ -404,7 +422,7 @@
                 Grid.Row="4"
                 Grid.Column="0"
                 Grid.ColumnSpan="4"
-                Margin="0,20,0,20"
+                Margin="0,20"
                 HorizontalAlignment="Center"
                 ColumnDefinitions="Auto,Auto"
                 IsVisible="{Binding SelectedHeadingButton, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static vm:HeadingButtons.TeleOp}}"
@@ -470,9 +488,7 @@
                         Content="Bump"
                         IsChecked="{Binding TeleOpUsedBump}" />
 
-                    <CheckBox
-                        Content="Trench"
-                        IsChecked="{Binding TeleOpUsedTrench}" />
+                    <CheckBox Content="Trench" IsChecked="{Binding TeleOpUsedTrench}" />
 
                 </StackPanel>
 
@@ -501,9 +517,7 @@
                         Content="Outpost"
                         IsChecked="{Binding TeleOpIntakeOutpost}" />
 
-                    <CheckBox
-                        Content="Neutral Zone"
-                        IsChecked="{Binding TeleOpIntakeNeutralZone}" />
+                    <CheckBox Content="Neutral Zone" IsChecked="{Binding TeleOpIntakeNeutralZone}" />
 
                 </StackPanel>
 
@@ -514,7 +528,7 @@
                     Height="32"
                     Margin="0,20,20,0"
                     FontWeight="Bold">
-                    Tower Climb:
+                    Climb:
                 </TextBlock>
                 <ComboBox
                     Grid.Row="3"
@@ -550,49 +564,11 @@
                         <x:Static Member="vm:Breakdown2026.None" />
                         <x:Static Member="vm:Breakdown2026.Tipped" />
                         <x:Static Member="vm:Breakdown2026.MechanicalFailure" />
-                        <x:Static Member="vm:Breakdown2026.Incapacitated" />
+                        <x:Static Member="vm:Breakdown2026.ConnectionFailure" />
                         <x:Static Member="vm:Breakdown2026.Disabled" />
-                        <x:Static Member="vm:Breakdown2026.Beached" />
+                        <x:Static Member="vm:Breakdown2026.BeachedOnFuel" />
                     </ComboBox.Items>
                 </ComboBox>
-
-                <!--  Defense Rating  -->
-                <TextBlock
-                    Grid.Row="5"
-                    Grid.Column="0"
-                    Height="32"
-                    Margin="0,20,20,0"
-                    FontWeight="Bold">
-                    Defense Rating (0-5):
-                </TextBlock>
-                <NumericUpDown
-                    Grid.Row="5"
-                    Grid.Column="1"
-                    Width="180"
-                    Margin="0,20,0,0"
-                    FormatString="0"
-                    Maximum="5"
-                    Minimum="0"
-                    Value="{Binding DefenseRating}" />
-
-                <!--  Notes  -->
-                <TextBlock
-                    Grid.Row="6"
-                    Grid.Column="0"
-                    Height="32"
-                    Margin="0,20,20,0"
-                    FontWeight="Bold">
-                    Notes:
-                </TextBlock>
-                <TextBox
-                    Grid.Row="6"
-                    Grid.Column="1"
-                    Width="250"
-                    Height="100"
-                    Margin="0,20,0,0"
-                    AcceptsReturn="True"
-                    Text="{Binding Notes}"
-                    TextWrapping="Wrap" />
 
             </Grid>
 

@@ -20,9 +20,9 @@ namespace ScoutApp.ViewModels
         None,
         Tipped,
         MechanicalFailure,
-        Incapacitated,
+        ConnectionFailure,
         Disabled,
-        Beached
+        BeachedOnFuel
     }
 
     public enum TowerClimb2026
@@ -91,8 +91,6 @@ namespace ScoutApp.ViewModels
             // Endgame
             TowerClimb = null;
             Breakdown = Breakdown2026.None;
-            DefenseRating = 0;
-            Notes = string.Empty;
             ShowSummary = false;
             SelectedHeadingButton = HeadingButtons.PreMatch;
         }
@@ -164,6 +162,21 @@ namespace ScoutApp.ViewModels
                         SelectedHeadingButton = HeadingButtons.PostMatch;
                         break;
                 }
+            }
+        }
+
+        [ObservableProperty]
+        private bool _TextVisible;
+
+        partial void OnSelectedHeadingButtonChanged(HeadingButtons value)
+        {
+            if (value == HeadingButtons.PreMatch)
+            {
+                TextVisible = false;
+            }
+            else
+            {
+                TextVisible = true;
             }
         }
 
@@ -301,16 +314,6 @@ namespace ScoutApp.ViewModels
         [NotifyPropertyChangedFor(nameof(QRCode1))]
         private Breakdown2026 _Breakdown = Breakdown2026.None;
 
-        [ObservableProperty]
-        [NotifyPropertyChangedFor(nameof(Summary))]
-        [NotifyPropertyChangedFor(nameof(QRCode1))]
-        private int _DefenseRating = 0;
-
-        [ObservableProperty]
-        [NotifyPropertyChangedFor(nameof(Summary))]
-        [NotifyPropertyChangedFor(nameof(QRCode1))]
-        private string _Notes = string.Empty;
-
         public string Summary
         {
             get
@@ -339,8 +342,6 @@ TeleOp Intake Outpost: {{TeleOpIntakeOutpost}}
 TeleOp Intake Neutral Zone: {{TeleOpIntakeNeutralZone}}
 Endgame Tower Climb: {{TowerClimb}}
 Breakdown: {{Breakdown}}
-Defense Rating: {{DefenseRating}}
-Notes: {{Notes}}
 """;
             }
         }
@@ -374,11 +375,9 @@ TIOut-{{TeleOpIntakeOutpost}}
 TINZ-{{TeleOpIntakeNeutralZone}}
 TC-{{TowerClimb}}
 BD-{{Breakdown}}
-DEF-{{DefenseRating}}
-NOTE-{{Notes}}
 """;
 
-                if (SelectedAlliancePosition == null || SPosition2026 == null || TowerClimb == null)
+                if (SelectedAlliancePosition == null || SPosition2026 == null || TowerClimb == null || AutoTowerClimb == null)
                 {
                     var uri = new Uri("avares://ScoutApp/Assets/cartman.png");
                     using var stream = AssetLoader.Open(uri);
