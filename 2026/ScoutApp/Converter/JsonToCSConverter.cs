@@ -87,7 +87,7 @@ public static class JsonToCSConverter
                 TryLoadDefaultSchedule();
         }
 
-        public static bool TryGetTeamNumber(int matchNumber, AlliancePosition alliancePosition, out int teamNumber)
+        public static bool TryGetTeamNumber(int matchNumber, AlliancePosition alliance, out int teamNumber)
         {
             EnsureLoaded();
             teamNumber = default;
@@ -95,7 +95,7 @@ public static class JsonToCSConverter
             if (!TeamsByMatch.TryGetValue(matchNumber, out int[]? teams) || teams.Length < 6)
                 return false;
 
-            int index = alliancePosition switch
+            int index = alliance switch
             {
                 AlliancePosition.Red1 => 0,
                 AlliancePosition.Red2 => 1,

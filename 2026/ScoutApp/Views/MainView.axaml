@@ -27,7 +27,7 @@
         <Color x:Key="darkgrey_color">#636363</Color>
         <Color x:Key="orange_color">#FF5722</Color>
         <Color x:Key="thirdbutton_color">#DED6CE</Color>
-        <Color x:Key="secondary_color">#0089D6</Color>
+        <Color x:Key="secondary_color">#0D6EFD</Color>
         <Color x:Key="error_color">#F2110C</Color>
         <Color x:Key="green_color">#1FA659</Color>
 

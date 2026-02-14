@@ -53,6 +53,12 @@ namespace ScoutApp.ViewModels
         Blue3
     }
 
+    public enum Alliance
+    {
+        Red,
+        Blue
+    }
+
     public partial class MainViewModel : ObservableObject
     {
         [RelayCommand]
@@ -91,12 +97,12 @@ namespace ScoutApp.ViewModels
             SelectedHeadingButton = HeadingButtons.PreMatch;
         }
 
-        private static int? GetTeamNumberFromSchedule(int matchNumber, AlliancePosition? alliancePosition)
+        private static int? GetTeamNumberFromSchedule(int matchNumber, AlliancePosition? alliance)
         {
-            if (alliancePosition == null)
+            if (alliance == null)
                 return null;
 
-            return JsonToCSConverter.TryGetTeamNumber(matchNumber, alliancePosition.Value, out int teamNumber)
+            return JsonToCSConverter.TryGetTeamNumber(matchNumber, alliance.Value, out int teamNumber)
                 ? teamNumber
                 : null;
         }
@@ -114,7 +120,23 @@ namespace ScoutApp.ViewModels
             UpdateTeamNumberFromSchedule();
         }
 
-        partial void OnSelectedAlliancePositionChanged(AlliancePosition? value) => UpdateTeamNumberFromSchedule();
+        partial void OnSelectedAlliancePositionChanged(AlliancePosition? value)
+        {
+            UpdateTeamNumberFromSchedule();
+
+            if (value == null)
+            {
+                SelectedAlliance = null;
+            }
+            else if (value is AlliancePosition.Red1 or AlliancePosition.Red2 or AlliancePosition.Red3)
+            {
+                SelectedAlliance = Alliance.Red;
+            }
+            else if (value is AlliancePosition.Blue1 or AlliancePosition.Blue2 or AlliancePosition.Blue3)
+            {
+                SelectedAlliance = Alliance.Blue;
+            }
+        }
 
         [ObservableProperty]
         private HeadingButtons _SelectedHeadingButton = HeadingButtons.PreMatch;
@@ -171,6 +193,11 @@ namespace ScoutApp.ViewModels
 
         [ObservableProperty]
         private AlliancePosition? _SelectedAlliancePosition;
+
+        [ObservableProperty]
+        [NotifyPropertyChangedFor(nameof(Summary))]
+        [NotifyPropertyChangedFor(nameof(QRCode1))]
+        private Alliance? _SelectedAlliance;
 
         [ObservableProperty]
         [NotifyPropertyChangedFor(nameof(Summary))]
@@ -292,7 +319,7 @@ namespace ScoutApp.ViewModels
 Scout Name: {{ScoutName}}
 Team Number: {{TeamNumber}}
 Match Number: {{MatchNumber}}
-Alliance Position: {{SelectedAlliancePosition}}
+Alliance: {{SelectedAlliance}}
 Auto Starting Position: {{SPosition2026}}
 Auto Move: {{AutoMove}}
 Auto FUEL Scored: {{AutoFuelScored}}
@@ -327,7 +354,7 @@ Notes: {{Notes}}
 Name-{{ScoutName}}
 Team-{{TeamNumber}}
 Match-{{MatchNumber}}
-APos-{{SelectedAlliancePosition}}
+APos-{{SelectedAlliance}}
 SPos-{{SPosition2026}}
 AMove-{{AutoMove}}
 AFS-{{AutoFuelScored}}
