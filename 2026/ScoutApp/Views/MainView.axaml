@@ -6,8 +6,8 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:vm="using:ScoutApp.ViewModels"
-    d:DesignHeight="600"
-    d:DesignWidth="800"
+    d:DesignHeight="1000"
+    d:DesignWidth="750"
     x:DataType="vm:MainViewModel">
 
     <Design.DataContext>
@@ -104,7 +104,6 @@
                 VerticalAlignment="Top"
                 FontWeight="Bold"
                 Foreground="{StaticResource accent}"
-                IsVisible="{Binding TextVisible}"
                 Text="{Binding MatchNumber, StringFormat='Match {0}'}" />
             <TextBlock
                 Grid.Row="0"
@@ -113,7 +112,6 @@
                 VerticalAlignment="Top"
                 FontWeight="Bold"
                 Foreground="{StaticResource accent}"
-                IsVisible="{Binding TextVisible}"
                 Text="{Binding TeamNumber, StringFormat='Team {0}'}" />
 
             <ToggleButton
@@ -123,7 +121,7 @@
                 Command="{Binding HeadingButtonCommand}"
                 CommandParameter="PreMatch"
                 Content="PRE MATCH"
-                FontSize="16"
+                FontSize="18"
                 FontWeight="Bold"
                 IsChecked="{Binding SelectedHeadingButton, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static vm:HeadingButtons.PreMatch}}" />
             <ToggleButton
@@ -133,7 +131,7 @@
                 Command="{Binding HeadingButtonCommand}"
                 CommandParameter="Auto"
                 Content="AUTO"
-                FontSize="16"
+                FontSize="18"
                 FontWeight="Bold"
                 IsChecked="{Binding SelectedHeadingButton, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static vm:HeadingButtons.Auto}}" />
             <ToggleButton
@@ -143,7 +141,7 @@
                 Command="{Binding HeadingButtonCommand}"
                 CommandParameter="TeleOp"
                 Content="TELEOP"
-                FontSize="16"
+                FontSize="18"
                 FontWeight="Bold"
                 IsChecked="{Binding SelectedHeadingButton, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static vm:HeadingButtons.TeleOp}}" />
             <ToggleButton
@@ -153,7 +151,7 @@
                 Command="{Binding HeadingButtonCommand}"
                 CommandParameter="PostMatch"
                 Content="POST MATCH"
-                FontSize="16"
+                FontSize="18"
                 FontWeight="Bold"
                 IsChecked="{Binding SelectedHeadingButton, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static vm:HeadingButtons.PostMatch}}" />
 
@@ -166,7 +164,10 @@
                 IsVisible="{Binding SelectedHeadingButton, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static vm:HeadingButtons.PreMatch}}"
                 Orientation="Vertical">
 
-                <TextBlock HorizontalAlignment="Center" FontWeight="Bold">
+                <TextBlock
+                    HorizontalAlignment="Center"
+                    FontSize="{Binding TextSize}"
+                    FontWeight="Bold">
                     Scout Name:
                 </TextBlock>
                 <TextBox
@@ -174,7 +175,10 @@
                     HorizontalAlignment="Center"
                     Text="{Binding ScoutName}" />
 
-                <TextBlock HorizontalAlignment="Center" FontWeight="Bold">
+                <TextBlock
+                    HorizontalAlignment="Center"
+                    FontSize="{Binding TextSize}"
+                    FontWeight="Bold">
                     Match Number:
                 </TextBlock>
                 <NumericUpDown
@@ -184,7 +188,10 @@
                     Minimum="0"
                     Value="{Binding MatchNumber}" />
 
-                <TextBlock HorizontalAlignment="Center" FontWeight="Bold">
+                <TextBlock
+                    HorizontalAlignment="Center"
+                    FontSize="{Binding TextSize}"
+                    FontWeight="Bold">
                     Team Number:
                 </TextBlock>
                 <NumericUpDown
@@ -194,7 +201,10 @@
                     Minimum="0"
                     Value="{Binding TeamNumber}" />
 
-                <TextBlock HorizontalAlignment="Center" FontWeight="Bold">
+                <TextBlock
+                    HorizontalAlignment="Center"
+                    FontSize="{Binding TextSize}"
+                    FontWeight="Bold">
                     Alliance Position:
                 </TextBlock>
                 <ComboBox
@@ -226,10 +236,12 @@
                     Background="{StaticResource darkgrey}"
                     Command="{Binding ToggleSummaryCommand}"
                     Content="Summary"
+                    FontSize="{Binding TextSize}"
                     FontWeight="Bold"
                     Foreground="{StaticResource accent}" />
                 <TextBlock
                     Margin="0,10,0,0"
+                    FontSize="{Binding TextSize}"
                     IsVisible="{Binding ShowSummary}"
                     Text="{Binding Summary}" />
                 <Image
@@ -244,6 +256,7 @@
                     Background="{StaticResource darkgrey}"
                     Command="{Binding NextMatchCommand}"
                     Content="Next Match"
+                    FontSize="{Binding TextSize}"
                     FontWeight="Bold"
                     Foreground="{StaticResource accent}" />
             </StackPanel>
@@ -257,13 +270,14 @@
                 HorizontalAlignment="Center"
                 ColumnDefinitions="Auto,Auto"
                 IsVisible="{Binding SelectedHeadingButton, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static vm:HeadingButtons.Auto}}"
-                RowDefinitions="Auto,Auto,Auto,Auto,Auto">
+                RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto">
 
                 <TextBlock
                     Grid.Row="0"
                     Grid.Column="0"
                     Height="32"
                     Margin="0,0,20,0"
+                    FontSize="{Binding TextSize}"
                     FontWeight="Bold">
                     Auto Starting Position:
                 </TextBlock>
@@ -283,18 +297,116 @@
                     Grid.Row="1"
                     Grid.Column="0"
                     Height="32"
-                    Margin="0,20,0,0"
+                    Margin="0,32,0,0"
+                    FontSize="{Binding TextSize}"
                     FontWeight="Bold">
                     Auto Move:
                 </TextBlock>
                 <CheckBox
                     Grid.Row="1"
                     Grid.Column="1"
-                    Margin="0,20,0,0"
+                    Margin="0,32,0,0"
                     HorizontalAlignment="Center"
                     IsChecked="{Binding AutoMove}" />
 
                 <StackPanel
+                    Grid.Row="2"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="2"
+                    Margin="150,32,0,0"
+                    Orientation="Horizontal">
+
+                    <TextBlock
+                        Width="150"
+                        Height="32"
+                        Margin="0,0,32,0"
+                        FontSize="{Binding TextSize}"
+                        FontWeight="Bold">
+                        SCORED
+                    </TextBlock>
+                    <TextBlock
+                        Width="150"
+                        Height="32"
+                        FontSize="{Binding TextSize}"
+                        FontWeight="Bold">
+                        MISSED
+                    </TextBlock>
+
+                </StackPanel>
+
+                <StackPanel
+                    Grid.Row="3"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="2"
+                    Orientation="Horizontal">
+
+                    <TextBlock
+                        Width="150"
+                        Height="32"
+                        FontSize="{Binding TextSize}"
+                        FontWeight="Bold">
+                        FUEL
+                    </TextBlock>
+
+                    <TextBlock
+                        Width="30"
+                        VerticalAlignment="Center"
+                        FontSize="{Binding TextSize}"
+                        FontWeight="Bold"
+                        Text="{Binding AutoFuelScored}" />
+                    <Button
+                        Width="50"
+                        Height="50"
+                        HorizontalContentAlignment="Center"
+                        VerticalContentAlignment="Center"
+                        Background="{StaticResource darkgrey}"
+                        Command="{Binding AutoScoredUpCommand}"
+                        Content="+"
+                        FontSize="24"
+                        Foreground="{StaticResource accent}" />
+                    <Button
+                        Width="50"
+                        Height="50"
+                        Margin="15,0,32,0"
+                        HorizontalContentAlignment="Center"
+                        VerticalContentAlignment="Center"
+                        Background="{StaticResource darkgrey}"
+                        Command="{Binding AutoScoredDownCommand}"
+                        Content="-"
+                        FontSize="24"
+                        Foreground="{StaticResource accent}" />
+
+                    <TextBlock
+                        Width="30"
+                        VerticalAlignment="Center"
+                        FontSize="{Binding TextSize}"
+                        FontWeight="Bold"
+                        Text="{Binding AutoFuelMissed}" />
+                    <Button
+                        Width="50"
+                        Height="50"
+                        HorizontalContentAlignment="Center"
+                        VerticalContentAlignment="Center"
+                        Background="{StaticResource darkgrey}"
+                        Command="{Binding AutoMissedUpCommand}"
+                        Content="+"
+                        FontSize="24"
+                        Foreground="{StaticResource accent}" />
+                    <Button
+                        Width="50"
+                        Height="50"
+                        Margin="15,0,0,0"
+                        HorizontalContentAlignment="Center"
+                        VerticalContentAlignment="Center"
+                        Background="{StaticResource darkgrey}"
+                        Command="{Binding AutoMissedDownCommand}"
+                        Content="-"
+                        FontSize="24"
+                        Foreground="{StaticResource accent}" />
+
+                </StackPanel>
+
+                <!-- <StackPanel
                     Grid.Row="2"
                     Grid.Column="0"
                     Grid.ColumnSpan="2"
@@ -325,11 +437,17 @@
                             SCORED
                         </TextBlock>
 
-                        <NumericUpDown
-                            Margin="0,16"
-                            FormatString="0"
-                            Minimum="0"
-                            Value="{Binding AutoFuelScored}" />
+                        <StackPanel Margin="0,16" Orientation="Horizontal">
+                            <TextBlock Text="{Binding AutoFuelScored}" />
+                            <Button
+                                Height="32"
+                                Command="{Binding AutoScoredUpCommand}"
+                                Content="+" />
+                            <Button
+                                Height="32"
+                                Command="{Binding AutoScoredDownCommand}"
+                                Content="-" />
+                        </StackPanel>
 
                         <ComboBox
                             Width="150"
@@ -344,34 +462,37 @@
 
                     </StackPanel>
 
-                    <StackPanel Orientation="Vertical">
+                    <TextBlock Height="16" FontWeight="Bold">
+                        MISSED
+                    </TextBlock>
 
-                        <TextBlock Height="16" FontWeight="Bold">
-                            MISSED
-                        </TextBlock>
-
-                        <NumericUpDown
-                            Margin="0,16"
-                            FormatString="0"
-                            Minimum="0"
-                            Value="{Binding AutoFuelMissed}" />
-
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding AutoFuelMissed}" />
+                        <Button
+                            Height="32"
+                            Command="{Binding AutoMissedUpCommand}"
+                            Content="+" />
+                        <Button
+                            Height="32"
+                            Command="{Binding AutoMissedDownCommand}"
+                            Content="-" />
                     </StackPanel>
 
-                </StackPanel>
+                </StackPanel>-->
 
                 <!--  Auto Obstacles  -->
                 <StackPanel
-                    Grid.Row="3"
+                    Grid.Row="4"
                     Grid.Column="0"
                     Grid.ColumnSpan="2"
-                    Margin="0,20,0,0"
+                    Margin="0,32,0,0"
                     HorizontalAlignment="Center"
                     Orientation="Horizontal">
 
                     <TextBlock
                         Height="32"
                         Margin="0,0,20,0"
+                        FontSize="{Binding TextSize}"
                         FontWeight="Bold">
                         Obstacles Used:
                     </TextBlock>
@@ -379,24 +500,29 @@
                     <CheckBox
                         Margin="0,0,20,0"
                         Content="Bump"
+                        FontSize="{Binding TextSize}"
                         IsChecked="{Binding AutoUsedBump}" />
 
-                    <CheckBox Content="Trench" IsChecked="{Binding AutoUsedTrench}" />
+                    <CheckBox
+                        Content="Trench"
+                        FontSize="{Binding TextSize}"
+                        IsChecked="{Binding AutoUsedTrench}" />
 
                 </StackPanel>
 
                 <!--  Auto Intake  -->
                 <StackPanel
-                    Grid.Row="4"
+                    Grid.Row="5"
                     Grid.Column="0"
                     Grid.ColumnSpan="2"
-                    Margin="0,20,0,0"
+                    Margin="0,32,0,0"
                     HorizontalAlignment="Center"
                     Orientation="Horizontal">
 
                     <TextBlock
                         Height="32"
                         Margin="0,0,20,0"
+                        FontSize="{Binding TextSize}"
                         FontWeight="Bold">
                         Intake From:
                     </TextBlock>
@@ -404,14 +530,19 @@
                     <CheckBox
                         Margin="0,0,20,0"
                         Content="Depot"
+                        FontSize="{Binding TextSize}"
                         IsChecked="{Binding AutoIntakeDepot}" />
 
                     <CheckBox
                         Margin="0,0,20,0"
                         Content="Outpost"
+                        FontSize="{Binding TextSize}"
                         IsChecked="{Binding AutoIntakeOutpost}" />
 
-                    <CheckBox Content="Neutral Zone" IsChecked="{Binding AutoIntakeNeutralZone}" />
+                    <CheckBox
+                        Content="Neutral Zone"
+                        FontSize="{Binding TextSize}"
+                        IsChecked="{Binding AutoIntakeNeutralZone}" />
 
                 </StackPanel>
 
@@ -439,13 +570,17 @@
                         <TextBlock
                             Height="32"
                             Margin="0,32,0,0"
+                            FontSize="{Binding TextSize}"
                             FontWeight="Bold">
                             FUEL into HUB
                         </TextBlock>
                     </StackPanel>
 
                     <StackPanel Margin="0,0,25,0" Orientation="Vertical">
-                        <TextBlock Height="16" FontWeight="Bold">
+                        <TextBlock
+                            Height="16"
+                            FontSize="{Binding TextSize}"
+                            FontWeight="Bold">
                             SCORED
                         </TextBlock>
                         <NumericUpDown
@@ -456,7 +591,10 @@
                     </StackPanel>
 
                     <StackPanel Orientation="Vertical">
-                        <TextBlock Height="16" FontWeight="Bold">
+                        <TextBlock
+                            Height="16"
+                            FontSize="{Binding TextSize}"
+                            FontWeight="Bold">
                             MISSED
                         </TextBlock>
                         <NumericUpDown
@@ -479,6 +617,7 @@
                     <TextBlock
                         Height="32"
                         Margin="0,0,20,0"
+                        FontSize="{Binding TextSize}"
                         FontWeight="Bold">
                         Obstacles Used:
                     </TextBlock>
@@ -486,9 +625,13 @@
                     <CheckBox
                         Margin="0,0,20,0"
                         Content="Bump"
+                        FontSize="{Binding TextSize}"
                         IsChecked="{Binding TeleOpUsedBump}" />
 
-                    <CheckBox Content="Trench" IsChecked="{Binding TeleOpUsedTrench}" />
+                    <CheckBox
+                        Content="Trench"
+                        FontSize="{Binding TextSize}"
+                        IsChecked="{Binding TeleOpUsedTrench}" />
 
                 </StackPanel>
 
@@ -501,8 +644,8 @@
                     Orientation="Horizontal">
 
                     <TextBlock
-                        Height="32"
                         Margin="0,0,20,0"
+                        FontSize="{Binding TextSize}"
                         FontWeight="Bold">
                         Intake From:
                     </TextBlock>
@@ -510,14 +653,19 @@
                     <CheckBox
                         Margin="0,0,20,0"
                         Content="Depot"
+                        FontSize="{Binding TextSize}"
                         IsChecked="{Binding TeleOpIntakeDepot}" />
 
                     <CheckBox
                         Margin="0,0,20,0"
                         Content="Outpost"
+                        FontSize="{Binding TextSize}"
                         IsChecked="{Binding TeleOpIntakeOutpost}" />
 
-                    <CheckBox Content="Neutral Zone" IsChecked="{Binding TeleOpIntakeNeutralZone}" />
+                    <CheckBox
+                        Content="Neutral Zone"
+                        FontSize="{Binding TextSize}"
+                        IsChecked="{Binding TeleOpIntakeNeutralZone}" />
 
                 </StackPanel>
 
@@ -527,6 +675,7 @@
                     Grid.Column="0"
                     Height="32"
                     Margin="0,20,20,0"
+                    FontSize="{Binding TextSize}"
                     FontWeight="Bold">
                     Climb:
                 </TextBlock>
@@ -551,6 +700,7 @@
                     Grid.Column="0"
                     Height="32"
                     Margin="0,20,20,0"
+                    FontSize="{Binding TextSize}"
                     FontWeight="Bold">
                     Breakdown:
                 </TextBlock>

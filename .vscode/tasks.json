@@ -72,8 +72,39 @@
             }
         },
         {
-            "label": "Show .NET",
-            "detail": "Run a HTTP server for the Browser app",
+            "label": "Show Debug .NET",
+            "detail": "Run a HTTP server for the Debug Browser app",
+            "type": "process",
+            "command": "./dk",
+            "windows": {
+                "command": ".\\dk.cmd"
+            },
+            "options": {
+                "env": {
+                    "DK_FACADE": "UPGRADE_NEVER"
+                }
+            },
+            "args": [
+                "SonicScout_Setup.HttpServer",
+                "--addr",
+                "127.0.0.1",
+                "--port",
+                "3100",
+                "--dir",
+                "2026/ScoutApp.Browser/bin/Debug/net8.0-browser/publish/wwwroot",
+            ],
+            "group": {
+                "kind": "test",
+            },
+            "isBackground": true,
+            "presentation": {
+                "reveal": "silent",
+                "panel": "dedicated"
+            }
+        },
+        {
+            "label": "Show Release .NET",
+            "detail": "Run a HTTP server for the Release Browser app",
             "type": "process",
             "command": "./dk",
             "windows": {

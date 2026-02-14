@@ -165,19 +165,53 @@ namespace ScoutApp.ViewModels
             }
         }
 
-        [ObservableProperty]
-        private bool _TextVisible;
-
-        partial void OnSelectedHeadingButtonChanged(HeadingButtons value)
+        [RelayCommand]
+        private void AutoScoredUp()
         {
-            if (value == HeadingButtons.PreMatch)
-            {
-                TextVisible = false;
-            }
-            else
-            {
-                TextVisible = true;
-            }
+            AutoFuelScored += 1;
+        }
+        [RelayCommand]
+        private void AutoScoredDown()
+        {
+            AutoFuelScored -= 1;
+            if (AutoFuelScored < 0)
+                AutoFuelScored = 0;
+        }
+        [RelayCommand]
+        private void AutoMissedUp()
+        {
+            AutoFuelMissed += 1;
+        }
+        [RelayCommand]
+        private void AutoMissedDown()
+        {
+            AutoFuelMissed -= 1;
+            if (AutoFuelMissed < 0)
+                AutoFuelMissed = 0;
+        }
+        [RelayCommand]
+        private void TeleOpScoredUp()
+        {
+            TeleOpFuelScored += 1;
+        }
+        [RelayCommand]
+        private void TeleOpScoredDown()
+        {
+            TeleOpFuelScored -= 1;
+            if (TeleOpFuelScored < 0)
+                TeleOpFuelScored = 0;
+        }
+        [RelayCommand]
+        private void TeleOpMissedUp()
+        {
+            TeleOpFuelMissed += 1;
+        }
+        [RelayCommand]
+        private void TeleOpMissedDown()
+        {
+            TeleOpFuelMissed -= 1;
+            if (TeleOpFuelMissed < 0)
+                TeleOpFuelMissed = 0;
         }
 
         [ObservableProperty]
@@ -188,6 +222,9 @@ namespace ScoutApp.ViewModels
         {
             ShowSummary = !ShowSummary;
         }
+
+        [ObservableProperty]
+        public int _TextSize = 16;
 
         [ObservableProperty]
         [NotifyPropertyChangedFor(nameof(Summary))]
@@ -323,6 +360,7 @@ Scout Name: {{ScoutName}}
 Team Number: {{TeamNumber}}
 Match Number: {{MatchNumber}}
 Alliance: {{SelectedAlliance}}
+Alliance Position: {{SelectedAlliancePosition}}
 Auto Starting Position: {{SPosition2026}}
 Auto Move: {{AutoMove}}
 Auto FUEL Scored: {{AutoFuelScored}}
@@ -355,7 +393,8 @@ Breakdown: {{Breakdown}}
 Name-{{ScoutName}}
 Team-{{TeamNumber}}
 Match-{{MatchNumber}}
-APos-{{SelectedAlliance}}
+Alliance-{{SelectedAlliance}}
+APos-{{SelectedAlliancePosition}}
 SPos-{{SPosition2026}}
 AMove-{{AutoMove}}
 AFS-{{AutoFuelScored}}
@@ -379,8 +418,7 @@ BD-{{Breakdown}}
 
                 if (SelectedAlliancePosition == null || SPosition2026 == null || TowerClimb == null || AutoTowerClimb == null)
                 {
-                    var uri = new Uri("avares://ScoutApp/Assets/cartman.png");
-                    using var stream = AssetLoader.Open(uri);
+                    using var stream = AssetLoader.Open(new Uri("avares://ScoutApp/Assets/cartman.png"));
                     return new Bitmap(stream);
                 }
 
