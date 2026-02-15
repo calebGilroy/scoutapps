@@ -360,7 +360,6 @@ Scout Name: {{ScoutName}}
 Team Number: {{TeamNumber}}
 Match Number: {{MatchNumber}}
 Alliance: {{SelectedAlliance}}
-Alliance Position: {{SelectedAlliancePosition}}
 Auto Starting Position: {{SPosition2026}}
 Auto Move: {{AutoMove}}
 Auto FUEL Scored: {{AutoFuelScored}}
@@ -394,7 +393,6 @@ Name-{{ScoutName}}
 Team-{{TeamNumber}}
 Match-{{MatchNumber}}
 Alliance-{{SelectedAlliance}}
-APos-{{SelectedAlliancePosition}}
 SPos-{{SPosition2026}}
 AMove-{{AutoMove}}
 AFS-{{AutoFuelScored}}

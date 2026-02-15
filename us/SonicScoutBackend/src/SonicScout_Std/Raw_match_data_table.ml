@@ -47,11 +47,29 @@ let fs field_name = { field_name; field_is_primary=false; field_type = String }
 let as_primary field = { field with field_is_primary=true }
 
 let fields = [
-  as_primary (fi "Name");
-  fs "SPos";
+  fs "Name";
   fi "Team";
-  fs "ALeave";
-  fi "AL4";
+  fi "Match";
+  fs "Alliance";
+  fs "SPos";
+  fs "AMove";
+  fi "AFS";
+  fi "AFM";
+  fs "ATC";
+  fb "ABump";
+  fb "ATrench";
+  fb "AIDep";
+  fb "AIOut";
+  fb "AINZ";
+  fi "TFS";
+  fi "TFM";
+  fb "TBump";
+  fb "TTrench";
+  fb "TIDep";
+  fb "TIOut";
+  fb "TINZ";
+  fs "TC";
+  fs "TB";
 ]
 
 let getfield name =
