@@ -270,7 +270,7 @@
                 HorizontalAlignment="Center"
                 ColumnDefinitions="Auto,Auto"
                 IsVisible="{Binding SelectedHeadingButton, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static vm:HeadingButtons.Auto}}"
-                RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto">
+                RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto">
 
                 <TextBlock
                     Grid.Row="0"
@@ -354,9 +354,11 @@
                         FontSize="{Binding TextSize}"
                         FontWeight="Bold"
                         Text="{Binding AutoFuelScored}" />
-                    <Button
+                    <RepeatButton
                         Width="50"
                         Height="50"
+                        Delay="300"
+                        Interval="150"
                         HorizontalContentAlignment="Center"
                         VerticalContentAlignment="Center"
                         Background="{StaticResource darkgrey}"
@@ -364,10 +366,12 @@
                         Content="+"
                         FontSize="24"
                         Foreground="{StaticResource accent}" />
-                    <Button
+                    <RepeatButton
                         Width="50"
                         Height="50"
                         Margin="15,0,32,0"
+                        Delay="300"
+                        Interval="150"
                         HorizontalContentAlignment="Center"
                         VerticalContentAlignment="Center"
                         Background="{StaticResource darkgrey}"
@@ -382,9 +386,11 @@
                         FontSize="{Binding TextSize}"
                         FontWeight="Bold"
                         Text="{Binding AutoFuelMissed}" />
-                    <Button
+                    <RepeatButton
                         Width="50"
                         Height="50"
+                        Delay="300"
+                        Interval="150"
                         HorizontalContentAlignment="Center"
                         VerticalContentAlignment="Center"
                         Background="{StaticResource darkgrey}"
@@ -392,10 +398,12 @@
                         Content="+"
                         FontSize="24"
                         Foreground="{StaticResource accent}" />
-                    <Button
+                    <RepeatButton
                         Width="50"
                         Height="50"
                         Margin="15,0,0,0"
+                        Delay="300"
+                        Interval="150"
                         HorizontalContentAlignment="Center"
                         VerticalContentAlignment="Center"
                         Background="{StaticResource darkgrey}"
@@ -405,6 +413,29 @@
                         Foreground="{StaticResource accent}" />
 
                 </StackPanel>
+
+                <!--  Auto Tower Climb  -->
+                <TextBlock
+                    Grid.Row="4"
+                    Grid.Column="0"
+                    Height="32"
+                    Margin="0,32,20,0"
+                    FontSize="{Binding TextSize}"
+                    FontWeight="Bold">
+                    Auto Tower Climb:
+                </TextBlock>
+                <ComboBox
+                    Grid.Row="4"
+                    Grid.Column="1"
+                    Width="180"
+                    Margin="0,32,0,0"
+                    SelectedItem="{Binding AutoTowerClimb, Mode=TwoWay}">
+                    <ComboBox.Items>
+                        <x:Static Member="vm:TowerClimb2026.Level1" />
+                        <x:Static Member="vm:TowerClimb2026.Failed" />
+                        <x:Static Member="vm:TowerClimb2026.DidNotAttempt" />
+                    </ComboBox.Items>
+                </ComboBox>
 
                 <!-- <StackPanel
                     Grid.Row="2"
@@ -482,7 +513,7 @@
 
                 <!--  Auto Obstacles  -->
                 <StackPanel
-                    Grid.Row="4"
+                    Grid.Row="5"
                     Grid.Column="0"
                     Grid.ColumnSpan="2"
                     Margin="0,32,0,0"
@@ -512,7 +543,7 @@
 
                 <!--  Auto Intake  -->
                 <StackPanel
-                    Grid.Row="5"
+                    Grid.Row="6"
                     Grid.Column="0"
                     Grid.ColumnSpan="2"
                     Margin="0,32,0,0"
@@ -559,58 +590,116 @@
                 IsVisible="{Binding SelectedHeadingButton, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static vm:HeadingButtons.TeleOp}}"
                 RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto">
 
-                <!--  FUEL Scoring  -->
+                <!--  FUEL Scoring Headers  -->
                 <StackPanel
                     Grid.Row="0"
                     Grid.ColumnSpan="2"
-                    HorizontalAlignment="Center"
+                    Margin="150,0,0,0"
                     Orientation="Horizontal">
 
-                    <StackPanel Margin="0,0,25,0" Orientation="Vertical">
-                        <TextBlock
-                            Height="32"
-                            Margin="0,32,0,0"
-                            FontSize="{Binding TextSize}"
-                            FontWeight="Bold">
-                            FUEL into HUB
-                        </TextBlock>
-                    </StackPanel>
+                    <TextBlock
+                        Width="150"
+                        Height="32"
+                        Margin="0,0,32,0"
+                        FontSize="{Binding TextSize}"
+                        FontWeight="Bold">
+                        SCORED
+                    </TextBlock>
+                    <TextBlock
+                        Width="150"
+                        Height="32"
+                        FontSize="{Binding TextSize}"
+                        FontWeight="Bold">
+                        MISSED
+                    </TextBlock>
 
-                    <StackPanel Margin="0,0,25,0" Orientation="Vertical">
-                        <TextBlock
-                            Height="16"
-                            FontSize="{Binding TextSize}"
-                            FontWeight="Bold">
-                            SCORED
-                        </TextBlock>
-                        <NumericUpDown
-                            Margin="0,16"
-                            FormatString="0"
-                            Minimum="0"
-                            Value="{Binding TeleOpFuelScored}" />
-                    </StackPanel>
+                </StackPanel>
 
-                    <StackPanel Orientation="Vertical">
-                        <TextBlock
-                            Height="16"
-                            FontSize="{Binding TextSize}"
-                            FontWeight="Bold">
-                            MISSED
-                        </TextBlock>
-                        <NumericUpDown
-                            Margin="0,16"
-                            FormatString="0"
-                            Minimum="0"
-                            Value="{Binding TeleOpFuelMissed}" />
-                    </StackPanel>
+                <!--  FUEL Scoring Row  -->
+                <StackPanel
+                    Grid.Row="1"
+                    Grid.ColumnSpan="2"
+                    Orientation="Horizontal">
+
+                    <TextBlock
+                        Width="150"
+                        Height="32"
+                        FontSize="{Binding TextSize}"
+                        FontWeight="Bold">
+                        FUEL
+                    </TextBlock>
+
+                    <TextBlock
+                        Width="30"
+                        VerticalAlignment="Center"
+                        FontSize="{Binding TextSize}"
+                        FontWeight="Bold"
+                        Text="{Binding TeleOpFuelScored}" />
+                    <RepeatButton
+                        Width="50"
+                        Height="50"
+                        Delay="300"
+                        Interval="150"
+                        HorizontalContentAlignment="Center"
+                        VerticalContentAlignment="Center"
+                        Background="{StaticResource darkgrey}"
+                        Command="{Binding TeleOpScoredUpCommand}"
+                        Content="+"
+                        FontSize="24"
+                        Foreground="{StaticResource accent}" />
+                    <RepeatButton
+                        Width="50"
+                        Height="50"
+                        Margin="15,0,32,0"
+                        Delay="300"
+                        Interval="150"
+                        HorizontalContentAlignment="Center"
+                        VerticalContentAlignment="Center"
+                        Background="{StaticResource darkgrey}"
+                        Command="{Binding TeleOpScoredDownCommand}"
+                        Content="-"
+                        FontSize="24"
+                        Foreground="{StaticResource accent}" />
+
+                    <TextBlock
+                        Width="30"
+                        VerticalAlignment="Center"
+                        FontSize="{Binding TextSize}"
+                        FontWeight="Bold"
+                        Text="{Binding TeleOpFuelMissed}" />
+                    <RepeatButton
+                        Width="50"
+                        Height="50"
+                        Delay="300"
+                        Interval="150"
+                        HorizontalContentAlignment="Center"
+                        VerticalContentAlignment="Center"
+                        Background="{StaticResource darkgrey}"
+                        Command="{Binding TeleOpMissedUpCommand}"
+                        Content="+"
+                        FontSize="24"
+                        Foreground="{StaticResource accent}" />
+                    <RepeatButton
+                        Width="50"
+                        Height="50"
+                        Margin="15,0,0,0"
+                        Delay="300"
+                        Interval="150"
+                        HorizontalContentAlignment="Center"
+                        VerticalContentAlignment="Center"
+                        Background="{StaticResource darkgrey}"
+                        Command="{Binding TeleOpMissedDownCommand}"
+                        Content="-"
+                        FontSize="24"
+                        Foreground="{StaticResource accent}" />
 
                 </StackPanel>
 
                 <!--  TeleOp Obstacles  -->
                 <StackPanel
-                    Grid.Row="1"
+                    Grid.Row="2"
                     Grid.ColumnSpan="2"
-                    Margin="0,20,0,0"
+                    Margin="0,32,0,0"
                     HorizontalAlignment="Center"
                     Orientation="Horizontal">
 
@@ -637,9 +726,9 @@
 
                 <!--  TeleOp Intake  -->
                 <StackPanel
-                    Grid.Row="2"
+                    Grid.Row="3"
                     Grid.ColumnSpan="2"
-                    Margin="0,20,0,0"
+                    Margin="0,32,0,0"
                     HorizontalAlignment="Center"
                     Orientation="Horizontal">
 
@@ -671,19 +760,19 @@
 
                 <!--  Tower Climb  -->
                 <TextBlock
-                    Grid.Row="3"
+                    Grid.Row="4"
                     Grid.Column="0"
                     Height="32"
-                    Margin="0,20,20,0"
+                    Margin="0,32,20,0"
                     FontSize="{Binding TextSize}"
                     FontWeight="Bold">
                     Climb:
                 </TextBlock>
                 <ComboBox
-                    Grid.Row="3"
+                    Grid.Row="4"
                     Grid.Column="1"
                     Width="180"
-                    Margin="0,20,0,0"
+                    Margin="0,32,0,0"
                     SelectedItem="{Binding TowerClimb, Mode=TwoWay}">
                     <ComboBox.Items>
                         <x:Static Member="vm:TowerClimb2026.Level1" />
@@ -696,19 +785,19 @@
 
                 <!--  Breakdown  -->
                 <TextBlock
-                    Grid.Row="4"
+                    Grid.Row="5"
                     Grid.Column="0"
                     Height="32"
-                    Margin="0,20,20,0"
+                    Margin="0,32,20,0"
                     FontSize="{Binding TextSize}"
                     FontWeight="Bold">
                     Breakdown:
                 </TextBlock>
                 <ComboBox
-                    Grid.Row="4"
+                    Grid.Row="5"
                     Grid.Column="1"
                     Width="180"
-                    Margin="0,20,0,0"
+                    Margin="0,32,0,0"
                     SelectedItem="{Binding Breakdown, Mode=TwoWay}">
                     <ComboBox.Items>
                         <x:Static Member="vm:Breakdown2026.None" />
