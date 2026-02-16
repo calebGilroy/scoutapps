@@ -92,7 +92,7 @@
 
         <Grid
             HorizontalAlignment="Left"
-            VerticalAlignment="Top"
+            VerticalAlignment="Stretch"
             Background="{StaticResource background}"
             ColumnDefinitions="Auto,Auto,Auto,Auto"
             RowDefinitions="Auto,Auto,Auto,Auto,Auto">
@@ -102,7 +102,6 @@
                 Grid.Column="0"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top"
-                FontWeight="Bold"
                 Foreground="{StaticResource accent}"
                 Text="{Binding MatchNumber, StringFormat='Match {0}'}" />
             <TextBlock
@@ -110,7 +109,6 @@
                 Grid.Column="3"
                 HorizontalAlignment="Right"
                 VerticalAlignment="Top"
-                FontWeight="Bold"
                 Foreground="{StaticResource accent}"
                 Text="{Binding TeamNumber, StringFormat='Team {0}'}" />
 
@@ -284,7 +282,7 @@
                 <ComboBox
                     Grid.Row="0"
                     Grid.Column="1"
-                    Width="150"
+                    Width="180"
                     SelectedItem="{Binding SPosition2026, Mode=TwoWay}">
                     <ComboBox.Items>
                         <x:Static Member="vm:AutoStartingPosition.Left" />
@@ -357,28 +355,28 @@
                     <RepeatButton
                         Width="50"
                         Height="50"
-                        Delay="300"
-                        Interval="150"
                         HorizontalContentAlignment="Center"
                         VerticalContentAlignment="Center"
                         Background="{StaticResource darkgrey}"
                         Command="{Binding AutoScoredUpCommand}"
                         Content="+"
+                        Delay="300"
                         FontSize="24"
-                        Foreground="{StaticResource accent}" />
+                        Foreground="{StaticResource accent}"
+                        Interval="150" />
                     <RepeatButton
                         Width="50"
                         Height="50"
                         Margin="15,0,32,0"
-                        Delay="300"
-                        Interval="150"
                         HorizontalContentAlignment="Center"
                         VerticalContentAlignment="Center"
                         Background="{StaticResource darkgrey}"
                         Command="{Binding AutoScoredDownCommand}"
                         Content="-"
+                        Delay="300"
                         FontSize="24"
-                        Foreground="{StaticResource accent}" />
+                        Foreground="{StaticResource accent}"
+                        Interval="150" />
 
                     <TextBlock
                         Width="30"
@@ -389,131 +387,34 @@
                     <RepeatButton
                         Width="50"
                         Height="50"
-                        Delay="300"
-                        Interval="150"
                         HorizontalContentAlignment="Center"
                         VerticalContentAlignment="Center"
                         Background="{StaticResource darkgrey}"
                         Command="{Binding AutoMissedUpCommand}"
                         Content="+"
+                        Delay="300"
                         FontSize="24"
-                        Foreground="{StaticResource accent}" />
+                        Foreground="{StaticResource accent}"
+                        Interval="150" />
                     <RepeatButton
                         Width="50"
                         Height="50"
                         Margin="15,0,0,0"
-                        Delay="300"
-                        Interval="150"
                         HorizontalContentAlignment="Center"
                         VerticalContentAlignment="Center"
                         Background="{StaticResource darkgrey}"
                         Command="{Binding AutoMissedDownCommand}"
                         Content="-"
+                        Delay="300"
                         FontSize="24"
-                        Foreground="{StaticResource accent}" />
+                        Foreground="{StaticResource accent}"
+                        Interval="150" />
 
                 </StackPanel>
 
-                <!--  Auto Tower Climb  -->
-                <TextBlock
-                    Grid.Row="4"
-                    Grid.Column="0"
-                    Height="32"
-                    Margin="0,32,20,0"
-                    FontSize="{Binding TextSize}"
-                    FontWeight="Bold">
-                    Auto Tower Climb:
-                </TextBlock>
-                <ComboBox
-                    Grid.Row="4"
-                    Grid.Column="1"
-                    Width="180"
-                    Margin="0,32,0,0"
-                    SelectedItem="{Binding AutoTowerClimb, Mode=TwoWay}">
-                    <ComboBox.Items>
-                        <x:Static Member="vm:TowerClimb2026.Level1" />
-                        <x:Static Member="vm:TowerClimb2026.Failed" />
-                        <x:Static Member="vm:TowerClimb2026.DidNotAttempt" />
-                    </ComboBox.Items>
-                </ComboBox>
-
-                <!-- <StackPanel
-                    Grid.Row="2"
-                    Grid.Column="0"
-                    Grid.ColumnSpan="2"
-                    Margin="0,20,0,0"
-                    Orientation="Horizontal">
-
-                    <StackPanel Margin="0,0,25,0" Orientation="Vertical">
-
-                        <TextBlock
-                            Height="32"
-                            Margin="0,32,0,0"
-                            FontWeight="Bold">
-                            FUEL into HUB
-                        </TextBlock>
-
-                        <TextBlock
-                            Height="32"
-                            Margin="0,32,0,0"
-                            FontWeight="Bold">
-                            Auto Tower Climb
-                        </TextBlock>
-
-                    </StackPanel>
-
-                    <StackPanel Margin="0,0,25,0" Orientation="Vertical">
-
-                        <TextBlock Height="16" FontWeight="Bold">
-                            SCORED
-                        </TextBlock>
-
-                        <StackPanel Margin="0,16" Orientation="Horizontal">
-                            <TextBlock Text="{Binding AutoFuelScored}" />
-                            <Button
-                                Height="32"
-                                Command="{Binding AutoScoredUpCommand}"
-                                Content="+" />
-                            <Button
-                                Height="32"
-                                Command="{Binding AutoScoredDownCommand}"
-                                Content="-" />
-                        </StackPanel>
-
-                        <ComboBox
-                            Width="150"
-                            Margin="0,16"
-                            SelectedItem="{Binding AutoTowerClimb, Mode=TwoWay}">
-                            <ComboBox.Items>
-                                <x:Static Member="vm:TowerClimb2026.Level1" />
-                                <x:Static Member="vm:TowerClimb2026.Failed" />
-                                <x:Static Member="vm:TowerClimb2026.DidNotAttempt" />
-                            </ComboBox.Items>
-                        </ComboBox>
-
-                    </StackPanel>
-
-                    <TextBlock Height="16" FontWeight="Bold">
-                        MISSED
-                    </TextBlock>
-
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="{Binding AutoFuelMissed}" />
-                        <Button
-                            Height="32"
-                            Command="{Binding AutoMissedUpCommand}"
-                            Content="+" />
-                        <Button
-                            Height="32"
-                            Command="{Binding AutoMissedDownCommand}"
-                            Content="-" />
-                    </StackPanel>
-
-                </StackPanel>-->
-
                 <!--  Auto Obstacles  -->
                 <StackPanel
-                    Grid.Row="5"
+                    Grid.Row="4"
                     Grid.Column="0"
                     Grid.ColumnSpan="2"
                     Margin="0,32,0,0"
@@ -543,7 +444,7 @@
 
                 <!--  Auto Intake  -->
                 <StackPanel
-                    Grid.Row="6"
+                    Grid.Row="5"
                     Grid.Column="0"
                     Grid.ColumnSpan="2"
                     Margin="0,32,0,0"
@@ -576,6 +477,29 @@
                         IsChecked="{Binding AutoIntakeNeutralZone}" />
 
                 </StackPanel>
+
+                <!--  Auto Tower Climb  -->
+                <TextBlock
+                    Grid.Row="6"
+                    Grid.Column="0"
+                    Height="32"
+                    Margin="0,32,20,0"
+                    FontSize="{Binding TextSize}"
+                    FontWeight="Bold">
+                    Auto Tower Climb:
+                </TextBlock>
+                <ComboBox
+                    Grid.Row="6"
+                    Grid.Column="1"
+                    Width="180"
+                    Margin="0,32,0,0"
+                    SelectedItem="{Binding AutoTowerClimb, Mode=TwoWay}">
+                    <ComboBox.Items>
+                        <x:Static Member="vm:TowerClimb2026.Level1" />
+                        <x:Static Member="vm:TowerClimb2026.Failed" />
+                        <x:Static Member="vm:TowerClimb2026.DidNotAttempt" />
+                    </ComboBox.Items>
+                </ComboBox>
 
             </Grid>
 
@@ -638,28 +562,28 @@
                     <RepeatButton
                         Width="50"
                         Height="50"
-                        Delay="300"
-                        Interval="150"
                         HorizontalContentAlignment="Center"
                         VerticalContentAlignment="Center"
                         Background="{StaticResource darkgrey}"
                         Command="{Binding TeleOpScoredUpCommand}"
                         Content="+"
+                        Delay="300"
                         FontSize="24"
-                        Foreground="{StaticResource accent}" />
+                        Foreground="{StaticResource accent}"
+                        Interval="150" />
                     <RepeatButton
                         Width="50"
                         Height="50"
                         Margin="15,0,32,0"
-                        Delay="300"
-                        Interval="150"
                         HorizontalContentAlignment="Center"
                         VerticalContentAlignment="Center"
                         Background="{StaticResource darkgrey}"
                         Command="{Binding TeleOpScoredDownCommand}"
                         Content="-"
+                        Delay="300"
                         FontSize="24"
-                        Foreground="{StaticResource accent}" />
+                        Foreground="{StaticResource accent}"
+                        Interval="150" />
 
                     <TextBlock
                         Width="30"
@@ -670,28 +594,28 @@
                     <RepeatButton
                         Width="50"
                         Height="50"
-                        Delay="300"
-                        Interval="150"
                         HorizontalContentAlignment="Center"
                         VerticalContentAlignment="Center"
                         Background="{StaticResource darkgrey}"
                         Command="{Binding TeleOpMissedUpCommand}"
                         Content="+"
+                        Delay="300"
                         FontSize="24"
-                        Foreground="{StaticResource accent}" />
+                        Foreground="{StaticResource accent}"
+                        Interval="150" />
                     <RepeatButton
                         Width="50"
                         Height="50"
                         Margin="15,0,0,0"
-                        Delay="300"
-                        Interval="150"
                         HorizontalContentAlignment="Center"
                         VerticalContentAlignment="Center"
                         Background="{StaticResource darkgrey}"
                         Command="{Binding TeleOpMissedDownCommand}"
                         Content="-"
+                        Delay="300"
                         FontSize="24"
-                        Foreground="{StaticResource accent}" />
+                        Foreground="{StaticResource accent}"
+                        Interval="150" />
 
                 </StackPanel>
 
