@@ -90,163 +90,120 @@ module Table : Table_type = struct
   type colums =
     (* [not game specific] generic info *)
     | Team_number
-    | Team_name
     | Match_Number
     | Scouter_Name
+    | Alliance_Color
     (* [Game specific] auto*)
     | Starting_Position
-    | Auto_coral_l1_score
-    | Auto_coral_l1_miss
-    | Auto_coral_l2_score
-    | Auto_coral_l2_miss
-    | Auto_coral_l3_score
-    | Auto_coral_l3_miss
-    | Auto_coral_l4_score
-    | Auto_coral_l4_miss
-    | Auto_processor_score
-    | Auto_processor_miss
-    | Auto_net_score
-    | Auto_net_miss
-    | Preplaced_coral
-    | Auto_leave
+    | Auto_move
+    | Auto_fuel_score
+    | Auto_fuel_miss
+    | Auto_tower_climb
+    | Auto_bump
+    | Auto_trench
+    | Auto_intake_depot
+    | Auto_intake_outpost
+    | Auto_intake_neutral_zone
 
     (* [Game specific] tele data points *)
-    | Tele_op_coral_l1_score
-    | Tele_op_coral_l1_miss
-    | Tele_op_coral_l2_score
-    | Tele_op_coral_l2_miss
-    | Tele_op_coral_l3_score
-    | Tele_op_coral_l3_miss
-    | Tele_op_coral_l4_score
-    | Tele_op_coral_l4_miss
-    | Tele_op_processor_score
-    | Tele_op_processor_miss
-    | Tele_op_net_score
-    | Tele_op_net_miss
-    | Tele_op_breakdown
-    | Endgame_climb
+    | Tele_op_fuel_score
+    | Tele_op_fuel_miss
+    | Tele_op_bump
+    | Tele_op_trench
+    | Tele_op_intake_depot
+    | Tele_op_intake_outpost
+    | Tele_op_intake_neutral_zone
+    | Tower_climb
+    | Breakdown
 
   (* This is how the column will be seen in the SQL database or the
     .csv file upon exportation*)
   (*The # of column_name should match the # of columns defined in above function*)
   let colum_name = function
     | Team_number -> "team_number"
-    | Team_name -> "team_name"
     | Match_Number -> "match_number"
     | Scouter_Name -> "scouter_name"
+    | Alliance_Color -> "alliance_color"
     (*  *)
     | Starting_Position -> "starting_position"
-    | Auto_coral_l1_score -> "auto_coral_l1_score"
-    | Auto_coral_l1_miss -> "auto_coral_l1_miss"
-    | Auto_coral_l2_score -> "auto_coral_l2_score"
-    | Auto_coral_l2_miss -> "auto_coral_l2_miss"
-    | Auto_coral_l3_score -> "auto_coral_l3_score"
-    | Auto_coral_l3_miss -> "auto_coral_l3_miss"
-    | Auto_coral_l4_score -> "auto_coral_l4_score"
-    | Auto_coral_l4_miss -> "auto_coral_l4_miss"
-    | Auto_processor_score -> "auto_processor_score"
-    | Auto_processor_miss -> "auto_processor_miss"
-    | Auto_net_score -> "auto_net_score"
-    | Auto_net_miss -> "auto_net_miss"
-    | Preplaced_coral -> "preplaced_coral"
-    | Auto_leave -> "auto_leave"
-
+    | Auto_move -> "auto_move"
+    | Auto_fuel_score -> "auto_fuel_score"
+    | Auto_fuel_miss -> "auto_fuel_miss"
+    | Auto_tower_climb -> "auto_tower_climb"
+    | Auto_bump -> "auto_bump"
+    | Auto_trench -> "auto_trench"
+    | Auto_intake_depot -> "auto_intake_depot"
+    | Auto_intake_outpost -> "auto_intake_outpost"
+    | Auto_intake_neutral_zone -> "auto_intake_neutral_zone"
     (*  *)
-    | Tele_op_coral_l1_score -> "tele_op_coral_l1_score"
-    | Tele_op_coral_l1_miss -> "tele_op_coral_l1_miss"
-    | Tele_op_coral_l2_score -> "tele_op_coral_l2_score"
-    | Tele_op_coral_l2_miss -> "tele_op_coral_l2_miss"
-    | Tele_op_coral_l3_score -> "tele_op_coral_l3_score"
-    | Tele_op_coral_l3_miss -> "tele_op_coral_l3_miss"
-    | Tele_op_coral_l4_score -> "tele_op_coral_l4_score"
-    | Tele_op_coral_l4_miss -> "tele_op_coral_l4_miss"
-    | Tele_op_processor_score -> "tele_op_processor_score"
-    | Tele_op_processor_miss -> "tele_op_processor_miss"
-    | Tele_op_net_score -> "tele_op_net_score"
-    | Tele_op_net_miss -> "tele_op_net_miss"
-    | Tele_op_breakdown -> "tele_op_breakdown"
-    | Endgame_climb -> "endgame_climb"
+    | Tele_op_fuel_score -> "tele_op_fuel_score"
+    | Tele_op_fuel_miss -> "tele_op_fuel_miss"
+    | Tele_op_bump -> "tele_op_bump"
+    | Tele_op_trench -> "tele_op_trench"
+    | Tele_op_intake_depot -> "tele_op_intake_depot"
+    | Tele_op_intake_outpost -> "tele_op_intake_outpost"
+    | Tele_op_intake_neutral_zone -> "tele_op_intake_neutral_zone"
+    | Tower_climb -> "tower_climb"
+    | Breakdown -> "breakdown"
 
   (* This defines what kind of data type each column will store. There are only two options: TEXT or INT*)
   (* # of colum_datatype should be matching # of columns defined in above functions*)
   let colum_datatype = function
     | Team_number -> "INT"
-    | Team_name -> "TEXT"
     | Match_Number -> "INT"
     | Scouter_Name -> "TEXT"
+    | Alliance_Color -> "TEXT"
     (*  *)
     | Starting_Position -> "TEXT"
-    | Auto_coral_l1_score -> "INT"
-    | Auto_coral_l1_miss -> "INT"
-    | Auto_coral_l2_score -> "INT"
-    | Auto_coral_l2_miss -> "INT"
-    | Auto_coral_l3_score -> "INT"
-    | Auto_coral_l3_miss -> "INT"
-    | Auto_coral_l4_score -> "INT"
-    | Auto_coral_l4_miss -> "INT"
-    | Auto_processor_score -> "INT"
-    | Auto_processor_miss -> "INT"
-    | Auto_net_score -> "INT"
-    | Auto_net_miss -> "INT"
-    | Preplaced_coral -> "TEXT"
-    | Auto_leave -> "TEXT"
-
+    | Auto_move -> "BOOLEAN"
+    | Auto_fuel_score -> "INT"
+    | Auto_fuel_miss -> "INT"
+    | Auto_tower_climb -> "TEXT"
+    | Auto_bump -> "BOOLEAN"
+    | Auto_trench -> "BOOLEAN"
+    | Auto_intake_depot -> "BOOLEAN"
+    | Auto_intake_outpost -> "BOOLEAN"
+    | Auto_intake_neutral_zone -> "BOOLEAN"
     (*  *)
-    | Tele_op_coral_l1_score -> "INT"
-    | Tele_op_coral_l1_miss -> "INT"
-    | Tele_op_coral_l2_score -> "INT"
-    | Tele_op_coral_l2_miss -> "INT"
-    | Tele_op_coral_l3_score -> "INT"
-    | Tele_op_coral_l3_miss -> "INT"
-    | Tele_op_coral_l4_score -> "INT"
-    | Tele_op_coral_l4_miss -> "INT"
-    | Tele_op_processor_score -> "INT"
-    | Tele_op_processor_miss -> "INT"
-    | Tele_op_net_score -> "INT"
-    | Tele_op_net_miss -> "INT"
-    | Tele_op_breakdown -> "TEXT"
-    | Endgame_climb -> "TEXT"
+    | Tele_op_fuel_score -> "INT"
+    | Tele_op_fuel_miss -> "INT"
+    | Tele_op_bump -> "BOOLEAN"
+    | Tele_op_trench -> "BOOLEAN"
+    | Tele_op_intake_depot -> "BOOLEAN"
+    | Tele_op_intake_outpost -> "BOOLEAN"
+    | Tele_op_intake_neutral_zone -> "BOOLEAN"
+    | Tower_climb -> "TEXT"
+    | Breakdown -> "TEXT"
 
   (*This defines how the order of the columns seen in databse will be written and captured from QR code*)
   let colums_in_order =
     [
       Team_number;
-      Team_name;
       Match_Number;
       Scouter_Name;
+      Alliance_Color;
       (*Alliance;*)
       (* Auto *)
       Starting_Position;
-      Auto_coral_l1_score;
-      Auto_coral_l1_miss;
-      Auto_coral_l2_score;
-      Auto_coral_l2_miss;
-      Auto_coral_l3_score;
-      Auto_coral_l3_miss;
-      Auto_coral_l4_score;
-      Auto_coral_l4_miss;
-      Auto_processor_score;
-      Auto_processor_miss;
-      Auto_net_score;
-      Auto_net_miss;
-      Preplaced_coral;
-      Auto_leave;
-
+      Auto_move;
+      Auto_fuel_score;
+      Auto_fuel_miss;
+      Auto_bump;
+      Auto_trench;
+      Auto_intake_depot;
+      Auto_intake_outpost;
+      Auto_intake_neutral_zone;
+      Auto_tower_climb;
       (* Teleop *)
-      Tele_op_coral_l1_score;
-      Tele_op_coral_l1_miss;
-      Tele_op_coral_l2_score;
-      Tele_op_coral_l2_miss;
-      Tele_op_coral_l3_score;
-      Tele_op_coral_l3_miss;
-      Tele_op_coral_l4_score;
-      Tele_op_coral_l4_miss;
-      Tele_op_processor_score;
-      Tele_op_processor_miss;
-      Tele_op_net_score;
-      Tele_op_net_miss;
-      Tele_op_breakdown;
-      Endgame_climb;
+      Tele_op_fuel_score;
+      Tele_op_fuel_miss;
+      Tele_op_bump;
+      Tele_op_trench;
+      Tele_op_intake_depot;
+      Tele_op_intake_outpost;
+      Tele_op_intake_neutral_zone;
+      Tower_climb;
+      Breakdown;
     ]
 
   (*Set's primary keys for identification of data. Do not change under normal circumstanes.*)
