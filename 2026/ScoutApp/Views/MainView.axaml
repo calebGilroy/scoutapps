@@ -353,10 +353,10 @@
                         Background="{StaticResource darkgrey}"
                         Command="{Binding AutoScoredUpCommand}"
                         Content="+"
-                        Delay="300"
+                        Delay="50"
                         FontSize="24"
                         Foreground="{StaticResource accent}"
-                        Interval="150" />
+                        Interval="75" />
                     <RepeatButton
                         Width="60"
                         Height="60"
@@ -366,10 +366,10 @@
                         Background="{StaticResource darkgrey}"
                         Command="{Binding AutoScoredDownCommand}"
                         Content="-"
-                        Delay="300"
+                        Delay="50"
                         FontSize="24"
                         Foreground="{StaticResource accent}"
-                        Interval="150" />
+                        Interval="75" />
 
                     <RepeatButton
                         Width="60"
@@ -379,10 +379,10 @@
                         Background="{StaticResource darkgrey}"
                         Command="{Binding AutoMissedUpCommand}"
                         Content="+"
-                        Delay="300"
+                        Delay="50"
                         FontSize="24"
                         Foreground="{StaticResource accent}"
-                        Interval="150" />
+                        Interval="75" />
                     <RepeatButton
                         Width="60"
                         Height="60"
@@ -392,10 +392,10 @@
                         Background="{StaticResource darkgrey}"
                         Command="{Binding AutoMissedDownCommand}"
                         Content="-"
-                        Delay="300"
+                        Delay="50"
                         FontSize="24"
                         Foreground="{StaticResource accent}"
-                        Interval="150" />
+                        Interval="75" />
 
                 </StackPanel>
 
@@ -547,10 +547,10 @@
                         Background="{StaticResource darkgrey}"
                         Command="{Binding TeleOpScoredUpCommand}"
                         Content="+"
-                        Delay="300"
+                        Delay="50"
                         FontSize="24"
                         Foreground="{StaticResource accent}"
-                        Interval="150" />
+                        Interval="75" />
                     <RepeatButton
                         Width="60"
                         Height="60"
@@ -560,10 +560,10 @@
                         Background="{StaticResource darkgrey}"
                         Command="{Binding TeleOpScoredDownCommand}"
                         Content="-"
-                        Delay="300"
+                        Delay="50"
                         FontSize="24"
                         Foreground="{StaticResource accent}"
-                        Interval="150" />
+                        Interval="75" />
 
                     <RepeatButton
                         Width="60"
@@ -573,10 +573,10 @@
                         Background="{StaticResource darkgrey}"
                         Command="{Binding TeleOpMissedUpCommand}"
                         Content="+"
-                        Delay="300"
+                        Delay="50"
                         FontSize="24"
                         Foreground="{StaticResource accent}"
-                        Interval="150" />
+                        Interval="75" />
                     <RepeatButton
                         Width="60"
                         Height="60"
@@ -586,10 +586,10 @@
                         Background="{StaticResource darkgrey}"
                         Command="{Binding TeleOpMissedDownCommand}"
                         Content="-"
-                        Delay="300"
+                        Delay="50"
                         FontSize="24"
                         Foreground="{StaticResource accent}"
-                        Interval="150" />
+                        Interval="75" />
 
                 </StackPanel>
 
