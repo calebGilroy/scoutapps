@@ -353,7 +353,7 @@
                         Background="{StaticResource darkgrey}"
                         Command="{Binding AutoScoredUpCommand}"
                         Content="+"
-                        Delay="50"
+                        Delay="150"
                         FontSize="24"
                         Foreground="{StaticResource accent}"
                         Interval="75" />
@@ -366,7 +366,7 @@
                         Background="{StaticResource darkgrey}"
                         Command="{Binding AutoScoredDownCommand}"
                         Content="-"
-                        Delay="50"
+                        Delay="150"
                         FontSize="24"
                         Foreground="{StaticResource accent}"
                         Interval="75" />
@@ -379,7 +379,7 @@
                         Background="{StaticResource darkgrey}"
                         Command="{Binding AutoMissedUpCommand}"
                         Content="+"
-                        Delay="50"
+                        Delay="150"
                         FontSize="24"
                         Foreground="{StaticResource accent}"
                         Interval="75" />
@@ -392,7 +392,7 @@
                         Background="{StaticResource darkgrey}"
                         Command="{Binding AutoMissedDownCommand}"
                         Content="-"
-                        Delay="50"
+                        Delay="150"
                         FontSize="24"
                         Foreground="{StaticResource accent}"
                         Interval="75" />
@@ -547,7 +547,7 @@
                         Background="{StaticResource darkgrey}"
                         Command="{Binding TeleOpScoredUpCommand}"
                         Content="+"
-                        Delay="50"
+                        Delay="150"
                         FontSize="24"
                         Foreground="{StaticResource accent}"
                         Interval="75" />
@@ -560,7 +560,7 @@
                         Background="{StaticResource darkgrey}"
                         Command="{Binding TeleOpScoredDownCommand}"
                         Content="-"
-                        Delay="50"
+                        Delay="150"
                         FontSize="24"
                         Foreground="{StaticResource accent}"
                         Interval="75" />
@@ -573,7 +573,7 @@
                         Background="{StaticResource darkgrey}"
                         Command="{Binding TeleOpMissedUpCommand}"
                         Content="+"
-                        Delay="50"
+                        Delay="150"
                         FontSize="24"
                         Foreground="{StaticResource accent}"
                         Interval="75" />
@@ -586,7 +586,7 @@
                         Background="{StaticResource darkgrey}"
                         Command="{Binding TeleOpMissedDownCommand}"
                         Content="-"
-                        Delay="50"
+                        Delay="150"
                         FontSize="24"
                         Foreground="{StaticResource accent}"
                         Interval="75" />
