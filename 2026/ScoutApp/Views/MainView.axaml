@@ -119,7 +119,7 @@
                 Command="{Binding HeadingButtonCommand}"
                 CommandParameter="PreMatch"
                 Content="PRE MATCH"
-                FontSize="18"
+                FontSize="{Binding HeadingsTextSize}"
                 FontWeight="Bold"
                 IsChecked="{Binding SelectedHeadingButton, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static vm:HeadingButtons.PreMatch}}" />
             <ToggleButton
@@ -129,7 +129,7 @@
                 Command="{Binding HeadingButtonCommand}"
                 CommandParameter="Auto"
                 Content="AUTO"
-                FontSize="18"
+                FontSize="{Binding HeadingsTextSize}"
                 FontWeight="Bold"
                 IsChecked="{Binding SelectedHeadingButton, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static vm:HeadingButtons.Auto}}" />
             <ToggleButton
@@ -139,17 +139,17 @@
                 Command="{Binding HeadingButtonCommand}"
                 CommandParameter="TeleOp"
                 Content="TELEOP"
-                FontSize="18"
+                FontSize="{Binding HeadingsTextSize}"
                 FontWeight="Bold"
                 IsChecked="{Binding SelectedHeadingButton, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static vm:HeadingButtons.TeleOp}}" />
             <ToggleButton
                 Grid.Row="0"
                 Grid.Column="3"
-                Margin="20,20,40,00"
+                Margin="20,20,40,0"
                 Command="{Binding HeadingButtonCommand}"
                 CommandParameter="PostMatch"
                 Content="POST MATCH"
-                FontSize="18"
+                FontSize="{Binding HeadingsTextSize}"
                 FontWeight="Bold"
                 IsChecked="{Binding SelectedHeadingButton, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static vm:HeadingButtons.PostMatch}}" />
 
@@ -157,7 +157,7 @@
             <StackPanel
                 Grid.Row="1"
                 Grid.ColumnSpan="4"
-                Margin="0,20,0,0"
+                Margin="0,50"
                 HorizontalAlignment="Center"
                 IsVisible="{Binding SelectedHeadingButton, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static vm:HeadingButtons.PreMatch}}"
                 Orientation="Vertical">
@@ -166,7 +166,7 @@
                     HorizontalAlignment="Center"
                     FontSize="{Binding TextSize}"
                     FontWeight="Bold">
-                    Scout Name:
+                    SCOUT NAME:
                 </TextBlock>
                 <TextBox
                     Margin="0,10,0,50"
@@ -177,7 +177,7 @@
                     HorizontalAlignment="Center"
                     FontSize="{Binding TextSize}"
                     FontWeight="Bold">
-                    Match Number:
+                    MATCH NUMBER:
                 </TextBlock>
                 <NumericUpDown
                     Margin="0,10,0,50"
@@ -190,7 +190,7 @@
                     HorizontalAlignment="Center"
                     FontSize="{Binding TextSize}"
                     FontWeight="Bold">
-                    Team Number:
+                    TEAM NUMBER:
                 </TextBlock>
                 <NumericUpDown
                     Margin="0,10,0,50"
@@ -203,28 +203,29 @@
                     HorizontalAlignment="Center"
                     FontSize="{Binding TextSize}"
                     FontWeight="Bold">
-                    Alliance Position:
+                    ALLIANCE POSITION:
                 </TextBlock>
                 <ComboBox
                     Width="150"
-                    Margin="0,10,0,50"
+                    Margin="0,10,0,0"
                     SelectedItem="{Binding SelectedAlliancePosition, Mode=TwoWay}">
                     <ComboBox.Items>
-                        <x:Static Member="vm:AlliancePosition.Red1" />
-                        <x:Static Member="vm:AlliancePosition.Red2" />
-                        <x:Static Member="vm:AlliancePosition.Red3" />
-                        <x:Static Member="vm:AlliancePosition.Blue1" />
-                        <x:Static Member="vm:AlliancePosition.Blue2" />
-                        <x:Static Member="vm:AlliancePosition.Blue3" />
+                        <x:Static Member="vm:AlliancePosition.RED1" />
+                        <x:Static Member="vm:AlliancePosition.RED2" />
+                        <x:Static Member="vm:AlliancePosition.RED3" />
+                        <x:Static Member="vm:AlliancePosition.BLUE1" />
+                        <x:Static Member="vm:AlliancePosition.BLUE2" />
+                        <x:Static Member="vm:AlliancePosition.BLUE3" />
                     </ComboBox.Items>
                 </ComboBox>
+
             </StackPanel>
 
             <!--  Post-Match  -->
             <StackPanel
                 Grid.Row="2"
                 Grid.ColumnSpan="4"
-                Margin="0,20"
+                Margin="0,50"
                 HorizontalAlignment="Center"
                 IsVisible="{Binding SelectedHeadingButton, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static vm:HeadingButtons.PostMatch}}"
                 Orientation="Vertical">
@@ -233,7 +234,7 @@
                     HorizontalContentAlignment="Center"
                     Background="{StaticResource darkgrey}"
                     Command="{Binding ToggleSummaryCommand}"
-                    Content="Summary"
+                    Content="SUMMARY"
                     FontSize="{Binding TextSize}"
                     FontWeight="Bold"
                     Foreground="{StaticResource accent}" />
@@ -245,16 +246,16 @@
                 <Image
                     Width="300"
                     Height="300"
-                    Margin="0,20,0,0"
+                    Margin="0,40,0,0"
                     Source="{Binding QRCode1}"
                     Stretch="Fill" />
                 <Button
-                    Margin="0,20,0,0"
+                    Margin="0,40,0,0"
                     HorizontalAlignment="Center"
                     Background="{StaticResource darkgrey}"
                     Command="{Binding NextMatchCommand}"
-                    Content="Next Match"
-                    FontSize="{Binding TextSize}"
+                    Content="NEXT MATCH"
+                    FontSize="{Binding HeadingsTextSize}"
                     FontWeight="Bold"
                     Foreground="{StaticResource accent}" />
             </StackPanel>
@@ -264,7 +265,7 @@
                 Grid.Row="3"
                 Grid.Column="0"
                 Grid.ColumnSpan="4"
-                Margin="0,20"
+                Margin="0,50"
                 HorizontalAlignment="Center"
                 ColumnDefinitions="Auto,Auto"
                 IsVisible="{Binding SelectedHeadingButton, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static vm:HeadingButtons.Auto}}"
@@ -277,7 +278,7 @@
                     Margin="0,0,20,0"
                     FontSize="{Binding TextSize}"
                     FontWeight="Bold">
-                    Auto Starting Position:
+                    STARTING POSITION:
                 </TextBlock>
                 <ComboBox
                     Grid.Row="0"
@@ -285,9 +286,9 @@
                     Width="180"
                     SelectedItem="{Binding SPosition2026, Mode=TwoWay}">
                     <ComboBox.Items>
-                        <x:Static Member="vm:AutoStartingPosition.Left" />
-                        <x:Static Member="vm:AutoStartingPosition.Center" />
-                        <x:Static Member="vm:AutoStartingPosition.Right" />
+                        <x:Static Member="vm:AutoStartingPosition.LEFT" />
+                        <x:Static Member="vm:AutoStartingPosition.CENTER" />
+                        <x:Static Member="vm:AutoStartingPosition.RIGHT" />
                     </ComboBox.Items>
                 </ComboBox>
 
@@ -295,15 +296,15 @@
                     Grid.Row="1"
                     Grid.Column="0"
                     Height="32"
-                    Margin="0,32,0,0"
+                    Margin="0,40,0,0"
                     FontSize="{Binding TextSize}"
                     FontWeight="Bold">
-                    Auto Move:
+                    AUTO MOVE:
                 </TextBlock>
                 <CheckBox
                     Grid.Row="1"
                     Grid.Column="1"
-                    Margin="0,32,0,0"
+                    Margin="0,40,0,0"
                     HorizontalAlignment="Center"
                     IsChecked="{Binding AutoMove}" />
 
@@ -311,24 +312,22 @@
                     Grid.Row="2"
                     Grid.Column="0"
                     Grid.ColumnSpan="2"
-                    Margin="150,32,0,0"
+                    Margin="150,40,0,0"
                     Orientation="Horizontal">
 
                     <TextBlock
                         Width="150"
                         Height="32"
-                        Margin="0,0,32,0"
+                        Margin="0,0,50,0"
                         FontSize="{Binding TextSize}"
-                        FontWeight="Bold">
-                        SCORED
-                    </TextBlock>
+                        FontWeight="Bold"
+                        Text="{Binding AutoFuelScored, StringFormat='SCORED: {0}'}}" />
                     <TextBlock
                         Width="150"
                         Height="32"
                         FontSize="{Binding TextSize}"
-                        FontWeight="Bold">
-                        MISSED
-                    </TextBlock>
+                        FontWeight="Bold"
+                        Text="{Binding AutoFuelMissed, StringFormat='MISSED: {0}'}}" />
 
                 </StackPanel>
 
@@ -339,22 +338,16 @@
                     Orientation="Horizontal">
 
                     <TextBlock
-                        Width="150"
+                        Width="120"
                         Height="32"
                         FontSize="{Binding TextSize}"
                         FontWeight="Bold">
                         FUEL
                     </TextBlock>
 
-                    <TextBlock
-                        Width="30"
-                        VerticalAlignment="Center"
-                        FontSize="{Binding TextSize}"
-                        FontWeight="Bold"
-                        Text="{Binding AutoFuelScored}" />
                     <RepeatButton
-                        Width="50"
-                        Height="50"
+                        Width="60"
+                        Height="60"
                         HorizontalContentAlignment="Center"
                         VerticalContentAlignment="Center"
                         Background="{StaticResource darkgrey}"
@@ -365,9 +358,9 @@
                         Foreground="{StaticResource accent}"
                         Interval="150" />
                     <RepeatButton
-                        Width="50"
-                        Height="50"
-                        Margin="15,0,32,0"
+                        Width="60"
+                        Height="60"
+                        Margin="30,0,50,0"
                         HorizontalContentAlignment="Center"
                         VerticalContentAlignment="Center"
                         Background="{StaticResource darkgrey}"
@@ -378,15 +371,9 @@
                         Foreground="{StaticResource accent}"
                         Interval="150" />
 
-                    <TextBlock
-                        Width="30"
-                        VerticalAlignment="Center"
-                        FontSize="{Binding TextSize}"
-                        FontWeight="Bold"
-                        Text="{Binding AutoFuelMissed}" />
                     <RepeatButton
-                        Width="50"
-                        Height="50"
+                        Width="60"
+                        Height="60"
                         HorizontalContentAlignment="Center"
                         VerticalContentAlignment="Center"
                         Background="{StaticResource darkgrey}"
@@ -397,9 +384,9 @@
                         Foreground="{StaticResource accent}"
                         Interval="150" />
                     <RepeatButton
-                        Width="50"
-                        Height="50"
-                        Margin="15,0,0,0"
+                        Width="60"
+                        Height="60"
+                        Margin="30,0,0,0"
                         HorizontalContentAlignment="Center"
                         VerticalContentAlignment="Center"
                         Background="{StaticResource darkgrey}"
@@ -417,7 +404,7 @@
                     Grid.Row="4"
                     Grid.Column="0"
                     Grid.ColumnSpan="2"
-                    Margin="0,32,0,0"
+                    Margin="0,40,0,0"
                     HorizontalAlignment="Center"
                     Orientation="Horizontal">
 
@@ -426,17 +413,17 @@
                         Margin="0,0,20,0"
                         FontSize="{Binding TextSize}"
                         FontWeight="Bold">
-                        Obstacles Used:
+                        OBSTACLES USED:
                     </TextBlock>
 
                     <CheckBox
                         Margin="0,0,20,0"
-                        Content="Bump"
+                        Content="BUMP"
                         FontSize="{Binding TextSize}"
                         IsChecked="{Binding AutoUsedBump}" />
 
                     <CheckBox
-                        Content="Trench"
+                        Content="TRENCH"
                         FontSize="{Binding TextSize}"
                         IsChecked="{Binding AutoUsedTrench}" />
 
@@ -447,7 +434,7 @@
                     Grid.Row="5"
                     Grid.Column="0"
                     Grid.ColumnSpan="2"
-                    Margin="0,32,0,0"
+                    Margin="0,40,0,0"
                     HorizontalAlignment="Center"
                     Orientation="Horizontal">
 
@@ -456,23 +443,23 @@
                         Margin="0,0,20,0"
                         FontSize="{Binding TextSize}"
                         FontWeight="Bold">
-                        Intake From:
+                        INTAKE FROM:
                     </TextBlock>
 
                     <CheckBox
                         Margin="0,0,20,0"
-                        Content="Depot"
+                        Content="DEPOT"
                         FontSize="{Binding TextSize}"
                         IsChecked="{Binding AutoIntakeDepot}" />
 
                     <CheckBox
                         Margin="0,0,20,0"
-                        Content="Outpost"
+                        Content="OUTPOST"
                         FontSize="{Binding TextSize}"
                         IsChecked="{Binding AutoIntakeOutpost}" />
 
                     <CheckBox
-                        Content="Neutral Zone"
+                        Content="NEUTRAL ZONE"
                         FontSize="{Binding TextSize}"
                         IsChecked="{Binding AutoIntakeNeutralZone}" />
 
@@ -483,21 +470,21 @@
                     Grid.Row="6"
                     Grid.Column="0"
                     Height="32"
-                    Margin="0,32,20,0"
+                    Margin="0,40,0,0"
                     FontSize="{Binding TextSize}"
                     FontWeight="Bold">
-                    Auto Tower Climb:
+                    AUTO CLIMB:
                 </TextBlock>
                 <ComboBox
                     Grid.Row="6"
                     Grid.Column="1"
                     Width="180"
-                    Margin="0,32,0,0"
+                    Margin="0,40,0,0"
                     SelectedItem="{Binding AutoTowerClimb, Mode=TwoWay}">
                     <ComboBox.Items>
-                        <x:Static Member="vm:TowerClimb2026.Level1" />
-                        <x:Static Member="vm:TowerClimb2026.Failed" />
-                        <x:Static Member="vm:TowerClimb2026.DidNotAttempt" />
+                        <x:Static Member="vm:TowerClimb2026.LEVEL1" />
+                        <x:Static Member="vm:TowerClimb2026.FAILED" />
+                        <x:Static Member="vm:TowerClimb2026.DIDNOTATTEMPT" />
                     </ComboBox.Items>
                 </ComboBox>
 
@@ -508,7 +495,7 @@
                 Grid.Row="4"
                 Grid.Column="0"
                 Grid.ColumnSpan="4"
-                Margin="0,20"
+                Margin="0,40"
                 HorizontalAlignment="Center"
                 ColumnDefinitions="Auto,Auto"
                 IsVisible="{Binding SelectedHeadingButton, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static vm:HeadingButtons.TeleOp}}"
@@ -524,18 +511,17 @@
                     <TextBlock
                         Width="150"
                         Height="32"
-                        Margin="0,0,32,0"
+                        Margin="30,0,20,0"
                         FontSize="{Binding TextSize}"
-                        FontWeight="Bold">
-                        SCORED
-                    </TextBlock>
+                        FontWeight="Bold"
+                        Text="{Binding TeleOpFuelScored, StringFormat='SCORED: {0}'}" />
                     <TextBlock
                         Width="150"
                         Height="32"
+                        Margin="30,0,0,0"
                         FontSize="{Binding TextSize}"
-                        FontWeight="Bold">
-                        MISSED
-                    </TextBlock>
+                        FontWeight="Bold"
+                        Text="{Binding TeleOpFuelMissed, StringFormat='MISSED: {0}'}" />
 
                 </StackPanel>
 
@@ -553,15 +539,9 @@
                         FUEL
                     </TextBlock>
 
-                    <TextBlock
-                        Width="30"
-                        VerticalAlignment="Center"
-                        FontSize="{Binding TextSize}"
-                        FontWeight="Bold"
-                        Text="{Binding TeleOpFuelScored}" />
                     <RepeatButton
-                        Width="50"
-                        Height="50"
+                        Width="60"
+                        Height="60"
                         HorizontalContentAlignment="Center"
                         VerticalContentAlignment="Center"
                         Background="{StaticResource darkgrey}"
@@ -572,9 +552,9 @@
                         Foreground="{StaticResource accent}"
                         Interval="150" />
                     <RepeatButton
-                        Width="50"
-                        Height="50"
-                        Margin="15,0,32,0"
+                        Width="60"
+                        Height="60"
+                        Margin="30,0,50,0"
                         HorizontalContentAlignment="Center"
                         VerticalContentAlignment="Center"
                         Background="{StaticResource darkgrey}"
@@ -585,15 +565,9 @@
                         Foreground="{StaticResource accent}"
                         Interval="150" />
 
-                    <TextBlock
-                        Width="30"
-                        VerticalAlignment="Center"
-                        FontSize="{Binding TextSize}"
-                        FontWeight="Bold"
-                        Text="{Binding TeleOpFuelMissed}" />
                     <RepeatButton
-                        Width="50"
-                        Height="50"
+                        Width="60"
+                        Height="60"
                         HorizontalContentAlignment="Center"
                         VerticalContentAlignment="Center"
                         Background="{StaticResource darkgrey}"
@@ -604,9 +578,9 @@
                         Foreground="{StaticResource accent}"
                         Interval="150" />
                     <RepeatButton
-                        Width="50"
-                        Height="50"
-                        Margin="15,0,0,0"
+                        Width="60"
+                        Height="60"
+                        Margin="30,0,0,0"
                         HorizontalContentAlignment="Center"
                         VerticalContentAlignment="Center"
                         Background="{StaticResource darkgrey}"
@@ -623,7 +597,7 @@
                 <StackPanel
                     Grid.Row="2"
                     Grid.ColumnSpan="2"
-                    Margin="0,32,0,0"
+                    Margin="0,40,0,0"
                     HorizontalAlignment="Center"
                     Orientation="Horizontal">
 
@@ -632,17 +606,17 @@
                         Margin="0,0,20,0"
                         FontSize="{Binding TextSize}"
                         FontWeight="Bold">
-                        Obstacles Used:
+                        OBSTACLES USED:
                     </TextBlock>
 
                     <CheckBox
                         Margin="0,0,20,0"
-                        Content="Bump"
+                        Content="BUMP"
                         FontSize="{Binding TextSize}"
                         IsChecked="{Binding TeleOpUsedBump}" />
 
                     <CheckBox
-                        Content="Trench"
+                        Content="TRENCH"
                         FontSize="{Binding TextSize}"
                         IsChecked="{Binding TeleOpUsedTrench}" />
 
@@ -652,7 +626,7 @@
                 <StackPanel
                     Grid.Row="3"
                     Grid.ColumnSpan="2"
-                    Margin="0,32,0,0"
+                    Margin="0,40,0,0"
                     HorizontalAlignment="Center"
                     Orientation="Horizontal">
 
@@ -660,23 +634,23 @@
                         Margin="0,0,20,0"
                         FontSize="{Binding TextSize}"
                         FontWeight="Bold">
-                        Intake From:
+                        INTAKE FROM:
                     </TextBlock>
 
                     <CheckBox
                         Margin="0,0,20,0"
-                        Content="Depot"
+                        Content="DEPOT"
                         FontSize="{Binding TextSize}"
                         IsChecked="{Binding TeleOpIntakeDepot}" />
 
                     <CheckBox
                         Margin="0,0,20,0"
-                        Content="Outpost"
+                        Content="OUTPOST"
                         FontSize="{Binding TextSize}"
                         IsChecked="{Binding TeleOpIntakeOutpost}" />
 
                     <CheckBox
-                        Content="Neutral Zone"
+                        Content="NEUTRAL ZONE"
                         FontSize="{Binding TextSize}"
                         IsChecked="{Binding TeleOpIntakeNeutralZone}" />
 
@@ -687,23 +661,23 @@
                     Grid.Row="4"
                     Grid.Column="0"
                     Height="32"
-                    Margin="0,32,20,0"
+                    Margin="0,40,20,0"
                     FontSize="{Binding TextSize}"
                     FontWeight="Bold">
-                    Climb:
+                    CLIMB:
                 </TextBlock>
                 <ComboBox
                     Grid.Row="4"
                     Grid.Column="1"
                     Width="180"
-                    Margin="0,32,0,0"
+                    Margin="0,40,0,0"
                     SelectedItem="{Binding TowerClimb, Mode=TwoWay}">
                     <ComboBox.Items>
-                        <x:Static Member="vm:TowerClimb2026.Level1" />
-                        <x:Static Member="vm:TowerClimb2026.Level2" />
-                        <x:Static Member="vm:TowerClimb2026.Level3" />
-                        <x:Static Member="vm:TowerClimb2026.Failed" />
-                        <x:Static Member="vm:TowerClimb2026.DidNotAttempt" />
+                        <x:Static Member="vm:TowerClimb2026.LEVEL1" />
+                        <x:Static Member="vm:TowerClimb2026.LEVEL2" />
+                        <x:Static Member="vm:TowerClimb2026.LEVEL3" />
+                        <x:Static Member="vm:TowerClimb2026.FAILED" />
+                        <x:Static Member="vm:TowerClimb2026.DIDNOTATTEMPT" />
                     </ComboBox.Items>
                 </ComboBox>
 
@@ -712,24 +686,24 @@
                     Grid.Row="5"
                     Grid.Column="0"
                     Height="32"
-                    Margin="0,32,20,0"
+                    Margin="0,40,20,0"
                     FontSize="{Binding TextSize}"
                     FontWeight="Bold">
-                    Breakdown:
+                    BREAKDOWN:
                 </TextBlock>
                 <ComboBox
                     Grid.Row="5"
                     Grid.Column="1"
                     Width="180"
-                    Margin="0,32,0,0"
+                    Margin="0,40,0,0"
                     SelectedItem="{Binding Breakdown, Mode=TwoWay}">
                     <ComboBox.Items>
-                        <x:Static Member="vm:Breakdown2026.None" />
-                        <x:Static Member="vm:Breakdown2026.Tipped" />
-                        <x:Static Member="vm:Breakdown2026.MechanicalFailure" />
-                        <x:Static Member="vm:Breakdown2026.ConnectionFailure" />
-                        <x:Static Member="vm:Breakdown2026.Disabled" />
-                        <x:Static Member="vm:Breakdown2026.BeachedOnFuel" />
+                        <x:Static Member="vm:Breakdown2026.NONE" />
+                        <x:Static Member="vm:Breakdown2026.TIPPED" />
+                        <x:Static Member="vm:Breakdown2026.MECHANICALFAILURE" />
+                        <x:Static Member="vm:Breakdown2026.CONNECTIONFAILURE" />
+                        <x:Static Member="vm:Breakdown2026.DISABLED" />
+                        <x:Static Member="vm:Breakdown2026.BEACHEDONFUEL" />
                     </ComboBox.Items>
                 </ComboBox>
 

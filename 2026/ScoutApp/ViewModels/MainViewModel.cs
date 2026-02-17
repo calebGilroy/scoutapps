@@ -10,28 +10,28 @@ namespace ScoutApp.ViewModels
 {
     public enum AutoStartingPosition
     {
-        Left,
-        Center,
-        Right
+        LEFT,
+        CENTER,
+        RIGHT
     }
 
     public enum Breakdown2026
     {
-        None,
-        Tipped,
-        MechanicalFailure,
-        ConnectionFailure,
-        Disabled,
-        BeachedOnFuel
+        NONE,
+        TIPPED,
+        MECHANICALFAILURE,
+        CONNECTIONFAILURE,
+        DISABLED,
+        BEACHEDONFUEL
     }
 
     public enum TowerClimb2026
     {
-        Level1,
-        Level2,
-        Level3,
-        Failed,
-        DidNotAttempt
+        LEVEL1,
+        LEVEL2,
+        LEVEL3,
+        FAILED,
+        DIDNOTATTEMPT
     }
 
     public enum HeadingButtons
@@ -45,12 +45,12 @@ namespace ScoutApp.ViewModels
 
     public enum AlliancePosition
     {
-        Red1,
-        Red2,
-        Red3,
-        Blue1,
-        Blue2,
-        Blue3
+        RED1,
+        RED2,
+        RED3,
+        BLUE1,
+        BLUE2,
+        BLUE3
     }
 
     public enum Alliance
@@ -90,7 +90,7 @@ namespace ScoutApp.ViewModels
             TeleOpIntakeNeutralZone = false;
             // Endgame
             TowerClimb = null;
-            Breakdown = Breakdown2026.None;
+            Breakdown = Breakdown2026.NONE;
             ShowSummary = false;
             SelectedHeadingButton = HeadingButtons.PreMatch;
         }
@@ -126,11 +126,11 @@ namespace ScoutApp.ViewModels
             {
                 SelectedAlliance = null;
             }
-            else if (value is AlliancePosition.Red1 or AlliancePosition.Red2 or AlliancePosition.Red3)
+            else if (value is AlliancePosition.RED1 or AlliancePosition.RED2 or AlliancePosition.RED3)
             {
                 SelectedAlliance = Alliance.Red;
             }
-            else if (value is AlliancePosition.Blue1 or AlliancePosition.Blue2 or AlliancePosition.Blue3)
+            else if (value is AlliancePosition.BLUE1 or AlliancePosition.BLUE2 or AlliancePosition.BLUE3)
             {
                 SelectedAlliance = Alliance.Blue;
             }
@@ -225,6 +225,9 @@ namespace ScoutApp.ViewModels
 
         [ObservableProperty]
         public int _TextSize = 16;
+
+        [ObservableProperty]
+        public int _HeadingsTextSize = 18;
 
         [ObservableProperty]
         [NotifyPropertyChangedFor(nameof(Summary))]
@@ -349,7 +352,7 @@ namespace ScoutApp.ViewModels
         [ObservableProperty]
         [NotifyPropertyChangedFor(nameof(Summary))]
         [NotifyPropertyChangedFor(nameof(QRCode1))]
-        private Breakdown2026 _Breakdown = Breakdown2026.None;
+        private Breakdown2026 _Breakdown = Breakdown2026.NONE;
 
         public string Summary
         {
