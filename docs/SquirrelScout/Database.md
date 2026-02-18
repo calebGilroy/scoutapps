@@ -1,5 +1,12 @@
 # Database
 
+The VERY FIRST TIME you setup a laptop you will need:
+
+```powershell
+./dk SonicScout_Setup.Clean --backend-builds  --dksdk-source-code
+./dk SonicScout_Setup.Develop compile-backend --next
+```
+
 Start the scanner in the Visual Studio Code "Terminal" without compiling:
 
 ```powershell
