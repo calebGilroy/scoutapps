@@ -27,18 +27,18 @@ These will compile all of the packages with DkCoder:
 This will compile with DkSDK CMake:
 
 ```powershell
-./dk src/SonicScout_Setup/Clean.ml --builds
-./dk src/SonicScout_Setup/Develop.ml android --next
+./dk SonicScout_Setup.Clean --builds
+./dk SonicScout_Setup.Develop android --next
 
-./dk src/SonicScout_Setup/Clean.ml --builds
-./dk src/SonicScout_Setup/Develop.ml android
+./dk SonicScout_Setup.Clean --builds
+./dk SonicScout_Setup.Develop android
 ```
 
 ## Goal B - DkCoder embeds bytecode interpreter into shared library
 
 Flush technique A:
 
-- Make sure Android Studio works locally with `./dk src/SonicScout_Setup/Develop.ml android`
+- Make sure Android Studio works locally with `./dk SonicScout_Setup.Develop android`
 - Run the app up until generating the QR scanner page.
 - Hide the DkSDK CMake bits in us/SonicScoutBackend/CMakeLists.txt behind a CMake variable set in the presets.
 - Compile with `./dk SonicScout_Setup.Develop compile --skip-fetch --next --build-type Debug` until Android Studio works again.
@@ -50,7 +50,7 @@ Drawbacks: Important bits like the capnp generation will not run.
 
 Flush technique B:
 
-- Make sure Android Studio works locally with `./dk src/SonicScout_Setup/Develop.ml android`
+- Make sure Android Studio works locally with `./dk SonicScout_Setup.Develop android`
 - Run the app up until generating the QR scanner page.
 - Edit DkSDK CMake so that OCaml compiler is never run. Ditto for WSL2. Hide that "never run" feature behind a CMake variable set in the presets.
 - Compile with `./dk SonicScout_Setup.Develop compile --skip-fetch --next --build-type Debug` until Android Studio works again.

@@ -3,13 +3,13 @@
 Start the scanner in the Visual Studio Code "Terminal" without compiling:
 
 ```powershell
-./dk src/SonicScout_Setup/Develop.ml scanner --skip-fetch --quick
+./dk SonicScout_Setup.Develop scanner --skip-fetch --quick
 ```
 
 Opens the database in the Visual Studio Code "Terminal" without compiling:
 
 ```powershell
-./dk src/SonicScout_Setup/Develop.ml database --skip-fetch --quick
+./dk SonicScout_Setup.Develop database --skip-fetch --quick
 ```
 
 To delete the database ... which is needed before a game day, do:
