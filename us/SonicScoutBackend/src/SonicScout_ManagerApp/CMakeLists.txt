@@ -35,6 +35,7 @@ endif()
 
 if(SONIC_SCOUT_FEATURE_SCANNER)
     DkSDKProject_AddLibrary(TARGET SquirrelScout_ManagerApp_ml STATIC
+        NUM_C_FILES 64
         MODULE_FILE ManagerApp_ml.ml)
     add_library(SquirrelScout::ManagerApp_ml ALIAS SquirrelScout_ManagerApp_ml)
 endif()
