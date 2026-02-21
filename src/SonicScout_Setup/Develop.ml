@@ -39,7 +39,7 @@ let compile common =
 
 let compile_backend common =
   try
-    let slots = Slots.create () in
+    let slots = _nocompile_base common in
     let slots = _compile_backend ~slots common in
     ignore slots;
     Utils.done_steps "Developing backend"
