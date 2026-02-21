@@ -88,7 +88,7 @@
         </Style>
     </UserControl.Styles>
 
-    <ScrollViewer VerticalScrollBarVisibility="Visible">
+    <ScrollViewer VerticalScrollBarVisibility="Hidden">
 
         <Grid
             HorizontalAlignment="Left"
@@ -244,8 +244,8 @@
                     IsVisible="{Binding ShowSummary}"
                     Text="{Binding Summary}" />
                 <Image
-                    Width="300"
-                    Height="300"
+                    Width="400"
+                    Height="400"
                     Margin="0,40,0,0"
                     Source="{Binding QRCode1}"
                     Stretch="Fill" />
@@ -284,7 +284,7 @@
                     Grid.Row="0"
                     Grid.Column="1"
                     Width="180"
-                    SelectedItem="{Binding SPosition2026, Mode=TwoWay}">
+                    SelectedItem="{Binding StartingPosition, Mode=TwoWay}">
                     <ComboBox.Items>
                         <x:Static Member="vm:AutoStartingPosition.LEFT" />
                         <x:Static Member="vm:AutoStartingPosition.CENTER" />
@@ -420,12 +420,12 @@
                         Margin="0,0,20,0"
                         Content="BUMP"
                         FontSize="{Binding TextSize}"
-                        IsChecked="{Binding AutoUsedBump}" />
+                        IsChecked="{Binding AutoBump}" />
 
                     <CheckBox
                         Content="TRENCH"
                         FontSize="{Binding TextSize}"
-                        IsChecked="{Binding AutoUsedTrench}" />
+                        IsChecked="{Binding AutoTrench}" />
 
                 </StackPanel>
 
@@ -480,11 +480,11 @@
                     Grid.Column="1"
                     Width="180"
                     Margin="0,40,0,0"
-                    SelectedItem="{Binding AutoTowerClimb, Mode=TwoWay}">
+                    SelectedItem="{Binding AutoClimb, Mode=TwoWay}">
                     <ComboBox.Items>
-                        <x:Static Member="vm:TowerClimb2026.LEVEL1" />
-                        <x:Static Member="vm:TowerClimb2026.FAILED" />
-                        <x:Static Member="vm:TowerClimb2026.DIDNOTATTEMPT" />
+                        <x:Static Member="vm:Climb2026.LEVEL1" />
+                        <x:Static Member="vm:Climb2026.FAILED" />
+                        <x:Static Member="vm:Climb2026.DIDNOTATTEMPT" />
                     </ComboBox.Items>
                 </ComboBox>
 
@@ -613,12 +613,12 @@
                         Margin="0,0,20,0"
                         Content="BUMP"
                         FontSize="{Binding TextSize}"
-                        IsChecked="{Binding TeleOpUsedBump}" />
+                        IsChecked="{Binding TeleOpBump}" />
 
                     <CheckBox
                         Content="TRENCH"
                         FontSize="{Binding TextSize}"
-                        IsChecked="{Binding TeleOpUsedTrench}" />
+                        IsChecked="{Binding TeleOpTrench}" />
 
                 </StackPanel>
 
@@ -671,13 +671,13 @@
                     Grid.Column="1"
                     Width="180"
                     Margin="0,40,0,0"
-                    SelectedItem="{Binding TowerClimb, Mode=TwoWay}">
+                    SelectedItem="{Binding TeleOpClimb, Mode=TwoWay}">
                     <ComboBox.Items>
-                        <x:Static Member="vm:TowerClimb2026.LEVEL1" />
-                        <x:Static Member="vm:TowerClimb2026.LEVEL2" />
-                        <x:Static Member="vm:TowerClimb2026.LEVEL3" />
-                        <x:Static Member="vm:TowerClimb2026.FAILED" />
-                        <x:Static Member="vm:TowerClimb2026.DIDNOTATTEMPT" />
+                        <x:Static Member="vm:Climb2026.LEVEL1" />
+                        <x:Static Member="vm:Climb2026.LEVEL2" />
+                        <x:Static Member="vm:Climb2026.LEVEL3" />
+                        <x:Static Member="vm:Climb2026.FAILED" />
+                        <x:Static Member="vm:Climb2026.DIDNOTATTEMPT" />
                     </ComboBox.Items>
                 </ComboBox>
 

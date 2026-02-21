@@ -58,29 +58,29 @@ let fields = [
      who scouts a single team ("Team") at an individual match ("Match").
 
      See [already_contains_record] which uses these fields. *)
-  as_primary (as_kind Scouter_Name (fs "Name"));
-  as_primary (as_kind Match_Number (fi "Match"));
   as_primary (as_kind Team_number (fi "Team"));
+  as_primary (as_kind Match_Number (fi "Match"));
+  as_primary (as_kind Scouter_Name (fs "Name"));
   fs "Alliance";
-  fs "SPos";
-  fs "AMove";
-  fi "AFS";
-  fi "AFM";
-  fs "ATC";
-  fb "ABump";
-  fb "ATrench";
-  fb "AIDep";
-  fb "AIOut";
-  fb "AINZ";
-  fi "TFS";
-  fi "TFM";
-  fb "TBump";
-  fb "TTrench";
-  fb "TIDep";
-  fb "TIOut";
-  fb "TINZ";
-  fs "TC";
-  fs "TB";
+  fs "StartingPosition";
+  fs "AutoMove";
+  fi "AutoFuelScore";
+  fi "AutoFuelMissed";
+  fb "AutoBump";
+  fb "AutoTrench";
+  fb "AutoIntakeDepot";
+  fb "AutoIntakeOutpost";
+  fb "AutoIntakeNeutralZone";
+  fs "AutoTowerClimb";
+  fi "TeleOpFuelScore";
+  fi "TeleOpFuelMissed";
+  fb "TeleOpBump";
+  fb "TeleOpTrench";
+  fb "TeleOpIntakeDepot";
+  fb "TeleOpIntakeOutpost";
+  fb "TeleOpIntakeNeutralZone";
+  fs "TowerClimb";
+  fs "Breakdown";
 ]
 
 let getfield name =
@@ -98,9 +98,9 @@ let getcolname ~kindname kind =
   | Some field -> field.field_name
   | None -> failwith (Printf.sprintf "No field with field kind %s found! Use `as_kind %s (fs \"field_name\")` in `let fields = [...]` to designate a field as the field kind." kindname kindname)
 
-let col_scouter_name () = getcolname ~kindname:"Scouter_Name" Scouter_Name
-let col_match_number () = getcolname ~kindname:"Match_Number" Match_Number
 let col_team_number () = getcolname ~kindname:"Team_number" Team_number
+let col_match_number () = getcolname ~kindname:"Match_Number" Match_Number
+let col_scouter_name () = getcolname ~kindname:"Scouter_Name" Scouter_Name
 
 let primaryfields () =
   let fields =

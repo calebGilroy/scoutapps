@@ -25,7 +25,7 @@ namespace ScoutApp.ViewModels
         BEACHEDONFUEL
     }
 
-    public enum TowerClimb2026
+    public enum Climb2026
     {
         LEVEL1,
         LEVEL2,
@@ -65,15 +65,15 @@ namespace ScoutApp.ViewModels
         private void NextMatch()
         {
             MatchNumber += 1;
-            SPosition2026 = null;
+            StartingPosition = null;
             AutoMove = false;
             // Auto FUEL
             AutoFuelScored = 0;
             AutoFuelMissed = 0;
-            AutoTowerClimb = null;
+            AutoClimb = null;
             // Auto Obstacles
-            AutoUsedBump = false;
-            AutoUsedTrench = false;
+            AutoBump = false;
+            AutoTrench = false;
             // Auto Intake
             AutoIntakeDepot = false;
             AutoIntakeOutpost = false;
@@ -82,14 +82,14 @@ namespace ScoutApp.ViewModels
             TeleOpFuelScored = 0;
             TeleOpFuelMissed = 0;
             // TeleOp Obstacles
-            TeleOpUsedBump = false;
-            TeleOpUsedTrench = false;
+            TeleOpBump = false;
+            TeleOpTrench = false;
             // TeleOp Intake
             TeleOpIntakeDepot = false;
             TeleOpIntakeOutpost = false;
             TeleOpIntakeNeutralZone = false;
             // Endgame
-            TowerClimb = null;
+            TeleOpClimb = null;
             Breakdown = Breakdown2026.NONE;
             ShowSummary = false;
             SelectedHeadingButton = HeadingButtons.PreMatch;
@@ -255,7 +255,7 @@ namespace ScoutApp.ViewModels
         [ObservableProperty]
         [NotifyPropertyChangedFor(nameof(Summary))]
         [NotifyPropertyChangedFor(nameof(QRCode1))]
-        private AutoStartingPosition? _SPosition2026;
+        private AutoStartingPosition? _StartingPosition;
 
         [ObservableProperty]
         [NotifyPropertyChangedFor(nameof(Summary))]
@@ -276,18 +276,18 @@ namespace ScoutApp.ViewModels
         [ObservableProperty]
         [NotifyPropertyChangedFor(nameof(Summary))]
         [NotifyPropertyChangedFor(nameof(QRCode1))]
-        private TowerClimb2026? _AutoTowerClimb;
+        private Climb2026? _AutoClimb;
 
         // ===== AUTO OBSTACLES =====
         [ObservableProperty]
         [NotifyPropertyChangedFor(nameof(Summary))]
         [NotifyPropertyChangedFor(nameof(QRCode1))]
-        private bool _AutoUsedBump = false;
+        private bool _AutoBump = false;
 
         [ObservableProperty]
         [NotifyPropertyChangedFor(nameof(Summary))]
         [NotifyPropertyChangedFor(nameof(QRCode1))]
-        private bool _AutoUsedTrench = false;
+        private bool _AutoTrench = false;
 
         // ===== AUTO INTAKE =====
         [ObservableProperty]
@@ -320,12 +320,12 @@ namespace ScoutApp.ViewModels
         [ObservableProperty]
         [NotifyPropertyChangedFor(nameof(Summary))]
         [NotifyPropertyChangedFor(nameof(QRCode1))]
-        private bool _TeleOpUsedBump = false;
+        private bool _TeleOpBump = false;
 
         [ObservableProperty]
         [NotifyPropertyChangedFor(nameof(Summary))]
         [NotifyPropertyChangedFor(nameof(QRCode1))]
-        private bool _TeleOpUsedTrench = false;
+        private bool _TeleOpTrench = false;
 
         // ===== TELEOP INTAKE =====
         [ObservableProperty]
@@ -347,7 +347,7 @@ namespace ScoutApp.ViewModels
         [ObservableProperty]
         [NotifyPropertyChangedFor(nameof(Summary))]
         [NotifyPropertyChangedFor(nameof(QRCode1))]
-        private TowerClimb2026? _TowerClimb;
+        private Climb2026? _TeleOpClimb;
 
         [ObservableProperty]
         [NotifyPropertyChangedFor(nameof(Summary))]
@@ -359,28 +359,28 @@ namespace ScoutApp.ViewModels
             get
             {
                 return $$"""
-Scout Name: {{ScoutName}}
 Team Number: {{TeamNumber}}
 Match Number: {{MatchNumber}}
+Scout Name: {{ScoutName}}
 Alliance: {{SelectedAlliance}}
-Auto Starting Position: {{SPosition2026}}
+Starting Position: {{StartingPosition}}
 Auto Move: {{AutoMove}}
-Auto FUEL Scored: {{AutoFuelScored}}
-Auto FUEL Missed: {{AutoFuelMissed}}
-Auto Tower Climb: {{AutoTowerClimb}}
-Auto Used Bump: {{AutoUsedBump}}
-Auto Used Trench: {{AutoUsedTrench}}
+Auto Fuel Scored: {{AutoFuelScored}}
+Auto Fuel Missed: {{AutoFuelMissed}}
+Auto Bump: {{AutoBump}}
+Auto Trench: {{AutoTrench}}
 Auto Intake Depot: {{AutoIntakeDepot}}
 Auto Intake Outpost: {{AutoIntakeOutpost}}
 Auto Intake Neutral Zone: {{AutoIntakeNeutralZone}}
-TeleOp FUEL Scored: {{TeleOpFuelScored}}
-TeleOp FUEL Missed: {{TeleOpFuelMissed}}
-TeleOp Used Bump: {{TeleOpUsedBump}}
-TeleOp Used Trench: {{TeleOpUsedTrench}}
+Auto Climb: {{AutoClimb}}
+TeleOp Fuel Scored: {{TeleOpFuelScored}}
+TeleOp Fuel Missed: {{TeleOpFuelMissed}}
+TeleOp Bump: {{TeleOpBump}}
+TeleOp Trench: {{TeleOpTrench}}
 TeleOp Intake Depot: {{TeleOpIntakeDepot}}
 TeleOp Intake Outpost: {{TeleOpIntakeOutpost}}
 TeleOp Intake Neutral Zone: {{TeleOpIntakeNeutralZone}}
-Endgame Tower Climb: {{TowerClimb}}
+Endgame Tower Climb: {{TeleOpClimb}}
 Breakdown: {{Breakdown}}
 """;
             }
@@ -392,34 +392,34 @@ Breakdown: {{Breakdown}}
             {
                 string textForQRCode =
                     $$"""
-Name-{{ScoutName}}
 Team-{{TeamNumber}}
 Match-{{MatchNumber}}
+Name-{{ScoutName}}
 Alliance-{{SelectedAlliance}}
-SPos-{{SPosition2026}}
-AMove-{{AutoMove}}
-AFS-{{AutoFuelScored}}
-AFM-{{AutoFuelMissed}}
-ATC-{{AutoTowerClimb}}
-ABump-{{AutoUsedBump}}
-ATrench-{{AutoUsedTrench}}
-AIDep-{{AutoIntakeDepot}}
-AIOut-{{AutoIntakeOutpost}}
-AINZ-{{AutoIntakeNeutralZone}}
-TFS-{{TeleOpFuelScored}}
-TFM-{{TeleOpFuelMissed}}
-TBump-{{TeleOpUsedBump}}
-TTrench-{{TeleOpUsedTrench}}
-TIDep-{{TeleOpIntakeDepot}}
-TIOut-{{TeleOpIntakeOutpost}}
-TINZ-{{TeleOpIntakeNeutralZone}}
-TC-{{TowerClimb}}
-BD-{{Breakdown}}
+StartingPosition-{{StartingPosition}}
+AutoMove-{{AutoMove}}
+AutoFuelScored-{{AutoFuelScored}}
+AutoFuelMissed-{{AutoFuelMissed}}
+AutoBump-{{AutoBump}}
+AutoTrench-{{AutoTrench}}
+AutoIntakeDepot-{{AutoIntakeDepot}}
+AutoIntakeOutpost-{{AutoIntakeOutpost}}
+AutoIntakeNeutralZone-{{AutoIntakeNeutralZone}}
+AutoClimb-{{AutoClimb}}
+TeleOpFuelScored-{{TeleOpFuelScored}}
+TeleOpFuelMissed-{{TeleOpFuelMissed}}
+TeleOpBump-{{TeleOpBump}}
+TeleOpTrench-{{TeleOpTrench}}
+TeleOpIntakeDepot-{{TeleOpIntakeDepot}}
+TeleOpIntakeOutpost-{{TeleOpIntakeOutpost}}
+TeleOpIntakeNeutralZone-{{TeleOpIntakeNeutralZone}}
+TowerClimb-{{TeleOpClimb}}
+Breakdown-{{Breakdown}}
 """;
 
-                if (SelectedAlliancePosition == null || SPosition2026 == null || TowerClimb == null || AutoTowerClimb == null)
+                if (SelectedAlliancePosition == null || StartingPosition == null || TeleOpClimb == null || AutoClimb == null)
                 {
-                    using var stream = AssetLoader.Open(new Uri("avares://ScoutApp/Assets/cartman.png"));
+                    using var stream = AssetLoader.Open(new Uri("avares://ScoutApp/Assets/cartman.jpg"));
                     return new Bitmap(stream);
                 }
 
