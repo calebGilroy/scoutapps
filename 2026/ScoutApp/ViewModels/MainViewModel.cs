@@ -137,6 +137,7 @@ namespace ScoutApp.ViewModels
         }
 
         [ObservableProperty]
+        [NotifyPropertyChangedFor(nameof(QRCode1))]
         private HeadingButtons _SelectedHeadingButton = HeadingButtons.PreMatch;
 
         [RelayCommand]
@@ -419,7 +420,7 @@ Breakdown-{{Breakdown}}
 BreakdownTime-5
 """;
 
-                if (SelectedAlliancePosition == null || StartingPosition == null || TeleOpClimb == null || AutoClimb == null)
+                if (SelectedAlliancePosition == null || StartingPosition == null || TeleOpClimb == null || AutoClimb == null || SelectedHeadingButton != HeadingButtons.PostMatch)
                 {
                     using var stream = AssetLoader.Open(new Uri("avares://ScoutApp/Assets/cartman.jpg"));
                     return new Bitmap(stream);
