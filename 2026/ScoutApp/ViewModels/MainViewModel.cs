@@ -414,7 +414,9 @@ TeleOpIntakeDepot-{{TeleOpIntakeDepot}}
 TeleOpIntakeOutpost-{{TeleOpIntakeOutpost}}
 TeleOpIntakeNeutralZone-{{TeleOpIntakeNeutralZone}}
 TowerClimb-{{TeleOpClimb}}
+ClimbTime-6
 Breakdown-{{Breakdown}}
+BreakdownTime-5
 """;
 
                 if (SelectedAlliancePosition == null || StartingPosition == null || TeleOpClimb == null || AutoClimb == null)

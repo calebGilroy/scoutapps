@@ -2,13 +2,12 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text.Json;
-using Avalonia.Logging;
 using Avalonia.Platform;
 using ScoutApp.ViewModels;
 
 public static class JsonToCSConverter
 {
-    private const string DefaultScheduleAssetPath = "avares://ScoutApp/Assets/2025wasno.json";
+    private const string DefaultScheduleAssetPath = "avares://ScoutApp/Assets/2026week0.json";
 
     private static Dictionary<int, int[]> TeamsByMatch = [];
 

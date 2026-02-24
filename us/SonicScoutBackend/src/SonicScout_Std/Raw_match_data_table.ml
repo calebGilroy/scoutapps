@@ -64,15 +64,15 @@ let fields = [
   fs "Alliance";
   fs "StartingPosition";
   fs "AutoMove";
-  fi "AutoFuelScore";
+  fi "AutoFuelScored";
   fi "AutoFuelMissed";
   fb "AutoBump";
   fb "AutoTrench";
   fb "AutoIntakeDepot";
   fb "AutoIntakeOutpost";
   fb "AutoIntakeNeutralZone";
-  fs "AutoTowerClimb";
-  fi "TeleOpFuelScore";
+  fs "AutoClimb";
+  fi "TeleOpFuelScored";
   fi "TeleOpFuelMissed";
   fb "TeleOpBump";
   fb "TeleOpTrench";
@@ -80,7 +80,9 @@ let fields = [
   fb "TeleOpIntakeOutpost";
   fb "TeleOpIntakeNeutralZone";
   fs "TowerClimb";
+  fi "ClimbTime";
   fs "Breakdown";
+  fi "BreakdownTime";
 ]
 
 let getfield name =
