@@ -291,7 +291,8 @@ namespace ScoutApp.ViewModels
             "Vijay Kumar, Diganth",
             "Walters, Elise",
             "Workneh, Michael",
-            "Yusufov, Ibrahim"
+            "Yusufov, Ibrahim",
+            "Mentor"
         };
 
         [ObservableProperty]
@@ -484,7 +485,7 @@ Breakdown-{{Breakdown}}
 BreakdownTime-5
 """;
 
-                if (SelectedAlliancePosition == null || StartingPosition == null || TeleOpClimb == null || AutoClimb == null || SelectedHeadingButton != HeadingButtons.PostMatch)
+                if (string.IsNullOrEmpty(ScoutName) || SelectedAlliancePosition == null || StartingPosition == null || TeleOpClimb == null || AutoClimb == null || SelectedHeadingButton != HeadingButtons.PostMatch)
                 {
                     using var stream = AssetLoader.Open(new Uri("avares://ScoutApp/Assets/cartman.jpg"));
                     return new Bitmap(stream);
