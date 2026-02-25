@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.IO;
 using System;
 using Avalonia.Media.Imaging;
@@ -229,6 +230,69 @@ namespace ScoutApp.ViewModels
 
         [ObservableProperty]
         public int _HeadingsTextSize = 18;
+
+        public List<string> ScoutNames { get; } = new List<string>
+        {
+            "Ahmad, Rayan",
+            "Arya, Sankalp",
+            "Baker, Viljami",
+            "Boddu, Aditi",
+            "Bogen, Andrew",
+            "Butlay, Martina",
+            "Calub, Kendrich",
+            "Chokkakula, Rithvik",
+            "Ciaravella, Embry",
+            "Corkins, Grayden",
+            "Cronk, Gabe",
+            "Dalton-Higbee, Gavin",
+            "Daly III, Paul",
+            "Datta, Vinamn",
+            "Dixit, Parth",
+            "Fabela, Lucas",
+            "Gilroy, Caleb",
+            "Giridharan, Dhananjay",
+            "Gopu, Sritanvi",
+            "Hammersmith, Jaxten",
+            "Hills, Holly",
+            "Hills, Liliana",
+            "Huang, Elizabeth",
+            "Kandala, Sripad",
+            "Karthik, Varshini",
+            "Kifle, Gelilla",
+            "Kim, Aram",
+            "Kondeti, Rithvika",
+            "Kumar, Tejit",
+            "Le, Audrey",
+            "Lee, Michael",
+            "Liebman, Blair",
+            "Lilly, Anders",
+            "Lin, Yu-Chen (Emily)",
+            "Maldonado, Alan",
+            "Manoj, Aarush",
+            "Munson, Garrett",
+            "Neilson, Jaxon",
+            "Patel, Halak",
+            "Phan, Damien",
+            "Prajapati, Tvisha",
+            "Pucek, Sophia",
+            "Pullela, Avani",
+            "Rajkumar, Ritvik",
+            "Reinecke, Bridgette",
+            "Rhoades, Kate",
+            "Rosenau, Hailey",
+            "Sabarinath, Manasi",
+            "Singaravadivelu, Siddharth",
+            "Singh, Ateev",
+            "Somayajula, Tanvi",
+            "Steffen, Mia",
+            "Sudhakar, Surriyaa",
+            "Tewodros, Dagmawi",
+            "Theaker, Landon",
+            "Vijay Kumar, Diganth",
+            "Walters, Elise",
+            "Workneh, Michael",
+            "Yusufov, Ibrahim"
+        };
 
         [ObservableProperty]
         [NotifyPropertyChangedFor(nameof(Summary))]

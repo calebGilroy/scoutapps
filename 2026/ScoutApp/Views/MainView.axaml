@@ -168,10 +168,11 @@
                     FontWeight="Bold">
                     SCOUT NAME:
                 </TextBlock>
-                <TextBox
+                <ComboBox
                     Margin="0,10,0,50"
                     HorizontalAlignment="Center"
-                    Text="{Binding ScoutName}" />
+                    ItemsSource="{Binding ScoutNames}"
+                    SelectedItem="{Binding ScoutName}" />
 
                 <TextBlock
                     HorizontalAlignment="Center"
