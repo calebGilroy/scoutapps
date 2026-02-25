@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System;
+using System.Linq;
 using Avalonia.Media.Imaging;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
@@ -139,6 +140,7 @@ namespace ScoutApp.ViewModels
 
         [ObservableProperty]
         [NotifyPropertyChangedFor(nameof(QRCode1))]
+        [NotifyPropertyChangedFor(nameof(MissingFields))]
         private HeadingButtons _SelectedHeadingButton = HeadingButtons.PreMatch;
 
         [RelayCommand]
@@ -298,6 +300,7 @@ namespace ScoutApp.ViewModels
         [ObservableProperty]
         [NotifyPropertyChangedFor(nameof(Summary))]
         [NotifyPropertyChangedFor(nameof(QRCode1))]
+        [NotifyPropertyChangedFor(nameof(MissingFields))]
         private string? _ScoutName;
 
         [ObservableProperty]
@@ -311,6 +314,7 @@ namespace ScoutApp.ViewModels
         private int? _TeamNumber;
 
         [ObservableProperty]
+        [NotifyPropertyChangedFor(nameof(MissingFields))]
         private AlliancePosition? _SelectedAlliancePosition;
 
         [ObservableProperty]
@@ -321,6 +325,7 @@ namespace ScoutApp.ViewModels
         [ObservableProperty]
         [NotifyPropertyChangedFor(nameof(Summary))]
         [NotifyPropertyChangedFor(nameof(QRCode1))]
+        [NotifyPropertyChangedFor(nameof(MissingFields))]
         private AutoStartingPosition? _StartingPosition;
 
         [ObservableProperty]
@@ -342,6 +347,7 @@ namespace ScoutApp.ViewModels
         [ObservableProperty]
         [NotifyPropertyChangedFor(nameof(Summary))]
         [NotifyPropertyChangedFor(nameof(QRCode1))]
+        [NotifyPropertyChangedFor(nameof(MissingFields))]
         private Climb2026? _AutoClimb;
 
         // ===== AUTO OBSTACLES =====
@@ -413,6 +419,7 @@ namespace ScoutApp.ViewModels
         [ObservableProperty]
         [NotifyPropertyChangedFor(nameof(Summary))]
         [NotifyPropertyChangedFor(nameof(QRCode1))]
+        [NotifyPropertyChangedFor(nameof(MissingFields))]
         private Climb2026? _TeleOpClimb;
 
         [ObservableProperty]
@@ -496,6 +503,21 @@ BreakdownTime-5
                 using PngByteQRCode qrCode = new(qrCodeData);
                 byte[] data = qrCode.GetGraphic(20);
                 return new Bitmap(new MemoryStream(data));
+            }
+        }
+
+        public string MissingFields
+        {
+            get
+            {
+                var missing = new List<string>();
+                if (string.IsNullOrEmpty(ScoutName)) missing.Add("Scout Name");
+                if (SelectedAlliancePosition == null) missing.Add("Alliance Position");
+                if (StartingPosition == null) missing.Add("Starting Position");
+                if (AutoClimb == null) missing.Add("Auto Climb");
+                if (TeleOpClimb == null) missing.Add("Endgame Tower Climb");
+                if (missing.Count == 0) return string.Empty;
+                return "Missing required fields:\n" + string.Join("\n", missing.Select(f => "  \u2022 " + f));
             }
         }
     }

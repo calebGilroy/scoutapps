@@ -244,6 +244,14 @@
                     FontSize="{Binding TextSize}"
                     IsVisible="{Binding ShowSummary}"
                     Text="{Binding Summary}" />
+                <TextBlock
+                    Margin="0,20,0,0"
+                    HorizontalAlignment="Center"
+                    FontSize="{Binding TextSize}"
+                    FontWeight="Bold"
+                    Foreground="Red"
+                    IsVisible="{Binding MissingFields, Converter={x:Static StringConverters.IsNotNullOrEmpty}}"
+                    Text="{Binding MissingFields}" />
                 <Image
                     Width="400"
                     Height="400"
