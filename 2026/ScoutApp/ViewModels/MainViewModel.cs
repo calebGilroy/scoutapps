@@ -12,28 +12,30 @@ namespace ScoutApp.ViewModels
 {
     public enum AutoStartingPosition
     {
-        LEFT,
+        LEFT_BUMP,
+        LEFT_TRENCH,
         CENTER,
-        RIGHT
+        RIGHT_TRENCH,
+        RIGHT_BUMP
     }
 
     public enum Breakdown2026
     {
         NONE,
         TIPPED,
-        MECHANICALFAILURE,
-        CONNECTIONFAILURE,
+        MECHANICAL_FAILURE,
+        CONNECTION_FAILURE,
         DISABLED,
-        BEACHEDONFUEL
+        BEACHED_ON_FUEL
     }
 
     public enum Climb2026
     {
-        LEVEL1,
-        LEVEL2,
-        LEVEL3,
+        LEVEL_1,
+        LEVEL_2,
+        LEVEL_3,
         FAILED,
-        DIDNOTATTEMPT
+        DID_NOT_ATTEMPT
     }
 
     public enum HeadingButtons
@@ -47,12 +49,12 @@ namespace ScoutApp.ViewModels
 
     public enum AlliancePosition
     {
-        RED1,
-        RED2,
-        RED3,
-        BLUE1,
-        BLUE2,
-        BLUE3
+        RED_1,
+        RED_2,
+        RED_3,
+        BLUE_1,
+        BLUE_2,
+        BLUE_3
     }
 
     public enum Alliance
@@ -128,11 +130,11 @@ namespace ScoutApp.ViewModels
             {
                 SelectedAlliance = null;
             }
-            else if (value is AlliancePosition.RED1 or AlliancePosition.RED2 or AlliancePosition.RED3)
+            else if (value is AlliancePosition.RED_1 or AlliancePosition.RED_2 or AlliancePosition.RED_3)
             {
                 SelectedAlliance = Alliance.Red;
             }
-            else if (value is AlliancePosition.BLUE1 or AlliancePosition.BLUE2 or AlliancePosition.BLUE3)
+            else if (value is AlliancePosition.BLUE_1 or AlliancePosition.BLUE_2 or AlliancePosition.BLUE_3)
             {
                 SelectedAlliance = Alliance.Blue;
             }
@@ -233,68 +235,68 @@ namespace ScoutApp.ViewModels
         [ObservableProperty]
         public int _HeadingsTextSize = 18;
 
-        public List<string> ScoutNames { get; } = new List<string>
+        public List<string>? ScoutNames { get; } = new List<string>
         {
-            "Ahmad, Rayan",
-            "Arya, Sankalp",
-            "Baker, Viljami",
-            "Boddu, Aditi",
-            "Bogen, Andrew",
-            "Butlay, Martina",
-            "Calub, Kendrich",
-            "Chokkakula, Rithvik",
-            "Ciaravella, Embry",
-            "Corkins, Grayden",
-            "Cronk, Gabe",
-            "Dalton-Higbee, Gavin",
-            "Daly III, Paul",
-            "Datta, Vinamn",
-            "Dixit, Parth",
-            "Fabela, Lucas",
-            "Gilroy, Caleb",
-            "Giridharan, Dhananjay",
-            "Gopu, Sritanvi",
-            "Hammersmith, Jaxten",
-            "Hills, Holly",
-            "Hills, Liliana",
-            "Huang, Elizabeth",
-            "Kandala, Sripad",
-            "Karthik, Varshini",
-            "Kifle, Gelilla",
-            "Kim, Aram",
-            "Kondeti, Rithvika",
-            "Kumar, Tejit",
-            "Le, Audrey",
-            "Lee, Michael",
-            "Liebman, Blair",
-            "Lilly, Anders",
-            "Lin, Yu-Chen (Emily)",
-            "Maldonado, Alan",
-            "Manoj, Aarush",
-            "Munson, Garrett",
-            "Neilson, Jaxon",
-            "Patel, Halak",
-            "Phan, Damien",
-            "Prajapati, Tvisha",
-            "Pucek, Sophia",
-            "Pullela, Avani",
-            "Rajkumar, Ritvik",
-            "Reinecke, Bridgette",
-            "Rhoades, Kate",
-            "Rosenau, Hailey",
-            "Sabarinath, Manasi",
-            "Singaravadivelu, Siddharth",
-            "Singh, Ateev",
-            "Somayajula, Tanvi",
-            "Steffen, Mia",
-            "Sudhakar, Surriyaa",
-            "Tewodros, Dagmawi",
-            "Theaker, Landon",
-            "Vijay Kumar, Diganth",
-            "Walters, Elise",
-            "Workneh, Michael",
-            "Yusufov, Ibrahim",
-            "Mentor"
+            "Mentor",
+            "Aarush Manoj",
+            "Aditi Boddu",
+            "Alan Maldonado",
+            "Anders Lilly",
+            "Andrew Bogen",
+            "Aram Kim",
+            "Ateev Singh",
+            "Audrey Le",
+            "Avani Pullela",
+            "Blair Liebman",
+            "Bridgette Reinecke",
+            "Caleb Gilroy",
+            "Damien Phan",
+            "Dagmawi Tewodros",
+            "Dhananjay Giridharan",
+            "Diganth Vijay Kumar",
+            "Elise Walters",
+            "Elizabeth Huang",
+            "Embry Ciaravella",
+            "Gabe Cronk",
+            "Garrett Munson",
+            "Gavin Dalton-Higbee",
+            "Gelilla Kifle",
+            "Grayden Corkins",
+            "Hailey Rosenau",
+            "Halak Patel",
+            "Holly Hills",
+            "Ibrahim Yusufov",
+            "Jaxten Hammersmith",
+            "Jaxon Neilson",
+            "Kate Rhoades",
+            "Kendrich Calub",
+            "Landon Theaker",
+            "Liliana Hills",
+            "Lucas Fabela",
+            "Manasi Sabarinath",
+            "Martina Butlay",
+            "Michael Lee",
+            "Michael Workneh",
+            "Mia Steffen",
+            "Parth Dixit",
+            "Paul Daly III",
+            "Rayan Ahmad",
+            "Rithvik Chokkakula",
+            "Rithvika Kondeti",
+            "Ritvik Rajkumar",
+            "Sankalp Arya",
+            "Siddharth Singaravadivelu",
+            "Sophia Pucek",
+            "Sritanvi Gopu",
+            "Sripad Kandala",
+            "Surriyaa Sudhakar",
+            "Tanvi Somayajula",
+            "Tejit Kumar",
+            "Tvisha Prajapati",
+            "Varshini Karthik",
+            "Viljami Baker",
+            "Vinamn Datta",
+            "Yu-Chen (Emily) Lin"
         };
 
         [ObservableProperty]

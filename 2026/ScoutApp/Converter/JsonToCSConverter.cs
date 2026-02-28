@@ -125,12 +125,12 @@ public static class JsonToCSConverter
 
         int index = alliance switch
         {
-            AlliancePosition.RED1 => 0,
-            AlliancePosition.RED2 => 1,
-            AlliancePosition.RED3 => 2,
-            AlliancePosition.BLUE1 => 3,
-            AlliancePosition.BLUE2 => 4,
-            AlliancePosition.BLUE3 => 5,
+            AlliancePosition.RED_1 => 0,
+            AlliancePosition.RED_2 => 1,
+            AlliancePosition.RED_3 => 2,
+            AlliancePosition.BLUE_1 => 3,
+            AlliancePosition.BLUE_2 => 4,
+            AlliancePosition.BLUE_3 => 5,
             _ => -1
         };
 

@@ -66,26 +66,6 @@
             <Setter Property="Background" Value="{StaticResource secondary}" />
             <Setter Property="Foreground" Value="{StaticResource text}" />
         </Style>
-        <Style Selector="ToggleButton:pointerover">
-            <Setter Property="Background" Value="{StaticResource darkgrey}" />
-            <Setter Property="Foreground" Value="{StaticResource accent}" />
-        </Style>
-        <Style Selector="ToggleButton:focused">
-            <Setter Property="Background" Value="{StaticResource darkgrey}" />
-            <Setter Property="Foreground" Value="{StaticResource accent}" />
-        </Style>
-        <Style Selector="ToggleButton:pressed">
-            <Setter Property="Background" Value="{StaticResource darkgrey}" />
-            <Setter Property="Foreground" Value="{StaticResource accent}" />
-        </Style>
-        <Style Selector="ToggleButton:checked:pointerover">
-            <Setter Property="Background" Value="{StaticResource secondary}" />
-            <Setter Property="Foreground" Value="{StaticResource text}" />
-        </Style>
-        <Style Selector="ToggleButton:checked:focused">
-            <Setter Property="Background" Value="{StaticResource secondary}" />
-            <Setter Property="Foreground" Value="{StaticResource text}" />
-        </Style>
     </UserControl.Styles>
 
     <ScrollViewer VerticalScrollBarVisibility="Hidden">
@@ -169,6 +149,7 @@
                     SCOUT NAME:
                 </TextBlock>
                 <ComboBox
+                    Width="150"
                     Margin="0,10,0,50"
                     HorizontalAlignment="Center"
                     ItemsSource="{Binding ScoutNames}"
@@ -211,12 +192,12 @@
                     Margin="0,10,0,0"
                     SelectedItem="{Binding SelectedAlliancePosition, Mode=TwoWay}">
                     <ComboBox.Items>
-                        <x:Static Member="vm:AlliancePosition.RED1" />
-                        <x:Static Member="vm:AlliancePosition.RED2" />
-                        <x:Static Member="vm:AlliancePosition.RED3" />
-                        <x:Static Member="vm:AlliancePosition.BLUE1" />
-                        <x:Static Member="vm:AlliancePosition.BLUE2" />
-                        <x:Static Member="vm:AlliancePosition.BLUE3" />
+                        <x:Static Member="vm:AlliancePosition.RED_1" />
+                        <x:Static Member="vm:AlliancePosition.RED_2" />
+                        <x:Static Member="vm:AlliancePosition.RED_3" />
+                        <x:Static Member="vm:AlliancePosition.BLUE_1" />
+                        <x:Static Member="vm:AlliancePosition.BLUE_2" />
+                        <x:Static Member="vm:AlliancePosition.BLUE_3" />
                     </ComboBox.Items>
                 </ComboBox>
 
@@ -295,9 +276,11 @@
                     Width="180"
                     SelectedItem="{Binding StartingPosition, Mode=TwoWay}">
                     <ComboBox.Items>
-                        <x:Static Member="vm:AutoStartingPosition.LEFT" />
+                        <x:Static Member="vm:AutoStartingPosition.LEFT_BUMP" />
+                        <x:Static Member="vm:AutoStartingPosition.LEFT_TRENCH" />
                         <x:Static Member="vm:AutoStartingPosition.CENTER" />
-                        <x:Static Member="vm:AutoStartingPosition.RIGHT" />
+                        <x:Static Member="vm:AutoStartingPosition.RIGHT_BUMP" />
+                        <x:Static Member="vm:AutoStartingPosition.RIGHT_TRENCH" />
                     </ComboBox.Items>
                 </ComboBox>
 
@@ -317,17 +300,18 @@
                     HorizontalAlignment="Center"
                     IsChecked="{Binding AutoMove}" />
 
+                <!--  FUEL Scoring Headers  -->
                 <StackPanel
                     Grid.Row="2"
                     Grid.Column="0"
                     Grid.ColumnSpan="2"
-                    Margin="150,40,0,0"
+                    Margin="125,40,0,0"
                     Orientation="Horizontal">
 
                     <TextBlock
                         Width="150"
                         Height="32"
-                        Margin="0,0,50,0"
+                        Margin="0,0,95,0"
                         FontSize="{Binding TextSize}"
                         FontWeight="Bold"
                         Text="{Binding AutoFuelScored, StringFormat='SCORED: {0}'}}" />
@@ -347,7 +331,7 @@
                     Orientation="Horizontal">
 
                     <TextBlock
-                        Width="120"
+                        Width="70"
                         Height="32"
                         FontSize="{Binding TextSize}"
                         FontWeight="Bold">
@@ -355,20 +339,20 @@
                     </TextBlock>
 
                     <RepeatButton
-                        Width="60"
-                        Height="60"
+                        Width="80"
+                        Height="80"
                         HorizontalContentAlignment="Center"
                         VerticalContentAlignment="Center"
                         Background="{StaticResource darkgrey}"
                         Command="{Binding AutoScoredUpCommand}"
                         Content="+"
                         Delay="150"
-                        FontSize="24"
+                        FontSize="40"
                         Foreground="{StaticResource accent}"
                         Interval="75" />
                     <RepeatButton
-                        Width="60"
-                        Height="60"
+                        Width="80"
+                        Height="80"
                         Margin="30,0,50,0"
                         HorizontalContentAlignment="Center"
                         VerticalContentAlignment="Center"
@@ -376,25 +360,25 @@
                         Command="{Binding AutoScoredDownCommand}"
                         Content="-"
                         Delay="150"
-                        FontSize="24"
+                        FontSize="40"
                         Foreground="{StaticResource accent}"
                         Interval="75" />
 
                     <RepeatButton
-                        Width="60"
-                        Height="60"
+                        Width="80"
+                        Height="80"
                         HorizontalContentAlignment="Center"
                         VerticalContentAlignment="Center"
                         Background="{StaticResource darkgrey}"
                         Command="{Binding AutoMissedUpCommand}"
                         Content="+"
                         Delay="150"
-                        FontSize="24"
+                        FontSize="40"
                         Foreground="{StaticResource accent}"
                         Interval="75" />
                     <RepeatButton
-                        Width="60"
-                        Height="60"
+                        Width="80"
+                        Height="80"
                         Margin="30,0,0,0"
                         HorizontalContentAlignment="Center"
                         VerticalContentAlignment="Center"
@@ -402,7 +386,7 @@
                         Command="{Binding AutoMissedDownCommand}"
                         Content="-"
                         Delay="150"
-                        FontSize="24"
+                        FontSize="40"
                         Foreground="{StaticResource accent}"
                         Interval="75" />
 
@@ -491,9 +475,9 @@
                     Margin="0,40,0,0"
                     SelectedItem="{Binding AutoClimb, Mode=TwoWay}">
                     <ComboBox.Items>
-                        <x:Static Member="vm:Climb2026.LEVEL1" />
+                        <x:Static Member="vm:Climb2026.LEVEL_1" />
                         <x:Static Member="vm:Climb2026.FAILED" />
-                        <x:Static Member="vm:Climb2026.DIDNOTATTEMPT" />
+                        <x:Static Member="vm:Climb2026.DID_NOT_ATTEMPT" />
                     </ComboBox.Items>
                 </ComboBox>
 
@@ -514,20 +498,19 @@
                 <StackPanel
                     Grid.Row="0"
                     Grid.ColumnSpan="2"
-                    Margin="150,0,0,0"
+                    Margin="125,0,0,0"
                     Orientation="Horizontal">
 
                     <TextBlock
                         Width="150"
                         Height="32"
-                        Margin="30,0,20,0"
+                        Margin="0,0,95,0"
                         FontSize="{Binding TextSize}"
                         FontWeight="Bold"
                         Text="{Binding TeleOpFuelScored, StringFormat='SCORED: {0}'}" />
                     <TextBlock
                         Width="150"
                         Height="32"
-                        Margin="30,0,0,0"
                         FontSize="{Binding TextSize}"
                         FontWeight="Bold"
                         Text="{Binding TeleOpFuelMissed, StringFormat='MISSED: {0}'}" />
@@ -541,7 +524,7 @@
                     Orientation="Horizontal">
 
                     <TextBlock
-                        Width="150"
+                        Width="70"
                         Height="32"
                         FontSize="{Binding TextSize}"
                         FontWeight="Bold">
@@ -549,20 +532,20 @@
                     </TextBlock>
 
                     <RepeatButton
-                        Width="60"
-                        Height="60"
+                        Width="80"
+                        Height="80"
                         HorizontalContentAlignment="Center"
                         VerticalContentAlignment="Center"
                         Background="{StaticResource darkgrey}"
                         Command="{Binding TeleOpScoredUpCommand}"
                         Content="+"
                         Delay="150"
-                        FontSize="24"
+                        FontSize="40"
                         Foreground="{StaticResource accent}"
                         Interval="75" />
                     <RepeatButton
-                        Width="60"
-                        Height="60"
+                        Width="80"
+                        Height="80"
                         Margin="30,0,50,0"
                         HorizontalContentAlignment="Center"
                         VerticalContentAlignment="Center"
@@ -570,25 +553,25 @@
                         Command="{Binding TeleOpScoredDownCommand}"
                         Content="-"
                         Delay="150"
-                        FontSize="24"
+                        FontSize="40"
                         Foreground="{StaticResource accent}"
                         Interval="75" />
 
                     <RepeatButton
-                        Width="60"
-                        Height="60"
+                        Width="80"
+                        Height="80"
                         HorizontalContentAlignment="Center"
                         VerticalContentAlignment="Center"
                         Background="{StaticResource darkgrey}"
                         Command="{Binding TeleOpMissedUpCommand}"
                         Content="+"
                         Delay="150"
-                        FontSize="24"
+                        FontSize="40"
                         Foreground="{StaticResource accent}"
                         Interval="75" />
                     <RepeatButton
-                        Width="60"
-                        Height="60"
+                        Width="80"
+                        Height="80"
                         Margin="30,0,0,0"
                         HorizontalContentAlignment="Center"
                         VerticalContentAlignment="Center"
@@ -596,7 +579,7 @@
                         Command="{Binding TeleOpMissedDownCommand}"
                         Content="-"
                         Delay="150"
-                        FontSize="24"
+                        FontSize="40"
                         Foreground="{StaticResource accent}"
                         Interval="75" />
 
@@ -682,11 +665,11 @@
                     Margin="0,40,0,0"
                     SelectedItem="{Binding TeleOpClimb, Mode=TwoWay}">
                     <ComboBox.Items>
-                        <x:Static Member="vm:Climb2026.LEVEL1" />
-                        <x:Static Member="vm:Climb2026.LEVEL2" />
-                        <x:Static Member="vm:Climb2026.LEVEL3" />
+                        <x:Static Member="vm:Climb2026.LEVEL_1" />
+                        <x:Static Member="vm:Climb2026.LEVEL_2" />
+                        <x:Static Member="vm:Climb2026.LEVEL_3" />
                         <x:Static Member="vm:Climb2026.FAILED" />
-                        <x:Static Member="vm:Climb2026.DIDNOTATTEMPT" />
+                        <x:Static Member="vm:Climb2026.DID_NOT_ATTEMPT" />
                     </ComboBox.Items>
                 </ComboBox>
 
@@ -709,10 +692,10 @@
                     <ComboBox.Items>
                         <x:Static Member="vm:Breakdown2026.NONE" />
                         <x:Static Member="vm:Breakdown2026.TIPPED" />
-                        <x:Static Member="vm:Breakdown2026.MECHANICALFAILURE" />
-                        <x:Static Member="vm:Breakdown2026.CONNECTIONFAILURE" />
+                        <x:Static Member="vm:Breakdown2026.MECHANICAL_FAILURE" />
+                        <x:Static Member="vm:Breakdown2026.CONNECTION_FAILURE" />
                         <x:Static Member="vm:Breakdown2026.DISABLED" />
-                        <x:Static Member="vm:Breakdown2026.BEACHEDONFUEL" />
+                        <x:Static Member="vm:Breakdown2026.BEACHED_ON_FUEL" />
                     </ComboBox.Items>
                 </ComboBox>
 
