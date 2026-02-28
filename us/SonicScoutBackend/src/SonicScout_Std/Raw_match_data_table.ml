@@ -80,9 +80,9 @@ let fields = [
   fb "TeleOpIntakeOutpost";
   fb "TeleOpIntakeNeutralZone";
   fs "TowerClimb";
-  fi "ClimbTime";
+  fs "ClimbTime";
   fs "Breakdown";
-  fi "BreakdownTime";
+  fs "BreakdownTime";
 ]
 
 let getfield name =

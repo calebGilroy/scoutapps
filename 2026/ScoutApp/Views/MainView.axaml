@@ -356,57 +356,61 @@
                         FUEL
                     </TextBlock>
 
-                    <RepeatButton
-                        Width="80"
-                        Height="80"
-                        HorizontalContentAlignment="Center"
-                        VerticalContentAlignment="Center"
-                        Background="{StaticResource darkgrey}"
-                        Command="{Binding AutoScoredUpCommand}"
-                        Content="+"
-                        Delay="150"
-                        FontSize="40"
-                        Foreground="{StaticResource accent}"
-                        Interval="75" />
-                    <RepeatButton
-                        Width="80"
-                        Height="80"
-                        Margin="30,0,50,0"
-                        HorizontalContentAlignment="Center"
-                        VerticalContentAlignment="Center"
-                        Background="{StaticResource darkgrey}"
-                        Command="{Binding AutoScoredDownCommand}"
-                        Content="-"
-                        Delay="150"
-                        FontSize="40"
-                        Foreground="{StaticResource accent}"
-                        Interval="75" />
+                    <StackPanel Margin="60,0,0,0" Orientation="Vertical">
+                        <RepeatButton
+                            Width="80"
+                            Height="80"
+                            HorizontalContentAlignment="Center"
+                            VerticalContentAlignment="Center"
+                            Background="{StaticResource darkgrey}"
+                            Command="{Binding AutoScoredUpCommand}"
+                            Content="+"
+                            Delay="150"
+                            FontSize="40"
+                            Foreground="{StaticResource accent}"
+                            Interval="75" />
+                        <RepeatButton
+                            Width="80"
+                            Height="80"
+                            Margin="0,10,0,0"
+                            HorizontalContentAlignment="Center"
+                            VerticalContentAlignment="Center"
+                            Background="{StaticResource darkgrey}"
+                            Command="{Binding AutoScoredDownCommand}"
+                            Content="-"
+                            Delay="150"
+                            FontSize="40"
+                            Foreground="{StaticResource accent}"
+                            Interval="75" />
+                    </StackPanel>
 
-                    <RepeatButton
-                        Width="80"
-                        Height="80"
-                        HorizontalContentAlignment="Center"
-                        VerticalContentAlignment="Center"
-                        Background="{StaticResource darkgrey}"
-                        Command="{Binding AutoMissedUpCommand}"
-                        Content="+"
-                        Delay="150"
-                        FontSize="40"
-                        Foreground="{StaticResource accent}"
-                        Interval="75" />
-                    <RepeatButton
-                        Width="80"
-                        Height="80"
-                        Margin="30,0,0,0"
-                        HorizontalContentAlignment="Center"
-                        VerticalContentAlignment="Center"
-                        Background="{StaticResource darkgrey}"
-                        Command="{Binding AutoMissedDownCommand}"
-                        Content="-"
-                        Delay="150"
-                        FontSize="40"
-                        Foreground="{StaticResource accent}"
-                        Interval="75" />
+                    <StackPanel Margin="160,0,0,0" Orientation="Vertical">
+                        <RepeatButton
+                            Width="80"
+                            Height="80"
+                            HorizontalContentAlignment="Center"
+                            VerticalContentAlignment="Center"
+                            Background="{StaticResource darkgrey}"
+                            Command="{Binding AutoMissedUpCommand}"
+                            Content="+"
+                            Delay="150"
+                            FontSize="40"
+                            Foreground="{StaticResource accent}"
+                            Interval="75" />
+                        <RepeatButton
+                            Width="80"
+                            Height="80"
+                            Margin="0,10,0,0"
+                            HorizontalContentAlignment="Center"
+                            VerticalContentAlignment="Center"
+                            Background="{StaticResource darkgrey}"
+                            Command="{Binding AutoMissedDownCommand}"
+                            Content="-"
+                            Delay="150"
+                            FontSize="40"
+                            Foreground="{StaticResource accent}"
+                            Interval="75" />
+                    </StackPanel>
 
                 </StackPanel>
 
@@ -557,57 +561,61 @@
                         FUEL
                     </TextBlock>
 
-                    <RepeatButton
-                        Width="80"
-                        Height="80"
-                        HorizontalContentAlignment="Center"
-                        VerticalContentAlignment="Center"
-                        Background="{StaticResource darkgrey}"
-                        Command="{Binding TeleOpScoredUpCommand}"
-                        Content="+"
-                        Delay="150"
-                        FontSize="40"
-                        Foreground="{StaticResource accent}"
-                        Interval="75" />
-                    <RepeatButton
-                        Width="80"
-                        Height="80"
-                        Margin="30,0,50,0"
-                        HorizontalContentAlignment="Center"
-                        VerticalContentAlignment="Center"
-                        Background="{StaticResource darkgrey}"
-                        Command="{Binding TeleOpScoredDownCommand}"
-                        Content="-"
-                        Delay="150"
-                        FontSize="40"
-                        Foreground="{StaticResource accent}"
-                        Interval="75" />
+                    <StackPanel Margin="60,0,0,0" Orientation="Vertical">
+                        <RepeatButton
+                            Width="80"
+                            Height="80"
+                            HorizontalContentAlignment="Center"
+                            VerticalContentAlignment="Center"
+                            Background="{StaticResource darkgrey}"
+                            Command="{Binding TeleOpScoredUpCommand}"
+                            Content="+"
+                            Delay="150"
+                            FontSize="40"
+                            Foreground="{StaticResource accent}"
+                            Interval="75" />
+                        <RepeatButton
+                            Width="80"
+                            Height="80"
+                            Margin="0,10,0,0"
+                            HorizontalContentAlignment="Center"
+                            VerticalContentAlignment="Center"
+                            Background="{StaticResource darkgrey}"
+                            Command="{Binding TeleOpScoredDownCommand}"
+                            Content="-"
+                            Delay="150"
+                            FontSize="40"
+                            Foreground="{StaticResource accent}"
+                            Interval="75" />
+                    </StackPanel>
 
-                    <RepeatButton
-                        Width="80"
-                        Height="80"
-                        HorizontalContentAlignment="Center"
-                        VerticalContentAlignment="Center"
-                        Background="{StaticResource darkgrey}"
-                        Command="{Binding TeleOpMissedUpCommand}"
-                        Content="+"
-                        Delay="150"
-                        FontSize="40"
-                        Foreground="{StaticResource accent}"
-                        Interval="75" />
-                    <RepeatButton
-                        Width="80"
-                        Height="80"
-                        Margin="30,0,0,0"
-                        HorizontalContentAlignment="Center"
-                        VerticalContentAlignment="Center"
-                        Background="{StaticResource darkgrey}"
-                        Command="{Binding TeleOpMissedDownCommand}"
-                        Content="-"
-                        Delay="150"
-                        FontSize="40"
-                        Foreground="{StaticResource accent}"
-                        Interval="75" />
+                    <StackPanel Margin="160,0,0,0" Orientation="Vertical">
+                        <RepeatButton
+                            Width="80"
+                            Height="80"
+                            HorizontalContentAlignment="Center"
+                            VerticalContentAlignment="Center"
+                            Background="{StaticResource darkgrey}"
+                            Command="{Binding TeleOpMissedUpCommand}"
+                            Content="+"
+                            Delay="150"
+                            FontSize="40"
+                            Foreground="{StaticResource accent}"
+                            Interval="75" />
+                        <RepeatButton
+                            Width="80"
+                            Height="80"
+                            Margin="0,10,0,0"
+                            HorizontalContentAlignment="Center"
+                            VerticalContentAlignment="Center"
+                            Background="{StaticResource darkgrey}"
+                            Command="{Binding TeleOpMissedDownCommand}"
+                            Content="-"
+                            Delay="150"
+                            FontSize="40"
+                            Foreground="{StaticResource accent}"
+                            Interval="75" />
+                    </StackPanel>
 
                 </StackPanel>
 
