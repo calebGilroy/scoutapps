@@ -16,6 +16,7 @@
 
     <UserControl.Resources>
         <cvt:EnumToBooleanConverter x:Key="EnumToBooleanConverter" />
+        <cvt:EnumMemberValueConverter x:Key="EnumMemberValueConverter" />
 
         <Color x:Key="black_color">#000000</Color>
         <Color x:Key="text_color">#FFFFFF</Color>
@@ -87,6 +88,7 @@
             <TextBlock
                 Grid.Row="0"
                 Grid.Column="3"
+                Margin="0,0,10,0"
                 HorizontalAlignment="Right"
                 VerticalAlignment="Top"
                 Foreground="{StaticResource accent}"
@@ -149,7 +151,7 @@
                     SCOUT NAME:
                 </TextBlock>
                 <ComboBox
-                    Width="150"
+                    Width="225"
                     Margin="0,10,0,50"
                     HorizontalAlignment="Center"
                     ItemsSource="{Binding ScoutNames}"
@@ -188,16 +190,21 @@
                     ALLIANCE POSITION:
                 </TextBlock>
                 <ComboBox
-                    Width="150"
+                    Width="225"
                     Margin="0,10,0,0"
                     SelectedItem="{Binding SelectedAlliancePosition, Mode=TwoWay}">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Converter={StaticResource EnumMemberValueConverter}}" />
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
                     <ComboBox.Items>
-                        <x:Static Member="vm:AlliancePosition.RED_1" />
-                        <x:Static Member="vm:AlliancePosition.RED_2" />
-                        <x:Static Member="vm:AlliancePosition.RED_3" />
-                        <x:Static Member="vm:AlliancePosition.BLUE_1" />
-                        <x:Static Member="vm:AlliancePosition.BLUE_2" />
-                        <x:Static Member="vm:AlliancePosition.BLUE_3" />
+                        <x:Static Member="vm:AlliancePosition.Red1" />
+                        <x:Static Member="vm:AlliancePosition.Red2" />
+                        <x:Static Member="vm:AlliancePosition.Red3" />
+                        <x:Static Member="vm:AlliancePosition.Blue1" />
+                        <x:Static Member="vm:AlliancePosition.Blue2" />
+                        <x:Static Member="vm:AlliancePosition.Blue3" />
                     </ComboBox.Items>
                 </ComboBox>
 
@@ -234,8 +241,8 @@
                     IsVisible="{Binding MissingFields, Converter={x:Static StringConverters.IsNotNullOrEmpty}}"
                     Text="{Binding MissingFields}" />
                 <Image
-                    Width="400"
-                    Height="400"
+                    Width="500"
+                    Height="500"
                     Margin="0,40,0,0"
                     Source="{Binding QRCode1}"
                     Stretch="Fill" />
@@ -261,44 +268,55 @@
                 IsVisible="{Binding SelectedHeadingButton, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static vm:HeadingButtons.Auto}}"
                 RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto">
 
-                <TextBlock
+                <StackPanel
                     Grid.Row="0"
                     Grid.Column="0"
-                    Height="32"
-                    Margin="0,0,20,0"
-                    FontSize="{Binding TextSize}"
-                    FontWeight="Bold">
-                    STARTING POSITION:
-                </TextBlock>
-                <ComboBox
-                    Grid.Row="0"
-                    Grid.Column="1"
-                    Width="180"
-                    SelectedItem="{Binding StartingPosition, Mode=TwoWay}">
-                    <ComboBox.Items>
-                        <x:Static Member="vm:AutoStartingPosition.LEFT_BUMP" />
-                        <x:Static Member="vm:AutoStartingPosition.LEFT_TRENCH" />
-                        <x:Static Member="vm:AutoStartingPosition.CENTER" />
-                        <x:Static Member="vm:AutoStartingPosition.RIGHT_BUMP" />
-                        <x:Static Member="vm:AutoStartingPosition.RIGHT_TRENCH" />
-                    </ComboBox.Items>
-                </ComboBox>
-
-                <TextBlock
-                    Grid.Row="1"
-                    Grid.Column="0"
-                    Height="32"
-                    Margin="0,40,0,0"
-                    FontSize="{Binding TextSize}"
-                    FontWeight="Bold">
-                    AUTO MOVE:
-                </TextBlock>
-                <CheckBox
-                    Grid.Row="1"
-                    Grid.Column="1"
-                    Margin="0,40,0,0"
+                    Grid.ColumnSpan="2"
                     HorizontalAlignment="Center"
-                    IsChecked="{Binding AutoMove}" />
+                    Orientation="Horizontal">
+                    <TextBlock
+                        Width="175"
+                        Height="32"
+                        Margin="0,0,20,0"
+                        FontSize="{Binding TextSize}"
+                        FontWeight="Bold">
+                        STARTING POSITION:
+                    </TextBlock>
+                    <ComboBox Width="225" SelectedItem="{Binding StartingPosition, Mode=TwoWay}">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Converter={StaticResource EnumMemberValueConverter}}" />
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                        <ComboBox.Items>
+                            <x:Static Member="vm:AutoStartingPosition.LeftBump" />
+                            <x:Static Member="vm:AutoStartingPosition.LeftTrench" />
+                            <x:Static Member="vm:AutoStartingPosition.Center" />
+                            <x:Static Member="vm:AutoStartingPosition.RightBump" />
+                            <x:Static Member="vm:AutoStartingPosition.RightTrench" />
+                        </ComboBox.Items>
+                    </ComboBox>
+                </StackPanel>
+
+                <StackPanel
+                    Grid.Row="1"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="2"
+                    HorizontalAlignment="Center"
+                    Orientation="Horizontal">
+                    <TextBlock
+                        Width="175"
+                        Height="32"
+                        Margin="0,40,0,0"
+                        FontSize="{Binding TextSize}"
+                        FontWeight="Bold">
+                        AUTO MOVE:
+                    </TextBlock>
+                    <CheckBox
+                        Margin="0,40,0,0"
+                        HorizontalAlignment="Center"
+                        IsChecked="{Binding AutoMove}" />
+                </StackPanel>
 
                 <!--  FUEL Scoring Headers  -->
                 <StackPanel
@@ -411,12 +429,12 @@
 
                     <CheckBox
                         Margin="0,0,20,0"
-                        Content="BUMP"
+                        Content="Bump"
                         FontSize="{Binding TextSize}"
                         IsChecked="{Binding AutoBump}" />
 
                     <CheckBox
-                        Content="TRENCH"
+                        Content="Trench"
                         FontSize="{Binding TextSize}"
                         IsChecked="{Binding AutoTrench}" />
 
@@ -441,46 +459,54 @@
 
                     <CheckBox
                         Margin="0,0,20,0"
-                        Content="DEPOT"
+                        Content="Depot"
                         FontSize="{Binding TextSize}"
                         IsChecked="{Binding AutoIntakeDepot}" />
 
                     <CheckBox
                         Margin="0,0,20,0"
-                        Content="OUTPOST"
+                        Content="Outpost"
                         FontSize="{Binding TextSize}"
                         IsChecked="{Binding AutoIntakeOutpost}" />
 
                     <CheckBox
-                        Content="NEUTRAL ZONE"
+                        Content="Neutral Zone"
                         FontSize="{Binding TextSize}"
                         IsChecked="{Binding AutoIntakeNeutralZone}" />
 
                 </StackPanel>
 
-                <!--  Auto Tower Climb  -->
-                <TextBlock
+                <!--  Auto Climb  -->
+                <StackPanel
                     Grid.Row="6"
                     Grid.Column="0"
-                    Height="32"
-                    Margin="0,40,0,0"
-                    FontSize="{Binding TextSize}"
-                    FontWeight="Bold">
-                    AUTO CLIMB:
-                </TextBlock>
-                <ComboBox
-                    Grid.Row="6"
-                    Grid.Column="1"
-                    Width="180"
-                    Margin="0,40,0,0"
-                    SelectedItem="{Binding AutoClimb, Mode=TwoWay}">
-                    <ComboBox.Items>
-                        <x:Static Member="vm:Climb2026.LEVEL_1" />
-                        <x:Static Member="vm:Climb2026.FAILED" />
-                        <x:Static Member="vm:Climb2026.DID_NOT_ATTEMPT" />
-                    </ComboBox.Items>
-                </ComboBox>
-
+                    Grid.ColumnSpan="2"
+                    HorizontalAlignment="Center"
+                    Orientation="Horizontal">
+                    <TextBlock
+                        Width="175"
+                        Height="32"
+                        Margin="0,40,0,0"
+                        FontSize="{Binding TextSize}"
+                        FontWeight="Bold">
+                        AUTO CLIMB:
+                    </TextBlock>
+                    <ComboBox
+                        Width="225"
+                        Margin="0,40,0,0"
+                        SelectedItem="{Binding AutoClimb, Mode=TwoWay}">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Converter={StaticResource EnumMemberValueConverter}}" />
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                        <ComboBox.Items>
+                            <x:Static Member="vm:Climb2026.Level1" />
+                            <x:Static Member="vm:Climb2026.Failed" />
+                            <x:Static Member="vm:Climb2026.DidNotAttempt" />
+                        </ComboBox.Items>
+                    </ComboBox>
+                </StackPanel>
             </Grid>
 
             <!--  TeleOp  -->
@@ -603,12 +629,12 @@
 
                     <CheckBox
                         Margin="0,0,20,0"
-                        Content="BUMP"
+                        Content="Bump"
                         FontSize="{Binding TextSize}"
                         IsChecked="{Binding TeleOpBump}" />
 
                     <CheckBox
-                        Content="TRENCH"
+                        Content="Trench"
                         FontSize="{Binding TextSize}"
                         IsChecked="{Binding TeleOpTrench}" />
 
@@ -631,27 +657,28 @@
 
                     <CheckBox
                         Margin="0,0,20,0"
-                        Content="DEPOT"
+                        Content="Depot"
                         FontSize="{Binding TextSize}"
                         IsChecked="{Binding TeleOpIntakeDepot}" />
 
                     <CheckBox
                         Margin="0,0,20,0"
-                        Content="OUTPOST"
+                        Content="Outpost"
                         FontSize="{Binding TextSize}"
                         IsChecked="{Binding TeleOpIntakeOutpost}" />
 
                     <CheckBox
-                        Content="NEUTRAL ZONE"
+                        Content="Neutral Zone"
                         FontSize="{Binding TextSize}"
                         IsChecked="{Binding TeleOpIntakeNeutralZone}" />
 
                 </StackPanel>
 
-                <!--  Tower Climb  -->
+                <!--  TeleOp Climb  -->
                 <TextBlock
                     Grid.Row="4"
                     Grid.Column="0"
+                    Width="175"
                     Height="32"
                     Margin="0,40,20,0"
                     FontSize="{Binding TextSize}"
@@ -661,22 +688,59 @@
                 <ComboBox
                     Grid.Row="4"
                     Grid.Column="1"
-                    Width="180"
+                    Width="225"
                     Margin="0,40,0,0"
                     SelectedItem="{Binding TeleOpClimb, Mode=TwoWay}">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Converter={StaticResource EnumMemberValueConverter}}" />
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
                     <ComboBox.Items>
-                        <x:Static Member="vm:Climb2026.LEVEL_1" />
-                        <x:Static Member="vm:Climb2026.LEVEL_2" />
-                        <x:Static Member="vm:Climb2026.LEVEL_3" />
-                        <x:Static Member="vm:Climb2026.FAILED" />
-                        <x:Static Member="vm:Climb2026.DID_NOT_ATTEMPT" />
+                        <x:Static Member="vm:Climb2026.Level1" />
+                        <x:Static Member="vm:Climb2026.Level2" />
+                        <x:Static Member="vm:Climb2026.Level3" />
+                        <x:Static Member="vm:Climb2026.Failed" />
+                        <x:Static Member="vm:Climb2026.DidNotAttempt" />
+                    </ComboBox.Items>
+                </ComboBox>
+
+                <TextBlock
+                    Grid.Row="5"
+                    Grid.Column="0"
+                    Width="175"
+                    Height="32"
+                    Margin="0,40,20,0"
+                    FontSize="{Binding TextSize}"
+                    FontWeight="Bold"
+                    IsVisible="{Binding ShowClimbTimes}">
+                    CLIMB TIME:
+                </TextBlock>
+                <ComboBox
+                    Grid.Row="5"
+                    Grid.Column="1"
+                    Width="225"
+                    Margin="0,40,0,0"
+                    IsVisible="{Binding ShowClimbTimes}"
+                    SelectedItem="{Binding TeleOpClimbTime, Mode=TwoWay}">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Converter={StaticResource EnumMemberValueConverter}}" />
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                    <ComboBox.Items>
+                        <x:Static Member="vm:ClimbTimes._0to10Seconds" />
+                        <x:Static Member="vm:ClimbTimes._10to20Seconds" />
+                        <x:Static Member="vm:ClimbTimes._20to30Seconds" />
+                        <x:Static Member="vm:ClimbTimes._30PlusSeconds" />
                     </ComboBox.Items>
                 </ComboBox>
 
                 <!--  Breakdown  -->
                 <TextBlock
-                    Grid.Row="5"
+                    Grid.Row="6"
                     Grid.Column="0"
+                    Width="175"
                     Height="32"
                     Margin="0,40,20,0"
                     FontSize="{Binding TextSize}"
@@ -684,18 +748,53 @@
                     BREAKDOWN:
                 </TextBlock>
                 <ComboBox
-                    Grid.Row="5"
+                    Grid.Row="6"
                     Grid.Column="1"
-                    Width="180"
+                    Width="225"
                     Margin="0,40,0,0"
                     SelectedItem="{Binding Breakdown, Mode=TwoWay}">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Converter={StaticResource EnumMemberValueConverter}}" />
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
                     <ComboBox.Items>
-                        <x:Static Member="vm:Breakdown2026.NONE" />
-                        <x:Static Member="vm:Breakdown2026.TIPPED" />
-                        <x:Static Member="vm:Breakdown2026.MECHANICAL_FAILURE" />
-                        <x:Static Member="vm:Breakdown2026.CONNECTION_FAILURE" />
-                        <x:Static Member="vm:Breakdown2026.DISABLED" />
-                        <x:Static Member="vm:Breakdown2026.BEACHED_ON_FUEL" />
+                        <x:Static Member="vm:Breakdown2026.None" />
+                        <x:Static Member="vm:Breakdown2026.Tipped" />
+                        <x:Static Member="vm:Breakdown2026.MechanicalFailure" />
+                        <x:Static Member="vm:Breakdown2026.ConnectionFailure" />
+                        <x:Static Member="vm:Breakdown2026.Disabled" />
+                        <x:Static Member="vm:Breakdown2026.BeachedOnFuel" />
+                    </ComboBox.Items>
+                </ComboBox>
+
+                <TextBlock
+                    Grid.Row="7"
+                    Grid.Column="0"
+                    Width="175"
+                    Height="32"
+                    Margin="0,40,20,0"
+                    FontSize="{Binding TextSize}"
+                    FontWeight="Bold"
+                    IsVisible="{Binding ShowBreakdownTimes}">
+                    BREAKDOWN TIME:
+                </TextBlock>
+                <ComboBox
+                    Grid.Row="7"
+                    Grid.Column="1"
+                    Width="225"
+                    Margin="0,40,0,0"
+                    IsVisible="{Binding ShowBreakdownTimes}"
+                    SelectedItem="{Binding BreakdownTime, Mode=TwoWay}">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Converter={StaticResource EnumMemberValueConverter}}" />
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                    <ComboBox.Items>
+                        <x:Static Member="vm:BreakdownTimes._0to15Seconds" />
+                        <x:Static Member="vm:BreakdownTimes._15to30Seconds" />
+                        <x:Static Member="vm:BreakdownTimes._30PlusSeconds" />
                     </ComboBox.Items>
                 </ComboBox>
 

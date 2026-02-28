@@ -7,37 +7,10 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using QRCoder;
 using Avalonia.Platform;
+using System.Runtime.Serialization;
 
 namespace ScoutApp.ViewModels
 {
-    public enum AutoStartingPosition
-    {
-        LEFT_BUMP,
-        LEFT_TRENCH,
-        CENTER,
-        RIGHT_TRENCH,
-        RIGHT_BUMP
-    }
-
-    public enum Breakdown2026
-    {
-        NONE,
-        TIPPED,
-        MECHANICAL_FAILURE,
-        CONNECTION_FAILURE,
-        DISABLED,
-        BEACHED_ON_FUEL
-    }
-
-    public enum Climb2026
-    {
-        LEVEL_1,
-        LEVEL_2,
-        LEVEL_3,
-        FAILED,
-        DID_NOT_ATTEMPT
-    }
-
     public enum HeadingButtons
     {
         PreMatch,
@@ -49,12 +22,12 @@ namespace ScoutApp.ViewModels
 
     public enum AlliancePosition
     {
-        RED_1,
-        RED_2,
-        RED_3,
-        BLUE_1,
-        BLUE_2,
-        BLUE_3
+        [EnumMember(Value = "Red 1")] Red1,
+        [EnumMember(Value = "Red 2")] Red2,
+        [EnumMember(Value = "Red 3")] Red3,
+        [EnumMember(Value = "Blue 1")] Blue1,
+        [EnumMember(Value = "Blue 2")] Blue2,
+        [EnumMember(Value = "Blue 3")] Blue3
     }
 
     public enum Alliance
@@ -63,42 +36,51 @@ namespace ScoutApp.ViewModels
         Blue
     }
 
+    public enum AutoStartingPosition
+    {
+        [EnumMember(Value = "Left Bump")] LeftBump,
+        [EnumMember(Value = "Left Trench")] LeftTrench,
+        [EnumMember(Value = "Center")] Center,
+        [EnumMember(Value = "Right Trench")] RightTrench,
+        [EnumMember(Value = "Right Bump")] RightBump
+    }
+
+    public enum Breakdown2026
+    {
+        [EnumMember(Value = "None")] None,
+        [EnumMember(Value = "Tipped")] Tipped,
+        [EnumMember(Value = "Mechanical Failure")] MechanicalFailure,
+        [EnumMember(Value = "Connection Failure")] ConnectionFailure,
+        [EnumMember(Value = "Disabled")] Disabled,
+        [EnumMember(Value = "Beached on Fuel")] BeachedOnFuel
+    }
+
+    public enum Climb2026
+    {
+        [EnumMember(Value = "Level 1")] Level1,
+        [EnumMember(Value = "Level 2")] Level2,
+        [EnumMember(Value = "Level 3")] Level3,
+        [EnumMember(Value = "Failed")] Failed,
+        [EnumMember(Value = "Did Not Attempt")] DidNotAttempt
+    }
+
+    public enum ClimbTimes
+    {
+        [EnumMember(Value = "~0-15 Seconds")] _0to10Seconds,
+        [EnumMember(Value = "~10-20 Seconds")] _10to20Seconds,
+        [EnumMember(Value = "~20-30 Seconds")] _20to30Seconds,
+        [EnumMember(Value = "~30+ Seconds")] _30PlusSeconds
+    }
+
+    public enum BreakdownTimes
+    {
+        [EnumMember(Value = "~0-15 Seconds")] _0to15Seconds,
+        [EnumMember(Value = "~15-30 Seconds")] _15to30Seconds,
+        [EnumMember(Value = "~30+ Seconds")] _30PlusSeconds
+    }
+
     public partial class MainViewModel : ObservableObject
     {
-        [RelayCommand]
-        private void NextMatch()
-        {
-            MatchNumber += 1;
-            StartingPosition = null;
-            AutoMove = false;
-            // Auto FUEL
-            AutoFuelScored = 0;
-            AutoFuelMissed = 0;
-            AutoClimb = null;
-            // Auto Obstacles
-            AutoBump = false;
-            AutoTrench = false;
-            // Auto Intake
-            AutoIntakeDepot = false;
-            AutoIntakeOutpost = false;
-            AutoIntakeNeutralZone = false;
-            // TeleOp FUEL
-            TeleOpFuelScored = 0;
-            TeleOpFuelMissed = 0;
-            // TeleOp Obstacles
-            TeleOpBump = false;
-            TeleOpTrench = false;
-            // TeleOp Intake
-            TeleOpIntakeDepot = false;
-            TeleOpIntakeOutpost = false;
-            TeleOpIntakeNeutralZone = false;
-            // Endgame
-            TeleOpClimb = null;
-            Breakdown = Breakdown2026.NONE;
-            ShowSummary = false;
-            SelectedHeadingButton = HeadingButtons.PreMatch;
-        }
-
         private static int? GetTeamNumberFromSchedule(int matchNumber, AlliancePosition? alliance)
         {
             if (alliance == null)
@@ -130,11 +112,11 @@ namespace ScoutApp.ViewModels
             {
                 SelectedAlliance = null;
             }
-            else if (value is AlliancePosition.RED_1 or AlliancePosition.RED_2 or AlliancePosition.RED_3)
+            else if (value is AlliancePosition.Red1 or AlliancePosition.Red2 or AlliancePosition.Red3)
             {
                 SelectedAlliance = Alliance.Red;
             }
-            else if (value is AlliancePosition.BLUE_1 or AlliancePosition.BLUE_2 or AlliancePosition.BLUE_3)
+            else if (value is AlliancePosition.Blue1 or AlliancePosition.Blue2 or AlliancePosition.Blue3)
             {
                 SelectedAlliance = Alliance.Blue;
             }
@@ -169,64 +151,6 @@ namespace ScoutApp.ViewModels
                         break;
                 }
             }
-        }
-
-        [RelayCommand]
-        private void AutoScoredUp()
-        {
-            AutoFuelScored += 1;
-        }
-        [RelayCommand]
-        private void AutoScoredDown()
-        {
-            AutoFuelScored -= 1;
-            if (AutoFuelScored < 0)
-                AutoFuelScored = 0;
-        }
-        [RelayCommand]
-        private void AutoMissedUp()
-        {
-            AutoFuelMissed += 1;
-        }
-        [RelayCommand]
-        private void AutoMissedDown()
-        {
-            AutoFuelMissed -= 1;
-            if (AutoFuelMissed < 0)
-                AutoFuelMissed = 0;
-        }
-        [RelayCommand]
-        private void TeleOpScoredUp()
-        {
-            TeleOpFuelScored += 1;
-        }
-        [RelayCommand]
-        private void TeleOpScoredDown()
-        {
-            TeleOpFuelScored -= 1;
-            if (TeleOpFuelScored < 0)
-                TeleOpFuelScored = 0;
-        }
-        [RelayCommand]
-        private void TeleOpMissedUp()
-        {
-            TeleOpFuelMissed += 1;
-        }
-        [RelayCommand]
-        private void TeleOpMissedDown()
-        {
-            TeleOpFuelMissed -= 1;
-            if (TeleOpFuelMissed < 0)
-                TeleOpFuelMissed = 0;
-        }
-
-        [ObservableProperty]
-        private bool showSummary = false;
-
-        [RelayCommand]
-        private void ToggleSummary()
-        {
-            ShowSummary = !ShowSummary;
         }
 
         [ObservableProperty]
@@ -298,6 +222,55 @@ namespace ScoutApp.ViewModels
             "Vinamn Datta",
             "Yu-Chen (Emily) Lin"
         };
+
+        [RelayCommand]
+        private void AutoScoredUp()
+        {
+            AutoFuelScored += 1;
+        }
+        [RelayCommand]
+        private void AutoScoredDown()
+        {
+            AutoFuelScored -= 1;
+            if (AutoFuelScored < 0)
+                AutoFuelScored = 0;
+        }
+        [RelayCommand]
+        private void AutoMissedUp()
+        {
+            AutoFuelMissed += 1;
+        }
+        [RelayCommand]
+        private void AutoMissedDown()
+        {
+            AutoFuelMissed -= 1;
+            if (AutoFuelMissed < 0)
+                AutoFuelMissed = 0;
+        }
+        [RelayCommand]
+        private void TeleOpScoredUp()
+        {
+            TeleOpFuelScored += 1;
+        }
+        [RelayCommand]
+        private void TeleOpScoredDown()
+        {
+            TeleOpFuelScored -= 1;
+            if (TeleOpFuelScored < 0)
+                TeleOpFuelScored = 0;
+        }
+        [RelayCommand]
+        private void TeleOpMissedUp()
+        {
+            TeleOpFuelMissed += 1;
+        }
+        [RelayCommand]
+        private void TeleOpMissedDown()
+        {
+            TeleOpFuelMissed -= 1;
+            if (TeleOpFuelMissed < 0)
+                TeleOpFuelMissed = 0;
+        }
 
         [ObservableProperty]
         [NotifyPropertyChangedFor(nameof(Summary))]
@@ -419,6 +392,7 @@ namespace ScoutApp.ViewModels
 
         // ===== ENDGAME =====
         [ObservableProperty]
+        [NotifyPropertyChangedFor(nameof(TeleOpClimbTime))]
         [NotifyPropertyChangedFor(nameof(Summary))]
         [NotifyPropertyChangedFor(nameof(QRCode1))]
         [NotifyPropertyChangedFor(nameof(MissingFields))]
@@ -427,7 +401,67 @@ namespace ScoutApp.ViewModels
         [ObservableProperty]
         [NotifyPropertyChangedFor(nameof(Summary))]
         [NotifyPropertyChangedFor(nameof(QRCode1))]
-        private Breakdown2026 _Breakdown = Breakdown2026.NONE;
+        private ClimbTimes? _TeleOpClimbTime;
+
+        [ObservableProperty]
+        [NotifyPropertyChangedFor(nameof(Summary))]
+        [NotifyPropertyChangedFor(nameof(QRCode1))]
+        [NotifyPropertyChangedFor(nameof(MissingFields))]
+        private Breakdown2026 _Breakdown = Breakdown2026.None;
+
+        [ObservableProperty]
+        [NotifyPropertyChangedFor(nameof(Summary))]
+        [NotifyPropertyChangedFor(nameof(QRCode1))]
+        [NotifyPropertyChangedFor(nameof(MissingFields))]
+        private BreakdownTimes? _BreakdownTime;
+
+        [ObservableProperty]
+        private bool _ShowClimbTimes = false;
+
+        partial void OnTeleOpClimbChanged(Climb2026? value)
+        {
+            ShowClimbTimes = value is Climb2026.Level1 or Climb2026.Level2 or Climb2026.Level3;
+
+            if (!ShowClimbTimes)
+                TeleOpClimbTime = null;
+        }
+
+        [ObservableProperty]
+        private bool _ShowBreakdownTimes = false;
+
+        partial void OnBreakdownChanged(Breakdown2026 value)
+        {
+            ShowBreakdownTimes = value != Breakdown2026.None;
+
+            if (!ShowBreakdownTimes)
+                BreakdownTime = null;
+        }
+
+        public string MissingFields
+        {
+            get
+            {
+                var missing = new List<string>();
+                if (string.IsNullOrEmpty(ScoutName)) missing.Add("Scout Name");
+                if (SelectedAlliancePosition == null) missing.Add("Alliance Position");
+                if (StartingPosition == null) missing.Add("Starting Position");
+                if (AutoClimb == null) missing.Add("Auto Climb");
+                if (TeleOpClimb == null) missing.Add("Endgame Tower Climb");
+                if (TeleOpClimbTime == null && TeleOpClimb != null && TeleOpClimb != Climb2026.DidNotAttempt && TeleOpClimb != Climb2026.Failed) missing.Add("Endgame Climb Time");
+                if (BreakdownTime == null && Breakdown != Breakdown2026.None) missing.Add("Breakdown Time");
+                if (missing.Count == 0) return string.Empty;
+                return "Missing required fields:\n" + string.Join("\n", missing.Select(f => "  \u2022 " + f));
+            }
+        }
+
+        [ObservableProperty]
+        private bool showSummary = false;
+
+        [RelayCommand]
+        private void ToggleSummary()
+        {
+            ShowSummary = !ShowSummary;
+        }
 
         public string Summary
         {
@@ -456,7 +490,9 @@ TeleOp Intake Depot: {{TeleOpIntakeDepot}}
 TeleOp Intake Outpost: {{TeleOpIntakeOutpost}}
 TeleOp Intake Neutral Zone: {{TeleOpIntakeNeutralZone}}
 Endgame Tower Climb: {{TeleOpClimb}}
+Endgame Climb Time: {{TeleOpClimbTime}}
 Breakdown: {{Breakdown}}
+Breakdown Time: {{BreakdownTime}}
 """;
             }
         }
@@ -489,9 +525,9 @@ TeleOpIntakeDepot-{{TeleOpIntakeDepot}}
 TeleOpIntakeOutpost-{{TeleOpIntakeOutpost}}
 TeleOpIntakeNeutralZone-{{TeleOpIntakeNeutralZone}}
 TowerClimb-{{TeleOpClimb}}
-ClimbTime-6
+ClimbTime-{{TeleOpClimbTime}}
 Breakdown-{{Breakdown}}
-BreakdownTime-5
+BreakdownTime-{{BreakdownTime}}
 """;
 
                 if (string.IsNullOrEmpty(ScoutName) || SelectedAlliancePosition == null || StartingPosition == null || TeleOpClimb == null || AutoClimb == null || SelectedHeadingButton != HeadingButtons.PostMatch)
@@ -508,19 +544,42 @@ BreakdownTime-5
             }
         }
 
-        public string MissingFields
+        [RelayCommand]
+        private void NextMatch()
         {
-            get
-            {
-                var missing = new List<string>();
-                if (string.IsNullOrEmpty(ScoutName)) missing.Add("Scout Name");
-                if (SelectedAlliancePosition == null) missing.Add("Alliance Position");
-                if (StartingPosition == null) missing.Add("Starting Position");
-                if (AutoClimb == null) missing.Add("Auto Climb");
-                if (TeleOpClimb == null) missing.Add("Endgame Tower Climb");
-                if (missing.Count == 0) return string.Empty;
-                return "Missing required fields:\n" + string.Join("\n", missing.Select(f => "  \u2022 " + f));
-            }
+            MatchNumber += 1;
+            StartingPosition = null;
+            AutoMove = false;
+            // Auto FUEL
+            AutoFuelScored = 0;
+            AutoFuelMissed = 0;
+            AutoClimb = null;
+            // Auto Obstacles
+            AutoBump = false;
+            AutoTrench = false;
+            // Auto Intake
+            AutoIntakeDepot = false;
+            AutoIntakeOutpost = false;
+            AutoIntakeNeutralZone = false;
+            // TeleOp FUEL
+            TeleOpFuelScored = 0;
+            TeleOpFuelMissed = 0;
+            // TeleOp Obstacles
+            TeleOpBump = false;
+            TeleOpTrench = false;
+            // TeleOp Intake
+            TeleOpIntakeDepot = false;
+            TeleOpIntakeOutpost = false;
+            TeleOpIntakeNeutralZone = false;
+            // Endgame
+            TeleOpClimb = null;
+            TeleOpClimbTime = null;
+            ShowClimbTimes = false;
+            Breakdown = Breakdown2026.None;
+            BreakdownTime = null;
+            ShowBreakdownTimes = false;
+            ShowSummary = false;
+            SelectedHeadingButton = HeadingButtons.PreMatch;
         }
     }
 }
