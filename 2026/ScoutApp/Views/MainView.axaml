@@ -289,8 +289,8 @@
                             </DataTemplate>
                         </ComboBox.ItemTemplate>
                         <ComboBox.Items>
-                            <x:Static Member="vm:AutoStartingPosition.LeftBump" />
                             <x:Static Member="vm:AutoStartingPosition.LeftTrench" />
+                            <x:Static Member="vm:AutoStartingPosition.LeftBump" />
                             <x:Static Member="vm:AutoStartingPosition.Center" />
                             <x:Static Member="vm:AutoStartingPosition.RightBump" />
                             <x:Static Member="vm:AutoStartingPosition.RightTrench" />

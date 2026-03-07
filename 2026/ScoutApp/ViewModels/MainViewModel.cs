@@ -38,8 +38,8 @@ namespace ScoutApp.ViewModels
 
     public enum AutoStartingPosition
     {
-        [EnumMember(Value = "Left Bump")] LeftBump,
         [EnumMember(Value = "Left Trench")] LeftTrench,
+        [EnumMember(Value = "Left Bump")] LeftBump,
         [EnumMember(Value = "Center")] Center,
         [EnumMember(Value = "Right Trench")] RightTrench,
         [EnumMember(Value = "Right Bump")] RightBump
@@ -66,7 +66,7 @@ namespace ScoutApp.ViewModels
 
     public enum ClimbTimes
     {
-        [EnumMember(Value = "~0-15 Seconds")] _0to10Seconds,
+        [EnumMember(Value = "~0-10 Seconds")] _0to10Seconds,
         [EnumMember(Value = "~10-20 Seconds")] _10to20Seconds,
         [EnumMember(Value = "~20-30 Seconds")] _20to30Seconds,
         [EnumMember(Value = "~30+ Seconds")] _30PlusSeconds
@@ -104,29 +104,10 @@ namespace ScoutApp.ViewModels
             UpdateTeamNumberFromSchedule();
         }
 
-        partial void OnSelectedAlliancePositionChanged(AlliancePosition? value)
-        {
-            UpdateTeamNumberFromSchedule();
-
-            if (value == null)
-            {
-                SelectedAlliance = null;
-            }
-            else if (value is AlliancePosition.Red1 or AlliancePosition.Red2 or AlliancePosition.Red3)
-            {
-                SelectedAlliance = Alliance.Red;
-            }
-            else if (value is AlliancePosition.Blue1 or AlliancePosition.Blue2 or AlliancePosition.Blue3)
-            {
-                SelectedAlliance = Alliance.Blue;
-            }
-        }
-
         [ObservableProperty]
         [NotifyPropertyChangedFor(nameof(QRCode1))]
         [NotifyPropertyChangedFor(nameof(MissingFields))]
         private HeadingButtons _SelectedHeadingButton = HeadingButtons.PreMatch;
-
         [RelayCommand]
         private void HeadingButton(object button)
         {
@@ -159,6 +140,11 @@ namespace ScoutApp.ViewModels
         [ObservableProperty]
         public int _HeadingsTextSize = 18;
 
+        [ObservableProperty]
+        [NotifyPropertyChangedFor(nameof(Summary))]
+        [NotifyPropertyChangedFor(nameof(QRCode1))]
+        [NotifyPropertyChangedFor(nameof(MissingFields))]
+        private string? _ScoutName;
         public List<string>? ScoutNames { get; } = new List<string>
         {
             "Mentor",
@@ -223,104 +209,6 @@ namespace ScoutApp.ViewModels
             "Yu-Chen (Emily) Lin"
         };
 
-        public string AutoObstacles
-        {
-            get
-            {
-                var parts = new List<string>(2);
-                if (AutoBump) parts.Add("Bump");
-                if (AutoTrench) parts.Add("Trench");
-                return string.Join(",", parts);
-            }
-        }
-        public string AutoIntakes
-        {
-            get
-            {
-                var parts = new List<string>(3);
-                if (AutoIntakeDepot) parts.Add("Depot");
-                if (AutoIntakeNeutralZone) parts.Add("NeutralZone");
-                if (AutoIntakeOutpost) parts.Add("Outpost");
-                return string.Join(",", parts);
-            }
-        }
-        public string TeleOpObstacles
-        {
-            get
-            {
-                var parts = new List<string>(2);
-                if (TeleOpBump) parts.Add("Bump");
-                if (TeleOpTrench) parts.Add("Trench");
-                return string.Join(",", parts);
-            }
-        }
-        public string TeleOpIntakes
-        {
-            get
-            {
-                var parts = new List<string>(3);
-                if (TeleOpIntakeDepot) parts.Add("Depot");
-                if (TeleOpIntakeNeutralZone) parts.Add("NeutralZone");
-                if (TeleOpIntakeOutpost) parts.Add("Outpost");
-                return string.Join(",", parts);
-            }
-        }
-
-        [RelayCommand]
-        private void AutoScoredUp()
-        {
-            AutoFuelScored += 1;
-        }
-        [RelayCommand]
-        private void AutoScoredDown()
-        {
-            AutoFuelScored -= 1;
-            if (AutoFuelScored < 0)
-                AutoFuelScored = 0;
-        }
-        [RelayCommand]
-        private void AutoMissedUp()
-        {
-            AutoFuelMissed += 1;
-        }
-        [RelayCommand]
-        private void AutoMissedDown()
-        {
-            AutoFuelMissed -= 1;
-            if (AutoFuelMissed < 0)
-                AutoFuelMissed = 0;
-        }
-        [RelayCommand]
-        private void TeleOpScoredUp()
-        {
-            TeleOpFuelScored += 1;
-        }
-        [RelayCommand]
-        private void TeleOpScoredDown()
-        {
-            TeleOpFuelScored -= 1;
-            if (TeleOpFuelScored < 0)
-                TeleOpFuelScored = 0;
-        }
-        [RelayCommand]
-        private void TeleOpMissedUp()
-        {
-            TeleOpFuelMissed += 1;
-        }
-        [RelayCommand]
-        private void TeleOpMissedDown()
-        {
-            TeleOpFuelMissed -= 1;
-            if (TeleOpFuelMissed < 0)
-                TeleOpFuelMissed = 0;
-        }
-
-        [ObservableProperty]
-        [NotifyPropertyChangedFor(nameof(Summary))]
-        [NotifyPropertyChangedFor(nameof(QRCode1))]
-        [NotifyPropertyChangedFor(nameof(MissingFields))]
-        private string? _ScoutName;
-
         [ObservableProperty]
         [NotifyPropertyChangedFor(nameof(Summary))]
         [NotifyPropertyChangedFor(nameof(QRCode1))]
@@ -339,6 +227,26 @@ namespace ScoutApp.ViewModels
         [NotifyPropertyChangedFor(nameof(Summary))]
         [NotifyPropertyChangedFor(nameof(QRCode1))]
         private Alliance? _SelectedAlliance;
+        
+        partial void OnSelectedAlliancePositionChanged(AlliancePosition? value)
+        {
+            UpdateTeamNumberFromSchedule();
+
+            if (value == null)
+            {
+                SelectedAlliance = null;
+            }
+            else if (value is AlliancePosition.Red1 or AlliancePosition.Red2 or AlliancePosition.Red3)
+            {
+                SelectedAlliance = Alliance.Red;
+            }
+            else if (value is AlliancePosition.Blue1 or AlliancePosition.Blue2 or AlliancePosition.Blue3)
+            {
+                SelectedAlliance = Alliance.Blue;
+            }
+        }
+
+        // ===== AUTO =====
 
         [ObservableProperty]
         [NotifyPropertyChangedFor(nameof(Summary))]
@@ -351,93 +259,180 @@ namespace ScoutApp.ViewModels
         [NotifyPropertyChangedFor(nameof(QRCode1))]
         private bool _AutoMove = false;
 
-        // ===== AUTO FUEL =====
-        [ObservableProperty]
-        [NotifyPropertyChangedFor(nameof(Summary))]
-        [NotifyPropertyChangedFor(nameof(QRCode1))]
-        private int _AutoFuelScored = 0;
-
-        [ObservableProperty]
-        [NotifyPropertyChangedFor(nameof(Summary))]
-        [NotifyPropertyChangedFor(nameof(QRCode1))]
-        private int _AutoFuelMissed = 0;
-
         [ObservableProperty]
         [NotifyPropertyChangedFor(nameof(Summary))]
         [NotifyPropertyChangedFor(nameof(QRCode1))]
         [NotifyPropertyChangedFor(nameof(MissingFields))]
         private Climb2026? _AutoClimb;
 
-        // ===== AUTO OBSTACLES =====
+        // ===== Auto Fuel =====
+
+        [ObservableProperty]
+        [NotifyPropertyChangedFor(nameof(Summary))]
+        [NotifyPropertyChangedFor(nameof(QRCode1))]
+        private int _AutoFuelScored = 0;
+
+        [RelayCommand]
+        private void AutoScoredUp()
+        {
+            AutoFuelScored += 1;
+        }
+        [RelayCommand]
+        private void AutoScoredDown()
+        {
+            AutoFuelScored -= 1;
+            if (AutoFuelScored < 0)
+                AutoFuelScored = 0;
+        }
+
+        [ObservableProperty]
+        [NotifyPropertyChangedFor(nameof(Summary))]
+        [NotifyPropertyChangedFor(nameof(QRCode1))]
+        private int _AutoFuelMissed = 0;
+
+        [RelayCommand]
+        private void AutoMissedUp()
+        {
+            AutoFuelMissed += 1;
+        }
+        [RelayCommand]
+        private void AutoMissedDown()
+        {
+            AutoFuelMissed -= 1;
+            if (AutoFuelMissed < 0)
+                AutoFuelMissed = 0;
+        }
+
+        // ===== Auto Obstacles =====
+        public string AutoObstacles
+        {
+            get
+            {
+                var obstacles = new List<string>(2);
+                if (AutoBump) obstacles.Add("Bump");
+                if (AutoTrench) obstacles.Add("Trench");
+                return string.Join(",", obstacles);
+            }
+        }
         [ObservableProperty]
         [NotifyPropertyChangedFor(nameof(AutoObstacles))]
         [NotifyPropertyChangedFor(nameof(Summary))]
         [NotifyPropertyChangedFor(nameof(QRCode1))]
         private bool _AutoBump = false;
-
         [ObservableProperty]
         [NotifyPropertyChangedFor(nameof(AutoObstacles))]
         [NotifyPropertyChangedFor(nameof(Summary))]
         [NotifyPropertyChangedFor(nameof(QRCode1))]
         private bool _AutoTrench = false;
 
-        // ===== AUTO INTAKE =====
-
+        // ===== Auto Intakes =====
+        public string AutoIntakes
+        {
+            get
+            {
+                var intakes = new List<string>(3);
+                if (AutoIntakeDepot) intakes.Add("Depot");
+                if (AutoIntakeNeutralZone) intakes.Add("NeutralZone");
+                if (AutoIntakeOutpost) intakes.Add("Outpost");
+                return string.Join(",", intakes);
+            }
+        }
         [ObservableProperty]
         [NotifyPropertyChangedFor(nameof(AutoIntakes))]
         [NotifyPropertyChangedFor(nameof(Summary))]
         [NotifyPropertyChangedFor(nameof(QRCode1))]
         private bool _AutoIntakeDepot = false;
-
         [ObservableProperty]
         [NotifyPropertyChangedFor(nameof(AutoIntakes))]
         [NotifyPropertyChangedFor(nameof(Summary))]
         [NotifyPropertyChangedFor(nameof(QRCode1))]
         private bool _AutoIntakeOutpost = false;
-
         [ObservableProperty]
         [NotifyPropertyChangedFor(nameof(AutoIntakes))]
         [NotifyPropertyChangedFor(nameof(Summary))]
         [NotifyPropertyChangedFor(nameof(QRCode1))]
         private bool _AutoIntakeNeutralZone = false;
 
-        // ===== TELEOP FUEL =====
+        // ===== TELEOP =====
+
+        // ===== TeleOp Fuel =====
         [ObservableProperty]
         [NotifyPropertyChangedFor(nameof(Summary))]
         [NotifyPropertyChangedFor(nameof(QRCode1))]
         private int _TeleOpFuelScored = 0;
-
+        [RelayCommand]
+        private void TeleOpScoredUp()
+        {
+            TeleOpFuelScored += 1;
+        }
+        [RelayCommand]
+        private void TeleOpScoredDown()
+        {
+            TeleOpFuelScored -= 1;
+            if (TeleOpFuelScored < 0)
+                TeleOpFuelScored = 0;
+        }
         [ObservableProperty]
         [NotifyPropertyChangedFor(nameof(Summary))]
         [NotifyPropertyChangedFor(nameof(QRCode1))]
         private int _TeleOpFuelMissed = 0;
+        [RelayCommand]
+        private void TeleOpMissedUp()
+        {
+            TeleOpFuelMissed += 1;
+        }
+        [RelayCommand]
+        private void TeleOpMissedDown()
+        {
+            TeleOpFuelMissed -= 1;
+            if (TeleOpFuelMissed < 0)
+                TeleOpFuelMissed = 0;
+        }
 
-        // ===== TELEOP OBSTACLES =====
+        // ===== TeleOp Obstacles =====
+        public string TeleOpObstacles
+        {
+            get
+            {
+                var obstacles = new List<string>(2);
+                if (TeleOpBump) obstacles.Add("Bump");
+                if (TeleOpTrench) obstacles.Add("Trench");
+                return string.Join(",", obstacles);
+            }
+        }
         [ObservableProperty]
         [NotifyPropertyChangedFor(nameof(TeleOpObstacles))]
         [NotifyPropertyChangedFor(nameof(Summary))]
         [NotifyPropertyChangedFor(nameof(QRCode1))]
         private bool _TeleOpBump = false;
-
         [ObservableProperty]
         [NotifyPropertyChangedFor(nameof(TeleOpObstacles))]
         [NotifyPropertyChangedFor(nameof(Summary))]
         [NotifyPropertyChangedFor(nameof(QRCode1))]
         private bool _TeleOpTrench = false;
 
-        // ===== TELEOP INTAKE =====
+        // ===== TeleOp Intakes =====
+        public string TeleOpIntakes
+        {
+            get
+            {
+                var intakes = new List<string>(3);
+                if (TeleOpIntakeDepot) intakes.Add("Depot");
+                if (TeleOpIntakeNeutralZone) intakes.Add("NeutralZone");
+                if (TeleOpIntakeOutpost) intakes.Add("Outpost");
+                return string.Join(",", intakes);
+            }
+        }
         [ObservableProperty]
         [NotifyPropertyChangedFor(nameof(TeleOpIntakes))]
         [NotifyPropertyChangedFor(nameof(Summary))]
         [NotifyPropertyChangedFor(nameof(QRCode1))]
         private bool _TeleOpIntakeDepot = false;
-
         [ObservableProperty]
         [NotifyPropertyChangedFor(nameof(TeleOpIntakes))]
         [NotifyPropertyChangedFor(nameof(Summary))]
         [NotifyPropertyChangedFor(nameof(QRCode1))]
         private bool _TeleOpIntakeOutpost = false;
-
         [ObservableProperty]
         [NotifyPropertyChangedFor(nameof(TeleOpIntakes))]
         [NotifyPropertyChangedFor(nameof(Summary))]
@@ -451,27 +446,12 @@ namespace ScoutApp.ViewModels
         [NotifyPropertyChangedFor(nameof(QRCode1))]
         [NotifyPropertyChangedFor(nameof(MissingFields))]
         private Climb2026? _TeleOpClimb;
-
         [ObservableProperty]
         [NotifyPropertyChangedFor(nameof(Summary))]
         [NotifyPropertyChangedFor(nameof(QRCode1))]
         private ClimbTimes? _TeleOpClimbTime;
-
-        [ObservableProperty]
-        [NotifyPropertyChangedFor(nameof(Summary))]
-        [NotifyPropertyChangedFor(nameof(QRCode1))]
-        [NotifyPropertyChangedFor(nameof(MissingFields))]
-        private Breakdown2026 _Breakdown = Breakdown2026.None;
-
-        [ObservableProperty]
-        [NotifyPropertyChangedFor(nameof(Summary))]
-        [NotifyPropertyChangedFor(nameof(QRCode1))]
-        [NotifyPropertyChangedFor(nameof(MissingFields))]
-        private BreakdownTimes? _BreakdownTime;
-
         [ObservableProperty]
         private bool _ShowClimbTimes = false;
-
         partial void OnTeleOpClimbChanged(Climb2026? value)
         {
             ShowClimbTimes = value is Climb2026.Level1 or Climb2026.Level2 or Climb2026.Level3;
@@ -481,8 +461,17 @@ namespace ScoutApp.ViewModels
         }
 
         [ObservableProperty]
+        [NotifyPropertyChangedFor(nameof(Summary))]
+        [NotifyPropertyChangedFor(nameof(QRCode1))]
+        [NotifyPropertyChangedFor(nameof(MissingFields))]
+        private Breakdown2026 _Breakdown = Breakdown2026.None;
+        [ObservableProperty]
+        [NotifyPropertyChangedFor(nameof(Summary))]
+        [NotifyPropertyChangedFor(nameof(QRCode1))]
+        [NotifyPropertyChangedFor(nameof(MissingFields))]
+        private BreakdownTimes? _BreakdownTime;
+        [ObservableProperty]
         private bool _ShowBreakdownTimes = false;
-
         partial void OnBreakdownChanged(Breakdown2026 value)
         {
             ShowBreakdownTimes = value != Breakdown2026.None;
@@ -510,13 +499,11 @@ namespace ScoutApp.ViewModels
 
         [ObservableProperty]
         private bool showSummary = false;
-
         [RelayCommand]
         private void ToggleSummary()
         {
             ShowSummary = !ShowSummary;
         }
-
         public string Summary
         {
             get

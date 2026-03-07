@@ -7,7 +7,7 @@ using ScoutApp.ViewModels;
 
 public static class JsonToCSConverter
 {
-    private const string DefaultScheduleAssetPath = "avares://ScoutApp/Assets/2026week0.json";
+    private const string DefaultScheduleAssetPath = "avares://ScoutApp/Assets/2026orsal.json";
 
     private static Dictionary<int, int[]> TeamsByMatch = [];
 
@@ -40,7 +40,7 @@ public static class JsonToCSConverter
         Console.WriteLine("json parameter in LoadFromScheduleJson: " + json);
         using var dom = JsonDocument.Parse(json);
         var root = dom.RootElement;
-        
+
         // read the "records" array from the root element
         if (!root.TryGetProperty("records", out var recordsElement))
         {
@@ -77,7 +77,8 @@ public static class JsonToCSConverter
         // set TeamsByMatch based on the parsed records ... but skip any comp_level
         // that is not "qm" (qualifier match) since those are the only ones we care about for scouting.
         TeamsByMatch = [];
-        foreach (var record in records)        {
+        foreach (var record in records)
+        {
             if (record.CompLevel != "qm")
                 continue;
             TeamsByMatch[record.MatchNumber] =
