@@ -13,10 +13,16 @@ To delete the database ... which is needed before a game day, do:
 del C:\Users\melan\AppData\Local\sonic-scout\sqlite3.db
 ```
 
-Start the scanner in the Visual Studio Code "Terminal" without compiling:
+Start the scanner in the Visual Studio Code "Terminal":
 
 ```powershell
 ./dk SonicScout_Setup.Develop scanner --skip-fetch
+```
+
+Start the scanner in the Visual Studio Code "Terminal" without compiling (RECOMMENDED for competition days):
+
+```powershell
+./dk SonicScout_Setup.Develop scanner --skip-fetch --quick
 ```
 
 Opens the database in the Visual Studio Code "Terminal" without compiling:

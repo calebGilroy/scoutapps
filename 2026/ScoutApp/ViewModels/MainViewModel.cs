@@ -223,6 +223,49 @@ namespace ScoutApp.ViewModels
             "Yu-Chen (Emily) Lin"
         };
 
+        public string AutoObstacles
+        {
+            get
+            {
+                var parts = new List<string>(2);
+                if (AutoBump) parts.Add("Bump");
+                if (AutoTrench) parts.Add("Trench");
+                return string.Join(",", parts);
+            }
+        }
+        public string AutoIntakes
+        {
+            get
+            {
+                var parts = new List<string>(3);
+                if (AutoIntakeDepot) parts.Add("Depot");
+                if (AutoIntakeNeutralZone) parts.Add("NeutralZone");
+                if (AutoIntakeOutpost) parts.Add("Outpost");
+                return string.Join(",", parts);
+            }
+        }
+        public string TeleOpObstacles
+        {
+            get
+            {
+                var parts = new List<string>(2);
+                if (TeleOpBump) parts.Add("Bump");
+                if (TeleOpTrench) parts.Add("Trench");
+                return string.Join(",", parts);
+            }
+        }
+        public string TeleOpIntakes
+        {
+            get
+            {
+                var parts = new List<string>(3);
+                if (TeleOpIntakeDepot) parts.Add("Depot");
+                if (TeleOpIntakeNeutralZone) parts.Add("NeutralZone");
+                if (TeleOpIntakeOutpost) parts.Add("Outpost");
+                return string.Join(",", parts);
+            }
+        }
+
         [RelayCommand]
         private void AutoScoredUp()
         {
@@ -327,27 +370,33 @@ namespace ScoutApp.ViewModels
 
         // ===== AUTO OBSTACLES =====
         [ObservableProperty]
+        [NotifyPropertyChangedFor(nameof(AutoObstacles))]
         [NotifyPropertyChangedFor(nameof(Summary))]
         [NotifyPropertyChangedFor(nameof(QRCode1))]
         private bool _AutoBump = false;
 
         [ObservableProperty]
+        [NotifyPropertyChangedFor(nameof(AutoObstacles))]
         [NotifyPropertyChangedFor(nameof(Summary))]
         [NotifyPropertyChangedFor(nameof(QRCode1))]
         private bool _AutoTrench = false;
 
         // ===== AUTO INTAKE =====
+
         [ObservableProperty]
+        [NotifyPropertyChangedFor(nameof(AutoIntakes))]
         [NotifyPropertyChangedFor(nameof(Summary))]
         [NotifyPropertyChangedFor(nameof(QRCode1))]
         private bool _AutoIntakeDepot = false;
 
         [ObservableProperty]
+        [NotifyPropertyChangedFor(nameof(AutoIntakes))]
         [NotifyPropertyChangedFor(nameof(Summary))]
         [NotifyPropertyChangedFor(nameof(QRCode1))]
         private bool _AutoIntakeOutpost = false;
 
         [ObservableProperty]
+        [NotifyPropertyChangedFor(nameof(AutoIntakes))]
         [NotifyPropertyChangedFor(nameof(Summary))]
         [NotifyPropertyChangedFor(nameof(QRCode1))]
         private bool _AutoIntakeNeutralZone = false;
@@ -365,27 +414,32 @@ namespace ScoutApp.ViewModels
 
         // ===== TELEOP OBSTACLES =====
         [ObservableProperty]
+        [NotifyPropertyChangedFor(nameof(TeleOpObstacles))]
         [NotifyPropertyChangedFor(nameof(Summary))]
         [NotifyPropertyChangedFor(nameof(QRCode1))]
         private bool _TeleOpBump = false;
 
         [ObservableProperty]
+        [NotifyPropertyChangedFor(nameof(TeleOpObstacles))]
         [NotifyPropertyChangedFor(nameof(Summary))]
         [NotifyPropertyChangedFor(nameof(QRCode1))]
         private bool _TeleOpTrench = false;
 
         // ===== TELEOP INTAKE =====
         [ObservableProperty]
+        [NotifyPropertyChangedFor(nameof(TeleOpIntakes))]
         [NotifyPropertyChangedFor(nameof(Summary))]
         [NotifyPropertyChangedFor(nameof(QRCode1))]
         private bool _TeleOpIntakeDepot = false;
 
         [ObservableProperty]
+        [NotifyPropertyChangedFor(nameof(TeleOpIntakes))]
         [NotifyPropertyChangedFor(nameof(Summary))]
         [NotifyPropertyChangedFor(nameof(QRCode1))]
         private bool _TeleOpIntakeOutpost = false;
 
         [ObservableProperty]
+        [NotifyPropertyChangedFor(nameof(TeleOpIntakes))]
         [NotifyPropertyChangedFor(nameof(Summary))]
         [NotifyPropertyChangedFor(nameof(QRCode1))]
         private bool _TeleOpIntakeNeutralZone = false;
@@ -511,19 +565,13 @@ StartingPosition-{{StartingPosition}}
 AutoMove-{{AutoMove}}
 AutoFuelScored-{{AutoFuelScored}}
 AutoFuelMissed-{{AutoFuelMissed}}
-AutoBump-{{AutoBump}}
-AutoTrench-{{AutoTrench}}
-AutoIntakeDepot-{{AutoIntakeDepot}}
-AutoIntakeOutpost-{{AutoIntakeOutpost}}
-AutoIntakeNeutralZone-{{AutoIntakeNeutralZone}}
+AutoObstacles-{{AutoObstacles}}
+AutoIntakes-{{AutoIntakes}}
 AutoClimb-{{AutoClimb}}
 TeleOpFuelScored-{{TeleOpFuelScored}}
 TeleOpFuelMissed-{{TeleOpFuelMissed}}
-TeleOpBump-{{TeleOpBump}}
-TeleOpTrench-{{TeleOpTrench}}
-TeleOpIntakeDepot-{{TeleOpIntakeDepot}}
-TeleOpIntakeOutpost-{{TeleOpIntakeOutpost}}
-TeleOpIntakeNeutralZone-{{TeleOpIntakeNeutralZone}}
+TeleOpObstacles-{{TeleOpObstacles}}
+TeleOpIntakes-{{TeleOpIntakes}}
 TowerClimb-{{TeleOpClimb}}
 ClimbTime-{{TeleOpClimbTime}}
 Breakdown-{{Breakdown}}
