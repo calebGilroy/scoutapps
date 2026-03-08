@@ -5,6 +5,8 @@ using System.Text.Json;
 using Avalonia.Platform;
 using ScoutApp.ViewModels;
 
+namespace ScoutApp.Converter;
+
 public static class JsonToCSConverter
 {
     private const string DefaultScheduleAssetPath = "avares://ScoutApp/Assets/2026orsal.json";

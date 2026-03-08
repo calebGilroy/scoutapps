@@ -8,6 +8,7 @@ using CommunityToolkit.Mvvm.Input;
 using QRCoder;
 using Avalonia.Platform;
 using System.Runtime.Serialization;
+using ScoutApp.Converter;
 
 namespace ScoutApp.ViewModels
 {
@@ -41,8 +42,8 @@ namespace ScoutApp.ViewModels
         [EnumMember(Value = "Left Trench")] LeftTrench,
         [EnumMember(Value = "Left Bump")] LeftBump,
         [EnumMember(Value = "Center")] Center,
-        [EnumMember(Value = "Right Trench")] RightTrench,
-        [EnumMember(Value = "Right Bump")] RightBump
+        [EnumMember(Value = "Right Bump")] RightBump,
+        [EnumMember(Value = "Right Trench")] RightTrench
     }
 
     public enum Breakdown2026
@@ -52,7 +53,8 @@ namespace ScoutApp.ViewModels
         [EnumMember(Value = "Mechanical Failure")] MechanicalFailure,
         [EnumMember(Value = "Connection Failure")] ConnectionFailure,
         [EnumMember(Value = "Disabled")] Disabled,
-        [EnumMember(Value = "Beached on Fuel")] BeachedOnFuel
+        [EnumMember(Value = "Beached on Fuel")] BeachedOnFuel,
+        [EnumMember(Value = "Stuck on Bump")] StuckOnBump
     }
 
     public enum Climb2026
@@ -135,18 +137,18 @@ namespace ScoutApp.ViewModels
         }
 
         [ObservableProperty]
-        public int _TextSize = 16;
+        public int _TextSize = 20;
 
         [ObservableProperty]
-        public int _HeadingsTextSize = 18;
+        public int _HeadingsTextSize = 24;
 
         [ObservableProperty]
         [NotifyPropertyChangedFor(nameof(Summary))]
         [NotifyPropertyChangedFor(nameof(QRCode1))]
         [NotifyPropertyChangedFor(nameof(MissingFields))]
         private string? _ScoutName;
-        public List<string>? ScoutNames { get; } = new List<string>
-        {
+        public List<string>? ScoutNames { get; } =
+        [
             "Mentor",
             "Aarush Manoj",
             "Aditi Boddu",
@@ -207,7 +209,7 @@ namespace ScoutApp.ViewModels
             "Viljami Baker",
             "Vinamn Datta",
             "Yu-Chen (Emily) Lin"
-        };
+        ];
 
         [ObservableProperty]
         [NotifyPropertyChangedFor(nameof(Summary))]
@@ -227,7 +229,7 @@ namespace ScoutApp.ViewModels
         [NotifyPropertyChangedFor(nameof(Summary))]
         [NotifyPropertyChangedFor(nameof(QRCode1))]
         private Alliance? _SelectedAlliance;
-        
+
         partial void OnSelectedAlliancePositionChanged(AlliancePosition? value)
         {
             UpdateTeamNumberFromSchedule();
