@@ -9,6 +9,7 @@ using QRCoder;
 using Avalonia.Platform;
 using System.Runtime.Serialization;
 using ScoutApp.Converter;
+using Avalonia.Markup.Xaml.MarkupExtensions;
 
 namespace ScoutApp.ViewModels
 {
@@ -92,7 +93,6 @@ namespace ScoutApp.ViewModels
                 ? teamNumber
                 : null;
         }
-
         [RelayCommand]
         private void UpdateTeamNumberFromSchedule()
         {
@@ -100,7 +100,6 @@ namespace ScoutApp.ViewModels
             if (scheduledTeamNumber.HasValue)
                 TeamNumber = scheduledTeamNumber.Value;
         }
-
         partial void OnMatchNumberChanged(int value)
         {
             UpdateTeamNumberFromSchedule();
@@ -108,32 +107,11 @@ namespace ScoutApp.ViewModels
 
         [ObservableProperty]
         [NotifyPropertyChangedFor(nameof(QRCode1))]
-        [NotifyPropertyChangedFor(nameof(MissingFields))]
         private HeadingButtons _SelectedHeadingButton = HeadingButtons.PreMatch;
         [RelayCommand]
-        private void HeadingButton(object button)
+        private void HeadingButton(HeadingButtons heading)
         {
-            if (button is string heading)
-            {
-                switch (heading)
-                {
-                    case "PreMatch":
-                        SelectedHeadingButton = HeadingButtons.PreMatch;
-                        break;
-                    case "Auto":
-                        SelectedHeadingButton = HeadingButtons.Auto;
-                        break;
-                    case "TeleOp":
-                        SelectedHeadingButton = HeadingButtons.TeleOp;
-                        break;
-                    case "Endgame":
-                        SelectedHeadingButton = HeadingButtons.Endgame;
-                        break;
-                    case "PostMatch":
-                        SelectedHeadingButton = HeadingButtons.PostMatch;
-                        break;
-                }
-            }
+            SelectedHeadingButton = heading;
         }
 
         [ObservableProperty]
@@ -222,6 +200,7 @@ namespace ScoutApp.ViewModels
         private int? _TeamNumber;
 
         [ObservableProperty]
+        [NotifyPropertyChangedFor(nameof(QRCode1))]
         [NotifyPropertyChangedFor(nameof(MissingFields))]
         private AlliancePosition? _SelectedAlliancePosition;
 
@@ -451,6 +430,7 @@ namespace ScoutApp.ViewModels
         [ObservableProperty]
         [NotifyPropertyChangedFor(nameof(Summary))]
         [NotifyPropertyChangedFor(nameof(QRCode1))]
+        [NotifyPropertyChangedFor(nameof(MissingFields))]
         private ClimbTimes? _TeleOpClimbTime;
         [ObservableProperty]
         private bool _ShowClimbTimes = false;
@@ -567,7 +547,7 @@ Breakdown-{{Breakdown}}
 BreakdownTime-{{BreakdownTime}}
 """;
 
-                if (string.IsNullOrEmpty(ScoutName) || SelectedAlliancePosition == null || StartingPosition == null || TeleOpClimb == null || AutoClimb == null || SelectedHeadingButton != HeadingButtons.PostMatch)
+                if (string.IsNullOrEmpty(ScoutName) || SelectedAlliancePosition == null || StartingPosition == null || TeleOpClimb == null || AutoClimb == null || SelectedHeadingButton != HeadingButtons.PostMatch || (TeleOpClimbTime == null && TeleOpClimb != null && TeleOpClimb != Climb2026.DidNotAttempt && TeleOpClimb != Climb2026.Failed) || (BreakdownTime == null && Breakdown != Breakdown2026.None))
                 {
                     using var stream = AssetLoader.Open(new Uri("avares://ScoutApp/Assets/cartman.jpg"));
                     return new Bitmap(stream);
