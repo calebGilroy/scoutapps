@@ -9,7 +9,6 @@ using QRCoder;
 using Avalonia.Platform;
 using System.Runtime.Serialization;
 using ScoutApp.Converter;
-using Avalonia.Markup.Xaml.MarkupExtensions;
 
 namespace ScoutApp.ViewModels
 {

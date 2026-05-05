@@ -257,7 +257,10 @@
                 </StackPanel>
 
                 <!--  Auto  -->
-                <StackPanel HorizontalAlignment="Center" IsVisible="{Binding SelectedHeadingButton, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static vm:HeadingButtons.Auto}}">
+                <StackPanel
+                    Margin="0,0,0,32"
+                    HorizontalAlignment="Center"
+                    IsVisible="{Binding SelectedHeadingButton, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static vm:HeadingButtons.Auto}}">
 
                     <StackPanel
                         Margin="0,32,0,0"
@@ -311,32 +314,31 @@
                         Orientation="Horizontal">
 
                         <StackPanel Orientation="Vertical">
-                            <TextBlock
-                                Height="32"
-                                Margin="0,0,0,0"
-                                FontSize="{Binding TextSize}"
-                                FontWeight="Bold"
-                                Text="{Binding AutoFuelScored, StringFormat='SCORED: {0}'}}" />
                             <RepeatButton
-                                Width="125"
-                                Height="125"
+                                Width="200"
+                                Height="200"
                                 HorizontalContentAlignment="Center"
                                 VerticalContentAlignment="Center"
                                 Background="{StaticResource darkgrey}"
-                                Command="{Binding AutoScoredUpCommand}"
+                                Command="{Binding AutoMissedUpCommand}"
                                 Content="+"
                                 Delay="150"
                                 FontSize="40"
                                 Foreground="{StaticResource accent}"
                                 Interval="75" />
+                            <TextBlock
+                                Margin="0,10"
+                                HorizontalAlignment="Center"
+                                FontSize="{Binding TextSize}"
+                                FontWeight="Bold"
+                                Text="{Binding AutoFuelMissed, StringFormat='MISSED: {0}'}}" />
                             <RepeatButton
-                                Width="125"
-                                Height="125"
-                                Margin="0,10,0,0"
+                                Width="200"
+                                Height="200"
                                 HorizontalContentAlignment="Center"
                                 VerticalContentAlignment="Center"
                                 Background="{StaticResource darkgrey}"
-                                Command="{Binding AutoScoredDownCommand}"
+                                Command="{Binding AutoMissedDownCommand}"
                                 Content="-"
                                 Delay="150"
                                 FontSize="40"
@@ -353,31 +355,31 @@
                         </TextBlock>
 
                         <StackPanel Orientation="Vertical">
-                            <TextBlock
-                                Height="32"
-                                FontSize="{Binding TextSize}"
-                                FontWeight="Bold"
-                                Text="{Binding AutoFuelMissed, StringFormat='MISSED: {0}'}}" />
                             <RepeatButton
-                                Width="125"
-                                Height="125"
+                                Width="200"
+                                Height="200"
                                 HorizontalContentAlignment="Center"
                                 VerticalContentAlignment="Center"
                                 Background="{StaticResource darkgrey}"
-                                Command="{Binding AutoMissedUpCommand}"
+                                Command="{Binding AutoScoredUpCommand}"
                                 Content="+"
                                 Delay="150"
                                 FontSize="40"
                                 Foreground="{StaticResource accent}"
                                 Interval="75" />
+                            <TextBlock
+                                Margin="0,10"
+                                HorizontalAlignment="Center"
+                                FontSize="{Binding TextSize}"
+                                FontWeight="Bold"
+                                Text="{Binding AutoFuelScored, StringFormat='SCORED: {0}'}}" />
                             <RepeatButton
-                                Width="125"
-                                Height="125"
-                                Margin="0,10,0,0"
+                                Width="200"
+                                Height="200"
                                 HorizontalContentAlignment="Center"
                                 VerticalContentAlignment="Center"
                                 Background="{StaticResource darkgrey}"
-                                Command="{Binding AutoMissedDownCommand}"
+                                Command="{Binding AutoScoredDownCommand}"
                                 Content="-"
                                 Delay="150"
                                 FontSize="40"
@@ -478,7 +480,10 @@
                 </StackPanel>
 
                 <!--  TeleOp  -->
-                <StackPanel HorizontalAlignment="Center" IsVisible="{Binding SelectedHeadingButton, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static vm:HeadingButtons.TeleOp}}">
+                <StackPanel
+                    Margin="0,0,0,32"
+                    HorizontalAlignment="Center"
+                    IsVisible="{Binding SelectedHeadingButton, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static vm:HeadingButtons.TeleOp}}">
 
                     <!--  FUEL  -->
                     <StackPanel
@@ -487,32 +492,31 @@
                         Orientation="Horizontal">
 
                         <StackPanel Orientation="Vertical">
-                            <TextBlock
-                                Height="32"
-                                Margin="0,0,0,0"
-                                FontSize="{Binding TextSize}"
-                                FontWeight="Bold"
-                                Text="{Binding TeleOpFuelScored, StringFormat='SCORED: {0}'}" />
                             <RepeatButton
-                                Width="125"
-                                Height="125"
+                                Width="200"
+                                Height="200"
                                 HorizontalContentAlignment="Center"
                                 VerticalContentAlignment="Center"
                                 Background="{StaticResource darkgrey}"
-                                Command="{Binding TeleOpScoredUpCommand}"
+                                Command="{Binding TeleOpMissedUpCommand}"
                                 Content="+"
                                 Delay="150"
                                 FontSize="40"
                                 Foreground="{StaticResource accent}"
                                 Interval="75" />
+                            <TextBlock
+                                Margin="0,10"
+                                HorizontalAlignment="Center"
+                                FontSize="{Binding TextSize}"
+                                FontWeight="Bold"
+                                Text="{Binding TeleOpFuelMissed, StringFormat='MISSED: {0}'}" />
                             <RepeatButton
-                                Width="125"
-                                Height="125"
-                                Margin="0,10,0,0"
+                                Width="200"
+                                Height="200"
                                 HorizontalContentAlignment="Center"
                                 VerticalContentAlignment="Center"
                                 Background="{StaticResource darkgrey}"
-                                Command="{Binding TeleOpScoredDownCommand}"
+                                Command="{Binding TeleOpMissedDownCommand}"
                                 Content="-"
                                 Delay="150"
                                 FontSize="40"
@@ -529,31 +533,31 @@
                         </TextBlock>
 
                         <StackPanel Orientation="Vertical">
-                            <TextBlock
-                                Height="32"
-                                FontSize="{Binding TextSize}"
-                                FontWeight="Bold"
-                                Text="{Binding TeleOpFuelMissed, StringFormat='MISSED: {0}'}" />
                             <RepeatButton
-                                Width="125"
-                                Height="125"
+                                Width="200"
+                                Height="200"
                                 HorizontalContentAlignment="Center"
                                 VerticalContentAlignment="Center"
                                 Background="{StaticResource darkgrey}"
-                                Command="{Binding TeleOpMissedUpCommand}"
+                                Command="{Binding TeleOpScoredUpCommand}"
                                 Content="+"
                                 Delay="150"
                                 FontSize="40"
                                 Foreground="{StaticResource accent}"
                                 Interval="75" />
+                            <TextBlock
+                                Margin="0,10"
+                                HorizontalAlignment="Center"
+                                FontSize="{Binding TextSize}"
+                                FontWeight="Bold"
+                                Text="{Binding TeleOpFuelScored, StringFormat='SCORED: {0}'}" />
                             <RepeatButton
-                                Width="125"
-                                Height="125"
-                                Margin="0,10,0,0"
+                                Width="200"
+                                Height="200"
                                 HorizontalContentAlignment="Center"
                                 VerticalContentAlignment="Center"
                                 Background="{StaticResource darkgrey}"
-                                Command="{Binding TeleOpMissedDownCommand}"
+                                Command="{Binding TeleOpScoredDownCommand}"
                                 Content="-"
                                 Delay="150"
                                 FontSize="40"
