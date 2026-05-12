@@ -114,7 +114,7 @@ public static class JsonToCSConverter
 
     private static void EnsureLoaded()
     {
-        if (TeamsByMatch.Count <= 1)
+        if (TeamsByMatch.Count <= 0)
             TryLoadDefaultSchedule();
     }
 
@@ -142,5 +142,15 @@ public static class JsonToCSConverter
 
         teamNumber = teams[index];
         return true;
+    }
+
+    public static int? GetTeamNumberFromSchedule(int matchNumber, AlliancePosition? alliance)
+    {
+        if (alliance == null)
+            return null;
+
+        return TryGetTeamNumber(matchNumber, alliance.Value, out int teamNumber)
+            ? teamNumber
+            : null;
     }
 }
