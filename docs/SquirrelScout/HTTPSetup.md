@@ -22,22 +22,29 @@ On your computer, copy over the folder ` scoutapps\2026\ScoutApp.Browser\bin\Rel
 ![wwwroot](../assets/wwwroot.png)
 
 If needed, use the USB type-a to type-c converter to connect the thumbdrive to the tablet. It should give you a popup saying:
-![USBConverterPopup](../assets/USBConverterPopup.jpeg){width="50%"}
+
+<img src="../assets/USBConverterPopup.jpeg" width="40%">
 
 Select "OK", then go back into File Manager +, go to the thumbdrive, and you should get a popup like this:
-![permission](../assets/permission.jpeg){width="50%"}
+
+<img src="../assets/permission.jpeg" width="40%">
 
 Select "OK", then on the next screen, Select the wwwroot folder, and then Select "USE THIS FOLDER":
-![usethisfolder1](../assets/usethisfolder1.jpeg){width="50%"}![usethisfolder2](../assets/usethisfolder2.jpeg){width="50%"}
+
+<img src="../assets/usethisfolder1.jpeg" width="40%"> <img src="../assets/usethisfolder2.jpeg" width="40%">
 
 Select "ALLOW", then as it moves back over to File Manager +, Select and hold the wwwroot folder, copy it, and Select "Paste" in the bottom right of the screen.
-![allowfileaccess](../assets/allowfileaccess.jpeg){width="50%"}![selectwwwrootfolder](../assets/selectwwwrootfolder.jpeg){width="50%"}![selectdownload](../assets/selectdownload.jpeg){width="50%"}![paste](../assets/paste.jpeg){width="50%"}
+
+<img src="../assets/allowfileaccess.jpeg" width="40%"> <img src="../assets/selectwwwrootfolder.jpeg" width="40%"> <img src="../assets/selectdownload.jpeg" width="40%"> <img src="../assets/paste.jpeg" width="40%">
 
 Open the Simple HTTP Server, and in the top left, Select the dropdown, Select "Downloads", Select the wwwroot folder, and then Select the "SELECT THIS FOLDER" button at the bottom of the screen.
-![simplehttp1](../assets/simplehttp1.jpeg){width="50%"}![simplehttp2](../assets/simplehttp2.jpeg){width="50%"}![simplehttp3](../assets/simplehttp3.jpeg){width="50%"}![simplehttp4](../assets/simplehttp4.jpeg){width="50%"}
+
+<img src="../assets/simplehttp1.jpeg" width="40%"> <img src="../assets/simplehttp2.jpeg" width="40%"> <img src="../assets/simplehttp3.jpeg" width="40%"> <img src="../assets/simplehttp4.jpeg" width="40%">
 
 Double check that the "Root folder" says /scorage/emulated/0/Download/wwwroot, then Select the "START" button in the center of the screen, then Select on the URL and Select the "Navigate" button to open it in the browser.
-![simplehttp5](../assets/simplehttp5.jpeg){width="50%"}![simplehttp6](../assets/simplehttp6.jpeg){width="50%"}![simplehttp7](../assets/simplehttp7.jpeg){width="50%"}
+
+<img src="../assets/simplehttp5.jpeg" width="40%"> <img src="../assets/simplehttp6.jpeg" width="40%"> <img src="../assets/simplehttp7.jpeg" width="40%">
 
 If you have followed these instructions correctly then the app should work successfully in the browser! Enjoy scouting for FRC 2026 Rebuilt, presented by Haas!
-![appinbrowser](../assets/appinbrowser.jpeg){width="50%"}
+
+<img src="../assets/appinbrowser.jpeg" width="40%">
