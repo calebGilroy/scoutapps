@@ -4,6 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:cvt="using:ScoutApp.Converter"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="using:ScoutApp.Views"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:vm="using:ScoutApp.ViewModels"
     d:DesignHeight="1000"
@@ -91,6 +92,7 @@
                 VerticalAlignment="Top"
                 Orientation="Vertical">
 
+                <!--  Heading Buttons  -->
                 <StackPanel
                     Margin="14"
                     HorizontalAlignment="Center"
@@ -207,7 +209,11 @@
 
                 </StackPanel>
 
-                <!--  Post-Match  -->
+                <Grid IsVisible="{Binding SelectedHeadingButton, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static vm:HeadingButtons.PostMatch}}">
+                    <local:PreMatchView DataContext="{Binding PreMatchVM}" />
+                </Grid>
+
+                <!--  Post-Match  
                 <StackPanel
                     Margin="0,32"
                     HorizontalAlignment="Center"
@@ -254,7 +260,7 @@
                         FontWeight="Bold"
                         Foreground="{StaticResource accent}" />
 
-                </StackPanel>
+                </StackPanel>-->
 
                 <!--  Auto  -->
                 <StackPanel

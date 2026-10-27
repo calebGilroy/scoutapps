@@ -83,6 +83,11 @@ namespace ScoutApp.ViewModels
 
     public partial class MainViewModel : ObservableObject
     {
+
+        public PreMatchViewModel PreMatchVM { get; } = new PreMatchViewModel();
+
+
+/*
         partial void OnMatchNumberChanged(int value)
         {
             if (JsonToCSConverter.GetTeamNumberFromSchedule(value, SelectedAlliancePosition) is int scheduledTeamNumber)
@@ -106,22 +111,6 @@ namespace ScoutApp.ViewModels
                 SelectedAlliance = Alliance.Blue;
             }
         }
-
-        [ObservableProperty]
-        [NotifyPropertyChangedFor(nameof(QRCode1))]
-        private HeadingButtons _SelectedHeadingButton = HeadingButtons.PreMatch;
-        [RelayCommand]
-        private void HeadingButton(HeadingButtons heading)
-        {
-            SelectedHeadingButton = heading;
-        }
-
-        [ObservableProperty]
-        public int _TextSize = 20;
-
-        [ObservableProperty]
-        public int _HeadingsTextSize = 24;
-
         [ObservableProperty]
         [NotifyPropertyChangedFor(nameof(Summary))]
         [NotifyPropertyChangedFor(nameof(QRCode1))]
@@ -130,65 +119,41 @@ namespace ScoutApp.ViewModels
         public List<string>? ScoutNames { get; } =
         [
             "Mentor",
-            "Aarush Manoj",
-            "Aditi Boddu",
-            "Alan Maldonado",
-            "Anders Lilly",
+            "Agriya Agarwal",
+            "Aki Peddireddy",
             "Andrew Bogen",
-            "Aram Kim",
-            "Ateev Singh",
+            "Aramis Carrender",
             "Audrey Le",
-            "Avani Pullela",
+            "Audrey Taubensee",
             "Blair Liebman",
             "Bridgette Reinecke",
             "Caleb Gilroy",
+            "Corbin Theaker",
             "Damien Phan",
-            "Dagmawi Tewodros",
             "Dhananjay Giridharan",
             "Diganth Vijay Kumar",
             "Elise Walters",
-            "Elizabeth Huang",
-            "Embry Ciaravella",
-            "Gabe Cronk",
             "Garrett Munson",
-            "Gavin Dalton-Higbee",
-            "Gelilla Kifle",
             "Grayden Corkins",
             "Hailey Rosenau",
-            "Halak Patel",
-            "Holly Hills",
-            "Ibrahim Yusufov",
             "Jaxten Hammersmith",
             "Jaxon Neilson",
-            "Kate Rhoades",
-            "Kendrich Calub",
-            "Landon Theaker",
-            "Liliana Hills",
-            "Lucas Fabela",
-            "Manasi Sabarinath",
-            "Martina Butlay",
-            "Michael Lee",
+            "Jerry Gu",
+            "Krishang Gupta",
+            "Katharine Le",
+            "Manvik Karnati",
+            "Maria Lukongwa",
+            "Marin McClarty",
+            "Mette' Baldwin",
+            "Marvin Abraham",
             "Michael Workneh",
             "Mia Steffen",
-            "Parth Dixit",
-            "Paul Daly III",
-            "Rayan Ahmad",
-            "Rithvik Chokkakula",
-            "Rithvika Kondeti",
-            "Ritvik Rajkumar",
-            "Sankalp Arya",
-            "Siddharth Singaravadivelu",
+            "Pranav Alreja",
+            "Rayne Davis",
             "Sophia Pucek",
-            "Sritanvi Gopu",
-            "Sripad Kandala",
-            "Surriyaa Sudhakar",
-            "Tanvi Somayajula",
-            "Tejit Kumar",
-            "Tvisha Prajapati",
+            "Tanishqa Raghumandala",
             "Varshini Karthik",
-            "Viljami Baker",
-            "Vinamn Datta",
-            "Yu-Chen (Emily) Lin"
+            "Viljami Baker"
         ];
 
         [ObservableProperty]
@@ -210,7 +175,24 @@ namespace ScoutApp.ViewModels
         [NotifyPropertyChangedFor(nameof(Summary))]
         [NotifyPropertyChangedFor(nameof(QRCode1))]
         private Alliance? _SelectedAlliance;
+ */
 
+        [ObservableProperty]
+        [NotifyPropertyChangedFor(nameof(QRCode1))]
+        private HeadingButtons _SelectedHeadingButton = HeadingButtons.PreMatch;
+        [RelayCommand]
+        private void HeadingButton(HeadingButtons heading)
+        {
+            SelectedHeadingButton = heading;
+        }
+
+        [ObservableProperty]
+        public int _TextSize = 20;
+
+        [ObservableProperty]
+        public int _HeadingsTextSize = 24;
+
+        
         // ===== AUTO =====
 
         [ObservableProperty]
@@ -451,8 +433,8 @@ namespace ScoutApp.ViewModels
             get
             {
                 var missing = new List<string>();
-                if (string.IsNullOrEmpty(ScoutName)) missing.Add("Scout Name");
-                if (SelectedAlliancePosition == null) missing.Add("Alliance Position");
+                if (string.IsNullOrEmpty(PreMatchVM.ScoutName)) missing.Add("Scout Name");
+                if (PreMatchVM.SelectedAlliancePosition == null) missing.Add("Alliance Position");
                 if (StartingPosition == null) missing.Add("Starting Position");
                 if (AutoClimb == null) missing.Add("Auto Climb");
                 if (TeleOpClimb == null) missing.Add("Endgame Tower Climb");
@@ -475,10 +457,7 @@ namespace ScoutApp.ViewModels
             get
             {
                 return $$"""
-Team Number: {{TeamNumber}}
-Match Number: {{MatchNumber}}
-Scout Name: {{ScoutName}}
-Alliance: {{SelectedAlliance}}
+{{PreMatchVM.PreMatchSummary}}
 Starting Position: {{StartingPosition}}
 Auto Move: {{AutoMove}}
 Auto Fuel Scored: {{AutoFuelScored}}
@@ -510,10 +489,7 @@ Breakdown Time: {{BreakdownTime}}
             {
                 string textForQRCode =
                     $$"""
-Team-{{TeamNumber}}
-Match-{{MatchNumber}}
-Name-{{ScoutName}}
-Alliance-{{SelectedAlliance}}
+{{PreMatchVM.PreMatchQRCode}}
 StartingPosition-{{StartingPosition}}
 AutoMove-{{AutoMove}}
 AutoFuelScored-{{AutoFuelScored}}
@@ -531,7 +507,7 @@ Breakdown-{{Breakdown}}
 BreakdownTime-{{BreakdownTime}}
 """;
 
-                if (string.IsNullOrEmpty(ScoutName) || SelectedAlliancePosition == null || StartingPosition == null || TeleOpClimb == null || AutoClimb == null || SelectedHeadingButton != HeadingButtons.PostMatch || (TeleOpClimbTime == null && TeleOpClimb != null && TeleOpClimb != Climb2026.DidNotAttempt && TeleOpClimb != Climb2026.Failed) || (BreakdownTime == null && Breakdown != Breakdown2026.None))
+                if (string.IsNullOrEmpty(PreMatchVM.ScoutName) || PreMatchVM.SelectedAlliancePosition == null || StartingPosition == null || TeleOpClimb == null || AutoClimb == null || SelectedHeadingButton != HeadingButtons.PostMatch || (TeleOpClimbTime == null && TeleOpClimb != null && TeleOpClimb != Climb2026.DidNotAttempt && TeleOpClimb != Climb2026.Failed) || (BreakdownTime == null && Breakdown != Breakdown2026.None))
                 {
                     using var stream = AssetLoader.Open(new Uri("avares://ScoutApp/Assets/cartman.jpg"));
                     return new Bitmap(stream);
@@ -548,8 +524,7 @@ BreakdownTime-{{BreakdownTime}}
         [RelayCommand]
         private void NextMatch()
         {
-            MatchNumber += 1;
-            StartingPosition = null;
+            PreMatchVM.NextMatch();
             AutoMove = false;
             // Auto FUEL
             AutoFuelScored = 0;

@@ -13,11 +13,13 @@ To delete the database ... which is needed before a game day, do:
 del C:\Users\melan\AppData\Local\sonic-scout\sqlite3.db
 ```
 
+<!--
 Start the scanner in the Visual Studio Code "Terminal":
 
 ```powershell
 ./dk SonicScout_Setup.Develop scanner --skip-fetch
 ```
+-->
 
 Start the scanner in the Visual Studio Code "Terminal" without compiling (RECOMMENDED for competition days):
 
@@ -34,6 +36,7 @@ Opens the database in the Visual Studio Code "Terminal" without compiling:
 right click if copy pasting doesn't work
 After ".quit" a csv file will be created. Right click the file and open with file explorer. 
 
+<!--
 ```sql
 .mode line
 SELECT * FROM raw_match_data;
@@ -42,12 +45,12 @@ SELECT match_number, team_number,endgame_climb, tele_op_coral_l4_score FROM raw_
 
 .quit
 ```
+-->
 
 ```sql
 .mode csv
 .output blahblah.csv
 SELECT * FROM raw_match_data;
-
 .quit
 ```
 

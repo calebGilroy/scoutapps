@@ -9,7 +9,7 @@ namespace ScoutApp.Converter;
 
 public static class JsonToCSConverter
 {
-    private const string DefaultScheduleAssetPath = "avares://ScoutApp/Assets/2026orore.json";
+    private const string DefaultScheduleAssetPath = "avares://ScoutApp/Assets/2026wamil.json";
 
     private static Dictionary<int, int[]> TeamsByMatch = [];
 
