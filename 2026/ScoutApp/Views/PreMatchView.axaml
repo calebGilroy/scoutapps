@@ -3,11 +3,7 @@
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:cvt="using:ScoutApp.Converter"
-    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:vm="using:ScoutApp.ViewModels"
-    d:DesignHeight="1000"
-    d:DesignWidth="750"
     x:DataType="vm:PreMatchViewModel">
 
     <Design.DataContext>

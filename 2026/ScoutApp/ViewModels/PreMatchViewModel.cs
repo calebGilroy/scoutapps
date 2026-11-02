@@ -9,33 +9,9 @@ namespace ScoutApp.ViewModels
         [ObservableProperty]
         public int _TextSize = 20;
 
-        partial void OnMatchNumberChanged(int value)
-        {
-            if (JsonToCSConverter.GetTeamNumberFromSchedule(value, SelectedAlliancePosition) is int scheduledTeamNumber)
-                TeamNumber = scheduledTeamNumber;
-        }
-
-        partial void OnSelectedAlliancePositionChanged(AlliancePosition? value)
-        {
-            if (JsonToCSConverter.GetTeamNumberFromSchedule(MatchNumber, value) is int scheduledTeamNumber)
-                TeamNumber = scheduledTeamNumber;
-
-            if (value == null)
-            {
-                SelectedAlliance = null;
-            }
-            else if (value is AlliancePosition.Red1 or AlliancePosition.Red2 or AlliancePosition.Red3)
-            {
-                SelectedAlliance = Alliance.Red;
-            }
-            else if (value is AlliancePosition.Blue1 or AlliancePosition.Blue2 or AlliancePosition.Blue3)
-            {
-                SelectedAlliance = Alliance.Blue;
-            }
-        }
-
         [ObservableProperty]
         [NotifyPropertyChangedFor(nameof(PreMatchSummary))]
+        [NotifyPropertyChangedFor(nameof(PreMatchQRCode))]
         private string? _ScoutName;
 
         public List<string>? ScoutNames { get; } =
@@ -79,16 +55,49 @@ namespace ScoutApp.ViewModels
         ];
 
         [ObservableProperty]
+        [NotifyPropertyChangedFor(nameof(PreMatchSummary))]
+        [NotifyPropertyChangedFor(nameof(PreMatchQRCode))]
         private int _MatchNumber = 1;
 
+        partial void OnMatchNumberChanged(int value)
+        {
+            if (JsonToCSConverter.GetTeamNumberFromSchedule(value, SelectedAlliancePosition) is int scheduledTeamNumber)
+                TeamNumber = scheduledTeamNumber;
+        }
+
         [ObservableProperty]
+        [NotifyPropertyChangedFor(nameof(PreMatchSummary))]
+        [NotifyPropertyChangedFor(nameof(PreMatchQRCode))]
         private int? _TeamNumber;
 
         [ObservableProperty]
+        [NotifyPropertyChangedFor(nameof(PreMatchSummary))]
+        [NotifyPropertyChangedFor(nameof(PreMatchQRCode))]
         private AlliancePosition? _SelectedAlliancePosition;
 
         [ObservableProperty]
+        [NotifyPropertyChangedFor(nameof(PreMatchSummary))]
+        [NotifyPropertyChangedFor(nameof(PreMatchQRCode))]
         private Alliance? _SelectedAlliance;
+
+        partial void OnSelectedAlliancePositionChanged(AlliancePosition? value)
+        {
+            if (JsonToCSConverter.GetTeamNumberFromSchedule(MatchNumber, value) is int scheduledTeamNumber)
+                TeamNumber = scheduledTeamNumber;
+
+            if (value == null)
+            {
+                SelectedAlliance = null;
+            }
+            else if (value is AlliancePosition.Red1 or AlliancePosition.Red2 or AlliancePosition.Red3)
+            {
+                SelectedAlliance = Alliance.Red;
+            }
+            else if (value is AlliancePosition.Blue1 or AlliancePosition.Blue2 or AlliancePosition.Blue3)
+            {
+                SelectedAlliance = Alliance.Blue;
+            }
+        }
 
         public string PreMatchSummary
         {
@@ -109,10 +118,9 @@ namespace ScoutApp.ViewModels
             get
             {
                 return $$"""
-                Team Number: {{TeamNumber}}
-                Match Number: {{MatchNumber}}
-                Alliance: {{SelectedAlliance}}
-                Scout Name: {{ScoutName}}
+                Team-{{TeamNumber}}
+                Match-{{MatchNumber}}
+                Alliance-{{SelectedAlliance}}
                 """;
             }
         }
@@ -120,9 +128,6 @@ namespace ScoutApp.ViewModels
         public void NextMatch()
         {
             MatchNumber += 1;
-            SelectedAlliancePosition = null;
-            TeamNumber = null;
-            ScoutName = null;
         }
     }
 }

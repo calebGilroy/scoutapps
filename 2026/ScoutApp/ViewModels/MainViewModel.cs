@@ -8,7 +8,6 @@ using CommunityToolkit.Mvvm.Input;
 using QRCoder;
 using Avalonia.Platform;
 using System.Runtime.Serialization;
-using ScoutApp.Converter;
 
 namespace ScoutApp.ViewModels
 {
@@ -83,11 +82,37 @@ namespace ScoutApp.ViewModels
 
     public partial class MainViewModel : ObservableObject
     {
-
         public PreMatchViewModel PreMatchVM { get; } = new PreMatchViewModel();
+
+        public AutoViewModel AutoVM { get; } = new AutoViewModel();
+
+        public MainViewModel()
+        {
+            PreMatchVM.PropertyChanged += (_, args) =>
+            {
+                if (args.PropertyName == nameof(PreMatchViewModel.PreMatchSummary))
+                    OnPropertyChanged(nameof(Summary));
+                if (args.PropertyName == nameof(PreMatchViewModel.PreMatchQRCode))
+                    OnPropertyChanged(nameof(QRCode1));
+                if (args.PropertyName == nameof(PreMatchViewModel.ScoutName) || args.PropertyName == nameof(PreMatchViewModel.SelectedAlliancePosition))
+                    OnPropertyChanged(nameof(MissingFields));
+            };
+            AutoVM.PropertyChanged += (_, args) =>
+            {
+                if (args.PropertyName == nameof(AutoViewModel.AutoSummary))
+                    OnPropertyChanged(nameof(Summary));
+                if (args.PropertyName == nameof(AutoViewModel.AutoQRCode))
+                    OnPropertyChanged(nameof(QRCode1));
+                if (args.PropertyName == nameof(AutoViewModel.StartingPosition) || args.PropertyName == nameof(AutoViewModel.AutoClimb))
+                    OnPropertyChanged(nameof(MissingFields));
+            };
+        }
 
 
 /*
+        === OLD PREMATCH CODE ===
+
+
         partial void OnMatchNumberChanged(int value)
         {
             if (JsonToCSConverter.GetTeamNumberFromSchedule(value, SelectedAlliancePosition) is int scheduledTeamNumber)
@@ -177,6 +202,7 @@ namespace ScoutApp.ViewModels
         private Alliance? _SelectedAlliance;
  */
 
+
         [ObservableProperty]
         [NotifyPropertyChangedFor(nameof(QRCode1))]
         private HeadingButtons _SelectedHeadingButton = HeadingButtons.PreMatch;
@@ -192,8 +218,8 @@ namespace ScoutApp.ViewModels
         [ObservableProperty]
         public int _HeadingsTextSize = 24;
 
-        
-        // ===== AUTO =====
+        /*
+        // ===== OLD AUTO =====
 
         [ObservableProperty]
         [NotifyPropertyChangedFor(nameof(Summary))]
@@ -298,7 +324,7 @@ namespace ScoutApp.ViewModels
         [NotifyPropertyChangedFor(nameof(AutoIntakes))]
         [NotifyPropertyChangedFor(nameof(Summary))]
         [NotifyPropertyChangedFor(nameof(QRCode1))]
-        private bool _AutoIntakeNeutralZone = false;
+        private bool _AutoIntakeNeutralZone = false; */
 
         // ===== TELEOP =====
 
@@ -435,8 +461,8 @@ namespace ScoutApp.ViewModels
                 var missing = new List<string>();
                 if (string.IsNullOrEmpty(PreMatchVM.ScoutName)) missing.Add("Scout Name");
                 if (PreMatchVM.SelectedAlliancePosition == null) missing.Add("Alliance Position");
-                if (StartingPosition == null) missing.Add("Starting Position");
-                if (AutoClimb == null) missing.Add("Auto Climb");
+                if (AutoVM.StartingPosition == null) missing.Add("Starting Position");
+                if (AutoVM.AutoClimb == null) missing.Add("Auto Climb");
                 if (TeleOpClimb == null) missing.Add("Endgame Tower Climb");
                 if (TeleOpClimbTime == null && TeleOpClimb != null && TeleOpClimb != Climb2026.DidNotAttempt && TeleOpClimb != Climb2026.Failed) missing.Add("Endgame Climb Time");
                 if (BreakdownTime == null && Breakdown != Breakdown2026.None) missing.Add("Breakdown Time");
@@ -458,16 +484,7 @@ namespace ScoutApp.ViewModels
             {
                 return $$"""
 {{PreMatchVM.PreMatchSummary}}
-Starting Position: {{StartingPosition}}
-Auto Move: {{AutoMove}}
-Auto Fuel Scored: {{AutoFuelScored}}
-Auto Fuel Missed: {{AutoFuelMissed}}
-Auto Bump: {{AutoBump}}
-Auto Trench: {{AutoTrench}}
-Auto Intake Depot: {{AutoIntakeDepot}}
-Auto Intake Outpost: {{AutoIntakeOutpost}}
-Auto Intake Neutral Zone: {{AutoIntakeNeutralZone}}
-Auto Climb: {{AutoClimb}}
+{{AutoVM.AutoSummary}}
 TeleOp Fuel Scored: {{TeleOpFuelScored}}
 TeleOp Fuel Missed: {{TeleOpFuelMissed}}
 TeleOp Bump: {{TeleOpBump}}
@@ -490,13 +507,7 @@ Breakdown Time: {{BreakdownTime}}
                 string textForQRCode =
                     $$"""
 {{PreMatchVM.PreMatchQRCode}}
-StartingPosition-{{StartingPosition}}
-AutoMove-{{AutoMove}}
-AutoFuelScored-{{AutoFuelScored}}
-AutoFuelMissed-{{AutoFuelMissed}}
-AutoObstacles-{{AutoObstacles}}
-AutoIntakes-{{AutoIntakes}}
-AutoClimb-{{AutoClimb}}
+{{AutoVM.AutoQRCode}}
 TeleOpFuelScored-{{TeleOpFuelScored}}
 TeleOpFuelMissed-{{TeleOpFuelMissed}}
 TeleOpObstacles-{{TeleOpObstacles}}
@@ -507,7 +518,7 @@ Breakdown-{{Breakdown}}
 BreakdownTime-{{BreakdownTime}}
 """;
 
-                if (string.IsNullOrEmpty(PreMatchVM.ScoutName) || PreMatchVM.SelectedAlliancePosition == null || StartingPosition == null || TeleOpClimb == null || AutoClimb == null || SelectedHeadingButton != HeadingButtons.PostMatch || (TeleOpClimbTime == null && TeleOpClimb != null && TeleOpClimb != Climb2026.DidNotAttempt && TeleOpClimb != Climb2026.Failed) || (BreakdownTime == null && Breakdown != Breakdown2026.None))
+                if (string.IsNullOrEmpty(PreMatchVM.ScoutName) || PreMatchVM.SelectedAlliancePosition == null || AutoVM.StartingPosition == null || TeleOpClimb == null || AutoVM.AutoClimb == null || SelectedHeadingButton != HeadingButtons.PostMatch || (TeleOpClimbTime == null && TeleOpClimb != null && TeleOpClimb != Climb2026.DidNotAttempt && TeleOpClimb != Climb2026.Failed) || (BreakdownTime == null && Breakdown != Breakdown2026.None))
                 {
                     using var stream = AssetLoader.Open(new Uri("avares://ScoutApp/Assets/cartman.jpg"));
                     return new Bitmap(stream);
@@ -525,18 +536,7 @@ BreakdownTime-{{BreakdownTime}}
         private void NextMatch()
         {
             PreMatchVM.NextMatch();
-            AutoMove = false;
-            // Auto FUEL
-            AutoFuelScored = 0;
-            AutoFuelMissed = 0;
-            AutoClimb = null;
-            // Auto Obstacles
-            AutoBump = false;
-            AutoTrench = false;
-            // Auto Intake
-            AutoIntakeDepot = false;
-            AutoIntakeOutpost = false;
-            AutoIntakeNeutralZone = false;
+            AutoVM.NextMatch();
             // TeleOp FUEL
             TeleOpFuelScored = 0;
             TeleOpFuelMissed = 0;
