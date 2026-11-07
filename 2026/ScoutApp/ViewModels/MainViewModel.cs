@@ -67,17 +67,17 @@ namespace ScoutApp.ViewModels
 
     public enum ClimbTimes
     {
-        [EnumMember(Value = "~0-10 Seconds")] _0to10Seconds,
-        [EnumMember(Value = "~10-20 Seconds")] _10to20Seconds,
-        [EnumMember(Value = "~20-30 Seconds")] _20to30Seconds,
-        [EnumMember(Value = "~30+ Seconds")] _30PlusSeconds
+        [EnumMember(Value = "0-10 Seconds")] _0to10Seconds,
+        [EnumMember(Value = "10-20 Seconds")] _10to20Seconds,
+        [EnumMember(Value = "20-30 Seconds")] _20to30Seconds,
+        [EnumMember(Value = "30+ Seconds")] _30PlusSeconds
     }
 
     public enum BreakdownTimes
     {
-        [EnumMember(Value = "~0-15 Seconds")] _0to15Seconds,
-        [EnumMember(Value = "~15-30 Seconds")] _15to30Seconds,
-        [EnumMember(Value = "~30+ Seconds")] _30PlusSeconds
+        [EnumMember(Value = "0-15 Seconds")] _0to15Seconds,
+        [EnumMember(Value = "15-30 Seconds")] _15to30Seconds,
+        [EnumMember(Value = "30+ Seconds")] _30PlusSeconds
     }
 
     public partial class MainViewModel : ObservableObject
@@ -85,6 +85,8 @@ namespace ScoutApp.ViewModels
         public PreMatchViewModel PreMatchVM { get; } = new PreMatchViewModel();
 
         public AutoViewModel AutoVM { get; } = new AutoViewModel();
+
+        public TeleopViewModel TeleopVM { get; } = new TeleopViewModel();
 
         public MainViewModel()
         {
@@ -106,101 +108,110 @@ namespace ScoutApp.ViewModels
                 if (args.PropertyName == nameof(AutoViewModel.StartingPosition) || args.PropertyName == nameof(AutoViewModel.AutoClimb))
                     OnPropertyChanged(nameof(MissingFields));
             };
+            TeleopVM.PropertyChanged += (_, args) =>
+            {
+                if (args.PropertyName == nameof(TeleopViewModel.TeleopSummary))
+                    OnPropertyChanged(nameof(Summary));
+                if (args.PropertyName == nameof(TeleopViewModel.TeleopQRCode))
+                    OnPropertyChanged(nameof(QRCode1));
+                if (args.PropertyName == nameof(TeleopViewModel.TeleOpClimb) || args.PropertyName == nameof(TeleopViewModel.TeleOpClimbTime) || args.PropertyName == nameof(TeleopViewModel.Breakdown) || args.PropertyName == nameof(TeleopViewModel.BreakdownTime))
+                    OnPropertyChanged(nameof(MissingFields));
+            };
         }
 
 
-/*
-        === OLD PREMATCH CODE ===
+        /*
+                === OLD PREMATCH CODE ===
 
 
-        partial void OnMatchNumberChanged(int value)
-        {
-            if (JsonToCSConverter.GetTeamNumberFromSchedule(value, SelectedAlliancePosition) is int scheduledTeamNumber)
-                TeamNumber = scheduledTeamNumber;
-        }
-        partial void OnSelectedAlliancePositionChanged(AlliancePosition? value)
-        {
-            if (JsonToCSConverter.GetTeamNumberFromSchedule(MatchNumber, value) is int scheduledTeamNumber)
-                TeamNumber = scheduledTeamNumber;
+                partial void OnMatchNumberChanged(int value)
+                {
+                    if (JsonToCSConverter.GetTeamNumberFromSchedule(value, SelectedAlliancePosition) is int scheduledTeamNumber)
+                        TeamNumber = scheduledTeamNumber;
+                }
+                partial void OnSelectedAlliancePositionChanged(AlliancePosition? value)
+                {
+                    if (JsonToCSConverter.GetTeamNumberFromSchedule(MatchNumber, value) is int scheduledTeamNumber)
+                        TeamNumber = scheduledTeamNumber;
 
-            if (value == null)
-            {
-                SelectedAlliance = null;
-            }
-            else if (value is AlliancePosition.Red1 or AlliancePosition.Red2 or AlliancePosition.Red3)
-            {
-                SelectedAlliance = Alliance.Red;
-            }
-            else if (value is AlliancePosition.Blue1 or AlliancePosition.Blue2 or AlliancePosition.Blue3)
-            {
-                SelectedAlliance = Alliance.Blue;
-            }
-        }
-        [ObservableProperty]
-        [NotifyPropertyChangedFor(nameof(Summary))]
-        [NotifyPropertyChangedFor(nameof(QRCode1))]
-        [NotifyPropertyChangedFor(nameof(MissingFields))]
-        private string? _ScoutName;
-        public List<string>? ScoutNames { get; } =
-        [
-            "Mentor",
-            "Agriya Agarwal",
-            "Aki Peddireddy",
-            "Andrew Bogen",
-            "Aramis Carrender",
-            "Audrey Le",
-            "Audrey Taubensee",
-            "Blair Liebman",
-            "Bridgette Reinecke",
-            "Caleb Gilroy",
-            "Corbin Theaker",
-            "Damien Phan",
-            "Dhananjay Giridharan",
-            "Diganth Vijay Kumar",
-            "Elise Walters",
-            "Garrett Munson",
-            "Grayden Corkins",
-            "Hailey Rosenau",
-            "Jaxten Hammersmith",
-            "Jaxon Neilson",
-            "Jerry Gu",
-            "Krishang Gupta",
-            "Katharine Le",
-            "Manvik Karnati",
-            "Maria Lukongwa",
-            "Marin McClarty",
-            "Mette' Baldwin",
-            "Marvin Abraham",
-            "Michael Workneh",
-            "Mia Steffen",
-            "Pranav Alreja",
-            "Rayne Davis",
-            "Sophia Pucek",
-            "Tanishqa Raghumandala",
-            "Varshini Karthik",
-            "Viljami Baker"
-        ];
+                    if (value == null)
+                    {
+                        SelectedAlliance = null;
+                    }
+                    else if (value is AlliancePosition.Red1 or AlliancePosition.Red2 or AlliancePosition.Red3)
+                    {
+                        SelectedAlliance = Alliance.Red;
+                    }
+                    else if (value is AlliancePosition.Blue1 or AlliancePosition.Blue2 or AlliancePosition.Blue3)
+                    {
+                        SelectedAlliance = Alliance.Blue;
+                    }
+                }
+                [ObservableProperty]
+                [NotifyPropertyChangedFor(nameof(Summary))]
+                [NotifyPropertyChangedFor(nameof(QRCode1))]
+                [NotifyPropertyChangedFor(nameof(MissingFields))]
+                private string? _ScoutName;
+                public List<string>? ScoutNames { get; } =
+                [
+                    "Mentor",
+                    "Agriya Agarwal",
+                    "Aki Peddireddy",
+                    "Andrew Bogen",
+                    "Aramis Carrender",
+                    "Audrey Le",
+                    "Audrey Taubensee",
+                    "Blair Liebman",
+                    "Bridgette Reinecke",
+                    "Caleb Gilroy",
+                    "Corbin Theaker",
+                    "Damien Phan",
+                    "Dhananjay Giridharan",
+                    "Diganth Vijay Kumar",
+                    "Elise Walters",
+                    "Garrett Munson",
+                    "Grayden Corkins",
+                    "Hailey Rosenau",
+                    "Jaxten Hammersmith",
+                    "Jaxon Neilson",
+                    "Jerry Gu",
+                    "Krishang Gupta",
+                    "Katharine Le",
+                    "Manvik Karnati",
+                    "Maria Lukongwa",
+                    "Marin McClarty",
+                    "Mette' Baldwin",
+                    "Marvin Abraham",
+                    "Michael Workneh",
+                    "Mia Steffen",
+                    "Pranav Alreja",
+                    "Rayne Davis",
+                    "Sophia Pucek",
+                    "Tanishqa Raghumandala",
+                    "Varshini Karthik",
+                    "Viljami Baker"
+                ];
 
-        [ObservableProperty]
-        [NotifyPropertyChangedFor(nameof(Summary))]
-        [NotifyPropertyChangedFor(nameof(QRCode1))]
-        private int _MatchNumber = 1;
+                [ObservableProperty]
+                [NotifyPropertyChangedFor(nameof(Summary))]
+                [NotifyPropertyChangedFor(nameof(QRCode1))]
+                private int _MatchNumber = 1;
 
-        [ObservableProperty]
-        [NotifyPropertyChangedFor(nameof(Summary))]
-        [NotifyPropertyChangedFor(nameof(QRCode1))]
-        private int? _TeamNumber;
+                [ObservableProperty]
+                [NotifyPropertyChangedFor(nameof(Summary))]
+                [NotifyPropertyChangedFor(nameof(QRCode1))]
+                private int? _TeamNumber;
 
-        [ObservableProperty]
-        [NotifyPropertyChangedFor(nameof(QRCode1))]
-        [NotifyPropertyChangedFor(nameof(MissingFields))]
-        private AlliancePosition? _SelectedAlliancePosition;
+                [ObservableProperty]
+                [NotifyPropertyChangedFor(nameof(QRCode1))]
+                [NotifyPropertyChangedFor(nameof(MissingFields))]
+                private AlliancePosition? _SelectedAlliancePosition;
 
-        [ObservableProperty]
-        [NotifyPropertyChangedFor(nameof(Summary))]
-        [NotifyPropertyChangedFor(nameof(QRCode1))]
-        private Alliance? _SelectedAlliance;
- */
+                [ObservableProperty]
+                [NotifyPropertyChangedFor(nameof(Summary))]
+                [NotifyPropertyChangedFor(nameof(QRCode1))]
+                private Alliance? _SelectedAlliance;
+         */
 
 
         [ObservableProperty]
@@ -326,7 +337,7 @@ namespace ScoutApp.ViewModels
         [NotifyPropertyChangedFor(nameof(QRCode1))]
         private bool _AutoIntakeNeutralZone = false; */
 
-        // ===== TELEOP =====
+        /* // ===== OLD TELEOP =====
 
         // ===== TeleOp Fuel =====
         [ObservableProperty]
@@ -452,7 +463,7 @@ namespace ScoutApp.ViewModels
 
             if (!ShowBreakdownTimes)
                 BreakdownTime = null;
-        }
+        } */
 
         public string MissingFields
         {
@@ -463,9 +474,9 @@ namespace ScoutApp.ViewModels
                 if (PreMatchVM.SelectedAlliancePosition == null) missing.Add("Alliance Position");
                 if (AutoVM.StartingPosition == null) missing.Add("Starting Position");
                 if (AutoVM.AutoClimb == null) missing.Add("Auto Climb");
-                if (TeleOpClimb == null) missing.Add("Endgame Tower Climb");
-                if (TeleOpClimbTime == null && TeleOpClimb != null && TeleOpClimb != Climb2026.DidNotAttempt && TeleOpClimb != Climb2026.Failed) missing.Add("Endgame Climb Time");
-                if (BreakdownTime == null && Breakdown != Breakdown2026.None) missing.Add("Breakdown Time");
+                if (TeleopVM.TeleOpClimb == null) missing.Add("Endgame Climb");
+                if (TeleopVM.TeleOpClimbTime == null && TeleopVM.TeleOpClimb != null && TeleopVM.TeleOpClimb != Climb2026.DidNotAttempt && TeleopVM.TeleOpClimb != Climb2026.Failed) missing.Add("Endgame Climb Time");
+                if (TeleopVM.BreakdownTime == null && TeleopVM.Breakdown != Breakdown2026.None) missing.Add("Breakdown Time");
                 if (missing.Count == 0) return string.Empty;
                 return "Missing required fields:\n" + string.Join("\n", missing.Select(f => "  \u2022 " + f));
             }
@@ -473,11 +484,13 @@ namespace ScoutApp.ViewModels
 
         [ObservableProperty]
         private bool showSummary = false;
+
         [RelayCommand]
         private void ToggleSummary()
         {
             ShowSummary = !ShowSummary;
         }
+
         public string Summary
         {
             get
@@ -485,17 +498,7 @@ namespace ScoutApp.ViewModels
                 return $$"""
 {{PreMatchVM.PreMatchSummary}}
 {{AutoVM.AutoSummary}}
-TeleOp Fuel Scored: {{TeleOpFuelScored}}
-TeleOp Fuel Missed: {{TeleOpFuelMissed}}
-TeleOp Bump: {{TeleOpBump}}
-TeleOp Trench: {{TeleOpTrench}}
-TeleOp Intake Depot: {{TeleOpIntakeDepot}}
-TeleOp Intake Outpost: {{TeleOpIntakeOutpost}}
-TeleOp Intake Neutral Zone: {{TeleOpIntakeNeutralZone}}
-Endgame Tower Climb: {{TeleOpClimb}}
-Endgame Climb Time: {{TeleOpClimbTime}}
-Breakdown: {{Breakdown}}
-Breakdown Time: {{BreakdownTime}}
+{{TeleopVM.TeleopSummary}}
 """;
             }
         }
@@ -508,17 +511,19 @@ Breakdown Time: {{BreakdownTime}}
                     $$"""
 {{PreMatchVM.PreMatchQRCode}}
 {{AutoVM.AutoQRCode}}
-TeleOpFuelScored-{{TeleOpFuelScored}}
-TeleOpFuelMissed-{{TeleOpFuelMissed}}
-TeleOpObstacles-{{TeleOpObstacles}}
-TeleOpIntakes-{{TeleOpIntakes}}
-TowerClimb-{{TeleOpClimb}}
-ClimbTime-{{TeleOpClimbTime}}
-Breakdown-{{Breakdown}}
-BreakdownTime-{{BreakdownTime}}
+{{TeleopVM.TeleopQRCode}}
 """;
 
-                if (string.IsNullOrEmpty(PreMatchVM.ScoutName) || PreMatchVM.SelectedAlliancePosition == null || AutoVM.StartingPosition == null || TeleOpClimb == null || AutoVM.AutoClimb == null || SelectedHeadingButton != HeadingButtons.PostMatch || (TeleOpClimbTime == null && TeleOpClimb != null && TeleOpClimb != Climb2026.DidNotAttempt && TeleOpClimb != Climb2026.Failed) || (BreakdownTime == null && Breakdown != Breakdown2026.None))
+                if (
+                    SelectedHeadingButton != HeadingButtons.PostMatch ||
+                    string.IsNullOrEmpty(PreMatchVM.ScoutName) ||
+                    PreMatchVM.SelectedAlliancePosition == null ||
+                    AutoVM.StartingPosition == null ||
+                    TeleopVM.TeleOpClimb == null ||
+                    AutoVM.AutoClimb == null ||
+                    (TeleopVM.TeleOpClimbTime == null && TeleopVM.TeleOpClimb != null && TeleopVM.TeleOpClimb != Climb2026.DidNotAttempt && TeleopVM.TeleOpClimb != Climb2026.Failed) ||
+                    (TeleopVM.BreakdownTime == null && TeleopVM.Breakdown != Breakdown2026.None)
+                )
                 {
                     using var stream = AssetLoader.Open(new Uri("avares://ScoutApp/Assets/cartman.jpg"));
                     return new Bitmap(stream);
@@ -537,23 +542,7 @@ BreakdownTime-{{BreakdownTime}}
         {
             PreMatchVM.NextMatch();
             AutoVM.NextMatch();
-            // TeleOp FUEL
-            TeleOpFuelScored = 0;
-            TeleOpFuelMissed = 0;
-            // TeleOp Obstacles
-            TeleOpBump = false;
-            TeleOpTrench = false;
-            // TeleOp Intake
-            TeleOpIntakeDepot = false;
-            TeleOpIntakeOutpost = false;
-            TeleOpIntakeNeutralZone = false;
-            // Endgame
-            TeleOpClimb = null;
-            TeleOpClimbTime = null;
-            ShowClimbTimes = false;
-            Breakdown = Breakdown2026.None;
-            BreakdownTime = null;
-            ShowBreakdownTimes = false;
+            TeleopVM.NextMatch();
             ShowSummary = false;
             SelectedHeadingButton = HeadingButtons.PreMatch;
         }

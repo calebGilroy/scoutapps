@@ -487,14 +487,16 @@
 
                 </StackPanel> -->
 
+                <UserControl IsVisible="{Binding SelectedHeadingButton, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static vm:HeadingButtons.TeleOp}}">
+                    <local:TeleopView DataContext="{Binding TeleopVM}" />
+                </UserControl>
 
-                <!--  TeleOp  -->
+                <!--  TeleOp
                 <StackPanel
                     Margin="0,0,0,32"
                     HorizontalAlignment="Center"
                     IsVisible="{Binding SelectedHeadingButton, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static vm:HeadingButtons.TeleOp}}">
 
-                    <!--  FUEL  -->
                     <StackPanel
                         Margin="0,32,0,0"
                         HorizontalAlignment="Center"
@@ -576,7 +578,6 @@
 
                     </StackPanel>
 
-                    <!--  TeleOp Obstacles  -->
                     <StackPanel
                         Margin="0,32,0,0"
                         HorizontalAlignment="Center"
@@ -603,7 +604,6 @@
 
                     </StackPanel>
 
-                    <!--  TeleOp Intake  -->
                     <StackPanel
                         Margin="0,32,0,0"
                         HorizontalAlignment="Center"
@@ -636,7 +636,6 @@
 
                     </StackPanel>
 
-                    <!--  TeleOp Climb  -->
                     <StackPanel
                         Margin="0,32,0,0"
                         HorizontalAlignment="Center"
@@ -694,7 +693,6 @@
                         </ComboBox>
                     </StackPanel>
 
-                    <!--  Breakdown  -->
                     <StackPanel
                         Margin="0,32,0,0"
                         HorizontalAlignment="Center"
@@ -752,7 +750,7 @@
                         </ComboBox>
                     </StackPanel>
 
-                </StackPanel>
+                </StackPanel>  -->
 
             </StackPanel>
 
