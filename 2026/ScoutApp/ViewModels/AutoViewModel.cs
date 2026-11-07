@@ -160,6 +160,7 @@ namespace ScoutApp.ViewModels
 
         public void NextMatch()
         {
+            StartingPosition = null;
             AutoMove = false;
             AutoFuelScored = 0;
             AutoFuelMissed = 0;
