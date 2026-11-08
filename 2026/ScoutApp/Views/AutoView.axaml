@@ -6,10 +6,6 @@
     xmlns:vm="using:ScoutApp.ViewModels"
     x:DataType="vm:AutoViewModel">
 
-    <Design.DataContext>
-        <vm:AutoViewModel />
-    </Design.DataContext>
-
     <UserControl.Resources>
         <cvt:EnumToBooleanConverter x:Key="EnumToBooleanConverter" />
         <cvt:EnumMemberValueConverter x:Key="EnumMemberValueConverter" />

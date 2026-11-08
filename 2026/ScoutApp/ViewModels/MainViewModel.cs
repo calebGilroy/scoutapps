@@ -1,12 +1,5 @@
-using System.Collections.Generic;
-using System.IO;
-using System;
-using System.Linq;
-using Avalonia.Media.Imaging;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using QRCoder;
-using Avalonia.Platform;
 using System.Runtime.Serialization;
 
 namespace ScoutApp.ViewModels
@@ -88,37 +81,14 @@ namespace ScoutApp.ViewModels
 
         public TeleopViewModel TeleopVM { get; } = new TeleopViewModel();
 
+        public PostMatchViewModel PostMatchVM { get; }
+
         public MainViewModel()
         {
-            PreMatchVM.PropertyChanged += (_, args) =>
-            {
-                if (args.PropertyName == nameof(PreMatchViewModel.PreMatchSummary))
-                    OnPropertyChanged(nameof(Summary));
-                if (args.PropertyName == nameof(PreMatchViewModel.PreMatchQRCode))
-                    OnPropertyChanged(nameof(QRCode1));
-                if (args.PropertyName == nameof(PreMatchViewModel.ScoutName) || args.PropertyName == nameof(PreMatchViewModel.SelectedAlliancePosition))
-                    OnPropertyChanged(nameof(MissingFields));
-            };
-            AutoVM.PropertyChanged += (_, args) =>
-            {
-                if (args.PropertyName == nameof(AutoViewModel.AutoSummary))
-                    OnPropertyChanged(nameof(Summary));
-                if (args.PropertyName == nameof(AutoViewModel.AutoQRCode))
-                    OnPropertyChanged(nameof(QRCode1));
-                if (args.PropertyName == nameof(AutoViewModel.StartingPosition) || args.PropertyName == nameof(AutoViewModel.AutoClimb))
-                    OnPropertyChanged(nameof(MissingFields));
-            };
-            TeleopVM.PropertyChanged += (_, args) =>
-            {
-                if (args.PropertyName == nameof(TeleopViewModel.TeleopSummary))
-                    OnPropertyChanged(nameof(Summary));
-                if (args.PropertyName == nameof(TeleopViewModel.TeleopQRCode))
-                    OnPropertyChanged(nameof(QRCode1));
-                if (args.PropertyName == nameof(TeleopViewModel.TeleOpClimb) || args.PropertyName == nameof(TeleopViewModel.TeleOpClimbTime) || args.PropertyName == nameof(TeleopViewModel.Breakdown) || args.PropertyName == nameof(TeleopViewModel.BreakdownTime))
-                    OnPropertyChanged(nameof(MissingFields));
-            };
-        }
+            PostMatchVM = new(PreMatchVM, AutoVM, TeleopVM);
 
+            PostMatchVM.NextMatchRequested += () => SelectedHeadingButton = HeadingButtons.PreMatch;
+        }
 
         /*
                 === OLD PREMATCH CODE ===
@@ -215,8 +185,8 @@ namespace ScoutApp.ViewModels
 
 
         [ObservableProperty]
-        [NotifyPropertyChangedFor(nameof(QRCode1))]
         private HeadingButtons _SelectedHeadingButton = HeadingButtons.PreMatch;
+
         [RelayCommand]
         private void HeadingButton(HeadingButtons heading)
         {
@@ -465,6 +435,7 @@ namespace ScoutApp.ViewModels
                 BreakdownTime = null;
         } */
 
+        /* // ===== OLD POSTMATCH =====
         public string MissingFields
         {
             get
@@ -545,6 +516,6 @@ namespace ScoutApp.ViewModels
             TeleopVM.NextMatch();
             ShowSummary = false;
             SelectedHeadingButton = HeadingButtons.PreMatch;
-        }
+        } */
     }
 }

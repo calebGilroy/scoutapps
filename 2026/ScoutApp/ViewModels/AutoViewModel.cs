@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using ScoutApp.Converter;
 
 namespace ScoutApp.ViewModels
 {

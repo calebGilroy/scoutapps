@@ -198,7 +198,16 @@
 
                 </StackPanel>-->
 
-            <!--  Post-Match  -->
+            <UserControl
+                Grid.Row="5"
+                Grid.Column="0"
+                Grid.ColumnSpan="2"
+                Margin="0,32"
+                IsVisible="{Binding SelectedHeadingButton, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static vm:HeadingButtons.PostMatch}}">
+                <local:PostMatchView DataContext="{Binding PostMatchVM}" />
+            </UserControl>
+
+            <!--  Post-Match
             <StackPanel
                 Grid.Row="5"
                 Grid.Column="0"
@@ -248,7 +257,7 @@
                     FontWeight="Bold"
                     Foreground="{StaticResource accent}" />
 
-            </StackPanel>
+            </StackPanel>-->
 
             <!--  Auto  -->
             <UserControl
