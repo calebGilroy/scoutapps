@@ -43,15 +43,15 @@ public static class JsonToCSConverter
         using var dom = JsonDocument.Parse(json);
         var root = dom.RootElement;
 
-        // read the "records" array from the root element
+        // Read the "records" array from the root element
         if (!root.TryGetProperty("records", out var recordsElement))
         {
             Console.WriteLine("Failed to find 'records' property in JSON");
             return;
         }
 
-        // for each element in the "records" array, convert it to a ScheduleRecord object and add it to a list.
-        // we don't use a serializer ... instead we read each property at a time so the code is clear.
+        // For each element in the "records" array, convert it to a ScheduleRecord object and add it to a list.
+        // We don't use a serializer ... instead we read each property at a time so the code is clear.
         var records = new List<ScheduleRecord>();
         foreach (var recordElement in recordsElement.EnumerateArray())
         {
@@ -76,8 +76,8 @@ public static class JsonToCSConverter
             }
         }
 
-        // set TeamsByMatch based on the parsed records ... but skip any comp_level
-        // that is not "qm" (qualifier match) since those are the only ones we care about for scouting.
+        // Set TeamsByMatch based on the parsed records ... but skip any comp_level
+        // That is not "qm" (qualifier match) since those are the only ones we care about for scouting.
         TeamsByMatch = [];
         foreach (var record in records)
         {
